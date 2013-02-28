@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/categorymon"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/rlspincat"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:background="#00ff00"
+        android:orientation="vertical" >
+
+        <Spinner
+            android:id="@+id/profiles"
+            android:layout_width="match_parent"
+            android:layout_height="75dp" />
+
+        <ListView
+            android:id="@+id/categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profiles"
+            android:layout_above="@+id/trash"
+            android:fadeScrollbars="false" >
+        </ListView>
+
+        <ImageView
+            android:id="@id/trash"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/trashbin" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/rlinfoall"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/rlspincat"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="501dp"
+            android:background="#ff0000" >
+
+            <ImageView
+                android:id="@+id/categorypic"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:contentDescription=""
+                android:src="@drawable/stop" />
+
+            <!--
+            <TextView
+                android:id="@+id/categoryinfo"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_toLeftOf="@id/categorypic"
+                android:fadeScrollbars="false"
+                android:scrollHorizontally="false" />
+            -->
+            
+            
+            <EditText
+                android:id="@+id/categoryinfo"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_toLeftOf="@id/categorypic"
+                android:fadeScrollbars="false"
+                android:scrollHorizontally="false" 
+                android:inputType="text"/>
+
+            <Button
+                android:id="@+id/createnewcategorybutton"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:background="#ff000000"
+                android:text="@string/createNewCategoryButton"/>
+
+            <Button
+                android:id="@+id/changecategorycolorbutton"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
+                android:layout_alignTop="@id/createnewcategorybutton"
+                android:layout_toRightOf="@id/createnewcategorybutton"
+                android:layout_marginLeft="30dp"
+                android:background="#ff000000"
+                android:text="@string/changeCategoryColorButton" />
+
+            <Button
+                android:id="@+id/changecategorynamebutton"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
+                android:layout_alignLeft="@id/createnewcategorybutton"
+                android:layout_below="@id/createnewcategorybutton"
+                android:layout_marginTop="40dp"
+                android:background="#ff000000"
+                android:text="@string/changeCategoryNameButton" />
+
+            <Button
+                android:id="@+id/copythiscategorytootherprofilebutton"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
+                android:layout_alignTop="@id/changecategorynamebutton"
+                android:layout_marginLeft="30dp"
+                android:background="#ff000000"
+                android:layout_toRightOf="@id/changecategorynamebutton"
+                android:text="@string/copyThisCategoryToOtherProfileButton" />
+
+            <Button
+                android:id="@+id/copythiscategorytootherprofilecategorybutton"
+                android:layout_width="120dp"
+                android:layout_height="75dp"
+                android:layout_alignTop="@id/changecategorynamebutton"
+                android:layout_marginLeft="30dp"
+                android:background="#ff000000"
+                android:layout_toRightOf="@id/copythiscategorytootherprofilebutton"
+                android:text="@string/copyThisCategoryToOtherProfileCategoryButton" />
+        </RelativeLayout>
+
+        <GridView
+            android:id="@+id/pictograms"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#0000ff"
+            android:numColumns="3"
+            android:fadeScrollbars="false" >
+        </GridView>
+    </LinearLayout>
+
+</RelativeLayout>
