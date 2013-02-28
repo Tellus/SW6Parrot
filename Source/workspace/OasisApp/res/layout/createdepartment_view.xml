@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvCreateDepName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/nameLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etCreateDepName"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etCreateDepAddress"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@id/tvCreateDepName"
+        android:inputType="text"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/tvCreateDepAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCreateDepName"
+        android:layout_margin="20dp"
+        android:text="@string/addressLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etCreateDepAddress"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCreateDepName"
+        android:layout_toRightOf="@id/tvCreateDepAddress"
+        android:inputType="text"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/tvCreateDepEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCreateDepAddress"
+        android:layout_margin="20dp"
+        android:text="@string/emailLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etCreateDepEmail"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/etCreateDepAddress"
+        android:layout_below="@id/etCreateDepAddress"
+        android:layout_toRightOf="@id/tvCreateDepEmail"
+        android:inputType="text"
+        android:textSize="32dp" />
+    
+    <TextView
+        android:id="@+id/tvCreateDepPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCreateDepEmail"
+        android:layout_margin="20dp"
+        android:text="@string/phoneLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etCreateDepPhone"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/etCreateDepAddress"
+        android:layout_below="@id/etCreateDepEmail"
+        android:layout_toRightOf="@id/tvCreateDepPhone"
+        android:inputType="phone"
+        android:textSize="32dp" />
+    
+    <CheckBox
+        android:id="@+id/cbCreateDepSuperDep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textSize="32dp"
+        android:layout_below="@id/tvCreateDepPhone"
+        android:text="Tilføj Over-Afdeling?" />
+    
+    <Button 
+        android:id="@+id/bCreateDepSuperDep"
+        android:layout_width="120dp"
+        android:text="Over-Afdeling"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_below="@id/cbCreateDepSuperDep"/>
+    
+    <TextView
+        android:id="@+id/tvCreateDepSuperDep"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cbCreateDepSuperDep"
+        android:layout_alignTop="@id/bCreateDepSuperDep"
+        android:layout_alignLeft="@id/etCreateDepAddress"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+</RelativeLayout>

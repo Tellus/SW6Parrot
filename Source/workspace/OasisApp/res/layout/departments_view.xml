@@ -1,0 +1,69 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="*" >
+
+    <Button
+        android:id="@+id/bAddDepartment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/tab_selector"
+        android:text="@string/addDepartment" />
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/tvDepName"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/columnDepName"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textSize="32dp" />
+
+        <TextView
+            android:id="@+id/tvDepAddress"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/columnDepAddress"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textSize="32dp" />
+
+        <TextView
+            android:id="@+id/tvDepContacts"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/columnDepContacts"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textSize="32dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal" >
+
+        <LinearLayout
+            android:layout_span="3"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scrollbars="vertical" />
+
+            <TextView
+                android:id="@+id/android:empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip"
+                android:text="@string/emptyList"
+                android:textSize="28dp" />
+        </LinearLayout>
+    </TableRow>
+
+</TableLayout>

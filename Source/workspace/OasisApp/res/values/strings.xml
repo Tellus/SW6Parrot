@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="back_button">Tilbage</string>
+    <string name="app_name">OasisApp</string>
+    <string name="myprofile">Min Profil</string>
+    <string name="allprofiles">Alle Profiler</string>
+    <string name="noprofile">Ingen profil er valgt!</string>
+    <string name="alldepartments">Alle Afdelinger</string>
+    <string name="addDummyData">Tilføj Test Data</string>
+    <string name="addedDummyData">Test dataen er blevet tilføjet</string>
+    <string name="mychildren">Mine Børn</string>
+    <string name="mydepartments">Mine Afdelinger</string>
+    <string name="mydepchildren">Mine Afd. Børn</string>
+    <string name="emptyList">Tom liste</string>
+    <string name="childmedia">Barnets Medier</string>
+    <string name="childapps">Barnets Apps</string>
+    <string name="dropdownDep">Vælg department</string>
+    <string name="dropdownRole">Vælg rolle</string>
+    
+    <string name="columnFirstName">Fornavn:</string>
+    <string name="columnMiddleName">Mellemnavn:</string>
+    <string name="columnSurName">Efternavn:</string>
+    <string name="columnDepName">Navn:</string>
+    <string name="columnDepAddress">Addresse:</string>
+    <string name="columnDepContacts">Email/Tlf:</string>
+    <string name="columnMediaName">Navn:</string>
+    <string name="columnMediaPublic">Offentlig:</string>
+    <string name="columnMediaType">Type:</string>
+    <string name="columnMediaOwner">Ejer:</string>
+    <string name="columnMediaPath">Sti:</string>
+    
+    <string name="columnAppName">Navn:</string>
+    
+    <string name="nameLabel">Navn: </string>
+    <string name="phoneLabel">Tlf: </string>
+    <string name="addressLabel">Addresse: </string>
+    <string name="emailLabel">Email: </string>
+    <string name="myAppsButton">Mine Apps</string>
+    <string name="myMediaButton">Mine Medier</string>
+    <string name="mySettingsButton">Rediger Profil</string>
+    
+    <string name="addProfile">Tilføj ny Profil</string>
+    <string name="addDepartment">Tilføj ny Afdeling</string>
+
+    <string name="tab_myprofile">Min Profil</string>
+    <string name="tab_mychildren">Mine Børn</string>
+    <string name="tab_mydepartments">Mine Afdelinger</string>
+    <string name="tab_mydepchildren">Mine Afd. Børn</string>
+    
+    <string name="tab_myapps">Mine Apps</string>
+    <string name="tab_allapps">Alle Apps</string>
+    
+    <string name="tab_mymedia">Mine Medier</string>
+    <string name="tab_privatemedia">Private Medier</string>
+    <string name="tab_publicmedia">Alle Medier</string>
+    
+    <string name="tab_profiles">Profiler</string>
+    <string name="tab_guardians">Pædagoger</string>
+    <string name="tab_children">Børn</string>
+    
+    <string name="tab_departments">Afdelinger</string>
+
+    <string name="tab_childprofile">Barnets Profil</string>
+    <string name="tab_childapps">Barnets Apps</string>
+    <string name="tab_childmedia">Barnets Medier</string>
+    <string name="tab_childguardians">Barnets Pædagoger</string>
+    <string name="tab_childdepartments">Barnets Afdelinger</string>
+
+</resources>
