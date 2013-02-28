@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvCreateProfileLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/nameLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etCreateProfileName"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@id/tvCreateProfileLabel"
+        android:inputType="text"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/tvCreateProfilePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCreateProfileName"
+        android:layout_margin="20dp"
+        android:text="@string/phoneLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etCreateProfilePhone"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/etCreateProfileName"
+        android:layout_below="@id/etCreateProfileName"
+        android:layout_toRightOf="@id/tvCreateProfilePhone"
+        android:inputType="phone"
+        android:textSize="32dp" />
+
+    <ImageView
+        android:id="@+id/iCreateProfileImg"
+        android:layout_width="200dp"
+        android:layout_height="260dp"
+        android:layout_below="@id/etCreateProfilePhone"
+        android:layout_margin="20dp"
+        android:src="@drawable/logo" />
+
+    <Button
+        android:id="@+id/bCreateProfileImg"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCreateProfilePhone"
+        android:layout_toRightOf="@id/iCreateProfileImg"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="60dp"
+        android:background="@drawable/tab_selector"
+        android:text="Skift Billede" />
+
+    <CheckBox
+        android:id="@+id/cbCreateProfileIsGuardian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textSize="32dp"
+        android:layout_below="@id/bCreateProfileImg"
+        android:layout_toRightOf="@id/iCreateProfileImg"
+        android:text="Pædagog" />
+    
+    <CheckBox
+        android:id="@+id/cbCreateProfileDep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32dp"
+        android:layout_below="@id/cbCreateProfileIsGuardian"
+        android:layout_alignLeft="@id/cbCreateProfileIsGuardian"
+        android:text="Tilføj Afdeling?" />
+    
+    <Button 
+        android:id="@+id/bCreateProfileDep"
+        android:layout_width="120dp"
+        android:text="Afdeling"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/iCreateProfileImg"/>
+    
+    <TextView
+        android:id="@+id/tvCreateProfileDep"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iCreateProfileImg"
+        android:layout_alignTop="@id/bCreateProfileDep"
+        android:layout_toRightOf="@id/bCreateProfileDep"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+</RelativeLayout>
