@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, PARROTActivity!</string>
+    <string name="app_name">PARROT</string>
+    <string name="firstTab">Tale</string>
+    <string name="secondTab">Administrer</string>
+	<color name="cell_empty">#FF993311</color>
+	<string name="thirdTab">Indstillinger</string>
+	<string name="fourthTab">Kamera</string>
+	<string name="TakePictureButton">Tag Billed</string>
+	<string name="changecategorycolor">Ændring af baggrunds farve på kategorilisten</string>
+	<string name="changesentencecolor">Ændring af baggrunds farve på sætningsbrættet</string>
+	
+	<!-- Old DigiPecs String Values.  -->
+	
+    <string name="admin_app_name">DigiPECS</string>
+    <string name="star">Star</string>
+    <string name="modifyPicturePreviewText">Preview</string>
+    <string name="modifyPictureEditTextDescription">Vælg Tekst</string>
+    <string name="modifyPictureModifySoundDescription">Afspil eller modifcer tilhørende lyd</string>
+    <string name="modifyPictureSaveDescription">Gem ændringer/Fjern billede</string>
+    <string name="modifyPictureSaveButtonText">Gem Ændringer</string>
+    <string name="modifyPictureDeleteButtonText">Fjern Billede</string>
+    <string name="addPictureSaveButtonText">Gem Billede</string>
+    <string name="addPictureSaveDescription">Gem billede i pecs bogen</string>
+    <string name="addPictureTakePictureButtonText">Tag Billede</string>
+    <string name="situationsListContextMenuAddText">Ny Situation</string>
+    <string name="createSituationTextboxNameText">Situationens Navn</string>
+    <string name="createSituationSaveButtonText">Gem</string>
+    <string name="createSituationCancelButtonText">Annuler</string>
+    <string name="situationsListContextMenuDeleteText">Fjern Situation</string>
+    <string name="situationListOptionMenuDeleteText"/>
+    <string name="selectActiveSituationOkButtonText">ok</string>
+    <string name="electActiveSituationOkButtonText">Fortryd</string>
+    <string name="selectSituationSpinnerPromptText">Vælg situation</string>
+    <string name="defaultSituationNameDB">Hele Arkiv</string>
+    <string name="situationListOptionsMenuEditText">Ret Situationsnavn</string>
+    <string name="addImageFromCameraButtonText">Fra Kamera</string>
+    <string name="addImageFromPhoneButtonText">Fra Telefon</string>
+    <string name="errorSoundNotSavedIO">Sound not Saved</string>
+    <string name="createNewCategoryButton">Opret Ny Kategori</string>
+    <string name="changeCategoryPicButton">Kategori Billede</string>
+    <string name="changeCategoryColorButton">Kategori Farve</string>
+    <string name="changeCategoryNameButton">Kategori Titel</string>
+    <string name="copyThisCategoryToOtherProfileButton">Kopier Denne Kategori</string>
+    <string name="copyThisCategoryToOtherProfileCategoryButton">Kopier Til Anden Profil Kategori</string>
+</resources>
