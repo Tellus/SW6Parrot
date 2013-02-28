@@ -21,6 +21,7 @@ package kankan.wheel.widget;
  * 
  * @deprecated Use WheelViewAdapter
  */
+@Deprecated
 public interface WheelAdapter {
 	/**
 	 * Gets items count

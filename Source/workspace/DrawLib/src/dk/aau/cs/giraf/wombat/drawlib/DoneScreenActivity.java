@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.wombat.drawlib;
 
+import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.TimerLib.SubProfile;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +14,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import dk.aau.cs.giraf.TimerLib.Attachment;
-import dk.aau.cs.giraf.TimerLib.Guardian;
-import dk.aau.cs.giraf.TimerLib.SplitImg;
-import dk.aau.cs.giraf.TimerLib.SubProfile;
 /**
  * This class is the activity which creates the done screen view.
  * Layer: Draw
@@ -78,6 +76,7 @@ public class DoneScreenActivity extends Activity {
 		
 		frame.setOnClickListener(new OnClickListener() {
 			
+			@Override
 			public void onClick(View v) {
 				// Start 
 				Intent i = new Intent("dk.aau.cs.giraf.launcher.AUTHENTICATE");

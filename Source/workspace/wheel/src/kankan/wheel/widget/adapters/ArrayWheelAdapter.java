@@ -50,7 +50,8 @@ public class ArrayWheelAdapter<T> extends AbstractWheelTextAdapter {
         return null;
     }
 
-    public int getItemsCount() {
+    @Override
+	public int getItemsCount() {
         return items.length;
     }
 }

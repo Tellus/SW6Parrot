@@ -94,6 +94,7 @@ public class CustomizeFragment extends Fragment {
 				.findViewById(R.id.new_template_button);
 		b.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				guard.subProfileID = -1;
 				SubProfileFragment spf = (SubProfileFragment) getFragmentManager()
@@ -149,6 +150,7 @@ public class CustomizeFragment extends Fragment {
 				R.id.houglassButton);
 		hourglassButton.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				selectStyle(formFactor.Hourglass);
 
@@ -159,6 +161,7 @@ public class CustomizeFragment extends Fragment {
 				R.id.timetimerButton);
 		timetimerButton.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				selectStyle(formFactor.TimeTimer);
 
@@ -169,6 +172,7 @@ public class CustomizeFragment extends Fragment {
 				R.id.progressbarButton);
 		progressbarButton.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				selectStyle(formFactor.ProgressBar);
 
@@ -178,6 +182,7 @@ public class CustomizeFragment extends Fragment {
 		digitalButton = (Button) getActivity().findViewById(R.id.digitalButton);
 		digitalButton.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				selectStyle(formFactor.DigitalClock);
 
@@ -262,6 +267,7 @@ public class CustomizeFragment extends Fragment {
 
 		/* Add on change listeners for both wheels */
 		mins.addChangingListener(new OnWheelChangedListener() {
+			@Override
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
 				updateTime(mins.getCurrentItem(), secs.getCurrentItem());
 
@@ -285,6 +291,7 @@ public class CustomizeFragment extends Fragment {
 		});
 
 		secs.addChangingListener(new OnWheelChangedListener() {
+			@Override
 			public void onChanged(WheelView wheel, int oldValue, int newValue) {
 				updateTime(mins.getCurrentItem(), secs.getCurrentItem());
 			}
@@ -380,6 +387,7 @@ public class CustomizeFragment extends Fragment {
 		gradientButton = new WCheckbox(getActivity());
 		gradientButton.setOnClickListener(currSubP.gradient, new OnClickListener() {
 			
+			@Override
 			public void onClick(View v) {
 				currSubP.gradient = gradientButton.changeCheckedState();		
 			}
@@ -392,12 +400,15 @@ public class CustomizeFragment extends Fragment {
 		setColor(colorGradientButton1.getBackground(), currSubP.timeLeftColor);
 
 		colorGradientButton1.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						currSubP.timeLeftColor, new OnAmbilWarnaListener() {
+					@Override
 					public void onCancel(AmbilWarnaDialog dialog) {
 					}
 
+					@Override
 					public void onOk(AmbilWarnaDialog dialog, int color) {
 						currSubP.timeLeftColor = color;
 						setColor(colorGradientButton1.getBackground(),
@@ -412,12 +423,15 @@ public class CustomizeFragment extends Fragment {
 				R.id.gradientButton_2);
 		setColor(colorGradientButton2.getBackground(), currSubP.timeSpentColor);
 		colorGradientButton2.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						currSubP.timeSpentColor, new OnAmbilWarnaListener() {
+					@Override
 					public void onCancel(AmbilWarnaDialog dialog) {
 					}
 
+					@Override
 					public void onOk(AmbilWarnaDialog dialog, int color) {
 						currSubP.timeSpentColor = color;
 						setColor(colorGradientButton2.getBackground(),
@@ -432,12 +446,15 @@ public class CustomizeFragment extends Fragment {
 				R.id.frameColorButton);
 		setColor(colorFrameButton.getBackground(), currSubP.frameColor);
 		colorFrameButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						currSubP.frameColor, new OnAmbilWarnaListener() {
+					@Override
 					public void onCancel(AmbilWarnaDialog dialog) {
 					}
 
+					@Override
 					public void onOk(AmbilWarnaDialog dialog, int color) {
 						currSubP.frameColor = color;
 						setColor(colorFrameButton.getBackground(),
@@ -453,12 +470,15 @@ public class CustomizeFragment extends Fragment {
 		setColor(colorBackgroundButton.getBackground(), currSubP.bgcolor);
 		colorBackgroundButton.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						currSubP.bgcolor, new OnAmbilWarnaListener() {
+					@Override
 					public void onCancel(AmbilWarnaDialog dialog) {
 					}
 
+					@Override
 					public void onOk(AmbilWarnaDialog dialog, int color) {
 						currSubP.bgcolor = color;
 						setColor(colorBackgroundButton.getBackground(),
@@ -491,6 +511,7 @@ public class CustomizeFragment extends Fragment {
 		attachmentButton.setOnClickListener(new OnClickListener() {
 
 			// First onClick
+			@Override
 			public void onClick(final View v) {
 				final ArrayList<formFactor> mode = guard.getMode();
 
@@ -505,6 +526,7 @@ public class CustomizeFragment extends Fragment {
 				attachment1.addButton(R.string.cancel, 1,
 						new OnClickListener() {
 
+					@Override
 					public void onClick(View arg0) {
 						attachment1.cancel();
 					}
@@ -513,6 +535,7 @@ public class CustomizeFragment extends Fragment {
 				// 2. window
 				attachment1.setOnItemClickListener(new OnItemClickListener() {
 
+					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
 						// List<String> values = new ArrayList<String>();
@@ -557,6 +580,7 @@ public class CustomizeFragment extends Fragment {
 						attachment2.addButton(R.string.go_back, 1,
 								new OnClickListener() {
 
+							@Override
 							public void onClick(View arg0) {
 								attachment2.cancel();
 
@@ -566,6 +590,7 @@ public class CustomizeFragment extends Fragment {
 						attachment2.addButton(R.string.cancel, 2,
 								new OnClickListener() {
 
+							@Override
 							public void onClick(View arg0) {
 								attachment1.cancel();
 								attachment2.cancel();
@@ -576,6 +601,7 @@ public class CustomizeFragment extends Fragment {
 
 						attachment2
 						.setOnItemClickListener(new OnItemClickListener() {
+							@Override
 							public void onItemClick(
 									AdapterView<?> parent, View view,
 									int position, long id) {
@@ -588,6 +614,7 @@ public class CustomizeFragment extends Fragment {
 								attachment3.addButton(R.string.go_back, 1,
 										new OnClickListener() {
 
+									@Override
 									public void onClick(
 											View arg0) {
 										attachment3.cancel();
@@ -598,6 +625,7 @@ public class CustomizeFragment extends Fragment {
 								attachment3.addButton(R.string.cancel,
 										2, new OnClickListener() {
 
+									@Override
 									public void onClick(
 											View arg0) {
 										attachment1.cancel();
@@ -623,6 +651,7 @@ public class CustomizeFragment extends Fragment {
 
 									attachment3
 									.setOnItemClickListener(new OnItemClickListener() {
+										@Override
 										public void onItemClick(
 												AdapterView<?> parent,
 												View view,
@@ -669,6 +698,7 @@ public class CustomizeFragment extends Fragment {
 
 									attachment3
 									.setOnItemClickListener(new OnItemClickListener() {
+										@Override
 										public void onItemClick(
 												AdapterView<?> parent,
 												View view,
@@ -711,6 +741,7 @@ public class CustomizeFragment extends Fragment {
 		// Long click to remove
 		attachmentButton.setOnLongClickListener(new OnLongClickListener() {
 
+			@Override
 			public boolean onLongClick(View v) {
 				setAttachment(null);
 				return true;
@@ -851,6 +882,7 @@ public class CustomizeFragment extends Fragment {
 		donePictureButton = (Button) getActivity().findViewById(
 				R.id.customize_donescreen);
 		donePictureButton.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(final View v) {
 				final ArrayList<Art> art = guard.ArtList;
 
@@ -860,6 +892,7 @@ public class CustomizeFragment extends Fragment {
 				doneDialog.setAdapter(adapter);
 				doneDialog.setOnItemClickListener(new OnItemClickListener() {
 
+					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
 						final formFactor mode = modeArray.get(position);
@@ -872,6 +905,7 @@ public class CustomizeFragment extends Fragment {
 							singleDialog.setAdapter(artList);
 							singleDialog.setOnItemClickListener(new OnItemClickListener() {
 
+								@Override
 								public void onItemClick(AdapterView<?> parent, View view,
 										int position, long id) {
 									Attachment atta1 = new SingleImg(guard.ArtList.get(position));
@@ -884,6 +918,7 @@ public class CustomizeFragment extends Fragment {
 							});
 							singleDialog.addButton(R.string.cancel, 1, new OnClickListener() {
 
+								@Override
 								public void onClick(View arg0) {
 									doneDialog.cancel();
 									singleDialog.cancel();
@@ -896,6 +931,7 @@ public class CustomizeFragment extends Fragment {
 							dualDialog.setAdapter(artList);
 							dualDialog.setOnItemClickListener(new OnItemClickListener() {
 
+								@Override
 								public void onItemClick(AdapterView<?> parent, View view,
 										int position, long id) {
 									final Art art1 = guard.ArtList.get(position);
@@ -903,6 +939,7 @@ public class CustomizeFragment extends Fragment {
 									dialog1.setAdapter(artList);
 									dialog1.setOnItemClickListener(new OnItemClickListener() {
 
+										@Override
 										public void onItemClick(AdapterView<?> parent, View view,
 												int position, long id) {
 											final Art art2 = guard.ArtList.get(position);
@@ -916,6 +953,7 @@ public class CustomizeFragment extends Fragment {
 									});
 									dialog1.addButton(R.string.cancel, 1, new OnClickListener() {
 
+										@Override
 										public void onClick(View arg0) {
 											doneDialog.cancel();
 											dualDialog.cancel();
@@ -927,6 +965,7 @@ public class CustomizeFragment extends Fragment {
 							});
 							dualDialog.addButton(R.string.cancel, 1, new OnClickListener() {
 
+								@Override
 								public void onClick(View arg0) {
 									doneDialog.cancel();
 									dualDialog.cancel();
@@ -939,6 +978,7 @@ public class CustomizeFragment extends Fragment {
 				});
 				doneDialog.addButton(R.string.cancel, 1, new OnClickListener() {
 
+					@Override
 					public void onClick(View arg0) {
 						doneDialog.cancel();
 					}
@@ -948,6 +988,7 @@ public class CustomizeFragment extends Fragment {
 		});
 		donePictureButton.setOnLongClickListener(new OnLongClickListener() {
 
+			@Override
 			public boolean onLongClick(View v) {
 				currSubP.setDoneArt(null);
 				setDonePicture(null);
@@ -973,7 +1014,8 @@ public class CustomizeFragment extends Fragment {
 				 && guard.getChild() != null) {
 			 d = getResources().getDrawable(R.drawable.thumbnail_save);
 			 saveButton.setOnClickListener(new OnClickListener() {
-				 public void onClick(View v) {
+				 @Override
+				public void onClick(View v) {
 					 if (preSubP == null) {
 						 final WDialog save1 = new WDialog(getActivity(),
 								 R.string.save_button);
@@ -981,7 +1023,8 @@ public class CustomizeFragment extends Fragment {
 						 save1.addEditText(getName(), 1);
 						 save1.addButton(R.string.ok, 2, new OnClickListener() {
 
-							 public void onClick(View arg0) {
+							 @Override
+							public void onClick(View arg0) {
 								 currSubP.name = save1.getEditTextText(1);
 								 guard.publishList()
 								 .get(guard.profilePosition).select();
@@ -1014,7 +1057,8 @@ public class CustomizeFragment extends Fragment {
 						 save1.addButton(R.string.cancel, 3,
 								 new OnClickListener() {
 
-							 public void onClick(View arg0) {
+							 @Override
+							public void onClick(View arg0) {
 								 save1.cancel();
 
 							 }
@@ -1049,7 +1093,8 @@ public class CustomizeFragment extends Fragment {
 			 d = getResources().getDrawable(R.drawable.thumbnail_save_gray);
 			 saveButton.setOnClickListener(new OnClickListener() {
 
-				 public void onClick(View v) {
+				 @Override
+				public void onClick(View v) {
 					 Toast t = Toast.makeText(getActivity(),
 							 getString(R.string.cant_save), 2000);
 					 t.show();
@@ -1144,7 +1189,8 @@ public class CustomizeFragment extends Fragment {
 			 d = getResources().getDrawable(R.drawable.thumbnail_saveas);
 			 saveAsButton.setOnClickListener(new OnClickListener() {
 
-				 public void onClick(View v) {
+				 @Override
+				public void onClick(View v) {
 					 ArrayList<Child> child = guard.Children();
 					 ArrayAdapter adapter = new ChildAdapter(getActivity(),
 							 android.R.layout.simple_list_item_1, child);
@@ -1154,14 +1200,16 @@ public class CustomizeFragment extends Fragment {
 					 saveAs1.setAdapter(adapter);
 					 saveAs1.addButton(R.string.cancel, 1,
 							 new OnClickListener() {
-						 public void onClick(View v) {
+						 @Override
+						public void onClick(View v) {
 							 saveAs1.cancel();
 						 }
 					 });
 
 					 saveAs1.setOnItemClickListener(new OnItemClickListener() {
 
-						 public void onItemClick(AdapterView<?> arg0, View arg1,
+						 @Override
+						public void onItemClick(AdapterView<?> arg0, View arg1,
 								 final int position, long arg3) {
 							 // Name picker
 							 final WDialog saveAs2 = new WDialog(getActivity(),
@@ -1171,7 +1219,8 @@ public class CustomizeFragment extends Fragment {
 							 saveAs2.addButton(R.string.ok, 2,
 									 new OnClickListener() {
 
-								 public void onClick(View arg0) {
+								 @Override
+								public void onClick(View arg0) {
 									 currSubP.name = saveAs2
 											 .getEditTextText(1);
 									 guard.publishList()
@@ -1218,7 +1267,8 @@ public class CustomizeFragment extends Fragment {
 							 saveAs2.addButton(R.string.cancel, 3,
 									 new OnClickListener() {
 
-								 public void onClick(View arg0) {
+								 @Override
+								public void onClick(View arg0) {
 									 saveAs2.cancel();
 									 saveAs1.cancel();
 
@@ -1234,7 +1284,8 @@ public class CustomizeFragment extends Fragment {
 			 d = getResources().getDrawable(R.drawable.thumbnail_saveas_gray);
 			 saveAsButton.setOnClickListener(new OnClickListener() {
 
-				 public void onClick(View v) {
+				 @Override
+				public void onClick(View v) {
 					 Toast t = Toast.makeText(getActivity(),
 							 getString(R.string.cant_save), 2000);
 					 t.show();
@@ -1258,7 +1309,8 @@ public class CustomizeFragment extends Fragment {
 			 d = getResources().getDrawable(R.drawable.thumbnail_start);
 			 startButton.setOnClickListener(new OnClickListener() {
 
-				 public void onClick(View v) {
+				 @Override
+				public void onClick(View v) {
 					 currSubP.addLastUsed(preSubP);
 					 guard.saveGuardian(currSubP);
 					 currSubP.select();
@@ -1272,7 +1324,8 @@ public class CustomizeFragment extends Fragment {
 			 d = getResources().getDrawable(R.drawable.thumbnail_start_gray);
 			 startButton.setOnClickListener(new OnClickListener() {
 
-				 public void onClick(View v) {
+				 @Override
+				public void onClick(View v) {
 					 Toast t = Toast.makeText(getActivity(),
 							 getString(R.string.cant_start), 2000);
 					 t.show();
