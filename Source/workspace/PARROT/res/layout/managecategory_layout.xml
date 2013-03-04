@@ -19,7 +19,7 @@
         <ListView
             android:id="@+id/categories"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_below="@id/profiles"
             android:layout_above="@+id/trash"
             android:fadeScrollbars="false" >
@@ -52,7 +52,7 @@
                 android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:contentDescription=""
+                android:contentDescription="categoryIcon"
                 android:src="@drawable/stop" />
 
             <!--
