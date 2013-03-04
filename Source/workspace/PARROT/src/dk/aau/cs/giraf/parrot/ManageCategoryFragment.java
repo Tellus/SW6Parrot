@@ -36,7 +36,7 @@ public class ManageCategoryFragment extends Fragment {
 	//Remembers the index of the item that is currently being dragged.
 	public static int draggedItemIndex = -1;
 	public static int catDragOwnerID =-1;
-	public static int currentCategoryId = 0; //This is the currrent category that is chosen
+	public static int currentCategoryId = 0; //This is the current category that is chosen
 	public static PARROTProfile profileBeingModified; 
 	public static ArrayList<Pictogram> categories =  new ArrayList<Pictogram>();
 
