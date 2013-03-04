@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.wombat.drawlib;
 
+import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.TimerLib.SubProfile;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +14,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import dk.aau.cs.giraf.TimerLib.Guardian;
-import dk.aau.cs.giraf.TimerLib.SubProfile;
 /**
  * This class is the activity which initiate the timer
  * Layer: Draw
@@ -121,7 +121,8 @@ public class DrawLibActivity extends Activity {
 		mHandler = new Handler();
 		
 		mRunnable = new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 final Intent mainIntent = new Intent(DrawLibActivity.this, DoneScreenActivity.class);
                 DrawLibActivity.this.startActivity(mainIntent);
                 DrawLibActivity.this.finish();
@@ -134,6 +135,7 @@ public class DrawLibActivity extends Activity {
 	}
 	
 	/* When the activity is destroyed, kill the donescreen aswell*/
+	@Override
 	public void onDestroy(){
 		super.onDestroy();
 		mHandler.removeCallbacks(mRunnable);

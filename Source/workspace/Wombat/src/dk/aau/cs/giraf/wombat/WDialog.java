@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.wombat;
 
+import dk.aau.cs.giraf.TimerLib.Guardian;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,7 +18,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import dk.aau.cs.giraf.TimerLib.Guardian;
 /**
  * This class is a custom dialog which is used for all dialogs in WOMBAT
  * Layer: Layout

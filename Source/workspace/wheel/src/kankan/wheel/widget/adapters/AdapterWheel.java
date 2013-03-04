@@ -24,6 +24,7 @@ import android.content.Context;
  * 
  * @deprecated Will be removed soon
  */
+@Deprecated
 public class AdapterWheel extends AbstractWheelTextAdapter {
 
     // Source adapter
@@ -48,7 +49,8 @@ public class AdapterWheel extends AbstractWheelTextAdapter {
         return adapter;
     }
     
-    public int getItemsCount() {
+    @Override
+	public int getItemsCount() {
         return adapter.getItemsCount();
     }
 

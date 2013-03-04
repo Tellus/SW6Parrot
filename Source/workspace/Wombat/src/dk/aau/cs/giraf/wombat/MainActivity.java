@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import dk.aau.cs.giraf.TimerLib.Art;
-import dk.aau.cs.giraf.TimerLib.Child;
 import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 /**
@@ -66,6 +65,7 @@ public class MainActivity extends Activity {
 	/**
 	 * Clear everything in case the user is going to log out
 	 */
+	@Override
 	public void onBackPressed() {
 		guard.reset();
 		finish();

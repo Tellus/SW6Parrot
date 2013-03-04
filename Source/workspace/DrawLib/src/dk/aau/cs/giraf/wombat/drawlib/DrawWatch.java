@@ -1,7 +1,7 @@
 package dk.aau.cs.giraf.wombat.drawlib;
 
+import dk.aau.cs.giraf.TimerLib.SubProfile;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
@@ -10,7 +10,6 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
-import dk.aau.cs.giraf.TimerLib.SubProfile;
 /**
  * This class is used to generate a view for Watch
  * Layer: Draw

@@ -2,6 +2,8 @@ package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
 
+import dk.aau.cs.giraf.TimerLib.formFactor;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import dk.aau.cs.giraf.TimerLib.formFactor;
 /**
  * This class is an ArrayAdapter which is used for the Attachment function
  * Layer: Layout
