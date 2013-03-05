@@ -7,22 +7,24 @@ import java.util.ArrayList;
  * @Rasmus
  *The Category class is used to store a number of pictograms
  */
-public class Category {
+public class PARROTCategory 
+{	
 	private ArrayList<Pictogram> pictograms; 
 	private int categoryColour;
 	private Pictogram icon;
 	private boolean newCategory;
 	private boolean changed;
 	private String categoryName;
+	
 	//This is the constructor method.
-	public Category(int colour, Pictogram icon) //this is a constructer method that takes icon and color as input
+	public PARROTCategory(int colour, Pictogram icon) //this is a constructor method that takes icon and color as input
 	{
 		pictograms = new ArrayList<Pictogram>();
 		setCategoryColour(colour);
 		setIcon(icon);
 	}
 	
-	public Category(String categoryName,int colour,Pictogram icon)  //this is a constructer method that takes name, icon and color as input
+	public PARROTCategory(String categoryName,int colour,Pictogram icon)  //this is a constructor method that takes name, icon and color as input
 	{
 		pictograms = new ArrayList<Pictogram>();
 		setCategoryColour(colour);
