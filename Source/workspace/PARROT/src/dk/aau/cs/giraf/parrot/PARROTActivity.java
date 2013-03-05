@@ -20,12 +20,12 @@ public class PARROTActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-//		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
-//		girafIntent = getIntent();
-//		Helper help = new Helper(this);
-//		app = help.appsHelper.getAppByPackageName();
-//		guardianID = girafIntent.getExtras().getLong("currentGuardianID");
-//		
+		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
+		/*girafIntent = getIntent();
+		Helper help = new Helper(this);
+		app = help.appsHelper.getAppByPackageName();
+		guardianID = girafIntent.getExtras().getLong("currentGuardianID");*/
+		
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main);
 
@@ -73,13 +73,7 @@ public class PARROTActivity extends Activity {
 					.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
 			actionBar.addTab(tab);
 		}
-//		if (parrotUser.getRights(2) == true)//TODO put me back in when there's something for me to do.
-//		{
-//			tab = actionBar.newTab()
-//					.setText(R.string.fourthTab)
-//					.setTabListener(new TabListener<OptionsFragment>(this,"camera",OptionsFragment.class)); TODO: Find new Fragments to attach to.
-//			actionBar.addTab(tab);
-//		}
+
 
 	}
 	@Override
