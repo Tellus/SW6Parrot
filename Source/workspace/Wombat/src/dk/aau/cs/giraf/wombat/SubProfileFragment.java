@@ -48,6 +48,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 		ListView lv = getListView();
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 
+			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View v,
 					final int row, long arg3) {
 				
@@ -59,6 +60,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 					deleteDialog.addTextView(getString(R.string.delete_description) + " " + guard.getChild().SubProfiles().get(row).name + "?", 1);
 					deleteDialog.addButton(R.string.delete_yes, 2, new View.OnClickListener() {
 						
+						@Override
 						public void onClick(View v) {
 							if (guard.getChild() != null && guard.getChild().deleteCheck()) {
 								guard.getChild().SubProfiles().get(row)
@@ -82,6 +84,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 
 					deleteDialog.addButton(R.string.delete_no, 3, new View.OnClickListener() {
 						
+						@Override
 						public void onClick(View v) {
 							deleteDialog.cancel();
 							
@@ -113,6 +116,7 @@ public class SubProfileFragment extends android.app.ListFragment {
 		}
 	}
 
+	@Override
 	public void onListItemClick(ListView lv, View view, int position, long id) {
 		if (guard.subProfileFirstClick) {
 			for (int i = 0; i < lv.getChildCount(); i++) {

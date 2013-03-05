@@ -2,6 +2,9 @@ package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
 
+import dk.aau.cs.giraf.TimerLib.Guardian;
+import dk.aau.cs.giraf.TimerLib.SubProfile;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import dk.aau.cs.giraf.TimerLib.Guardian;
-import dk.aau.cs.giraf.TimerLib.SubProfile;
 /**
  * This class is an ArrayAdapter which fit the SubProfile object
  * Layer: Layout

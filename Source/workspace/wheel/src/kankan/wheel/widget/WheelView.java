@@ -132,12 +132,14 @@ public class WheelView extends View {
 	
 	// Scrolling listener
 	WheelScroller.ScrollingListener scrollingListener = new WheelScroller.ScrollingListener() {
-        public void onStarted() {
+        @Override
+		public void onStarted() {
             isScrollingPerformed = true;
             notifyScrollingListenersAboutStart();
         }
         
-        public void onScroll(int distance) {
+        @Override
+		public void onScroll(int distance) {
             doScroll(distance);
             
             int height = getHeight();
@@ -150,7 +152,8 @@ public class WheelView extends View {
             }
         }
         
-        public void onFinished() {
+        @Override
+		public void onFinished() {
             if (isScrollingPerformed) {
                 notifyScrollingListenersAboutEnd();
                 isScrollingPerformed = false;
@@ -160,7 +163,8 @@ public class WheelView extends View {
             invalidate();
         }
 
-        public void onJustify() {
+        @Override
+		public void onJustify() {
             if (Math.abs(scrollingOffset) > WheelScroller.MIN_DELTA_FOR_SCROLLING) {
                 scroller.scroll(scrollingOffset, 0);
             }
