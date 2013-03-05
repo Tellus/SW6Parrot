@@ -91,31 +91,16 @@ public class PARROTDataLoader {
 				parrotUser = loadSettings(parrotUser, specialSettings);
 
 				//Add all of the categories to the profile
-				int number = 0;
-				String categoryString=null;
-				while (true)
+				String categoryString = null;
+				for(int number = 0; specialSettings.get("category"+number) != null; number++)
 				{
-					//Here we read the pictograms of the categories
-					//The settings reader uses this format : category +number | cat_property | value
-					try
-					{
-						categoryString = specialSettings.get("category"+number).get("pictograms");
-					}
-					catch (NullPointerException e)
-					{
-						//the value does not exist, so we will not load anymore categories
-						break;
-					}
-
+					categoryString = specialSettings.get("category"+number).get("pictograms");
 					String colourString = specialSettings.get("category"+number).get("colour");
 					int col=Integer.valueOf(colourString);
 					String iconString = specialSettings.get("category"+number).get("icon");
 					String catName = specialSettings.get("category"+number).get("name");
-					parrotUser.addCategory(loadCategory(catName,categoryString,col,iconString));
-					number++;
-
+					parrotUser.addCategory(loadCategory(catName,categoryString,col,iconString));					
 				}
-
 				return parrotUser;
 			}
 			else
