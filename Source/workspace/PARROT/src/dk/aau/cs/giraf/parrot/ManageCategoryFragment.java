@@ -161,7 +161,7 @@ public class ManageCategoryFragment extends Fragment {
 			public void onClick(View v) 
 			{
 				Pictogram pictogram = new Pictogram("#usynlig#", null, null, null, parrent);
-				Category cat = new Category("Kategori Navn", 0xffff0000, pictogram);
+				PARROTCategory cat = new PARROTCategory("Kategori Navn", 0xffff0000, pictogram);
 				profileBeingModified.addCategory(cat);
 				ListView categories = (ListView) parrent.findViewById(R.id.categories); //Redrawing the categories
 				categories.setAdapter(new ListViewAdapter(parrent, R.layout.categoriesitem, profileBeingModified.getCategories())); //Adapter for the category gridview
@@ -182,7 +182,7 @@ public class ManageCategoryFragment extends Fragment {
 
 					public void onOk(AmbilWarnaDialog dialog, int color) 
 					{
-						Category tempCat = profileBeingModified.getCategoryAt(currentCategoryId);
+						PARROTCategory tempCat = profileBeingModified.getCategoryAt(currentCategoryId);
 						tempCat.setCategoryColour(color);
 						profileBeingModified.setCategoryAt(currentCategoryId, tempCat);
 						

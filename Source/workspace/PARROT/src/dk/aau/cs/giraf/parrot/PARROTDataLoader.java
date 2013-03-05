@@ -150,10 +150,10 @@ public class PARROTDataLoader {
 		return parrotUser;
 	}
 	//This method loads category
-	public Category loadCategory(String catName, String pictureIDs,int colour,String iconString)
+	public PARROTCategory loadCategory(String catName, String pictureIDs,int colour,String iconString)
 	{
 		Long iconId = Long.valueOf(iconString);
-		Category cat = new Category(catName, colour, loadPictogram(iconId));
+		PARROTCategory cat = new PARROTCategory(catName, colour, loadPictogram(iconId));
 		ArrayList<Long> listIDs = getIDsFromString(pictureIDs);
 		for(int i = 0; i<listIDs.size();i++)
 		{
@@ -333,7 +333,7 @@ public class PARROTDataLoader {
 		Pictogram væreStillePic = new Pictogram("Være Stille", "/sdcard/Pictogram/Være_Stille.png", null, "/sdcard/Pictogram/være_stille.wma");
 		væreStillePic.setNewPictogram(true);
 
-		Category tempCat3 = new Category("Kategori 1", 0xff05ff12, migPic);
+		PARROTCategory tempCat3 = new PARROTCategory("Kategori 1", 0xff05ff12, migPic);
 
 		tempCat3.addPictogram(badePic);
 		tempCat3.addPictogram(børsteTænderPic);
@@ -361,7 +361,7 @@ public class PARROTDataLoader {
 	
 		testProfile.addCategory(tempCat3);
 
-		Category tempCat4 = new Category("Kategori 2", 0xffff0000, duPic);
+		PARROTCategory tempCat4 = new PARROTCategory("Kategori 2", 0xffff0000, duPic);
 		tempCat4.addPictogram(duPic);
 		tempCat4.addPictogram(migPic);
 		tempCat4.addPictogram(jaPic);
@@ -384,7 +384,7 @@ public class PARROTDataLoader {
 		//END TEMP LINES
 	}
 
-	private Setting<String, String, String> saveCategory(Category category, int categoryNumber, Setting<String, String, String> profileSetting ) {
+	private Setting<String, String, String> saveCategory(PARROTCategory category, int categoryNumber, Setting<String, String, String> profileSetting ) {
 		//first, we save the pictograms
 		String pictogramString = "";
 		for(int i=0;i<category.getPictograms().size();i++)
