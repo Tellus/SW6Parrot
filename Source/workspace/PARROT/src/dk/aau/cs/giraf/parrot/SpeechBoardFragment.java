@@ -34,17 +34,11 @@ public class SpeechBoardFragment extends Fragment
 	public static int dragOwnerID =-1;
 	//Serves as the back-end storage for the visual speechboard
 	public static ArrayList<Pictogram> speechboardPictograms = new ArrayList<Pictogram>();
-<<<<<<< HEAD
-=======
-	public static PARROTCategory speechBoardCategory = new PARROTCategory(0x00ff00,null);	//This category contains the pictograms on the sentenceboard
-	public static PARROTCategory displayedCat = new PARROTCategory(PARROTActivity.getUser().getCategoryAt(0).getCategoryColour(),null);			//This category contains the pictograms displayed on the big board
-	private PARROTProfile user = null;
->>>>>>> origin/Jacob-2
 	
 	//This category contains the pictograms on the sentenceboard
-	public static Category speechBoardCategory = new Category(0x00ff00,null);	
+	public static PARROTCategory speechBoardCategory = new PARROTCategory(0x00ff00,null);	
 	//This category contains the pictograms displayed on the big board
-	public static Category displayedCategory = new Category(PARROTActivity.getUser().getCategoryAt(0).getCategoryColour(),null);
+	public static PARROTCategory displayedCategory = new PARROTCategory(PARROTActivity.getUser().getCategoryAt(0).getCategoryColour(),null);
 	
 	private PARROTProfile user = null;
 	private Pictogram emptyPictogram;  
