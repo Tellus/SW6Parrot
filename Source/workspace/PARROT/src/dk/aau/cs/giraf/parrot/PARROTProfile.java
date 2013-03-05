@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class PARROTProfile {
 	private String name;
 	private Pictogram icon;
-	private ArrayList<Category> categories = new ArrayList<Category>();
+	private ArrayList<PARROTCategory> categories = new ArrayList<PARROTCategory>();
 	private long profileID;
 	private int NumberOfSentencePictograms = 4;
 	private boolean[] rights = new boolean[3];
@@ -26,22 +26,22 @@ public class PARROTProfile {
 		this.setIcon(icon);
 	}
 
-	public ArrayList<Category> getCategories() {
+	public ArrayList<PARROTCategory> getCategories() {
 		return categories;
 	}
 	
 	
-	public Category getCategoryAt(int i)
+	public PARROTCategory getCategoryAt(int i)
 	{
 		return categories.get(i);
 	}
 	
-	public void setCategoryAt(int i, Category cat)
+	public void setCategoryAt(int i, PARROTCategory cat)
 	{
 		this.categories.set(i, cat);
 	}
 	
-	public void addCategory(Category cat)
+	public void addCategory(PARROTCategory cat)
 	{
 		categories.add(cat);
 	}
