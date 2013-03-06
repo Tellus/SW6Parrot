@@ -127,14 +127,22 @@ public class ManagementBoxDragListener implements OnDragListener
 				default:
 					break;
 				}
+				/*if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to delete a pictogram from a category
+				{
+					PARROTCategory temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
+					temp.removePictogram(ManageCategoryFragment.draggedItemIndex);
+					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, temp);
+					
+					pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId), parrent));
+				}
 				// Delete pictogram from category
-				/*if(self.getId() == R.id.trash && ManageCategoryFragment.categoryDragownerID == R.id.pictograms)
+				if(self.getId() == R.id.trash && ManageCategoryFragment.categoryDragownerID == R.id.pictograms)
 				{
 					deletePictogram();
 				}
 				// Delete category
 				else if(self.getId() == R.id.trash && ManageCategoryFragment.categoryDragownerID == R.id.categories)
-				{	
+				{
 					ManageCategoryFragment.profileBeingModified.removeCategory(ManageCategoryFragment.draggedItemIndex);
 					categories.setAdapter(new ListViewAdapter(parent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
 				}

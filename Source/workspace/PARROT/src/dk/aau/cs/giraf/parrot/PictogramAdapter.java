@@ -18,10 +18,10 @@ import android.widget.TextView;
  */
 public class PictogramAdapter extends BaseAdapter {
 
-	private Category cat;
+	private PARROTCategory cat;
 	private Context context;
 
-	public PictogramAdapter(Category cat, Context c)
+	public PictogramAdapter(PARROTCategory cat, Context c)
 	{
 		super();
 		this.cat=cat;

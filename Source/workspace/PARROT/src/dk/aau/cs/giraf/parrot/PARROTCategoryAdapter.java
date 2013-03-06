@@ -16,12 +16,13 @@ import android.widget.ImageView;
  * This class takes a list of categories and loads them into a GridView.
  */
 
-public class CategoryAdapter extends BaseAdapter{
+public class PARROTCategoryAdapter extends BaseAdapter{
 
-	private ArrayList<Category> catList;
+	private ArrayList<PARROTCategory> catList;
 	private Context context;
 
-	public CategoryAdapter(ArrayList<Category> catList, Context c)
+	//Constructor taking List of PARROTCategories, and a Context.
+	public PARROTCategoryAdapter(ArrayList<PARROTCategory> catList, Context c)
 	{
 		this.catList=catList;
 		context = c;
@@ -50,9 +51,10 @@ public class CategoryAdapter extends BaseAdapter{
 			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
 			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imageView.setPadding(8, 8, 8, 8);
-		} else {
+		} 
+		
+		else {
 			imageView = (ImageView) convertView;
-
 		}
 
 		//we then set the imageview to the icon of the category

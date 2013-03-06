@@ -18,11 +18,11 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
  * This class takes a list of categories and loads them into a ListView, displaying the icon as well as name. 
  */
 
-public class ListViewAdapter extends ArrayAdapter<Category> 
+public class ListViewAdapter extends ArrayAdapter<PARROTCategory> 
 {
-	private ArrayList<Category> items;
+	private ArrayList<PARROTCategory> items;
 
-	public ListViewAdapter(Context context, int textViewResourceId, ArrayList<Category> items)
+	public ListViewAdapter(Context context, int textViewResourceId, ArrayList<PARROTCategory> items)
 	{
 		super(context, textViewResourceId, items);
 		this.items = items;
@@ -40,7 +40,7 @@ public class ListViewAdapter extends ArrayAdapter<Category>
 			view = layoutInflater.inflate(R.layout.categoriesitem, null); 
 		}
 		//we get the current category.  
-		Category category = items.get(position);
+		PARROTCategory category = items.get(position);
 		if (category != null) {
 			//We find the imageView and the textView of the categoriesitem from before.
 			ImageView imageView = (ImageView) view.findViewById(R.id.catpic); 
