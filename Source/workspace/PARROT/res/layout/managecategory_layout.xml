@@ -2,19 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/categorymon"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation = "horizontal" >
 
     <RelativeLayout
         android:id="@+id/rlspincat"
-        android:layout_width="240dp"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:background="#00ff00"
-        android:orientation="vertical" >
+        android:background="@drawable/catlayout"
+        android:orientation="horizontal" >
 
         <Spinner
             android:id="@+id/profiles"
             android:layout_width="match_parent"
-            android:layout_height="75dp" />
+            android:layout_height="75dp"
+            android:background="@drawable/button" />
 
         <ListView
             android:id="@+id/categories"
@@ -27,11 +29,12 @@
 
         <ImageView
             android:id="@id/trash"
-            android:layout_width="240dp"
-            android:layout_height="240dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/trashbin" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -41,97 +44,202 @@
         android:layout_toRightOf="@id/rlspincat"
         android:orientation="vertical" >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="501dp"
-            android:background="#ff0000" >
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/background" >
 
-            <ImageView
-                android:id="@+id/categorypic"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:contentDescription="categoryIcon"
-                android:src="@drawable/stop" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="#ff000000"
+                android:orientation="vertical" >
 
-            <!--
-            <TextView
-                android:id="@+id/categoryinfo"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_toLeftOf="@id/categorypic"
-                android:fadeScrollbars="false"
-                android:scrollHorizontally="false" />
-            -->
-            
-            
-            <EditText
-                android:id="@+id/categoryinfo"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_toLeftOf="@id/categorypic"
-                android:fadeScrollbars="false"
-                android:scrollHorizontally="false" 
-                android:inputType="text"/>
+                <ImageView
+                    android:id="@+id/categoryPicture"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:contentDescription="categoryIcon"
+                    android:src="@drawable/stop" />
+
+                <EditText
+                    android:id="@+id/categoryinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold" >
+
+                    <requestFocus />
+                </EditText>
+
+                <TextView
+                    android:id="@+id/TextView02"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:text="Træk billede op til icon for at skifte"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="#ff000000"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opret ny"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="@dimen/ambilwarna_hueWidth"
+                    android:layout_gravity="center"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/createnewcategorybutton"
+                    android:layout_width="120dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button"
+                    android:text="Kategori"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/create_new_subcategory_button"
+                    android:layout_width="120dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button"
+                    android:text="Under kategori"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/create_new_pictogram_button"
+                    android:layout_width="120dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button"
+                    android:text="Pictogram"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="#ff000000"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Rediger"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="@dimen/ambilwarna_hueWidth"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/changecategorynamebutton"
+                    android:layout_width="120dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button"
+                    android:text="Titel"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/changecategorycolorbutton"
+                    android:layout_width="120dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button"
+                    android:text="Kategori Farve"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="#ff000000"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Kopier"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="@dimen/ambilwarna_hueWidth"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/copythiscategorytootherprofilebutton"
+                    android:layout_width="120dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button"
+                    android:text="@string/copyThisCategoryToOtherProfileButton"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/copythiscategorytootherprofilecategorybutton"
+                    android:layout_width="120dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button"
+                    android:text="@string/copyThisCategoryToOtherProfileCategoryButton"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="#ff000000"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Random"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="@dimen/ambilwarna_hueWidth"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <Button
-                android:id="@+id/createnewcategorybutton"
-                android:layout_width="120dp"
-                android:layout_height="75dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
-                android:background="#ff000000"
-                android:text="@string/createNewCategoryButton"/>
+                android:id="@+id/button1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:text="Tilbage"
+                android:textSize="@dimen/ambilwarna_hueWidth"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/changecategorycolorbutton"
-                android:layout_width="120dp"
-                android:layout_height="75dp"
-                android:layout_alignTop="@id/createnewcategorybutton"
-                android:layout_toRightOf="@id/createnewcategorybutton"
-                android:layout_marginLeft="30dp"
-                android:background="#ff000000"
-                android:text="@string/changeCategoryColorButton" />
-
-            <Button
-                android:id="@+id/changecategorynamebutton"
-                android:layout_width="120dp"
-                android:layout_height="75dp"
-                android:layout_alignLeft="@id/createnewcategorybutton"
-                android:layout_below="@id/createnewcategorybutton"
-                android:layout_marginTop="40dp"
-                android:background="#ff000000"
-                android:text="@string/changeCategoryNameButton" />
-
-            <Button
-                android:id="@+id/copythiscategorytootherprofilebutton"
-                android:layout_width="120dp"
-                android:layout_height="75dp"
-                android:layout_alignTop="@id/changecategorynamebutton"
-                android:layout_marginLeft="30dp"
-                android:background="#ff000000"
-                android:layout_toRightOf="@id/changecategorynamebutton"
-                android:text="@string/copyThisCategoryToOtherProfileButton" />
-
-            <Button
-                android:id="@+id/copythiscategorytootherprofilecategorybutton"
-                android:layout_width="120dp"
-                android:layout_height="75dp"
-                android:layout_alignTop="@id/changecategorynamebutton"
-                android:layout_marginLeft="30dp"
-                android:background="#ff000000"
-                android:layout_toRightOf="@id/copythiscategorytootherprofilebutton"
-                android:text="@string/copyThisCategoryToOtherProfileCategoryButton" />
-        </RelativeLayout>
+        </LinearLayout>
 
         <GridView
             android:id="@+id/pictograms"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
             android:background="#0000ff"
-            android:numColumns="3"
+            android:numColumns="6"
             android:fadeScrollbars="false" >
         </GridView>
     </LinearLayout>

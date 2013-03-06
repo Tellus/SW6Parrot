@@ -81,7 +81,7 @@ public class ManagementBoxDragListener implements OnDragListener
 		
 		ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, tempCategory);
 		
-		ImageView icon = (ImageView) parent.findViewById(R.id.categorypic);
+		ImageView icon = (ImageView) parent.findViewById(R.id.categoryPicture);
 		icon.setImageBitmap(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId).getIcon().getBitmap());
 		
 		ListView list = (ListView) parent.findViewById(R.id.categories);
@@ -102,39 +102,65 @@ public class ManagementBoxDragListener implements OnDragListener
 		case DragEvent.ACTION_DROP:
 			if (insideOfMe)
 			{
+				switch(ManageCategoryFragment.categoryDragownerID){
+				case R.id.pictograms:
+					if(self.getId() == R.id.trash){
+						deletePictogram(); 				// Delete pictogram from category
+					}
+					else if(self.getId() == R.id.categories){
+						copyPictogramToCategory(event); // Copy a pictogram into another category
+					}
+					else if(self.getId() == R.id.categoryPicture){
+						changeCategoryIcon(event); 		// Change category icon
+					}
+					break;
+				case R.id.categories:
+					if(self.getId() == R.id.trash){
+						// Delete category
+						ManageCategoryFragment.profileBeingModified.removeCategory(ManageCategoryFragment.draggedItemIndex);
+						categories.setAdapter(new ListViewAdapter(parent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
+					}
+					if(self.getId() == R.id.pictograms){
+						copyCategoryToCategory(event);	// Copy a category into another category
+					}
+					break;
+				default:
+					break;
+				}
 				// Delete pictogram from category
-				if(self.getId() == R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.pictograms)
+				/*if(self.getId() == R.id.trash && ManageCategoryFragment.categoryDragownerID == R.id.pictograms)
 				{
-					// Klim:
 					deletePictogram();
 				}
 				// Delete category
-				else if(self.getId() == R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.categories)
+				else if(self.getId() == R.id.trash && ManageCategoryFragment.categoryDragownerID == R.id.categories)
 				{	
 					ManageCategoryFragment.profileBeingModified.removeCategory(ManageCategoryFragment.draggedItemIndex);
 					categories.setAdapter(new ListViewAdapter(parent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
 				}
 				// Copy a pictogram into another category
-				else if(self.getId() == R.id.categories && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) 
+				else if(self.getId() == R.id.categories && ManageCategoryFragment.categoryDragownerID == R.id.pictograms) 
 				{
-					//Klim:
 					copyPictogramToCategory(event);	
 				}
 				// Copy a category into another category
-				else if(self.getId() == R.id.pictograms && ManageCategoryFragment.catDragOwnerID == R.id.categories) 
+				else if(self.getId() == R.id.pictograms && ManageCategoryFragment.categoryDragownerID == R.id.categories) 
 				{	
-					// Klim:
 					copyCategoryToCategory(event);
 				}
 				// Change category icon
-				else if(self.getId() == R.id.categorypic && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) 
+				else if(self.getId() == R.id.categoryPicture && ManageCategoryFragment.categoryDragownerID == R.id.pictograms) 
 				{
 					changeCategoryIcon(event);
 				}
 				else
 				{
 					//TODO check that nothing is done. 
-				}
+				}*/
+			}
+			else
+			{
+				// TODO What happens if not inside of me?
 			}
 			break;
 		case DragEvent.ACTION_DRAG_ENDED:
