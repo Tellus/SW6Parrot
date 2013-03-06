@@ -54,6 +54,7 @@ public class PARROTDataLoader {
 		ArrayList<PARROTProfile> parrotChildren = new ArrayList<PARROTProfile>();
 		Profile guardian = help.profilesHelper.getProfileById(PARROTActivity.getGuardianID());
 		List<Profile> children = help.profilesHelper.getChildrenByGuardian(guardian);
+		
 		for(int i = 0;i<children.size();i++)
 		{
 			parrotChildren.add(loadProfile(children.get(i).getId(), app.getId()));
@@ -76,17 +77,16 @@ public class PARROTDataLoader {
 
 
 		if(childId !=null && appId !=null)
-		{
+		 {
 			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
 
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 			parrotUser.setProfileID(prof.getId());
 			Setting<String, String, String> specialSettings = app.getSettings();//This object might be null
-			if(specialSettings != null)
+			
+			try
 			{
-
-
 				//Load the settings
 				parrotUser = loadSettings(parrotUser, specialSettings);
 
@@ -103,17 +103,15 @@ public class PARROTDataLoader {
 				}
 				return parrotUser;
 			}
-			else
+			
+			catch(NullPointerException e)
 			{
-				//If no profile is found, return null.
-				//It means that the launcher has not provided a profile, either due to an error, or because PARROT has been launched outside of GIRAF.
+				//TODO make a exception that can be catched later.
 				return null;
 			}
 		}
 		//If an error has happened, return null
 		return null;
-
-
 	}
 
 	private PARROTProfile loadSettings(PARROTProfile parrotUser, Setting<String, String, String> profileSettings) {
@@ -125,13 +123,11 @@ public class PARROTDataLoader {
 		parrotUser.setSentenceBoardColor(sentenceColour);
 
 		//Then we load the tab settings
-		boolean tab0 = Boolean.valueOf(profileSettings.get("Rights").get("tab0"));
-		boolean tab1 = Boolean.valueOf(profileSettings.get("Rights").get("tab1"));
-		boolean tab2 = Boolean.valueOf(profileSettings.get("Rights").get("tab2"));
-		parrotUser.setRights(0, tab0);
-		parrotUser.setRights(1, tab1);
-		parrotUser.setRights(2, tab2);
-
+		for(int i = 0; i<3; i++)
+		{
+			parrotUser.setRights(i, Boolean.valueOf(profileSettings.get("Rights").get("tab" + i)));
+		}
+		
 		return parrotUser;
 	}
 	//This method loads category
