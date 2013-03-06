@@ -30,7 +30,7 @@ public class ManagementBoxDragListener implements OnDragListener
 	// Klim 
 	private void deletePictogram()
 	{
-		Category tempCategory = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
+		PARROTCategory tempCategory = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
 		tempCategory.removePictogram(ManageCategoryFragment.draggedItemIndex);
 		
 		ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, tempCategory);
@@ -46,7 +46,7 @@ public class ManagementBoxDragListener implements OnDragListener
 		int pos = categories.pointToPosition(x, y);
 		
 		draggedPictogram = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId).getPictogramAtIndex(ManageCategoryFragment.draggedItemIndex); 
-		Category categoryCopiedTo = ManageCategoryFragment.profileBeingModified.getCategoryAt(pos);
+		PARROTCategory categoryCopiedTo = ManageCategoryFragment.profileBeingModified.getCategoryAt(pos);
 		categories = (ListView) parent.findViewById(R.id.categories);
 		
 		categoryCopiedTo.addPictogram(draggedPictogram);
@@ -56,8 +56,8 @@ public class ManagementBoxDragListener implements OnDragListener
 	// Klim
 	private void copyCategoryToCategory(DragEvent event)
 	{
-		Category categoryCopiedFrom = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.draggedItemIndex); 
-		Category categoryCopiedTo   = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
+		PARROTCategory categoryCopiedFrom = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.draggedItemIndex); 
+		PARROTCategory categoryCopiedTo   = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
 		
 		// Add all pictogram from categoryCopiedFrom to categoryCopiedTo
 		// i = numberOfPictograms
@@ -74,7 +74,7 @@ public class ManagementBoxDragListener implements OnDragListener
 	private void changeCategoryIcon(DragEvent event)
 	{
 		draggedPictogram      = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId).getPictogramAtIndex(ManageCategoryFragment.draggedItemIndex);
-		Category tempCategory = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
+		PARROTCategory tempCategory = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
 		
 		// Set new icon
 		tempCategory.setIcon(draggedPictogram);

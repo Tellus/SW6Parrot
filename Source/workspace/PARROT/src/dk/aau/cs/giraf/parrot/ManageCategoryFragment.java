@@ -180,7 +180,7 @@ public class ManageCategoryFragment extends Fragment {
 				Pictogram pictogram = new Pictogram("#usynlig#", null, null, null, parentActivity);
 				
 				// Category name set to Kategori Navn, default green category color set
-				Category newCategory = new Category("Kategori Navn", 0xffff0000, pictogram);
+				PARROTCategory newCategory = new PARROTCategory("Kategori Navn", 0xffff0000, pictogram);
 				
 				// Add category to the current profile/user
 				profileBeingModified.addCategory(newCategory);
@@ -204,7 +204,7 @@ public class ManageCategoryFragment extends Fragment {
 					public void onOk(AmbilWarnaDialog dialog, int color) 
 					{
 						// Assess currentCategory
-						Category currentCategory = profileBeingModified.getCategoryAt(currentCategoryId);
+						PARROTCategory currentCategory = profileBeingModified.getCategoryAt(currentCategoryId);
 						currentCategory.setCategoryColour(color);
 						profileBeingModified.setCategoryAt(currentCategoryId, currentCategory);
 						// Method to change color
