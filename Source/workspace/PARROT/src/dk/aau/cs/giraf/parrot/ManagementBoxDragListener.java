@@ -90,19 +90,28 @@ public class ManagementBoxDragListener implements OnDragListener
 	
 	public boolean onDrag(View self, DragEvent event) {
 		switch (event.getAction()) {
+		// Drag started
 		case DragEvent.ACTION_DRAG_STARTED:
 			// Dummy
 			break;
+		// Drag ended
+		case DragEvent.ACTION_DRAG_ENDED:
+			// Dummy
+			break;
+		// Drag entered
 		case DragEvent.ACTION_DRAG_ENTERED:
 			insideOfMe = true;
 			break;
+		// Drag exited
 		case DragEvent.ACTION_DRAG_EXITED:
 			insideOfMe = false;
 			break;
+		// Drop dragged item
 		case DragEvent.ACTION_DROP:
 			if (insideOfMe)
 			{
 				switch(ManageCategoryFragment.categoryDragownerID){
+				// Drag pictogram to..
 				case R.id.pictograms:
 					if(self.getId() == R.id.trash){
 						deletePictogram(); 				// Delete pictogram from category
@@ -114,6 +123,7 @@ public class ManagementBoxDragListener implements OnDragListener
 						changeCategoryIcon(event); 		// Change category icon
 					}
 					break;
+				// Drag category to..
 				case R.id.categories:
 					if(self.getId() == R.id.trash){
 						// Delete category
@@ -127,52 +137,7 @@ public class ManagementBoxDragListener implements OnDragListener
 				default:
 					break;
 				}
-				/*if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to delete a pictogram from a category
-				{
-					PARROTCategory temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
-					temp.removePictogram(ManageCategoryFragment.draggedItemIndex);
-					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, temp);
-					
-					pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId), parrent));
-				}
-				// Delete pictogram from category
-				if(self.getId() == R.id.trash && ManageCategoryFragment.categoryDragownerID == R.id.pictograms)
-				{
-					deletePictogram();
-				}
-				// Delete category
-				else if(self.getId() == R.id.trash && ManageCategoryFragment.categoryDragownerID == R.id.categories)
-				{
-					ManageCategoryFragment.profileBeingModified.removeCategory(ManageCategoryFragment.draggedItemIndex);
-					categories.setAdapter(new ListViewAdapter(parent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
-				}
-				// Copy a pictogram into another category
-				else if(self.getId() == R.id.categories && ManageCategoryFragment.categoryDragownerID == R.id.pictograms) 
-				{
-					copyPictogramToCategory(event);	
-				}
-				// Copy a category into another category
-				else if(self.getId() == R.id.pictograms && ManageCategoryFragment.categoryDragownerID == R.id.categories) 
-				{	
-					copyCategoryToCategory(event);
-				}
-				// Change category icon
-				else if(self.getId() == R.id.categoryPicture && ManageCategoryFragment.categoryDragownerID == R.id.pictograms) 
-				{
-					changeCategoryIcon(event);
-				}
-				else
-				{
-					//TODO check that nothing is done. 
-				}*/
 			}
-			else
-			{
-				// TODO What happens if not inside of me?
-			}
-			break;
-		case DragEvent.ACTION_DRAG_ENDED:
-			// Dummy
 			break;
 		default:
 			break;
