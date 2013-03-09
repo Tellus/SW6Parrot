@@ -28,6 +28,7 @@ public class PARROTActivity extends Activity {
 		app = help.appsHelper.getAppByPackageName();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
 		
+		
 		if(guardianID == -1 )
 		{
 			//do nothing
