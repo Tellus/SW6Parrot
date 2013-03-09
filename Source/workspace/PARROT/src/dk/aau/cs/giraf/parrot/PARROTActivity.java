@@ -23,26 +23,33 @@ public class PARROTActivity extends Activity {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main);
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
-		girafIntent = getIntent();
+		/*girafIntent = getIntent();
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
-		
 		
 		if(guardianID == -1 )
 		{
 			//do nothing
 		}
 		else
-		{
+		{ */
 			dataLoader = new PARROTDataLoader(this);
-			parrotUser = dataLoader.loadPARROT();			
+		/*	
+			//If an error occur parrotUser is null which must be cached  
+			try{parrotUser = dataLoader.loadPARROT();	}
+			catch(NullPointerException e)
+			{
+				return;
+			}
+			*/
+			
 			//TODO replace the temp lines with the above line
 			//START TEMP LINES
-			/*dataLoader.TESTsaveTestProfile();
+			dataLoader.TESTsaveTestProfile();
 			parrotUser.setRights(0, true);
 			parrotUser.setRights(1, true);
-			parrotUser.setRights(2, true);*/
+			parrotUser.setRights(2, true);
 			//END TEMP LINES
 	
 			/* Here all the Tabs in the system is initialized based on whether or not a user
@@ -63,6 +70,7 @@ public class PARROTActivity extends Activity {
 					.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
 			actionBar.addTab(tab);
 			
+		
 			if (parrotUser.getRights(0) == true)
 			{
 				tab = actionBar.newTab()
@@ -77,7 +85,7 @@ public class PARROTActivity extends Activity {
 						.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
 				actionBar.addTab(tab);
 			}
-		}
+		//}
 
 
 	}
