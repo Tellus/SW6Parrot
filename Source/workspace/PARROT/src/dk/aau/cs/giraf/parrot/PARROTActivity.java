@@ -30,10 +30,10 @@ public class PARROTActivity extends Activity {
 		test.TESTsaveTestProfile();*/
 		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
-		girafIntent = getIntent();
+		/*girafIntent = getIntent();
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
-		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
+		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);*/
 		
 		if(guardianID == -1 )
 		{
@@ -48,26 +48,26 @@ public class PARROTActivity extends Activity {
 			dataLoader = new PARROTDataLoader(this);
 			
 			//If an error occur parrotUser is null which must be cached  
-			try{parrotUser = dataLoader.loadPARROT();	}
+		/*	try{parrotUser = dataLoader.loadPARROT();	}
 			catch(NullPointerException e)
 			{
 				Long id = new Long(girafIntent.getLongExtra("currentChildID", -1));
-				/*AlertDialog alertDialog;
+				AlertDialog alertDialog;
 				alertDialog = new AlertDialog.Builder(this).create();
 				alertDialog.setTitle("null returned");
 				alertDialog.setMessage("childID "+ id.toString());
-				alertDialog.show();*/
-				Log.e("MessageParrot", "error null was returned, childID: " + id.toString());
+				alertDialog.show();
+				//Log.e("MessageParrot", "error null was returned, childID: " + id.toString());
 				return;
-			}
+			}*/
 			
 			
 			//TODO replace the temp lines with the above line
 			//START TEMP LINES
-			/*dataLoader.TESTsaveTestProfile();
+			dataLoader.TESTsaveTestProfile();
 			parrotUser.setRights(0, true);
 			parrotUser.setRights(1, true);
-			parrotUser.setRights(2, true);*/
+			parrotUser.setRights(2, true);
 			//END TEMP LINES
 	
 			/* Here all the Tabs in the system is initialized based on whether or not a user
