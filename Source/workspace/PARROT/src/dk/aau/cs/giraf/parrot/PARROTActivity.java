@@ -5,8 +5,10 @@ import dk.aau.cs.giraf.oasis.lib.models.App;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 
 public class PARROTActivity extends Activity {
@@ -22,34 +24,50 @@ public class PARROTActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main);
+		
+		//this write test data to database
+		/*TestData test = new TestData(this);
+		test.TESTsaveTestProfile();*/
+		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
-		/*girafIntent = getIntent();
+		girafIntent = getIntent();
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
 		
 		if(guardianID == -1 )
 		{
-			//do nothing
+			AlertDialog alertDialog;
+			alertDialog = new AlertDialog.Builder(this).create();
+			alertDialog.setTitle("guardianID");
+			alertDialog.setMessage("Could not find guardian.");
+			alertDialog.show();
 		}
 		else
-		{ */
+		{ 
 			dataLoader = new PARROTDataLoader(this);
-		/*	
+			
 			//If an error occur parrotUser is null which must be cached  
 			try{parrotUser = dataLoader.loadPARROT();	}
 			catch(NullPointerException e)
 			{
+				Long id = new Long(girafIntent.getLongExtra("currentChildID", -1));
+				/*AlertDialog alertDialog;
+				alertDialog = new AlertDialog.Builder(this).create();
+				alertDialog.setTitle("null returned");
+				alertDialog.setMessage("childID "+ id.toString());
+				alertDialog.show();*/
+				Log.e("MessageParrot", "error null was returned, childID: " + id.toString());
 				return;
 			}
-			*/
+			
 			
 			//TODO replace the temp lines with the above line
 			//START TEMP LINES
-			dataLoader.TESTsaveTestProfile();
+			/*dataLoader.TESTsaveTestProfile();
 			parrotUser.setRights(0, true);
 			parrotUser.setRights(1, true);
-			parrotUser.setRights(2, true);
+			parrotUser.setRights(2, true);*/
 			//END TEMP LINES
 	
 			/* Here all the Tabs in the system is initialized based on whether or not a user
@@ -85,10 +103,11 @@ public class PARROTActivity extends Activity {
 						.setTabListener(new TabListener<OptionsFragment>(this,"options",OptionsFragment.class));
 				actionBar.addTab(tab);
 			}
-		//}
+		}
 
 
 	}
+	
 	@Override
 	protected void onPause() {
 		/*AudioPlayer.close();
