@@ -11,6 +11,7 @@ public class TimeTimer extends SubProfile {
 		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.get_totalTime(),obj.gradient);
 	}
 	
+	@Override
 	public TimeTimer copy(){
 		TimeTimer copyP = new TimeTimer(this);
 		copyP.setAttachment(this._attachment);
@@ -18,6 +19,7 @@ public class TimeTimer extends SubProfile {
 		return copyP;
 	}
 	
+	@Override
 	public formFactor formType(){
 		return formFactor.TimeTimer;
 	}

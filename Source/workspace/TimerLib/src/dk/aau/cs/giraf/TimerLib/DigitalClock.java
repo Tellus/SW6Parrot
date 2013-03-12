@@ -27,6 +27,7 @@ public class DigitalClock extends SubProfile {
 	/**
 	 * Copy method
 	 */
+	@Override
 	public DigitalClock copy(){
 		DigitalClock copyP = new DigitalClock(this);
 		copyP.setAttachment(this._attachment);
@@ -37,6 +38,7 @@ public class DigitalClock extends SubProfile {
 	/**
 	 * Used to check what type the object is.
 	 */
+	@Override
 	public formFactor formType(){
 		return formFactor.DigitalClock;
 	}
