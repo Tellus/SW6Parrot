@@ -9,42 +9,52 @@ import android.widget.GridView;
 
 /**
  * 
- * @author PARROT
+ * @author PARROT, spring 2012
  * This is the BoxDragListener class.
  * It handles drag and drop functionality with objects in the SpeechboardFragment.
  *
  */
-public class BoxDragListener implements OnDragListener 
+public class SpeechBoardBoxDragListener implements OnDragListener 
 {
 	private Activity parrent;
 	private Pictogram draggedPictogram = null;
 	private PARROTProfile profile = PARROTActivity.getUser();
 	int numberOfSentencePictograms = profile.getNumberOfSentencePictograms();
+	boolean insideOfMe = false;
 
-
-	public BoxDragListener(Activity active) {
+	/**
+	 * @param active
+	 */
+	public SpeechBoardBoxDragListener(Activity active) {
 		parrent = active;
 	}
 
-	boolean insideOfMe = false;
+	/**
+	 * it handles drag and drop functionality with objects in the SpeechboardFragment
+	 * @param self
+	 * @param event
+	 */
 	public boolean onDrag(View self, DragEvent event) {
 		if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
+			//When pictogram is dragged from sentenceboard
 			if(self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard)
 			{
 				draggedPictogram = SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);
+				//Do not allow dragging empty pictograms, show do nothing
 				if(draggedPictogram.isEmpty()==true)
 				{
-					//Do not allow dragging empty pictograms
 				}
 				else
 				{
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
+					
+					//remove pictogram from sentenceboard and add an empty pictogram 
 					SpeechBoardFragment.speechBoardCategory.removePictogram(SpeechBoardFragment.draggedPictogramIndex);	
-					SpeechBoardFragment.speechBoardCategory.addPictogram(new Pictogram("#usynlig#", null, null, null, parrent));
+					SpeechBoardFragment.speechBoardCategory.addPictogram(new Pictogram("#emptyPictogram#", null, null, null, parrent));
+					
 					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 				}
 			}
-			//Dummy
 		} else if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED){ 
 			insideOfMe = true;
 		} else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED){
@@ -52,8 +62,8 @@ public class BoxDragListener implements OnDragListener
 		} else if (event.getAction() == DragEvent.ACTION_DROP){
 			if (insideOfMe){
 
-
-				if( self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID != R.id.sentenceboard)	//We are about to drop a view into the sentenceboard
+				//We want to drop a view into the sentenceboard
+				if( self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID != R.id.sentenceboard)	
 				{
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
 					int x = (int)event.getX();
@@ -66,21 +76,22 @@ public class BoxDragListener implements OnDragListener
 					}
 					else
 					{
-						draggedPictogram =SpeechBoardFragment.displayedCat.getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);
+						draggedPictogram = SpeechBoardFragment.displayedCategory.getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);
 
 
-
-						if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).isEmpty() == false) //Replaces a pictogram already in the sentencebord
+						//Replaces a pictogram already in the sentencebord
+						if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).isEmpty() == false) 
 						{
 							SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
 							SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, index); //add the pictogram at the specific position
 						}
+						//place the dragged pictogram into an empty filled
 						else 
 						{
 							int count = 0;
+							//place the new pictogram in the first empty filled
 							while (count < numberOfSentencePictograms) 
 							{
-
 								if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).isEmpty() == true) 
 								{
 									SpeechBoardFragment.speechBoardCategory.removePictogram(count); //Removes the pictogram at the specific index

@@ -177,7 +177,7 @@ public class Pictogram {
 	}
 
 	public boolean isEmpty() {
-		if(this.name.equals("#usynlig#"))
+		if(this.name.equals("#emptyPictogram#"))
 		{
 			return true;
 		}

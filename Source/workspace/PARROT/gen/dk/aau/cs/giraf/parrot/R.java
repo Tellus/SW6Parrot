@@ -41,7 +41,9 @@ public final class R {
         public static final int usynlig=0x7f020012;
     }
     public static final class id {
-        public static final int SpeechBoard=0x7f08001d;
+        public static final int SpeechBoard=0x7f080025;
+        public static final int TextView01=0x7f08001d;
+        public static final int TextView02=0x7f080012;
         public static final int ambilwarna_cursor=0x7f080003;
         public static final int ambilwarna_state=0x7f080005;
         public static final int ambilwarna_target=0x7f080004;
@@ -50,32 +52,38 @@ public final class R {
         public static final int ambilwarna_viewSatBri=0x7f080001;
         public static final int ambilwarna_warnaBaru=0x7f080007;
         public static final int ambilwarna_warnaLama=0x7f080006;
+        public static final int button1=0x7f08001e;
         public static final int categories=0x7f08000d;
+        public static final int categoryPicture=0x7f080010;
         public static final int categoryinfo=0x7f080011;
         public static final int categorymon=0x7f08000a;
-        public static final int categorypic=0x7f080010;
         public static final int catname=0x7f080009;
         public static final int catpic=0x7f080008;
-        public static final int changecategorycolor=0x7f080019;
-        public static final int changecategorycolorbutton=0x7f080013;
-        public static final int changecategorynamebutton=0x7f080014;
-        public static final int changesentencecolor=0x7f08001a;
-        public static final int copythiscategorytootherprofilebutton=0x7f080015;
-        public static final int copythiscategorytootherprofilecategorybutton=0x7f080016;
-        public static final int createnewcategorybutton=0x7f080012;
-        public static final int options_layout=0x7f080018;
-        public static final int pictogrambitmap=0x7f08001b;
-        public static final int pictogramgrid=0x7f080021;
-        public static final int pictogramgrid_layout=0x7f080020;
-        public static final int pictograms=0x7f080017;
-        public static final int pictogramtext=0x7f08001c;
+        public static final int changecategorycolor=0x7f080021;
+        public static final int changecategorycolorbutton=0x7f080019;
+        public static final int changecategorynamebutton=0x7f080018;
+        public static final int changesentencecolor=0x7f080022;
+        public static final int copythiscategorytootherprofilebutton=0x7f08001b;
+        public static final int copythiscategorytootherprofilecategorybutton=0x7f08001c;
+        public static final int create_new_pictogram_button=0x7f080016;
+        public static final int create_new_subcategory_button=0x7f080015;
+        public static final int createnewcategorybutton=0x7f080014;
+        public static final int options_layout=0x7f080020;
+        public static final int pictogrambitmap=0x7f080023;
+        public static final int pictogramgrid=0x7f080029;
+        public static final int pictogramgrid_layout=0x7f080028;
+        public static final int pictograms=0x7f08001f;
+        public static final int pictogramtext=0x7f080024;
         public static final int profiles=0x7f08000c;
         public static final int rlinfoall=0x7f08000f;
         public static final int rlspincat=0x7f08000b;
-        public static final int sentenceboard=0x7f080023;
-        public static final int sentenceboardlinearhelper=0x7f080022;
-        public static final int supercategory=0x7f08001f;
-        public static final int supercategory_layout=0x7f08001e;
+        public static final int sentenceboard=0x7f08002b;
+        public static final int sentenceboardlinearhelper=0x7f08002a;
+        public static final int supercategory=0x7f080027;
+        public static final int supercategory_layout=0x7f080026;
+        public static final int textView1=0x7f080013;
+        public static final int textView2=0x7f080017;
+        public static final int textView3=0x7f08001a;
         public static final int trash=0x7f08000e;
     }
     public static final class layout {
@@ -88,6 +96,7 @@ public final class R {
         public static final int speechboard_layout=0x7f030006;
     }
     public static final class string {
+        public static final int KlimTest=0x7f040028;
         public static final int TakePictureButton=0x7f040006;
         public static final int addImageFromCameraButtonText=0x7f04001f;
         public static final int addImageFromPhoneButtonText=0x7f040020;

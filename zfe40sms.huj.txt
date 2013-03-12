@@ -1,0 +1,38 @@
+﻿Merge remote-tracking branch 'origin/master' into Klim
+
+Conflicts:
+	Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/ManageCategoryFragment.java
+	Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/ManagementBoxDragListener.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch Klim
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	modified:   Source/workspace/LocalDB/AndroidManifest.xml
+#	modified:   Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/ListViewAdapter.java
+#	modified:   Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/ManageCategoryFragment.java
+#	modified:   Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/ManagementBoxDragListener.java
+#	modified:   Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/PARROTActivity.java
+#	renamed:    Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/Category.java -> Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/PARROTCategory.java
+#	renamed:    Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/CategoryAdapter.java -> Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/PARROTCategoryAdapter.java
+#	modified:   Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/PARROTDataLoader.java
+#	modified:   Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/PARROTProfile.java
+#	modified:   Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/Pictogram.java
+#	modified:   Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/PictogramAdapter.java
+#	renamed:    Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/BoxDragListener.java -> Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/SpeechBoardBoxDragListener.java
+#	modified:   Source/workspace/PARROT/src/dk/aau/cs/giraf/parrot/SpeechBoardFragment.java
+#	new file:   Source/workspace/TimerLib/gen/dk/aau/cs/giraf/TimerLib/R.java
+#	deleted:    Source/workspace/Wombat/gen/.gitignore
+#	new file:   Source/workspace/Wombat/gen/dk/aau/cs/giraf/TimerLib/R.java
+#
+
