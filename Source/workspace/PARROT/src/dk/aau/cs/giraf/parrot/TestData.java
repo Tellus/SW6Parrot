@@ -138,7 +138,9 @@ public class TestData {
 				profileSetting = saveCategory(testProfile.getCategoryAt(i), i, profileSetting);
 			}
 			profileSetting = saveSettings(profileSetting, testProfile);
-			app.setSettings(profileSetting);	
+			app.setSettings(profileSetting);
+			
+			help.appsHelper.modifyAppByProfile(app, tempProf);
 			long appID=app.getId();
 		//	PARROTProfile parrot =loadProfile(profileId, appID);
 		//	PARROTActivity.setUser(parrot);

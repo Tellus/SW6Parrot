@@ -1,8 +1,11 @@
 package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -24,7 +27,7 @@ public class PARROTDataLoader {
 	public PARROTDataLoader(Activity activity)
 	{
 		this.parrent = activity;
-		help = PARROTActivity.getHelp();
+		help = new Helper(parrent); 
 		app = PARROTActivity.getApp();
 
 	}
@@ -37,10 +40,12 @@ public class PARROTDataLoader {
 	public PARROTProfile loadPARROT()
 	{
 		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
-		//Long childId = PARROTActivity.getGirafIntent().getExtras().getLong("currentChildID");
-		Long childId = PARROTActivity.getGirafIntent().getLongExtra("currentChildID", -1);
-		Long appId = app.getId();
-		//PARROTActivity.setGuardianID(parrent.getIntent().getExtras().getLong("currentGuardianID"));
+		long childId = PARROTActivity.getGirafIntent().getLongExtra("currentChildID", -1);
+		long appId = app.getId();
+		if(appId <=0)
+		{
+			appId=-1;
+		}
 		return loadProfile(childId, appId);
 	}
 
@@ -71,25 +76,28 @@ public class PARROTDataLoader {
 	 * @return
 	 * This methods loads a specific PARROTProfile.
 	 */
-	public PARROTProfile loadProfile(Long childId,Long appId)	
+	public PARROTProfile loadProfile(long childId,long appId)	
 	{
-		Profile prof;
+		Profile prof =null;
 
-
-		if((childId != -1 || childId !=null) && appId !=null)
+		
+		if(childId != -1 && appId != -1)
 		 {
+				
 			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
-
+		
 			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
+			
 			parrotUser.setProfileID(prof.getId());
-			Setting<String, String, String> specialSettings = app.getSettings();//This object might be null
+			Setting<String, String, String> specialSettings = help.appsHelper.getSettingByIds(appId, childId);
+					//app.getSettings();//This object might be null
 			
 			try
 			{
+					
 				//Load the settings
 				parrotUser = loadSettings(parrotUser, specialSettings);
-
 				//Add all of the categories to the profile
 				String categoryString = null;
 				for(int number = 0; specialSettings.get("category"+number) != null; number++)
@@ -115,13 +123,17 @@ public class PARROTDataLoader {
 	}
 
 	private PARROTProfile loadSettings(PARROTProfile parrotUser, Setting<String, String, String> profileSettings) {
-
+		
+		
+		int sentenceColour=0xaaafff;
+		int catColour=0xbbbfffff;
 		//First we load the colour settings
-		int catColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SuperCategory"));
-		int sentenceColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SentenceBoard"));
+		catColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SuperCategory"));
+		sentenceColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SentenceBoard"));
+		Log.v("MessageParrot","I loadSettings: efter get colour Settings");
 		parrotUser.setCategoryColor(catColour);
 		parrotUser.setSentenceBoardColor(sentenceColour);
-
+		Log.v("MessageParrot","I loadSettings: efter set colour i parrotUser");
 		//Then we load the tab settings
 		for(int i = 0; i<3; i++)
 		{
@@ -225,6 +237,8 @@ public class PARROTDataLoader {
 		}
 		//after all the changes are made, we save the settings to the database
 		app.setSettings(profileSetting);
+		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
+		help.appsHelper.modifyAppByProfile(app, prof);
 	}
 
 	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
