@@ -262,12 +262,12 @@ public class CRUD {
 		/* Load all settings from the hash table */
 		p.name = String.valueOf(hm.get("Name"));
 		p.desc = String.valueOf(hm.get("desc"));	
-		p.bgcolor = Integer.valueOf((String)hm.get("bgcolor"));
-		p.timeLeftColor = Integer.valueOf((String)hm.get("timeLeftColor"));
-		p.timeSpentColor = Integer.valueOf((String)hm.get("timeSpentColor"));
-		p.frameColor = Integer.valueOf((String)hm.get("frameColor"));
-		p.set_totalTime(Integer.valueOf((String)hm.get("totalTime")));
-		p.gradient = Boolean.valueOf((String)hm.get("gradient"));
+		p.bgcolor = Integer.valueOf(hm.get("bgcolor"));
+		p.timeLeftColor = Integer.valueOf(hm.get("timeLeftColor"));
+		p.timeSpentColor = Integer.valueOf(hm.get("timeSpentColor"));
+		p.frameColor = Integer.valueOf(hm.get("frameColor"));
+		p.set_totalTime(Integer.valueOf(hm.get("totalTime")));
+		p.gradient = Boolean.valueOf(hm.get("gradient"));
 		formFactor factor = formFactor.convert(hm.get("type"));
 		p.refChild = Long.valueOf(hm.get("refChild"));
 		p.refPro = Long.valueOf(hm.get("refPro"));
@@ -278,10 +278,10 @@ public class CRUD {
 		p = convertType(p,factor);
 
 		p.setDB_id(Long.valueOf(hm.get("db_id")));
-		p.save = Boolean.valueOf((String)hm.get("save"));
-		p.saveAs = Boolean.valueOf((String)hm.get("saveAs"));
+		p.save = Boolean.valueOf(hm.get("save"));
+		p.saveAs = Boolean.valueOf(hm.get("saveAs"));
 
-		p._AttaBool = (Boolean.valueOf((String) hm.get("Attachment")));
+		p._AttaBool = (Boolean.valueOf(hm.get("Attachment")));
 		//Attachment
 		if(p._AttaBool){
 			//Attachment attachP = new Attachment();
@@ -295,7 +295,7 @@ public class CRUD {
 				int t_timeLeftColor = Integer.valueOf(hm.get("_timeLeftColor"));
 				int t_timeSpentColor = Integer.valueOf(hm.get("_timeSpentColor"));
 				boolean t_gradient = Boolean.valueOf(hm.get("_gradient"));
-				int t_time = Integer.valueOf((String)hm.get("totalTime"));
+				int t_time = Integer.valueOf(hm.get("totalTime"));
 
 				art = new Timer(tFactor,t_bgColor,t_timeLeftColor, t_timeSpentColor, t_frameColor,t_time, t_gradient);
 				break;
