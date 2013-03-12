@@ -28,33 +28,35 @@ public class ListViewAdapter extends ArrayAdapter<PARROTCategory>
 		this.items = items;
 	}
 
-
 	@Override
 	//This is the getView method, all adapters must have one. 
 	//It takes the category corresponding to the current item in the ListView and transforms it into a View.  
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent)
+	{
 		View view = convertView;
-		if (view == null) {
+		if (view == null)
+		{
 			LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			//We inflate a categoriesitem and prepare it for data 
+			// We inflate a categoriesitem and prepare it for data 
 			view = layoutInflater.inflate(R.layout.categoriesitem, null); 
 		}
-		//we get the current category.  
+		
+		// Get current category  
 		PARROTCategory category = items.get(position);
-		if (category != null) {
+		if (category != null)
+		{
 			//We find the imageView and the textView of the categoriesitem from before.
 			ImageView imageView = (ImageView) view.findViewById(R.id.catpic); 
 			TextView textView = (TextView) view.findViewById(R.id.catname);
 				
-			if (imageView != null) {
+			if (imageView != null)
+			{
 				imageView.setImageBitmap(items.get(position).getIcon().getBitmap());
 			}
-			if (textView != null) {
-
+			if (textView != null)
+			{
 				textView.setText(category.getCategoryName());
-
 			}
-
 		}
 
 		return view;
