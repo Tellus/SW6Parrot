@@ -249,6 +249,7 @@ public class SubProfile implements Comparable<SubProfile>{
 		}
 	}
 
+	@Override
 	public boolean equals(Object o) {
         if (!(o instanceof SubProfile))
             return false;
@@ -256,15 +257,18 @@ public class SubProfile implements Comparable<SubProfile>{
         return n.name.equals(name) && n.name.equals(name);
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return 31*name.hashCode() + name.hashCode();
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
 	return name + " " + name;
     }
 
-    public int compareTo(SubProfile n) {
+    @Override
+	public int compareTo(SubProfile n) {
         int lastCmp = name.compareTo(n.name);
         return (lastCmp != 0 ? lastCmp : name.compareTo(n.name));
     }

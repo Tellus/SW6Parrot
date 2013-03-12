@@ -11,6 +11,7 @@ public class Hourglass extends SubProfile {
 		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.get_totalTime(),obj.gradient);
 	}
 	
+	@Override
 	public Hourglass copy(){
 		Hourglass copyP = new Hourglass(this);
 		
@@ -20,6 +21,7 @@ public class Hourglass extends SubProfile {
 		return copyP;
 	}
 	
+	@Override
 	public formFactor formType(){
 		return formFactor.Hourglass;
 	}

@@ -123,7 +123,7 @@ public class PARROTDataLoader {
 		parrotUser.setSentenceBoardColor(sentenceColour);
 
 		//Then we load the tab settings
-		for(int i = 0; i<3; i++)
+		for(int i = 0; i<profileSettings.get("Rights").size(); i++)
 		{
 			parrotUser.setRights(i, Boolean.valueOf(profileSettings.get("Rights").get("tab" + i)));
 		}
@@ -143,23 +143,23 @@ public class PARROTDataLoader {
 		return cat;
 	}
 
-	public Pictogram loadPictogram(long id)
+	public Pictogram loadPictogram(long idPictogram)
 	{
 		Pictogram pic = null;
-		Media media=help.mediaHelper.getSingleMediaById(id); //This is the image media //TODO check type
+		Media media=help.mediaHelper.getSingleMediaById(idPictogram); //This is the image media //TODO check type
 
 		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); 
-		Media investigatedMedia;
 		String soundPath = null;
 		String wordPath = null;
 		long soundID = -1; //If this value is still -1 when we save a media, it is because the pictogram has no sound.
 		long wordID = -1;
-
+		
 		if(subMedias != null)	//Media files can have a link to a sub-media file, check if this one does.
-		{
-			for(int i = 0;i<subMedias.size();i++) 		
+		{	
+			Media investigatedMedia;
+			for(int i = 0; i<subMedias.size();i++) 		
 			{
-				investigatedMedia =subMedias.get(i);
+				investigatedMedia = subMedias.get(i);
 				if(investigatedMedia.getMType().equals("SOUND"))
 				{
 					soundPath = investigatedMedia.getMPath();
@@ -174,7 +174,7 @@ public class PARROTDataLoader {
 		}
 		pic = new Pictogram(media.getName(), media.getMPath(), soundPath, wordPath);
 		//set the different ID's
-		pic.setImageID(id);
+		pic.setImageID(idPictogram);
 		pic.setSoundID(soundID);
 		pic.setWordID(wordID);
 
@@ -189,10 +189,8 @@ public class PARROTDataLoader {
 		if(IDstring !=null && IDstring.charAt(0)!='$' && IDstring.charAt(0)!='#')
 		{
 			String temp = String.valueOf(IDstring.charAt(0));
-			int w = 0;
-			while(IDstring.charAt(w)!='$')
+			for(int w = 1; IDstring.charAt(w)!='$'; w++)
 			{
-				w++;
 				if(IDstring.charAt(w)!='#')
 				{
 					temp = temp+ IDstring.charAt(w);
@@ -417,9 +415,6 @@ public class PARROTDataLoader {
 			help.mediaHelper.modifyMedia(imageMedia);
 		}
 
-
-
-
 		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
 		{
 			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
@@ -439,14 +434,11 @@ public class PARROTDataLoader {
 			pic.setSoundID(help.mediaHelper.insertMedia(soundMedia));
 			soundMedia.setId(pic.getSoundID());
 		}
-		else
+		else if(pic.getSoundPath() != null)
 		{
-			if(pic.getSoundPath() != null)
-			{
-				soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-				soundMedia.setId(pic.getSoundID());
-				help.mediaHelper.modifyMedia(soundMedia);
-			}
+			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			soundMedia.setId(pic.getSoundID());
+			help.mediaHelper.modifyMedia(soundMedia);
 		}
 
 		// save the submedia references for NEW pictograms
@@ -479,7 +471,7 @@ public class PARROTDataLoader {
 			}
 
 		}
-		//Update the information about the pictogram so that it is nolonger new or changed from the version in the database.
+		//Update the information about the pictogram so that it is no longer new or changed from the version in the database.
 		pic.setChanged(false);
 		pic.setNewPictogram(false);
 		return pic;

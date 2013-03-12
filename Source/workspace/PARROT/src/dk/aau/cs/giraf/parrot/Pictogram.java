@@ -23,7 +23,7 @@ public class Pictogram {
 	private long imageID = -1;
 	private long soundID = -1;
 	private long wordID = -1;
-	private boolean newPictogram =false;
+	private boolean newPictogram = false;
 	private boolean changed = false;
 	private Activity parrent;
 	private Bitmap bitmap;
