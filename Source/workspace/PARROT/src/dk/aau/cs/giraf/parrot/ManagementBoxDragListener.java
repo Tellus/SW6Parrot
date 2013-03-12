@@ -10,7 +10,9 @@ import android.widget.ListView;
 /**
  * 
  * @PARROT
- * This is the ManagementBoxDragListener, like the BoxDragListener, but for the ManageCategoryFragment instead.
+ * This is the ManagementBoxDragListener 
+ * The basic function of this class is like that of BoxDragListener
+ * It works with the ManageCategoryFragment and handles drag-drop functionality
  */
 public class ManagementBoxDragListener implements OnDragListener
 {
@@ -21,13 +23,13 @@ public class ManagementBoxDragListener implements OnDragListener
 	private boolean insideOfMe = false;
 	
 	// Constructor
-	public ManagementBoxDragListener(Activity active) {
+	public ManagementBoxDragListener(Activity active)
+	{
 		parent = active;
 		categories = (ListView) parent.findViewById(R.id.categories);
 		pictograms = (GridView) parent.findViewById(R.id.pictograms);
 	}
 	
-	// Klim 
 	private void deletePictogram()
 	{
 		PARROTCategory tempCategory = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
@@ -37,7 +39,6 @@ public class ManagementBoxDragListener implements OnDragListener
 		pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId), parent));
 	}
 	
-	// Klim
 	private void copyPictogramToCategory(DragEvent event)
 	{
 		int x = (int)event.getX(),
@@ -53,24 +54,21 @@ public class ManagementBoxDragListener implements OnDragListener
 		ManageCategoryFragment.profileBeingModified.setCategoryAt(pos, categoryCopiedTo);			
 	}
 	
-	// Klim
 	private void copyCategoryToCategory(DragEvent event)
 	{
 		PARROTCategory categoryCopiedFrom = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.draggedItemIndex); 
 		PARROTCategory categoryCopiedTo   = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
 		
 		// Add all pictogram from categoryCopiedFrom to categoryCopiedTo
-		// i = numberOfPictograms
-		for(int i = 0; i < categoryCopiedFrom.getPictograms().size(); i++)
+		for(int picIndex = 0; picIndex < categoryCopiedFrom.getPictograms().size(); picIndex++)
 		{
-			categoryCopiedTo.addPictogram(categoryCopiedFrom.getPictogramAtIndex(i)); 
+			categoryCopiedTo.addPictogram(categoryCopiedFrom.getPictogramAtIndex(picIndex)); 
 		}
 		
 		ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, categoryCopiedTo);
 		pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId), parent));
 	}
 	
-	// Klim
 	private void changeCategoryIcon(DragEvent event)
 	{
 		draggedPictogram      = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId).getPictogramAtIndex(ManageCategoryFragment.draggedItemIndex);
@@ -88,21 +86,32 @@ public class ManagementBoxDragListener implements OnDragListener
 		list.setAdapter(new ListViewAdapter(parent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
 	}
 	
-	public boolean onDrag(View self, DragEvent event) {
+	/**
+	 * This method is the primary event handler, when dragging items in the administration
+	 * It handles the administration of categories by drag-drop functionality
+	 * Each action (except delete category) has its own method declared above
+	 * The functionality of each method should be self-explanatory
+	 */
+	public boolean onDrag(View self, DragEvent event)
+	{
 		switch (event.getAction()) {
-		case DragEvent.ACTION_DRAG_STARTED:
+		case DragEvent.ACTION_DRAG_STARTED:	// Drag started
 			// Dummy
 			break;
-		case DragEvent.ACTION_DRAG_ENTERED:
+		case DragEvent.ACTION_DRAG_ENDED:	// Drag ended
+			// Dummy
+			break;
+		case DragEvent.ACTION_DRAG_ENTERED:	// Drag entered
 			insideOfMe = true;
 			break;
-		case DragEvent.ACTION_DRAG_EXITED:
+		case DragEvent.ACTION_DRAG_EXITED:	// Drag exited
 			insideOfMe = false;
 			break;
-		case DragEvent.ACTION_DROP:
+		case DragEvent.ACTION_DROP:			// Drop dragged item
 			if (insideOfMe)
 			{
 				switch(ManageCategoryFragment.categoryDragownerID){
+				// Drag pictogram to..
 				case R.id.pictograms:
 					if(self.getId() == R.id.trash){
 						deletePictogram(); 				// Delete pictogram from category
@@ -114,6 +123,7 @@ public class ManagementBoxDragListener implements OnDragListener
 						changeCategoryIcon(event); 		// Change category icon
 					}
 					break;
+				// Drag category to..
 				case R.id.categories:
 					if(self.getId() == R.id.trash){
 						// Delete category
@@ -127,52 +137,7 @@ public class ManagementBoxDragListener implements OnDragListener
 				default:
 					break;
 				}
-				/*if(self.getId()==R.id.trash && ManageCategoryFragment.catDragOwnerID == R.id.pictograms) //We are to delete a pictogram from a category
-				{
-					PARROTCategory temp = ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId);
-					temp.removePictogram(ManageCategoryFragment.draggedItemIndex);
-					ManageCategoryFragment.profileBeingModified.setCategoryAt(ManageCategoryFragment.currentCategoryId, temp);
-					
-					pictograms.setAdapter(new PictogramAdapter(ManageCategoryFragment.profileBeingModified.getCategoryAt(ManageCategoryFragment.currentCategoryId), parrent));
-				}
-				// Delete pictogram from category
-				if(self.getId() == R.id.trash && ManageCategoryFragment.categoryDragownerID == R.id.pictograms)
-				{
-					deletePictogram();
-				}
-				// Delete category
-				else if(self.getId() == R.id.trash && ManageCategoryFragment.categoryDragownerID == R.id.categories)
-				{
-					ManageCategoryFragment.profileBeingModified.removeCategory(ManageCategoryFragment.draggedItemIndex);
-					categories.setAdapter(new ListViewAdapter(parent, R.layout.categoriesitem, ManageCategoryFragment.profileBeingModified.getCategories()));
-				}
-				// Copy a pictogram into another category
-				else if(self.getId() == R.id.categories && ManageCategoryFragment.categoryDragownerID == R.id.pictograms) 
-				{
-					copyPictogramToCategory(event);	
-				}
-				// Copy a category into another category
-				else if(self.getId() == R.id.pictograms && ManageCategoryFragment.categoryDragownerID == R.id.categories) 
-				{	
-					copyCategoryToCategory(event);
-				}
-				// Change category icon
-				else if(self.getId() == R.id.categoryPicture && ManageCategoryFragment.categoryDragownerID == R.id.pictograms) 
-				{
-					changeCategoryIcon(event);
-				}
-				else
-				{
-					//TODO check that nothing is done. 
-				}*/
 			}
-			else
-			{
-				// TODO What happens if not inside of me?
-			}
-			break;
-		case DragEvent.ACTION_DRAG_ENDED:
-			// Dummy
 			break;
 		default:
 			break;

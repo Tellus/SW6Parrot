@@ -102,7 +102,7 @@
                 <Button
                     android:id="@+id/createnewcategorybutton"
                     android:layout_width="120dp"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/button"
@@ -112,7 +112,7 @@
                 <Button
                     android:id="@+id/create_new_subcategory_button"
                     android:layout_width="120dp"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button"
@@ -122,7 +122,7 @@
                 <Button
                     android:id="@+id/create_new_pictogram_button"
                     android:layout_width="120dp"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button"
@@ -149,7 +149,7 @@
                 <Button
                     android:id="@+id/changecategorynamebutton"
                     android:layout_width="120dp"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button"
@@ -159,7 +159,7 @@
                 <Button
                     android:id="@+id/changecategorycolorbutton"
                     android:layout_width="120dp"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/button"
@@ -186,21 +186,21 @@
                 <Button
                     android:id="@+id/copythiscategorytootherprofilebutton"
                     android:layout_width="120dp"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/button"
-                    android:text="@string/copyThisCategoryToOtherProfileButton"
+                    android:text="Kategori"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/copythiscategorytootherprofilecategorybutton"
                     android:layout_width="120dp"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/button"
-                    android:text="@string/copyThisCategoryToOtherProfileCategoryButton"
+                    android:text="Til anden profil"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -215,10 +215,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Random"
+                    android:text="Options"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textSize="@dimen/ambilwarna_hueWidth"
                     android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/Button03"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button"
+                    android:text="Gem"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/Button01"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button"
+                    android:text="Fortryd"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/Button02"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button"
+                    android:text="Hjem"
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
             <Button

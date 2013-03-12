@@ -41,28 +41,46 @@ public class ManageCategoryFragment extends Fragment {
 	public static ArrayList<Pictogram> categories =  new ArrayList<Pictogram>();
 
 	// Klim: What does this function do?
-	public void onAttach(Activity activity) {
+	public void onAttach(Activity activity)
+	{
 		super.onAttach(activity);
 		this.parentActivity = activity;
 		ManageCategoryFragment.profileBeingModified = PARROTActivity.getUser();
 	}
 
+	// Set the color of the pictogram grid to the input color
+	private void setPictogramsColor(int color)
+	{
+		GridView pictograms = (GridView) parentActivity.findViewById(R.id.pictograms);
+		pictograms.setBackgroundColor(color);
+	}
+	
+	//FIXME currently this causes the program to crash, fix this.
+	/*public void saveProfileChanges(Activity parentActivity, PARROTProfile modifiedProfile)
+	{
+		PARROTDataLoader dataLoader = new PARROTDataLoader(parentActivity);
+		dataLoader.saveProfile(modifiedProfile);
+	}*/
+	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 	}
 
-	public void onResume() {
+	@Override
+	public void onResume()
+	{
 		super.onResume();
 		
 		// Change view to managecategory_layout
 		parentActivity.setContentView(R.layout.managecategory_layout);
 		
 		// Setup the views, so they can be accessed directly
-		Spinner profiles      = (Spinner)   parentActivity.findViewById(R.id.profiles);
+		Spinner profiles = (Spinner) parentActivity.findViewById(R.id.profiles);
 		ListView categories   = (ListView)  parentActivity.findViewById(R.id.categories);
 		GridView pictograms   = (GridView)  parentActivity.findViewById(R.id.pictograms);
-		//Klim EditText categoryInfo = (EditText) parentActivity.findViewById(R.id.categoryinfo);
+		EditText categoryInfo = (EditText) parentActivity.findViewById(R.id.categoryinfo);
 		ImageView categoryPic = (ImageView) parentActivity.findViewById(R.id.categoryPicture);
 		
 		Button createNewCategory = (Button) parentActivity.findViewById(R.id.createnewcategorybutton);
@@ -98,7 +116,6 @@ public class ManageCategoryFragment extends Fragment {
 			{
 				// TODO Auto-generated method stub
 				//profileBeingModified = /* profil på position pladsen i arrayet givet til adapteren*/;
-
 			}
 
 			public void onNothingSelected(AdapterView<?> arg0) 
@@ -226,7 +243,6 @@ public class ManageCategoryFragment extends Fragment {
 				
 				String name = categoryInfo.getText().toString();
 				profileBeingModified.getCategoryAt(currentCategoryId).setCategoryName(name);
-			
 			}
 		});*/
 
@@ -248,22 +264,19 @@ public class ManageCategoryFragment extends Fragment {
 	}
 
 	//TODO implement me
-	/*public void onPause() 
+	@Override
+	public void onPause() 
 	{
-		saveProfileChanges(parentActivity, profileBeingModified);
-	}*/
-
-	//FIXME currently this causes the program to crash, fix this.
-	/*public void saveProfileChanges(Activity parentActivity, PARROTProfile modifiedProfile)
-	{
-		PARROTDataLoader dataLoader = new PARROTDataLoader(parentActivity);
-		dataLoader.saveProfile(modifiedProfile);
-	}*/
-	
-	// Set the color of the pictogram grid to the input color
-	private void setPictogramsColor(int color)
-	{
-		GridView pictograms = (GridView) parentActivity.findViewById(R.id.pictograms);
-		pictograms.setBackgroundColor(color);
+		super.onPause();
+		//saveProfileChanges(parentActivity, profileBeingModified);
 	}
+	
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		//saveProfileChanges(parentActivity, profileBeingModified);
+		
+	}
+
 }
