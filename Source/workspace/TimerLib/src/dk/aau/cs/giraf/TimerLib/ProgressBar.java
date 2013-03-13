@@ -13,6 +13,7 @@ public class ProgressBar extends SubProfile {
 		super(obj.name, obj.desc,obj.bgcolor, obj.timeLeftColor,obj.timeSpentColor,obj.frameColor,obj.get_totalTime(),obj.gradient);
 	}
 	
+	@Override
 	public ProgressBar copy(){
 		ProgressBar copyP = new ProgressBar(this);
 		
@@ -24,6 +25,7 @@ public class ProgressBar extends SubProfile {
 		return copyP;
 	}
 	
+	@Override
 	public formFactor formType(){
 		return formFactor.ProgressBar;
 	}
