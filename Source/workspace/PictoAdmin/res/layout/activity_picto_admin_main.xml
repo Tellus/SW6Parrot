@@ -22,11 +22,10 @@
         </EditText>
 
         <GridView
-            android:id="@+id/gridView1"
+            android:id="@+id/searched_pictograms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:numColumns="3" >
-
         </GridView>
 
     </LinearLayout>
