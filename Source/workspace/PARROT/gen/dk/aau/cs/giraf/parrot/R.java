@@ -14,10 +14,10 @@ public final class R {
         public static final int cell_empty=0x7f060000;
     }
     public static final class dimen {
-        public static final int ambilwarna_hsvHeight=0x7f050000;
-        public static final int ambilwarna_hsvWidth=0x7f050001;
-        public static final int ambilwarna_hueWidth=0x7f050002;
-        public static final int ambilwarna_spacer=0x7f050003;
+        public static final int ambilwarna_hsvHeight=0x7f040000;
+        public static final int ambilwarna_hsvWidth=0x7f040001;
+        public static final int ambilwarna_hueWidth=0x7f040002;
+        public static final int ambilwarna_spacer=0x7f040003;
     }
     public static final class drawable {
         public static final int ambilwarna_arrow_down=0x7f020000;
@@ -99,49 +99,49 @@ public final class R {
         public static final int speechboard_layout=0x7f030006;
     }
     public static final class string {
-        public static final int KlimTest=0x7f040028;
-        public static final int TakePictureButton=0x7f040006;
-        public static final int addImageFromCameraButtonText=0x7f04001f;
-        public static final int addImageFromPhoneButtonText=0x7f040020;
-        public static final int addPictureSaveButtonText=0x7f040011;
-        public static final int addPictureSaveDescription=0x7f040012;
-        public static final int addPictureTakePictureButtonText=0x7f040013;
+        public static final int KlimTest=0x7f050028;
+        public static final int TakePictureButton=0x7f050006;
+        public static final int addImageFromCameraButtonText=0x7f05001f;
+        public static final int addImageFromPhoneButtonText=0x7f050020;
+        public static final int addPictureSaveButtonText=0x7f050011;
+        public static final int addPictureSaveDescription=0x7f050012;
+        public static final int addPictureTakePictureButtonText=0x7f050013;
         /**  Old DigiPecs String Values.  
          */
-        public static final int admin_app_name=0x7f040009;
-        public static final int app_name=0x7f040001;
-        public static final int changeCategoryColorButton=0x7f040024;
-        public static final int changeCategoryNameButton=0x7f040025;
-        public static final int changeCategoryPicButton=0x7f040023;
-        public static final int changecategorycolor=0x7f040007;
-        public static final int changesentencecolor=0x7f040008;
-        public static final int copyThisCategoryToOtherProfileButton=0x7f040026;
-        public static final int copyThisCategoryToOtherProfileCategoryButton=0x7f040027;
-        public static final int createNewCategoryButton=0x7f040022;
-        public static final int createSituationCancelButtonText=0x7f040017;
-        public static final int createSituationSaveButtonText=0x7f040016;
-        public static final int createSituationTextboxNameText=0x7f040015;
-        public static final int defaultSituationNameDB=0x7f04001d;
-        public static final int electActiveSituationOkButtonText=0x7f04001b;
-        public static final int errorSoundNotSavedIO=0x7f040021;
-        public static final int firstTab=0x7f040002;
-        public static final int fourthTab=0x7f040005;
-        public static final int hello=0x7f040000;
-        public static final int modifyPictureDeleteButtonText=0x7f040010;
-        public static final int modifyPictureEditTextDescription=0x7f04000c;
-        public static final int modifyPictureModifySoundDescription=0x7f04000d;
-        public static final int modifyPicturePreviewText=0x7f04000b;
-        public static final int modifyPictureSaveButtonText=0x7f04000f;
-        public static final int modifyPictureSaveDescription=0x7f04000e;
-        public static final int secondTab=0x7f040003;
-        public static final int selectActiveSituationOkButtonText=0x7f04001a;
-        public static final int selectSituationSpinnerPromptText=0x7f04001c;
-        public static final int situationListOptionMenuDeleteText=0x7f040019;
-        public static final int situationListOptionsMenuEditText=0x7f04001e;
-        public static final int situationsListContextMenuAddText=0x7f040014;
-        public static final int situationsListContextMenuDeleteText=0x7f040018;
-        public static final int star=0x7f04000a;
-        public static final int thirdTab=0x7f040004;
+        public static final int admin_app_name=0x7f050009;
+        public static final int app_name=0x7f050001;
+        public static final int changeCategoryColorButton=0x7f050024;
+        public static final int changeCategoryNameButton=0x7f050025;
+        public static final int changeCategoryPicButton=0x7f050023;
+        public static final int changecategorycolor=0x7f050007;
+        public static final int changesentencecolor=0x7f050008;
+        public static final int copyThisCategoryToOtherProfileButton=0x7f050026;
+        public static final int copyThisCategoryToOtherProfileCategoryButton=0x7f050027;
+        public static final int createNewCategoryButton=0x7f050022;
+        public static final int createSituationCancelButtonText=0x7f050017;
+        public static final int createSituationSaveButtonText=0x7f050016;
+        public static final int createSituationTextboxNameText=0x7f050015;
+        public static final int defaultSituationNameDB=0x7f05001d;
+        public static final int electActiveSituationOkButtonText=0x7f05001b;
+        public static final int errorSoundNotSavedIO=0x7f050021;
+        public static final int firstTab=0x7f050002;
+        public static final int fourthTab=0x7f050005;
+        public static final int hello=0x7f050000;
+        public static final int modifyPictureDeleteButtonText=0x7f050010;
+        public static final int modifyPictureEditTextDescription=0x7f05000c;
+        public static final int modifyPictureModifySoundDescription=0x7f05000d;
+        public static final int modifyPicturePreviewText=0x7f05000b;
+        public static final int modifyPictureSaveButtonText=0x7f05000f;
+        public static final int modifyPictureSaveDescription=0x7f05000e;
+        public static final int secondTab=0x7f050003;
+        public static final int selectActiveSituationOkButtonText=0x7f05001a;
+        public static final int selectSituationSpinnerPromptText=0x7f05001c;
+        public static final int situationListOptionMenuDeleteText=0x7f050019;
+        public static final int situationListOptionsMenuEditText=0x7f05001e;
+        public static final int situationsListContextMenuAddText=0x7f050014;
+        public static final int situationsListContextMenuDeleteText=0x7f050018;
+        public static final int star=0x7f05000a;
+        public static final int thirdTab=0x7f050004;
     }
     public static final class style {
         public static final int Text=0x7f070000;

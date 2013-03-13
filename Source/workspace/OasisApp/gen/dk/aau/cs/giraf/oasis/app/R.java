@@ -141,8 +141,8 @@ public final class R {
         public static final int addressLabel=0x7f04001f;
         public static final int alldepartments=0x7f040006;
         public static final int allprofiles=0x7f040004;
-        public static final int app_name=0x7f040001;
-        public static final int back_button=0x7f040002;
+        public static final int app_name=0x7f040002;
+        public static final int back_button=0x7f040001;
         public static final int childapps=0x7f04000e;
         public static final int childmedia=0x7f04000d;
         public static final int columnAppName=0x7f04001c;
