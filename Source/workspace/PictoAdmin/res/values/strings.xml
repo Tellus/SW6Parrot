@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="search_button">Search</string>
     <string name="text_input">Text Input</string>
+    <string name="kategori">Kategori</string>
+    <string name="subKategori">Under kategori</string>
+    <string name="create_new_pictogram">Nyt Pictogram</string>
 
 </resources>
