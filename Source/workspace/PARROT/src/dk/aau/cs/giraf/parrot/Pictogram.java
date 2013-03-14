@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.ImageView;
 
 
 /**
@@ -110,6 +109,7 @@ public class Pictogram {
 	private void playItem(final String path) {
 		// Running this in the background to keep UI reponsive and smooth
 		new Thread(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					AudioPlayer.play(path, null);

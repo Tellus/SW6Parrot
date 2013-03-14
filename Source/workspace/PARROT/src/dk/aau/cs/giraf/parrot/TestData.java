@@ -123,29 +123,7 @@ public class TestData {
 			{
 				tempCat3.addPictogram(p);
 			}
-			/*tempCat3.addPictogram(badePic);
-			tempCat3.addPictogram(børsteTænderPic);
-			tempCat3.addPictogram(drikkePic);
-			tempCat3.addPictogram(duPic);
-			tempCat3.addPictogram(filmPic);
-			tempCat3.addPictogram(forHøjtPic);
-			tempCat3.addPictogram(gåPic);
-			tempCat3.addPictogram(jaPic);
-			tempCat3.addPictogram(kørePic);
-			tempCat3.addPictogram(laveMadPic);
-			tempCat3.addPictogram(legePic);
-			tempCat3.addPictogram(migPic);
-			tempCat3.addPictogram(morgenRoutinePic);
-			tempCat3.addPictogram(nejPic);
-			tempCat3.addPictogram(sePic);
-			tempCat3.addPictogram(sideNedPic);
-			tempCat3.addPictogram(spilleComputerPic);
-			tempCat3.addPictogram(stopPic);
-			tempCat3.addPictogram(sultenPic);
-			tempCat3.addPictogram(søvnigPic);
-			tempCat3.addPictogram(taleSammenPic);
-			tempCat3.addPictogram(tørstigPic);
-			tempCat3.addPictogram(væreStillePic);*/
+
 		
 			testProfile.addCategory(tempCat3);
 	
