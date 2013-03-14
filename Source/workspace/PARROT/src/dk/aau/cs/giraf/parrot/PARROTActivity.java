@@ -2,6 +2,7 @@ package dk.aau.cs.giraf.parrot;
 
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
+import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -15,6 +16,7 @@ public class PARROTActivity extends Activity {
 
 	private static PARROTProfile parrotUser;
 	private static long guardianID;
+	private static long childID;
 	private PARROTDataLoader dataLoader;
 	private static App app;
 	private static Helper help;
@@ -32,13 +34,7 @@ public class PARROTActivity extends Activity {
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
-
-		//this write test data to database
-		
-	/*	TestData test = new TestData(this);
-		test.TESTsaveTestProfile();*/
-	
-		
+		childID = girafIntent.getLongExtra("currentChildID", -1);
 		
 		if(guardianID == -1 )
 		{
@@ -50,12 +46,26 @@ public class PARROTActivity extends Activity {
 		}
 		else
 		{ 
+			//this is new testData being written to database, such that we have some categories and colors
+			//BEGIN testData
+			Setting<String, String, String> setting = help.appsHelper.getSettingByIds(app.getId(), childID);
+			//this write test data to database
+			if(setting.containsKey("ColourSettings") == false)
+			{
+				
+				TestData test = new TestData(this);
+				test.TESTsaveTestProfile();
+		    				
+			}
+			//END testData
+			
+			
 			dataLoader = new PARROTDataLoader(this);
 			
 			//If an error occur parrotUser is null which must be cached  
 			try
 			{
-				parrotUser = dataLoader.loadPARROT();	
+				parrotUser = dataLoader.loadProfile(childID, app.getId());	
 			}
 			catch(NullPointerException e)
 			{

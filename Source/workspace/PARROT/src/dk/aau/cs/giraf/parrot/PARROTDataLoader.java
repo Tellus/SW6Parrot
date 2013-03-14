@@ -30,22 +30,6 @@ public class PARROTDataLoader {
 
 	}
 
-	/**
-	 * 
-	 * @return
-	 * The PARROTProfile corresponding to the current child user of the PARROT system.
-	 */
-	public PARROTProfile loadPARROT()
-	{
-		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
-		long childId = PARROTActivity.getGirafIntent().getLongExtra("currentChildID", -1);
-		long appId = app.getId();
-		if(appId <=0)
-		{
-			appId=-1;
-		}
-		return loadProfile(childId, appId);
-	}
 
 	/**
 	 * 
@@ -79,7 +63,7 @@ public class PARROTDataLoader {
 		Profile prof =null;
 
 		
-		if(childId != -1 && appId != -1)
+		if(childId != -1 && appId >=0)
 		 {
 				
 			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
