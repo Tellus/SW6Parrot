@@ -8,13 +8,10 @@ import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 
 
 
@@ -28,7 +25,6 @@ public class OptionsFragment extends Fragment
 	{
 		super.onAttach(activity);
 		this.parrent = activity;
-
 	}
 	@Override
 	public void onResume() {
@@ -52,12 +48,15 @@ public class OptionsFragment extends Fragment
 
 
 		ccc.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						PARROTActivity.getUser().getCategoryColor(), new OnAmbilWarnaListener() {
+					@Override
 					public void onCancel(AmbilWarnaDialog dialog) {
 					}
 
+					@Override
 					public void onOk(AmbilWarnaDialog dialog, int color) {
 						PARROTProfile user = PARROTActivity.getUser();
 						user.setCategoryColor(color);
@@ -70,12 +69,15 @@ public class OptionsFragment extends Fragment
 
 		csc.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 						PARROTActivity.getUser().getSentenceBoardColor(), new OnAmbilWarnaListener() {
+					@Override
 					public void onCancel(AmbilWarnaDialog dialog) {
 					}
 
+					@Override
 					public void onOk(AmbilWarnaDialog dialog, int color) {
 						PARROTProfile user = PARROTActivity.getUser();
 						user.setSentenceBoardColor(color);

@@ -25,15 +25,20 @@ public class PARROTActivity extends Activity {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main);
 		
-		//this write test data to database
-		/*TestData test = new TestData(this);
-		test.TESTsaveTestProfile();*/
+
 		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
 		girafIntent = getIntent();
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
+
+		//this write test data to database
+		
+	/*	TestData test = new TestData(this);
+		test.TESTsaveTestProfile();*/
+	
+		
 		
 		if(guardianID == -1 )
 		{
@@ -92,13 +97,13 @@ public class PARROTActivity extends Activity {
 			actionBar.addTab(tab);
 			
 		
-			if (parrotUser.getRights(0) == true)
+		/*	if (parrotUser.getRights(0) == true)
 			{
 				tab = actionBar.newTab()
 						.setText(R.string.secondTab)
 						.setTabListener(new TabListener<ManageCategoryFragment>(this,"manage",ManageCategoryFragment.class));
 				actionBar.addTab(tab);
-			}
+			}*/
 			if (parrotUser.getRights(1) == true) 
 			{
 				tab = actionBar.newTab()
@@ -113,14 +118,17 @@ public class PARROTActivity extends Activity {
 	
 	@Override
 	protected void onPause() {
-		/*AudioPlayer.close();
-		dataLoader.saveProfile(getUser());*/
+		AudioPlayer.close();
+		if(guardianID!=-1)
+		{
+			dataLoader.saveProfile(getUser());
+		}
 		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
-		//AudioPlayer.open();
+		AudioPlayer.open();
 		super.onResume();
 	}
 

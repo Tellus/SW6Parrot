@@ -28,21 +28,25 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 		context = c;
 	}
 
+	@Override
 	public int getCount() {
 		//return the number of categories
 		return catList.size();
 	}
 
+	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	//create an image view for each icon of the categories in the list.
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView;
 		Pictogram pct=catList.get(position).getIcon();

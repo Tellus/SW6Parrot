@@ -34,6 +34,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 	 * @param self
 	 * @param event
 	 */
+	@Override
 	public boolean onDrag(View self, DragEvent event) {
 		if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
 			//When pictogram is dragged from sentenceboard
