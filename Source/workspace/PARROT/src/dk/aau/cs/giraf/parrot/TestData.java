@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -29,7 +30,7 @@ public class TestData {
 		app = help.appsHelper.getAppByPackageName();
 		long profileId;
 
-		
+		/*
 		Pictogram badePic = new Pictogram("Bade", "/sdcard/Pictogram/Bade.png", null, "/sdcard/Pictogram/bade.wma");
 		badePic.setNewPictogram(true);
 		Pictogram børsteTænderPic = new Pictogram("Børste Tænder", "/sdcard/Pictogram/Børste_Tænder.png", null, "/sdcard/Pictogram/børste_tænder.wma");
@@ -75,26 +76,54 @@ public class TestData {
 		Pictogram tørstigPic = new Pictogram("Tørstig", "/sdcard/Pictogram/Tørstig.png", null, "/sdcard/Pictogram/tørstig.wma");
 		tørstigPic.setNewPictogram(true);
 		Pictogram væreStillePic = new Pictogram("Være Stille", "/sdcard/Pictogram/Være_Stille.png", null, "/sdcard/Pictogram/være_stille.wma");
-		væreStillePic.setNewPictogram(true);
+		væreStillePic.setNewPictogram(true);*/
 
 		
 		List<Profile> listOfChildren = help.profilesHelper.getChildren();
+
 		
+		Log.v("MessageParrot","before for");
 		for(Profile tempProf: listOfChildren)
 		{
+			ArrayList<Pictogram> pictograms = new ArrayList<Pictogram>();
+			List<Media> childMedia = help.mediaHelper.getMediaByProfile(tempProf);
+
+			Log.v("MessageParrot","hentet childMedia");
+
+			for(Media m : childMedia)
+			{
+				if(m.getMType().equalsIgnoreCase("image"))
+				{
+					Log.v("MessageParrot", "in IMAGE if");
+					pictograms.add(loadPictogram(m.getId()));
+					Log.v("MessageParrot", "efter indlæsning af media");
+				}
+			}
+			if(pictograms.isEmpty())
+			{
+				Log.v("MessageParrot", "pictograms is empty");
+			}
+			Log.v("MessageParrot", "efter indlæsning af media");
+			
 			profileId = tempProf.getId();
 			
 			Setting<String, String, String> profileSetting = new Setting<String, String, String>();
-	
+			
 			//START TEMP LINES
 			Pictogram tempPic = new Pictogram(tempProf.getFirstname(),tempProf.getPicture(),null, null);
 	
 			PARROTProfile testProfile = new PARROTProfile(tempProf.getFirstname(), tempPic);
 			testProfile.setProfileID(profileId);
+			Log.v("MessageParrot", "har indlæst test profil, til at lave kategori");
+			
 
-			PARROTCategory tempCat3 = new PARROTCategory("Kategori 1", 0xff05ff12, migPic);
+			PARROTCategory tempCat3 = new PARROTCategory("Kategori 1", 0xff05ff12, pictograms.get(0));
 	
-			tempCat3.addPictogram(badePic);
+			for(Pictogram p : pictograms)
+			{
+				tempCat3.addPictogram(p);
+			}
+			/*tempCat3.addPictogram(badePic);
 			tempCat3.addPictogram(børsteTænderPic);
 			tempCat3.addPictogram(drikkePic);
 			tempCat3.addPictogram(duPic);
@@ -116,15 +145,18 @@ public class TestData {
 			tempCat3.addPictogram(søvnigPic);
 			tempCat3.addPictogram(taleSammenPic);
 			tempCat3.addPictogram(tørstigPic);
-			tempCat3.addPictogram(væreStillePic);
+			tempCat3.addPictogram(væreStillePic);*/
 		
 			testProfile.addCategory(tempCat3);
 	
-			PARROTCategory tempCat4 = new PARROTCategory("Kategori 2", 0xffff0000, duPic);
-			tempCat4.addPictogram(duPic);
-			tempCat4.addPictogram(migPic);
-			tempCat4.addPictogram(jaPic);
-			tempCat4.addPictogram(nejPic);
+			PARROTCategory tempCat4 = new PARROTCategory("Kategori 2", 0xffff0000, pictograms.get(10));
+			tempCat4.addPictogram(pictograms.get(10));
+			tempCat4.addPictogram(pictograms.get(13));
+			tempCat4.addPictogram(pictograms.get(12));
+			tempCat4.addPictogram(pictograms.get(11));
+			
+			Log.v("MessageParrot", "settings bliver sat");
+			
 			testProfile.setRights(0, true);
 			testProfile.setRights(1, true);
 			testProfile.setRights(2, true);
@@ -133,38 +165,69 @@ public class TestData {
 			testProfile.setSentenceBoardColor(0xffffffff);
 			PARROTActivity.setUser(testProfile);
 	
+			Log.v("MessageParrot", "gem kategorier");
+			
 			for(int i=0;i<testProfile.getCategories().size();i++)
 			{
 				profileSetting = saveCategory(testProfile.getCategoryAt(i), i, profileSetting);
 			}
+			Log.v("MessageParrot", "gem settings");
+			
 			profileSetting = saveSettings(profileSetting, testProfile);
 			app.setSettings(profileSetting);
 			
+			
 			help.appsHelper.modifyAppByProfile(app, tempProf);
 			long appID=app.getId();
+			Log.v("MessageParrot", "færdig");
 		//	PARROTProfile parrot =loadProfile(profileId, appID);
 		//	PARROTActivity.setUser(parrot);
 			//END TEMP LINES
 		}
-		List<Media> media=new ArrayList<Media>();
-		List<Media> publicMedia = help.mediaHelper.getMedia();
-		for(Media m : publicMedia)
-		{
-			if(m.getMType().toLowerCase().equals("image")){
-				media.add(m);
-			}
-		}
-
-		for(Profile tempProf: listOfChildren)
-		{
-			for(Media m : media)
-			{
-				help.mediaHelper.attachMediaToProfile(m, tempProf, null);
-			}
-		}
+		
 		
 	}
 
+	public Pictogram loadPictogram(long idPictogram)
+	{
+		Pictogram pic = null;
+		Media media=help.mediaHelper.getSingleMediaById(idPictogram); //This is the image media //TODO check type
+
+		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); 
+		String soundPath = null;
+		String wordPath = null;
+		long soundID = -1; //If this value is still -1 when we save a media, it is because the pictogram has no sound.
+		long wordID = -1;
+		
+		if(subMedias != null)	//Media files can have a link to a sub-media file, check if this one does.
+		{	
+			Media investigatedMedia;
+			for(int i = 0; i<subMedias.size();i++) 		
+			{
+				investigatedMedia = subMedias.get(i);
+				if(investigatedMedia.getMType().equals("SOUND"))
+				{
+					soundPath = investigatedMedia.getMPath();
+					soundID= investigatedMedia.getId();
+				}
+				else if(investigatedMedia.getMType().equals("WORD"))
+				{
+					wordPath = investigatedMedia.getMPath();
+					wordID = investigatedMedia.getId();
+				}
+			}
+		}
+		pic = new Pictogram(media.getName(), media.getMPath(), soundPath, wordPath);
+		//set the different ID's
+		pic.setImageID(idPictogram);
+		pic.setSoundID(soundID);
+		pic.setWordID(wordID);
+
+		return pic;
+	}
+
+	
+	
 	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
 	{
 		//First, we save the colour settings
@@ -235,7 +298,7 @@ public class TestData {
 
 		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
 		{
-			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
+			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "IMAGE", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
 			pic.setWordID(help.mediaHelper.insertMedia(wordMedia));
 			wordMedia.setId(pic.getWordID());
 		}
