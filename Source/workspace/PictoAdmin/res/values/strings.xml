@@ -9,5 +9,17 @@
     <string name="kategori">Kategori</string>
     <string name="subKategori">Under kategori</string>
     <string name="create_new_pictogram">Nyt Pictogram</string>
+    <string-array name="select_search_field">
+        <item>Tags</item>
+        <item>Navn</item>
+        <item>Kategori</item>
+        <item>Under kategori</item>
+        <item>Farve?</item>
+    </string-array>
+        <string name="save_changes">Gem</string>
+        <string name="delete">Slet</string>
+        <string name="cancel">Annuller</string>
+        <string name="help">Hjælp</string>
+        <string name="add_existing_pictogram">Tilføj eksisterende pictogram</string>
 
 </resources>
