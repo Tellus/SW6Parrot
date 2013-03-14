@@ -3,7 +3,6 @@ package dk.aau.cs.giraf.TimerLib;
 import java.util.HashMap;
 
 import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
 
 public class SplitImg extends Attachment {
 	
@@ -18,22 +17,27 @@ public class SplitImg extends Attachment {
 		this._rightImg = right;
 	}
 	
+	@Override
 	public Attachment getAttachment(){
 		return this;
 	}
 	
+	@Override
 	public formFactor getForm(){
 		return formFactor.SplitImg;
 	}
 	
+	@Override
 	public Art getLeftImg(){
 		return this._leftImg;
 	}
 	
+	@Override
 	public Art getRightImg(){
 		return this._rightImg;
 	}
 	
+	@Override
 	public HashMap getHashMap(HashMap map){
 		//Defines what kind of attachment it is
 		map.put("AttachmentForm", String.valueOf(this.getForm()));

@@ -2,8 +2,6 @@ package dk.aau.cs.giraf.TimerLib;
 
 import java.util.HashMap;
 
-import dk.aau.cs.giraf.oasis.lib.models.Media;
-
 public class Timer extends Attachment {
 	
 	private formFactor _form;
@@ -34,6 +32,7 @@ public class Timer extends Attachment {
 		this._gradient = gradient;
 	}
 	
+	@Override
 	public SubProfile genSub(){
 		
 		SubProfile sp = null;
@@ -55,10 +54,12 @@ public class Timer extends Attachment {
 		return sp;
 	}
 
+	@Override
 	public Timer getAttachment(){
 		return this;
 	}
 	
+	@Override
 	public formFactor getForm(){
 		return formFactor.Timer;
 	}
@@ -67,10 +68,12 @@ public class Timer extends Attachment {
 		return this._form;
 	}
 	
+	@Override
 	void changeTime(int t){
 		this._time = t;
 	}
 	
+	@Override
 	public HashMap getHashMap(HashMap map){
 		//Defines what kind of attachment it is
 		map.put("AttachmentForm", String.valueOf(this.getForm()));
