@@ -1,10 +1,8 @@
 package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
@@ -32,22 +30,6 @@ public class PARROTDataLoader {
 
 	}
 
-	/**
-	 * 
-	 * @return
-	 * The PARROTProfile corresponding to the current child user of the PARROT system.
-	 */
-	public PARROTProfile loadPARROT()
-	{
-		//This part of the code is supposed to get a profile from the launcher, and read it from the admin.
-		long childId = PARROTActivity.getGirafIntent().getLongExtra("currentChildID", -1);
-		long appId = app.getId();
-		if(appId <=0)
-		{
-			appId=-1;
-		}
-		return loadProfile(childId, appId);
-	}
 
 	/**
 	 * 
@@ -81,7 +63,7 @@ public class PARROTDataLoader {
 		Profile prof =null;
 
 		
-		if(childId != -1 && appId != -1)
+		if(childId != -1 && appId >=0)
 		 {
 				
 			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
@@ -225,6 +207,7 @@ public class PARROTDataLoader {
 
 	public void saveProfile(PARROTProfile user)
 	{
+		Log.v("MessageParrot", "Begin saving in save Profil");
 		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
 		//save profile settings
 		saveSettings(profileSetting, user);
@@ -236,25 +219,28 @@ public class PARROTDataLoader {
 		//after all the changes are made, we save the settings to the database
 		app.setSettings(profileSetting);
 		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
+		Log.v("MessageParrot", "before saving in db");
 		help.appsHelper.modifyAppByProfile(app, prof);
+		Log.v("MessageParrot", "End saving in save Profil");
 	}
 
 	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
 	{
+		Log.v("MessageParrot", "Begin saving in save saveSettings");
 		//First, we save the colour settings
 		profileSettings.addValue("ColourSettings", "SuperCategory", String.valueOf(user.getCategoryColor()));
 		profileSettings.get("ColourSettings").put("SentenceBoard", String.valueOf(user.getSentenceBoardColor()));
-
+		Log.v("MessageParrot", "saveSetting: save colour");
 		//Then we save the rights, which are the available tabs for the user.
 		profileSettings.addValue("Rights", "tab0", String.valueOf(user.getRights(0)));
 		profileSettings.get("Rights").put("tab1", String.valueOf(user.getRights(1)));
 		profileSettings.get("Rights").put("tab2", String.valueOf(user.getRights(2)));
-
+		Log.v("MessageParrot", "end saveSettings");
 		//Now we return the settings so that they can be saved.
 		return profileSettings;	
 	}
 
-	public void TESTsaveTestProfile()
+	/*public void TESTsaveTestProfile()
 	{
 		help = new Helper(parrent);
 		app = help.appsHelper.getAppByPackageName();
@@ -375,7 +361,7 @@ public class PARROTDataLoader {
 		PARROTProfile parrot =loadProfile(profileId, appID);
 		PARROTActivity.setUser(parrot);
 		//END TEMP LINES
-	}
+	}*/
 
 	private Setting<String, String, String> saveCategory(PARROTCategory category, int categoryNumber, Setting<String, String, String> profileSetting ) {
 		//first, we save the pictograms
@@ -416,6 +402,7 @@ public class PARROTDataLoader {
 		Media imageMedia = null;
 		Media soundMedia = null;
 		Media wordMedia = null;
+		
 		if(pic.getImageID() == -1) //if the picture is new in the database
 		{
 			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE", PARROTActivity.getUser().getProfileID());

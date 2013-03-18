@@ -5,9 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,21 +26,25 @@ public class PictogramAdapter extends BaseAdapter {
 		context = c;
 	}
 
+	@Override
 	public int getCount() {
 		//return the number of pictograms
 		return cat.getPictograms().size();
 	}
 
+	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	//create an image view for each pictogram in the list.
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
 		ImageView imageView;

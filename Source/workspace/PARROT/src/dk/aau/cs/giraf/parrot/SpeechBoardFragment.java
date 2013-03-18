@@ -1,18 +1,14 @@
 package dk.aau.cs.giraf.parrot;
 
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
-import android.content.res.AssetManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.DragShadowBuilder;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -43,6 +39,7 @@ public class SpeechBoardFragment extends Fragment
 	private PARROTProfile user = null;
 	private Pictogram emptyPictogram;  
 	
+	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		this.parrent = activity;
@@ -95,6 +92,7 @@ public class SpeechBoardFragment extends Fragment
 			pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
 
+				@Override
 				public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 				{
 					draggedPictogramIndex = position; 
@@ -110,6 +108,7 @@ public class SpeechBoardFragment extends Fragment
 			//Play sound, when click on a pictogram in the sentence board
 			sentenceBoardGrid.setOnItemClickListener(new OnItemClickListener() {
 
+				@Override
 				public void onItemClick(AdapterView<?> arg0, View view,	int position, long id) {
 					speechBoardCategory.getPictogramAtIndex(position).playWord();
 				}
@@ -119,6 +118,7 @@ public class SpeechBoardFragment extends Fragment
 			sentenceBoardGrid.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
 
+				@Override
 				public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 				{
 					draggedPictogramIndex = position; 
@@ -135,6 +135,7 @@ public class SpeechBoardFragment extends Fragment
 			//change category that is to be shown 
 			superCategoryGrid.setOnItemClickListener(new OnItemClickListener() {
 
+				@Override
 				public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
 				{
 					displayedCategory = user.getCategoryAt(position);
