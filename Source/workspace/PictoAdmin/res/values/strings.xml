@@ -9,6 +9,7 @@
     <string name="kategori">Kategori</string>
     <string name="subKategori">Under kategori</string>
     <string name="create_new_pictogram">Nyt Pictogram</string>
+
     <string-array name="select_search_field">
         <item>Tags</item>
         <item>Navn</item>
@@ -16,10 +17,17 @@
         <item>Under kategori</item>
         <item>Farve?</item>
     </string-array>
-        <string name="save_changes">Gem</string>
-        <string name="delete">Slet</string>
-        <string name="cancel">Annuller</string>
-        <string name="help">Hjælp</string>
-        <string name="add_existing_pictogram">Tilføj eksisterende pictogram</string>
+
+    <string name="save_changes">Gem</string>
+    <string name="delete">Slet</string>
+    <string name="reset">Reset</string>
+    <string name="help">Hjælp</string>
+    <string name="add_existing_pictogram">Tilføj eksisterende pictogram</string>
+    <string name="back">Tilbage</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_help_menu">HelpMenu</string>
+    <string name="picture">Default picture content description</string>
+    <string name="default_error_message">Error Message</string>
+    <string name="title_activity_admin_category">AdminCategory</string>
 
 </resources>

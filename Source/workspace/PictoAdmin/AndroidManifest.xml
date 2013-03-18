@@ -15,14 +15,21 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="dk.aau.cs.giraf.pictoadmin.PictoAdminMain"
-            android:label="@string/app_name" 
-            android:screenOrientation="landscape"
-            >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="dk.aau.cs.giraf.pictoadmin.HelpMenu"
+            android:label="@string/title_activity_help_menu" >
+        </activity>
+        <activity
+            android:name="dk.aau.cs.giraf.pictoadmin.AdminCategory"
+            android:label="@string/title_activity_admin_category" >
         </activity>
     </application>
 
