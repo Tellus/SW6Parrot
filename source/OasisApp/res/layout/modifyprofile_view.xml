@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvProfileLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/nameLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etProfileName"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@id/tvProfileLabel"
+        android:inputType="text"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/tvProfilePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etProfileName"
+        android:layout_margin="20dp"
+        android:text="@string/phoneLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <EditText
+        android:id="@+id/etProfilePhone"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/etProfileName"
+        android:layout_below="@id/etProfileName"
+        android:layout_toRightOf="@id/tvProfilePhone"
+        android:inputType="phone"
+        android:textSize="32dp" />
+
+    <ImageView
+        android:id="@+id/iProfileImg"
+        android:layout_width="200dp"
+        android:layout_height="260dp"
+        android:layout_below="@id/etProfilePhone"
+        android:layout_margin="20dp"
+        android:src="@drawable/logo" />
+
+    <Button
+        android:id="@+id/bProfileImg"
+        android:layout_width="120dp"
+        android:layout_below="@id/iProfileImg"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/tab_selector"
+        android:text="Skift Billede" />
+
+</RelativeLayout>

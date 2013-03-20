@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/tvMyProfileNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/nameLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/tvMyProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/tvMyProfileNameLabel"
+        android:text="@string/hello"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/tvMyProfilePhoneLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMyProfileName"
+        android:layout_margin="20dp"
+        android:text="@string/phoneLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32dp" />
+
+    <TextView
+        android:id="@+id/tvMyProfilePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMyProfileName"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/tvMyProfilePhoneLabel"
+        android:layout_alignLeft="@id/tvMyProfileName"
+        android:text="@string/hello"
+        android:textSize="32dp" />
+
+    <ImageView
+        android:id="@+id/ivProfilePicture"
+        android:layout_width="200dp"
+        android:layout_height="260dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/tvMyProfileNameLabel"
+        android:layout_marginRight="100dp"
+        android:src="@drawable/logo" />
+    
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llMyProfile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/bMyProfileMedia"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="50"
+                android:background="@drawable/tab_selector"
+                android:text="@string/myMediaButton" />
+
+            <Button
+                android:id="@+id/bMyProfileApps"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="50"
+                android:background="@drawable/tab_selector"
+                android:text="@string/myAppsButton" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bMyProfileSettings"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tab_selector"
+            android:text="@string/mySettingsButton" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center_horizontal" >
+
+    <TextView
+        android:id="@+id/tvItemMediaName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/columnMediaName"
+        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/tvItemMediaPath"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/columnMediaPath"
+        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/tvItemMediaPublic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/columnMediaPublic"
+        android:textSize="28dp" />
+    
+    <TextView
+        android:id="@+id/tvItemMediaType"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/columnMediaType"
+        android:textSize="28dp" />
+    
+    <TextView
+        android:id="@+id/tvItemMediaOwner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/columnMediaOwner"
+        android:textSize="28dp" />
+
+</TableRow>
