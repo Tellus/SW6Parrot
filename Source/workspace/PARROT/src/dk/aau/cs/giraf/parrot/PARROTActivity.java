@@ -2,6 +2,7 @@ package dk.aau.cs.giraf.parrot;
 
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
+import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -15,6 +16,7 @@ public class PARROTActivity extends Activity {
 
 	private static PARROTProfile parrotUser;
 	private static long guardianID;
+	private static long childID;
 	private PARROTDataLoader dataLoader;
 	private static App app;
 	private static Helper help;
@@ -25,15 +27,14 @@ public class PARROTActivity extends Activity {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main);
 		
-		//this write test data to database
-		/*TestData test = new TestData(this);
-		test.TESTsaveTestProfile();*/
+
 		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
 		girafIntent = getIntent();
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
+		childID = girafIntent.getLongExtra("currentChildID", -1);
 		
 		if(guardianID == -1 )
 		{
@@ -45,12 +46,26 @@ public class PARROTActivity extends Activity {
 		}
 		else
 		{ 
+			//this is new testData being written to database, such that we have some categories and colors
+			//BEGIN testData
+			Setting<String, String, String> setting = help.appsHelper.getSettingByIds(app.getId(), childID);
+			//this write test data to database
+			if(setting.containsKey("ColourSettings") == false)
+			{
+				
+				TestData test = new TestData(this);
+				test.TESTsaveTestProfile();
+		    				
+			}
+			//END testData
+			
+			
 			dataLoader = new PARROTDataLoader(this);
 			
 			//If an error occur parrotUser is null which must be cached  
 			try
 			{
-				parrotUser = dataLoader.loadPARROT();	
+				parrotUser = dataLoader.loadProfile(childID, app.getId());	
 			}
 			catch(NullPointerException e)
 			{
@@ -92,13 +107,13 @@ public class PARROTActivity extends Activity {
 			actionBar.addTab(tab);
 			
 		
-			if (parrotUser.getRights(0) == true)
+		/*	if (parrotUser.getRights(0) == true)
 			{
 				tab = actionBar.newTab()
 						.setText(R.string.secondTab)
 						.setTabListener(new TabListener<ManageCategoryFragment>(this,"manage",ManageCategoryFragment.class));
 				actionBar.addTab(tab);
-			}
+			}*/
 			if (parrotUser.getRights(1) == true) 
 			{
 				tab = actionBar.newTab()
@@ -113,14 +128,17 @@ public class PARROTActivity extends Activity {
 	
 	@Override
 	protected void onPause() {
-		/*AudioPlayer.close();
-		dataLoader.saveProfile(getUser());*/
+		AudioPlayer.close();
+		if(guardianID!=-1)
+		{
+			dataLoader.saveProfile(getUser());
+		}
 		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
-		//AudioPlayer.open();
+		AudioPlayer.open();
 		super.onResume();
 	}
 

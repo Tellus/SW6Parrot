@@ -9,8 +9,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
 import android.widget.Button;
 
 public class PictoAdminMain extends Activity {
@@ -24,7 +22,7 @@ public class PictoAdminMain extends Activity {
 		setContentView(R.layout.activity_picto_admin_main);
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.picto_admin_main, menu);
@@ -47,6 +45,7 @@ public class PictoAdminMain extends Activity {
 		public void onClick(View v) {
 			
 		}
+<<<<<<< HEAD
 	};
 	
 	// Placeholder handler som bare smidder tomme objekter afsted til den activity der kaldte den.
@@ -62,4 +61,7 @@ public class PictoAdminMain extends Activity {
 			startActivity(placeholderIntent);
 		}
 	};
+=======
+	};*/
+>>>>>>> origin/master
 }

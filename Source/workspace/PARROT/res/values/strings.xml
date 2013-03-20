@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="hello">Hello World, PARROTActivity!</string>
     <string name="app_name">PARROT</string>
     <string name="firstTab">Tale</string>
     <string name="secondTab">Administrer</string>

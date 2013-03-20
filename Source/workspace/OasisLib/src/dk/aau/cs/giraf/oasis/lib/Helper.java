@@ -359,16 +359,65 @@ public class Helper {
 		departmentsHelper.attachProfileToDepartment(childrenLoaded.get(6), subsubdepartment121Loaded);
 		
 		List<Media> medias = mediaHelper.getMediaByProfile(childrenLoaded.get(0));
-		
+
+
+		// SW6F13 - PARROT ADDITIONAL INFO BEGIN
 		if (medias.isEmpty()) {
 			/*Media*/
-			Media mediaDog = new Media("Dog", "/sdcard/Pictures/giraf/public/dog.jpg", true, "picture", childrenLoaded.get(0).getId());
-			Media mediaCat = new Media("Cat", "/sdcard/Pictures/giraf/public/cat.jpg", true, "picture", childrenLoaded.get(1).getId());
-			Media mediaBat = new Media("Bat", "/sdcard/Pictures/giraf/private/bat.jpg", false, "picture", childrenLoaded.get(0).getId());
-			Media subMedia = new Media("Sound", "/sdcard/Pictures/giraf/public/sound.jpg", true, "picture", childrenLoaded.get(0).getId());
-			Media mediaFood = new Media("Food", "/sdcard/Pictures/giraf/public/food.jpg", true, "picture", childrenLoaded.get(2).getId());
-			Media mediaHouse = new Media ("House", "/sdcard/Pictures/giraf/private/house.jpg", false, "picture", childrenLoaded.get(3).getId());
-			
+			Media mediaDog = new Media("Dog", "/sdcard/Pictures/giraf/public/dog.jpg", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaCat = new Media("Cat", "/sdcard/Pictures/giraf/public/cat.jpg", true, "IMAGE", childrenLoaded.get(1).getId());
+			Media mediaBat = new Media("Bat", "/sdcard/Pictures/giraf/private/bat.jpg", false, "IMAGE", childrenLoaded.get(0).getId());
+			Media subMedia = new Media("Sound", "/sdcard/Pictures/giraf/public/sound.jpg", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaFood = new Media("Food", "/sdcard/Pictures/giraf/public/food.jpg", true, "IMAGE", childrenLoaded.get(2).getId());
+			Media mediaHouse = new Media ("House", "/sdcard/Pictures/giraf/private/house.jpg", false, "IMAGE", childrenLoaded.get(3).getId());
+
+			Media mediaBathImage = new Media("Bade","/sdcard/Pictures/giraf/public/Bade.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaBathWord = new Media("Bade","/sdcard/Pictures/giraf/public/bade.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaThoothImage = new Media("Børste Tænder","/sdcard/Pictures/giraf/public/Børste_Tænder.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaThoothWord = new Media("Børste Tænder","/sdcard/Pictures/giraf/public/børste_tænder.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaDrinkImage = new Media("Drikke","/sdcard/Pictures/giraf/public/Drikke.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaDrinkWord = new Media("Drikke","/sdcard/Pictures/giraf/public/drikke.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaYouImage = new Media("Du","/sdcard/Pictures/giraf/public/Du.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaYouWord = new Media("Du","/sdcard/Pictures/giraf/public/du.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaMovieImage = new Media("Film","/sdcard/Pictures/giraf/public/Film.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaMovieWord = new Media("Film","/sdcard/Pictures/giraf/public/film.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaHighImage = new Media("For Højt","/sdcard/Pictures/giraf/public/For_Højt.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaHighWord = new Media("For Højt","/sdcard/Pictures/giraf/public/for_højt.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaWalkImage = new Media("Gå","/sdcard/Pictures/giraf/public/Gå.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaWalkWord = new Media("Gå","/sdcard/Pictures/giraf/public/gå.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaYesImage = new Media("Ja","/sdcard/Pictures/giraf/public/Ja.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaYesWord = new Media("Ja","/sdcard/Pictures/giraf/public/ja.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaDriveImage = new Media("Køre","/sdcard/Pictures/giraf/public/Køre.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaDriveWord = new Media("Køre","/sdcard/Pictures/giraf/public/køre.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaFoodImage = new Media("Lave Mad","/sdcard/Pictures/giraf/public/Lave_Mad.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaFoodWord = new Media("Lave Mad","/sdcard/Pictures/giraf/public/lave_mad.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaPlayImage = new Media("Lege","/sdcard/Pictures/giraf/public/Lege.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaWord = new Media("Lege","/sdcard/Pictures/giraf/public/lege.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaMeImage = new Media("Mig","/sdcard/Pictures/giraf/public/Mig.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaMeWord = new Media("Mig","/sdcard/Pictures/giraf/public/mig.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaMorgenImage = new Media("Morgen Routine","/sdcard/Pictures/giraf/public/Morgen_Routine.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaMorgenWord = new Media("Morgen Routine","/sdcard/Pictures/giraf/public/morgen_routine.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaNoImage = new Media("Nej","/sdcard/Pictures/giraf/public/Nej.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaNoWord = new Media("Nej","/sdcard/Pictures/giraf/public/nej.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaSeeImage = new Media("Se","/sdcard/Pictures/giraf/public/Se.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaSeeWord = new Media("Se","/sdcard/Pictures/giraf/public/se.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaSitdownImage = new Media("Sidde Ned","/sdcard/Pictures/giraf/public/Side_Ned.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaSitdownWord = new Media("Sidde Ned","/sdcard/Pictures/giraf/public/side_ned.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaGamingImage = new Media("Spille Computer","/sdcard/Pictures/giraf/public/Spille_Computer.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaGamingWord = new Media("Spille Computer","/sdcard/Pictures/giraf/public/spille_computer.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaStopImage = new Media("Stop","/sdcard/Pictures/giraf/public/Stop.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaStopWord = new Media("Stop","/sdcard/Pictures/giraf/public/stop.wma", true, "WORD", childrenLoaded.get(0).getId());			
+			Media mediaHungryImage = new Media("Sulten","/sdcard/Pictures/giraf/public/Sulten.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaHungryWord = new Media("Sulten","/sdcard/Pictures/giraf/public/sulten.wma", true, "WORD", childrenLoaded.get(0).getId());			
+			Media mediaSleepImage = new Media("Søvnig","/sdcard/Pictures/giraf/public/Søvnig.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaSleepWord = new Media("Søvnig","/sdcard/Pictures/giraf/public/søvnig.wma", true, "WORD", childrenLoaded.get(0).getId());			
+			Media mediaTalkImage = new Media("Tale Sammen","/sdcard/Pictures/giraf/public/Tale_Sammen.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaTalkWord = new Media("Tale Sammen","/sdcard/Pictures/giraf/public/tale_sammen.wma", true, "WORD", childrenLoaded.get(0).getId());			
+			Media mediaThirstyImage = new Media("Tørstig","/sdcard/Pictures/giraf/public/Tørstig.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaThirstyWord = new Media("Tørstig","/sdcard/Pictures/giraf/public/tørstig.wma", true, "WORD", childrenLoaded.get(0).getId());
+			Media mediaSilentImage = new Media("Være Stille","/sdcard/Pictures/giraf/public/Være_Stille.png", true, "IMAGE", childrenLoaded.get(0).getId());
+			Media mediaSilentWord = new Media("Være Stille", "/sdcard/Pictures/giraf/public/være_stille.wma", true, "WORD", childrenLoaded.get(0).getId());
+
 			media.add(mediaDog);
 			media.add(mediaCat);
 			media.add(mediaBat);
@@ -376,22 +425,102 @@ public class Helper {
 			media.add(mediaFood);
 			media.add(mediaHouse);
 
+			media.add(mediaBathImage);
+			media.add(mediaBathWord);
+			media.add(mediaThoothImage);
+			media.add(mediaThoothWord);
+			media.add(mediaDrinkImage);
+			media.add(mediaDrinkWord);
+			media.add(mediaYouImage);
+			media.add(mediaYouWord );
+			media.add(mediaMovieImage ); 
+			media.add(mediaMovieWord);
+			media.add(mediaHighImage);
+			media.add(mediaHighWord);
+			media.add(mediaWalkImage);
+			media.add(mediaWalkWord);
+			media.add(mediaYesImage);
+			media.add(mediaYesWord);
+			media.add(mediaDriveImage);
+			media.add(mediaDriveWord);
+			media.add(mediaFoodImage);
+			media.add(mediaFoodWord);
+			media.add(mediaPlayImage);
+			media.add(mediaWord);
+			media.add(mediaMeImage);
+			media.add(mediaMeWord);
+			media.add(mediaMorgenImage);
+			media.add(mediaMorgenWord);
+			media.add(mediaNoImage);
+			media.add(mediaNoWord);
+			media.add(mediaSeeImage );
+			media.add(mediaSeeWord ); 
+			media.add(mediaSitdownImage);
+			media.add(mediaSitdownWord); 
+			media.add(mediaGamingImage);
+			media.add(mediaGamingWord);
+			media.add(mediaStopImage);
+			media.add(mediaStopWord);
+			media.add(mediaHungryImage);
+			media.add(mediaHungryWord); 
+			media.add(mediaSleepImage);
+			media.add(mediaSleepWord);
+			media.add(mediaTalkImage);
+			media.add(mediaTalkWord);
+			media.add(mediaThirstyImage);
+			media.add(mediaThirstyWord);
+			media.add(mediaSilentImage);
+			media.add(mediaSilentWord);
+			
+	
+			
 			/*Add media*/
 			for (Media singleMedia : media) {
-				mediaIds.add(mediaHelper.insertMedia(singleMedia));
+					mediaIds.add(mediaHelper.insertMedia(singleMedia));
 			}
-
+			
 			/*Load media*/
 			for (long id : mediaIds) {
 				mediaLoaded.add(mediaHelper.getMediaById(id));
 			}
-
-			/*Attach submedia to media*/
-			for (Media singleMedia : mediaLoaded) {
-				if (!singleMedia.getName().equals(subMedia.getName())) {
-					mediaHelper.attachSubMediaToMedia(mediaLoaded.get(3), singleMedia);
+			
+			ArrayList<Media> imageMedia= new ArrayList<Media>();
+			ArrayList<Media> wordMedia= new ArrayList<Media>();
+			ArrayList<Tag> tagList= new ArrayList<Tag>();
+			//add submedia and tag
+			for(Media singleMedia: mediaLoaded)
+			{
+				if(singleMedia.getMType().equalsIgnoreCase("image"))
+				{
+					imageMedia.add(singleMedia);
+				}
+				else if(singleMedia.getMType().equalsIgnoreCase("word"))
+				{
+					wordMedia.add(singleMedia);
 				}
 			}
+			
+			for(Media image : imageMedia)
+			{
+				Tag newTag =new Tag(image.getName());
+				long tagId = tagsHelper.insertTag(newTag);
+				newTag = tagsHelper.getTagById(tagId);
+				tagList.add(newTag); 
+				mediaHelper.addTagsToMedia(tagList, image);
+				
+				
+				for(Media word : wordMedia)
+				{
+					if(image.getName().equalsIgnoreCase(word.getName()))
+					{
+						mediaHelper.attachSubMediaToMedia(word, image);						
+						mediaHelper.addTagsToMedia(tagList, word);
+					}
+				}
+				tagList.clear();
+			}
+
+			
 
 			/*Attach media to profile*/
 			for (Media singleMedia : mediaLoaded) {
@@ -406,45 +535,9 @@ public class Helper {
 			}
 		}
 		
-		/*Tags*/
-		Tag tag1 = new Tag("Dog");
-		Tag tag2 = new Tag("Cat");
-		Tag tag3 = new Tag("Bat");
-		Tag tag4 = new Tag("Sound");
-		Tag tag5 = new Tag("Picture");
-
-		long tag1Id = tagsHelper.insertTag(tag1);
-		long tag2Id = tagsHelper.insertTag(tag2);
-		long tag3Id = tagsHelper.insertTag(tag3);
-		long tag4Id = tagsHelper.insertTag(tag4);
-		long tag5Id = tagsHelper.insertTag(tag5);
-
-		Tag tag1Loaded = tagsHelper.getTagById(tag1Id);
-		Tag tag2Loaded = tagsHelper.getTagById(tag2Id);
-		Tag tag3Loaded = tagsHelper.getTagById(tag3Id);
-		Tag tag4Loaded = tagsHelper.getTagById(tag4Id);
-		Tag tag5Loaded = tagsHelper.getTagById(tag5Id);
-
-		List<Tag> tags1 = new ArrayList<Tag>();
-		tags1.add(tag1Loaded);
-		tags1.add(tag5Loaded);
-		List<Tag> tags2 = new ArrayList<Tag>();
-		tags2.add(tag2Loaded);
-		tags2.add(tag5Loaded);
-		List<Tag> tags3 = new ArrayList<Tag>();
-		tags3.add(tag3Loaded);
-		tags3.add(tag5Loaded);
-		List<Tag> tags4 = new ArrayList<Tag>();
-		tags4.add(tag4Loaded);
-		
-		if (!mediaLoaded.isEmpty()) {
-			/*Attach tag to media*/
-			mediaHelper.addTagsToMedia(tags1, mediaLoaded.get(0));
-			mediaHelper.addTagsToMedia(tags2, mediaLoaded.get(1));
-			mediaHelper.addTagsToMedia(tags3, mediaLoaded.get(2));
-			mediaHelper.addTagsToMedia(tags4, mediaLoaded.get(3));
-		}
-		
+		// SW6F13 - PARROT ADDITIONAL INFO END
+	
+	
 		/*Apps*/
 		String basePackageName = "dk.aau.cs.giraf.";
 
@@ -452,11 +545,25 @@ public class Helper {
 		App parrot = new App("Parrot", basePackageName + "parrot", basePackageName + "parrot.PARROTActivity");
 		App wombat = new App("Wombat", basePackageName + "wombat", basePackageName + "wombat.MainActivity");
 		App admin = new App("Admin", basePackageName + "oasis.app", basePackageName + "oasis.app.MainActivity");
+		
+		// SW6F13
+		App zebra = new App("Zebra", basePackageName + "zebra", basePackageName + "zebra.MainActivity");
+		App tortoise = new App("TORTOISE", basePackageName + "tortoise", basePackageName + "tortoise.MainActivity");
+		App train = new App("Train", basePackageName + "train", basePackageName + "train.MainActivity");
+		App croc = new App("Croc", basePackageName + "pictocreator", basePackageName + "train.crocActivity");
+		App pictoAdmin = new App("PictoAdmin", basePackageName + "pictoadmin", basePackageName + "train.PictoAdminMain");
 
 		long launcherId = appsHelper.insertApp(launcher);
 		long parrotId = appsHelper.insertApp(parrot);
 		long wombatId = appsHelper.insertApp(wombat);
 		long adminId = appsHelper.insertApp(admin);
+		
+		// SW6F13
+		long zebraId = appsHelper.insertApp(zebra);
+		long tortoiseId = appsHelper.insertApp(tortoise);
+		long trainId = appsHelper.insertApp(train);
+		long crocId = appsHelper.insertApp(croc);
+		long pictoAdminId = appsHelper.insertApp(pictoAdmin);
 
 		List<App> apps = new ArrayList<App>();
 
@@ -488,11 +595,54 @@ public class Helper {
 			}
 		}
 
+		// SW6F13
+		if (zebraId == -1) {
+			apps = appsHelper.getAppsByName("Zebra");
+			if (apps.size() == 1) {
+				zebraId = apps.get(0).getId();
+			}
+		}
+		
+		if (tortoiseId == -1) {
+			apps = appsHelper.getAppsByName("TORTOISE");
+			if (apps.size() == 1) {
+				tortoiseId = apps.get(0).getId();
+			}
+		}
+		
+		if (trainId == -1) {
+			apps = appsHelper.getAppsByName("Train");
+			if (apps.size() == 1) {
+				trainId = apps.get(0).getId();
+			}
+		}
+		
+		if (crocId == -1) {
+			apps = appsHelper.getAppsByName("Croc");
+			if (apps.size() == 1) {
+				crocId = apps.get(0).getId();
+			}
+		}
+		
+		if (pictoAdminId == -1) {
+			apps = appsHelper.getAppsByName("PictoAdmin");
+			if (apps.size() == 1) {
+				pictoAdminId = apps.get(0).getId();
+			}
+		}
+
 		/*Get apps*/
 		App launcherLoaded = appsHelper.getAppById(launcherId);
 		App parrotLoaded = appsHelper.getAppById(parrotId);
 		App wombatLoaded = appsHelper.getAppById(wombatId);
 		App adminLoaded = appsHelper.getAppById(adminId);
+		
+		// SW6F13
+		App zebraLoaded = appsHelper.getAppById(zebraId);
+		App tortoiseLoaded = appsHelper.getAppById(tortoiseId);
+		App trainLoaded = appsHelper.getAppById(trainId);
+		App crocLoaded = appsHelper.getAppById(crocId);
+		App pictoAdminLoaded = appsHelper.getAppById(pictoAdminId);
 
 		/*Attach app to profile*/
 		for (Profile guardian : guardiansLoaded) {
@@ -500,12 +650,26 @@ public class Helper {
 			appsHelper.attachAppToProfile(parrotLoaded, guardian);
 			appsHelper.attachAppToProfile(wombatLoaded, guardian);
 			appsHelper.attachAppToProfile(adminLoaded, guardian);
+			
+			// SW6F13
+			appsHelper.attachAppToProfile(zebraLoaded, guardian);
+			appsHelper.attachAppToProfile(tortoiseLoaded, guardian);
+			appsHelper.attachAppToProfile(trainLoaded, guardian);
+			appsHelper.attachAppToProfile(crocLoaded, guardian);
+			appsHelper.attachAppToProfile(pictoAdminLoaded, guardian);
 		}
 
 		for (Profile child : childrenLoaded) {
 			appsHelper.attachAppToProfile(launcherLoaded, child);
 			appsHelper.attachAppToProfile(parrotLoaded, child);
 			appsHelper.attachAppToProfile(wombatLoaded, child);
+
+			// SW6F13
+			appsHelper.attachAppToProfile(zebraLoaded, child);
+			appsHelper.attachAppToProfile(tortoiseLoaded, child);
+			appsHelper.attachAppToProfile(trainLoaded, child);
+			appsHelper.attachAppToProfile(crocLoaded, child);
+			appsHelper.attachAppToProfile(pictoAdminLoaded, child);
 		}
 	}
 }

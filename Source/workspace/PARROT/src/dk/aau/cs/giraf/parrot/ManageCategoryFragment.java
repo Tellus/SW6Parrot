@@ -174,10 +174,7 @@ public class ManageCategoryFragment extends Fragment {
 		{
 			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 			{
-				draggedItemIndex = position;
-				categoryDragownerID = R.id.pictograms;
-				//TODO Dummy. Pictogram information can be placed here instead.
-				ClipData data = ClipData.newPlainText("label", "text");
+				ClipData data = ClipData.newPlainText("","");
 				
 				// This gives the dragged pictogram a transparentActivity, shadowy look.
 				DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
@@ -232,8 +229,7 @@ public class ManageCategoryFragment extends Fragment {
 			}
 		});
 
-		//FIXME This part of the code is currently not functioning
-		//Click this button to change the name of the category
+		// FIXME Click this button to change the name of the category
 		/*changeCategoryName.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View v) 
@@ -263,19 +259,18 @@ public class ManageCategoryFragment extends Fragment {
 		});
 	}
 
-	//TODO implement me
 	@Override
 	public void onPause() 
 	{
 		super.onPause();
-		//saveProfileChanges(parentActivity, profileBeingModified);
+		// FIXME saveProfileChanges(parentActivity, profileBeingModified);
 	}
 	
 	@Override
 	public void onDestroy()
 	{
 		super.onDestroy();
-		//saveProfileChanges(parentActivity, profileBeingModified);
+		// FIXME saveProfileChanges(parentActivity, profileBeingModified);
 		
 	}
 
