@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/UpperLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvMainHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="20dp"
+        android:drawableLeft="@drawable/logo"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:keepScreenOn="true"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tvMainHeader"
+        android:layout_alignRight="@id/tvMainHeader"
+        android:layout_below="@id/tvMainHeader"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/bMyProfile"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/tab_selector"
+            android:text="@string/myprofile" />
+
+        <Button
+            android:id="@+id/bAllProfiles"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/tab_selector"
+            android:text="@string/allprofiles" />
+
+        <Button
+            android:id="@+id/bAllDepartments"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/tab_selector"
+            android:text="@string/alldepartments" />
+        
+        <Button
+            android:id="@+id/bAddDummyData"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/tab_selector"
+            android:text="@string/addDummyData" />
+    </LinearLayout>
+
+</RelativeLayout>
