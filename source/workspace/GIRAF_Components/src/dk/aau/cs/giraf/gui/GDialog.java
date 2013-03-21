@@ -30,6 +30,7 @@ public class GDialog extends Dialog {
 		mDialog = this;
 		
 		this.findViewById(R.id.dialog_cancel).setOnClickListener(new View.OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				mDialog.cancel();	
 			}

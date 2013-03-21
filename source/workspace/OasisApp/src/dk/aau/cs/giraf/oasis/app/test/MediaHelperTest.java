@@ -19,6 +19,7 @@ public class MediaHelperTest extends ActivityInstrumentationTestCase2<MainActivi
 		super("dk.aau.cs.giraf.oasis.app", MainActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 

@@ -23,7 +23,7 @@ public class GIconButton extends GButton {
 	}
 	
 	private Drawable resizeIcon(Drawable icon, int height){
-		Drawable result = (BitmapDrawable) icon;
+		Drawable result = icon;
 		Bitmap tempIcon = ((BitmapDrawable)icon).getBitmap();
 		
 		final int oldWidth = tempIcon.getWidth();

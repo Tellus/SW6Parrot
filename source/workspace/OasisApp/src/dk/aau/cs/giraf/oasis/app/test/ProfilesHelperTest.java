@@ -17,6 +17,7 @@ public class ProfilesHelperTest extends ActivityInstrumentationTestCase2<MainAct
 		super("dk.aau.cs.giraf.oasis.app", MainActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 

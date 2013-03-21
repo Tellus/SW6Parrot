@@ -35,6 +35,7 @@ public class tmpListAdapter extends ArrayAdapter<String> {
 		TextView title;
 	}
 
+	@Override
 	public View getView(int position, View convertView,
 			ViewGroup parent) {
 		final LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

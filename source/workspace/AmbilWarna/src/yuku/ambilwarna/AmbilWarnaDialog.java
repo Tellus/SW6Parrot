@@ -52,6 +52,7 @@ public class AmbilWarnaDialog {
 		viewNewColor.setBackgroundColor(color);
 
 		viewHue.setOnTouchListener(new View.OnTouchListener() {
+			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_MOVE
 						|| event.getAction() == MotionEvent.ACTION_DOWN
@@ -75,6 +76,7 @@ public class AmbilWarnaDialog {
 			}
 		});
 		viewSatVal.setOnTouchListener(new View.OnTouchListener() {
+			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_MOVE
 						|| event.getAction() == MotionEvent.ACTION_DOWN
@@ -103,6 +105,7 @@ public class AmbilWarnaDialog {
 
 		dialog = new AlertDialog.Builder(context)
 			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (AmbilWarnaDialog.this.listener != null) {
 						AmbilWarnaDialog.this.listener.onOk(AmbilWarnaDialog.this, getColor());
@@ -110,6 +113,7 @@ public class AmbilWarnaDialog {
 				}
 			})
 			.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (AmbilWarnaDialog.this.listener != null) {
 						AmbilWarnaDialog.this.listener.onCancel(AmbilWarnaDialog.this);
@@ -118,6 +122,7 @@ public class AmbilWarnaDialog {
 			})
 			.setOnCancelListener(new OnCancelListener() {
 				// if back button is used, call back our listener.
+				@Override
 				public void onCancel(DialogInterface paramDialogInterface) {
 					if (AmbilWarnaDialog.this.listener != null) {
 						AmbilWarnaDialog.this.listener.onCancel(AmbilWarnaDialog.this);
@@ -132,6 +137,7 @@ public class AmbilWarnaDialog {
 		// move cursor & target on first draw
 		ViewTreeObserver vto = view.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
 			public void onGlobalLayout() {
 				moveCursor();
 				moveTarget();

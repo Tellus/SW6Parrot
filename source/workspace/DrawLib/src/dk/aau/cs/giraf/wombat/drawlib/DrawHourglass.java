@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.wombat.drawlib;
 
-import dk.aau.cs.giraf.TimerLib.SubProfile;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

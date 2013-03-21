@@ -2,8 +2,6 @@ package dk.aau.cs.giraf.wombat;
 
 import java.util.ArrayList;
 
-import dk.aau.cs.giraf.TimerLib.Art;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

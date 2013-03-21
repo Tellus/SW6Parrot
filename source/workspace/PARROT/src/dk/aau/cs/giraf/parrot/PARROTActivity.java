@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 
 public class PARROTActivity extends Activity {
@@ -112,6 +113,11 @@ public class PARROTActivity extends Activity {
 		super.onResume();
 	}
 
+	public void goToSettings(View view){
+		Intent intent = new Intent(this, SettingActivity.class);
+		startActivity(intent);
+	}
+	
 	public static PARROTProfile getUser()
 	{
 		return parrotUser;

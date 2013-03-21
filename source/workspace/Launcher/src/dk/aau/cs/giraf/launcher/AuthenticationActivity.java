@@ -45,6 +45,7 @@ public class AuthenticationActivity extends CaptureActivity {
 		
 
 		mGLoginButton.setOnClickListener(new View.OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				// If the authentication activity was not launched by the launcher...
 				if (!getIntent().hasCategory("dk.aau.cs.giraf.launcher.GIRAF")) {

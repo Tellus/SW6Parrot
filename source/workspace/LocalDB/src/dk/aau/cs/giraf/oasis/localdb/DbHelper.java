@@ -17,6 +17,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	/**
 	 * Creates all the tables in the database
 	 */
+	@Override
 	public void onCreate(SQLiteDatabase db) {
 		AppsTable.onCreate(db);
 		AuthUsersTable.onCreate(db);
@@ -37,6 +38,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	/**
 	 * Drops the old tables and then creates the tables in the database
 	 */
+	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		AppsTable.onUpgrade(db, oldVersion, newVersion);
 		AuthUsersTable.onUpgrade(db, oldVersion, newVersion);
