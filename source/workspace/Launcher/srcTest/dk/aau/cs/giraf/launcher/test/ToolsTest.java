@@ -7,6 +7,7 @@ import android.test.AndroidTestCase;
 
 public class ToolsTest extends AndroidTestCase {
 	
+	@Override
 	public void setUp() {
 		
 	}

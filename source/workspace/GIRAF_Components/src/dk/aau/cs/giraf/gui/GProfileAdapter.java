@@ -24,19 +24,23 @@ public class GProfileAdapter extends BaseAdapter {
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 	
-    public int getCount() {
+    @Override
+	public int getCount() {
         return data.size();
     }
  
-    public Object getItem(int position) {
+    @Override
+	public Object getItem(int position) {
         return data.get(position);
     }
  
-    public long getItemId(int position) {
+    @Override
+	public long getItemId(int position) {
         return position;
     }
     
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+	public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         if(convertView==null)
             vi = inflater.inflate(R.layout.gprofile_row, null);

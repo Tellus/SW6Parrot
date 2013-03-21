@@ -7,8 +7,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import dk.aau.cs.giraf.TimerLib.Art;
-import dk.aau.cs.giraf.TimerLib.Guardian;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 /**
  * This class is an MainActivity used to initiate WOMBAT

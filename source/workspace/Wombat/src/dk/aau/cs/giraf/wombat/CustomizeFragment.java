@@ -30,16 +30,6 @@ import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import dk.aau.cs.giraf.TimerLib.Art;
-import dk.aau.cs.giraf.TimerLib.Attachment;
-import dk.aau.cs.giraf.TimerLib.Child;
-import dk.aau.cs.giraf.TimerLib.Guardian;
-import dk.aau.cs.giraf.TimerLib.SingleImg;
-import dk.aau.cs.giraf.TimerLib.SplitImg;
-import dk.aau.cs.giraf.TimerLib.SubProfile;
-import dk.aau.cs.giraf.TimerLib.Timer;
-import dk.aau.cs.giraf.TimerLib.formFactor;
-import dk.aau.cs.giraf.wombat.drawlib.*;
 /**
  * This class is a Fragment which which is used to customize SubProfiles
  * Layer: Layout

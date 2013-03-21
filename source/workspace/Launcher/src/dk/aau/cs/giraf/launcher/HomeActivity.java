@@ -150,7 +150,7 @@ public class HomeActivity extends Activity {
 	 */
 	private int calculateNumOfColumns() {
 		if (mNumberOfApps > Data.APPS_PER_PAGE) {
-			return (int) Math.ceil((double)((double)mNumberOfApps) / ((double)Data.MAX_ROWS_PER_PAGE));
+			return (int) Math.ceil((double)((double)mNumberOfApps) / Data.MAX_ROWS_PER_PAGE);
 		} else {
 			return Data.MAX_COLUMNS_PER_PAGE;
 		}
@@ -178,7 +178,7 @@ public class HomeActivity extends Activity {
 
 		if (Tools.isLandscape(mContext)) {
 			homebarLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_land));
-			homebarLayoutParams.height = LayoutParams.MATCH_PARENT;
+			homebarLayoutParams.height = android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 			homebarLayoutParams.width = barHeightLandscape;
 
 			paramsGrid.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -186,7 +186,7 @@ public class HomeActivity extends Activity {
 		} else {
 			homebarLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.homebar_back_port));
 			homebarLayoutParams.height = barHeightPortrait;
-			homebarLayoutParams.width = LayoutParams.MATCH_PARENT;
+			homebarLayoutParams.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 			paramsGrid.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 			paramsGrid.height = screenHeight - barHeightPortrait;
@@ -388,8 +388,10 @@ public class HomeActivity extends Activity {
 		mWidgetTimer.addWidget(mConnectivityWidget);
 
 		mLogoutWidget.setOnClickListener(new View.OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				View.OnClickListener task = new View.OnClickListener() {
+					@Override
 					public void onClick(View v) {
 						startActivity(Tools.logOutIntent(mContext));
 						((Activity) mContext).finish();
