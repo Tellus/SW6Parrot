@@ -18,12 +18,13 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                
             </intent-filter>
-            
         </activity>
-        <activity android:name=".SpeechBoardFragment" />
-        
+        <activity android:name="dk.aau.cs.giraf.parrot.SpeechBoardFragment" />
+        <activity
+            android:name="dk.aau.cs.giraf.parrot.SettingActivity"
+            android:label="@string/title_activity_setting" >
+        </activity>
     </application>
 
 </manifest>
