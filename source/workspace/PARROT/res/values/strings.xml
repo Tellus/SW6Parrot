@@ -12,7 +12,7 @@
     <string name="MediumPictogram">Medium</string>
     <string name="textToPic">Vis text til pictogram:</string>
     <string name="SentenceboardNo">Antal bokse i sætnings boarded</string>
-    <string name="buttonChangeColorSentence">Ændre</string>
+    <string name="buttonChangeColorSentence">Ændre farven</string>
     <string-array name="SentenceboardNoChoses">
         <item>1</item>
         <item>2</item>
