@@ -8,14 +8,14 @@ package yuku.ambilwarna;
 
 public final class R {
 	public static final class id {
-		public static final int ambilwarna_viewContainer = 0x7f0a0000;
-		public static final int ambilwarna_warnaBaru = 0x7f0a0007;
-		public static final int ambilwarna_state = 0x7f0a0005;
-		public static final int ambilwarna_warnaLama = 0x7f0a0006;
-		public static final int ambilwarna_target = 0x7f0a0004;
-		public static final int ambilwarna_viewHue = 0x7f0a0002;
-		public static final int ambilwarna_cursor = 0x7f0a0003;
-		public static final int ambilwarna_viewSatBri = 0x7f0a0001;
+		public static final int ambilwarna_viewContainer = 0x7f0a000e;
+		public static final int ambilwarna_warnaBaru = 0x7f0a0015;
+		public static final int ambilwarna_state = 0x7f0a0013;
+		public static final int ambilwarna_warnaLama = 0x7f0a0014;
+		public static final int ambilwarna_target = 0x7f0a0012;
+		public static final int ambilwarna_viewHue = 0x7f0a0010;
+		public static final int ambilwarna_cursor = 0x7f0a0011;
+		public static final int ambilwarna_viewSatBri = 0x7f0a000f;
 	}
 	public static final class layout {
 		public static final int ambilwarna_dialog = 0x7f030001;
