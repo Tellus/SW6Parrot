@@ -10,8 +10,9 @@ public class SpinnerActivity extends Activity implements OnItemSelectedListener 
     public void onItemSelected(AdapterView<?> parent, View view, 
             int pos, long id) {
         // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-    	Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
+    	parent.getItemAtPosition(pos);
+    
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
     	spinner.setOnItemSelectedListener(this);
     }
 

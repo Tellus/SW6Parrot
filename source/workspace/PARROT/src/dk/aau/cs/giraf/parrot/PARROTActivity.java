@@ -102,7 +102,7 @@ public class PARROTActivity extends Activity {
 		AudioPlayer.close();
 		if(guardianID != -1)
 		{
-			dataLoader.saveProfile(getUser());
+			//dataLoader.saveProfile(getUser());
 		}
 		super.onPause();
 	}

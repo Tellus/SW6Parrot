@@ -43,7 +43,8 @@
                 android:background="@drawable/button"
                 android:radius="7dp"
                 android:text="@string/buttonChangeColorSentence"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:onClick="onSentenceboardColorChanged" />
         </LinearLayout>
 
         <LinearLayout
@@ -98,7 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.53"
                 android:text="@string/LargePictogram"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:onClick="onSizePictogramChanged"/> />
 
             <RadioButton
                 android:id="@+id/largePicRadioButton"
@@ -106,16 +108,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5.14"
                 android:text="@string/MediumPictogram"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:onClick="onSizePictogramChanged"/> />
         </RadioGroup>
 
         <CheckBox
-            android:id="@+id/checkBox1"
+            android:id="@+id/checkBoxShowText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:text="@string/textToPic"
-            android:textSize="20sp" />
+            android:textSize="20sp" 
+            android:onClick="onShowTextChanged"/>
     </LinearLayout>
 
 </RelativeLayout>

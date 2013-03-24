@@ -232,9 +232,9 @@ public class PARROTDataLoader {
 		profileSettings.get("ColourSettings").put("SentenceBoard", String.valueOf(user.getSentenceBoardColor()));
 		Log.v("MessageParrot", "saveSetting: save colour");
 		//Then we save the rights, which are the available tabs for the user.
-	/*	profileSettings.addValue("Rights", "tab0", String.valueOf(user.getRights(0)));
+		profileSettings.addValue("Rights", "tab0", String.valueOf(user.getRights(0)));
 		profileSettings.get("Rights").put("tab1", String.valueOf(user.getRights(1)));
-		profileSettings.get("Rights").put("tab2", String.valueOf(user.getRights(2)));*/
+		profileSettings.get("Rights").put("tab2", String.valueOf(user.getRights(2)));
 		Log.v("MessageParrot", "end saveSettings");
 		//Now we return the settings so that they can be saved.
 		return profileSettings;	
