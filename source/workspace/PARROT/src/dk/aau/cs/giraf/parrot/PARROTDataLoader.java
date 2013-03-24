@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import android.app.Activity;
 import android.util.Log;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -121,6 +124,34 @@ public class PARROTDataLoader {
 		{
 			parrotUser.setRights(i, Boolean.valueOf(profileSettings.get("Rights").get("tab" + i)));
 		}
+		
+		/*new settings*/
+		int noOfBoxes = Integer.valueOf(profileSettings.get("SentenceboardSettings").get("NoOfBoxes"));
+		boolean showText = Boolean.valueOf(profileSettings.get("PictogramSettings").get("ShowText"));
+		String PictogramSize = String.valueOf(profileSettings.get("PictogramSettings").get("PictogramSize"));
+			
+		Log.v("MessageParrot","noOfBoxes: "+noOfBoxes);
+		Log.v("MessageParrot","showText: "+showText);
+		Log.v("MessageParrot","PictogramSize: "+ PictogramSize);
+
+		
+		parrotUser.setNumberOfSentencePictograms(noOfBoxes);
+		if(PictogramSize.equalsIgnoreCase("MEDIUM"))
+		{ 
+			Log.v("MessageParrot","PictogramSize: medium");
+			parrotUser.setPictogramSize(PARROTProfile.PictogramSize.MEDIUM);
+		}
+		else if(PictogramSize.equalsIgnoreCase("LARGE"))
+		{
+			Log.v("MessageParrot","PictogramSize: large");
+			parrotUser.setPictogramSize(PARROTProfile.PictogramSize.LARGE);
+		}
+		
+		if(showText)
+		{
+			parrotUser.setShowText(true);
+		}
+		
 		
 		return parrotUser;
 	}

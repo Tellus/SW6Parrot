@@ -78,7 +78,6 @@ public class SettingActivity extends Activity  {
 	
 	private void readTheCurrentData() {
 		
-		int sentenceColour = user.getSentenceBoardColor();
 		int noOfPlacesInSentenceboard = user.getNumberOfSentencePictograms();
 		boolean showText = user.getShowText();
 		PARROTProfile.PictogramSize pictogramSize = user.getPictogramSize();
@@ -171,12 +170,12 @@ public class SettingActivity extends Activity  {
 		//save profile settings
 		Log.v("MessageParrot", "Begin saving in save saveSettings");
 		//First, we save the color settings
-		profileSetting.addValue("SentenceboardSettings", "color", String.valueOf(user.getSentenceBoardColor()));
-		profileSetting.get("SentenceboardSettings").put("NoOfboxes", String.valueOf(user.getNumberOfSentencePictograms()));
+		profileSetting.addValue("SentenceboardSettings", "Color", String.valueOf(user.getSentenceBoardColor()));
+		profileSetting.get("SentenceboardSettings").put("NoOfBoxes", String.valueOf(user.getNumberOfSentencePictograms()));
 		Log.v("MessageParrot", "saveSetting: save colour");
 		
-		profileSetting.addValue("pictogramSettings","size", String.valueOf(user.getPictogramSize()));
-		profileSetting.get("pictogramSettings").put("ShowText", String.valueOf(user.getShowText()));
+		profileSetting.addValue("PictogramSettings","PictogramSize", String.valueOf(user.getPictogramSize()));
+		profileSetting.get("PictogramSettings").put("ShowText", String.valueOf(user.getShowText()));
 
 		PARROTActivity.setUser(user);
 		//after all the changes are made, we save the settings to the database
