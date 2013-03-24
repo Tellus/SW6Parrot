@@ -45,6 +45,7 @@
                 android:text="@string/buttonChangeColorSentence"
                 android:textSize="20sp"
                 android:onClick="onSentenceboardColorChanged" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -102,6 +103,7 @@
                 android:textSize="20sp"
                 android:onClick="onSizePictogramChanged"/> />
 
+
             <RadioButton
                 android:id="@+id/largePicRadioButton"
                 android:layout_width="wrap_content"
@@ -120,6 +122,7 @@
             android:text="@string/textToPic"
             android:textSize="20sp" 
             android:onClick="onShowTextChanged"/>
+
     </LinearLayout>
 
 </RelativeLayout>
