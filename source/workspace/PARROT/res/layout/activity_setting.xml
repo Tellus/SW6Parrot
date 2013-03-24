@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.53"
-                android:text="@string/LargePictogram"
+                android:text="@string/MediumPictogram"
                 android:textSize="20sp"
                 android:onClick="onSizePictogramChanged"/> />
 
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.14"
-                android:text="@string/MediumPictogram"
+                android:text="@string/LargePictogram"
                 android:textSize="20sp"
                 android:onClick="onSizePictogramChanged"/> />
         </RadioGroup>

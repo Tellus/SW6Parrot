@@ -28,7 +28,7 @@ public class SettingActivity extends Activity  {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_setting);
 		
 		user = PARROTActivity.getUser();
@@ -58,12 +58,14 @@ public class SettingActivity extends Activity  {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         
+        
+        
+        //readTheCurrentData();
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parent, View view, 
                     int pos, long id) {
-            	
                 user.setNumberOfSentencePictograms((Integer)parent.getItemAtPosition(pos));
                 
             }
@@ -74,11 +76,43 @@ public class SettingActivity extends Activity  {
         }); 
     }
 	
+	private void readTheCurrentData() {
+		
+		int sentenceColour = user.getSentenceBoardColor();
+		int noOfPlacesInSentenceboard = user.getNumberOfSentencePictograms();
+		boolean showText = user.getShowText();
+		PARROTProfile.PictogramSize pictogramSize = user.getPictogramSize();
+		
+		if(pictogramSize == PARROTProfile.PictogramSize.MEDIUM)
+		{ 
+			RadioButton radioB = (RadioButton) findViewById(R.id.mediumPicRadioButton);
+			radioB.setChecked(true);
+		}
+		else if(pictogramSize == PARROTProfile.PictogramSize.LARGE)
+		{
+			RadioButton radioB = (RadioButton) findViewById(R.id.largePicRadioButton);
+			radioB.setChecked(true);
+		}
+			
+			
+		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
+		spinner.setSelection(noOfPlacesInSentenceboard-1,true);
+		
+		if(showText)
+		{
+			CheckBox checkBox  = (CheckBox) findViewById(R.id.checkBoxShowText);
+			checkBox.setChecked(true);
+		}
+	}
+	
+
 	@Override
 	protected void onPause() {
 		//saveChanges();
 		super.onPause();
 	}
+	
+
 
 	public void onSentenceboardColorChanged(View view)
 	{
