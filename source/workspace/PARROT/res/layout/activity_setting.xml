@@ -120,16 +120,7 @@
             android:onClick="onShowTextChanged"
             android:text="@string/textToPic"
             android:textSize="20sp" />
-        
-        <Button
-            android:id="@+id/SaveChangesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button"
-            android:onClick="saveChanges"
-            android:radius="7dp"
-            android:text="@string/buttonSaveChanges"
-            android:textSize="20sp" />
+
     </LinearLayout>
 
 </RelativeLayout>

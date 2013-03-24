@@ -65,7 +65,14 @@ public class SpeechBoardFragment extends Fragment
 		if(user.getCategoryAt(0)!=null)
 		{
 			displayedCategory = user.getCategoryAt(0); //TODO we might have to replace this.
-
+			
+			int count = speechBoardCategory.getPictograms().size()-1;
+			while(speechBoardCategory.getPictograms().size()!= 0)
+			{
+				speechBoardCategory.removePictogram(count);
+				count--;
+			}
+				
 			//Fills the sentenceboard with emptyPictogram pictograms
 			while(speechBoardCategory.getPictograms().size() <PARROTActivity.getUser().getNumberOfSentencePictograms())
 			{
