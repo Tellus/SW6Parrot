@@ -15,8 +15,8 @@ public class PARROTProfile {
 	private long profileID =-1;
 	private int noOfboxesInSentenceboard = 1;
 	private boolean[] rights = new boolean[3];
-	private int categoryColor = 0;
-	private int sentenceBoardColor = 0;
+	private int categoryColor = 0xb4b6b2;
+	private int sentenceBoardColor = 0xaaafff;
 	private PictogramSize pictogramSize = PictogramSize.MEDIUM; 
 	private boolean showText = false;
 			

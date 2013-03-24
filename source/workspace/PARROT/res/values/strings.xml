@@ -13,6 +13,7 @@
     <string name="textToPic">Vis text til pictogram:</string>
     <string name="SentenceboardNo">Antal bokse i sætnings boarded</string>
     <string name="buttonChangeColorSentence">Ændre farven</string>
+    <string name="buttonSaveChanges">Gem ændringer</string>
     
     
     <!-- In ParrotActivity -->

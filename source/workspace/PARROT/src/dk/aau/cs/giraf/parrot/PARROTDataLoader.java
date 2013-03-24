@@ -108,16 +108,13 @@ public class PARROTDataLoader {
 	}
 
 	private PARROTProfile loadSettings(PARROTProfile parrotUser, Setting<String, String, String> profileSettings) {
-		
-		
-		int sentenceColour=0xaaafff;
-		int catColour=0xbbbfffff;
+				
 		//First we load the colour settings
-		catColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SuperCategory"));
-		sentenceColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SentenceBoard"));
+		//int catColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SuperCategory"));
+		
 		Log.v("MessageParrot","I loadSettings: efter get colour Settings");
-		parrotUser.setCategoryColor(catColour);
-		parrotUser.setSentenceBoardColor(sentenceColour);
+		//parrotUser.setCategoryColor(catColour);
+		
 		Log.v("MessageParrot","I loadSettings: efter set colour i parrotUser");
 		//Then we load the tab settings
 		for(int i = 0; i<profileSettings.get("Rights").size(); i++)
@@ -129,12 +126,9 @@ public class PARROTDataLoader {
 		int noOfBoxes = Integer.valueOf(profileSettings.get("SentenceboardSettings").get("NoOfBoxes"));
 		boolean showText = Boolean.valueOf(profileSettings.get("PictogramSettings").get("ShowText"));
 		String PictogramSize = String.valueOf(profileSettings.get("PictogramSettings").get("PictogramSize"));
-			
-		Log.v("MessageParrot","noOfBoxes: "+noOfBoxes);
-		Log.v("MessageParrot","showText: "+showText);
-		Log.v("MessageParrot","PictogramSize: "+ PictogramSize);
-
+		int sentenceColour = Integer.valueOf(profileSettings.get("SentenceboardSettings").get("Color"));	
 		
+		parrotUser.setSentenceBoardColor(sentenceColour);
 		parrotUser.setNumberOfSentencePictograms(noOfBoxes);
 		if(PictogramSize.equalsIgnoreCase("MEDIUM"))
 		{ 

@@ -164,8 +164,8 @@ public class TestData {
 	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
 	{
 		//First, we save the colour settings
-		profileSettings.addValue("ColourSettings", "SuperCategory", String.valueOf(user.getCategoryColor()));
-		profileSettings.get("ColourSettings").put("SentenceBoard", String.valueOf(user.getSentenceBoardColor()));
+//		profileSettings.addValue("ColourSettings", "SuperCategory", String.valueOf(user.getCategoryColor()));
+//		profileSettings.get("ColourSettings").put("SentenceBoard", String.valueOf(user.getSentenceBoardColor()));
 
 		//Then we save the rights, which are the available tabs for the user.
 		profileSettings.addValue("Rights", "tab0", String.valueOf(user.getRights(0)));

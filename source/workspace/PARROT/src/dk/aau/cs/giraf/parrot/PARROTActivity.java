@@ -48,7 +48,7 @@ public class PARROTActivity extends Activity {
 			//BEGIN testData
 			Setting<String, String, String> setting = help.appsHelper.getSettingByIds(app.getId(), childID);
 			//this write test data to database
-			if(setting.containsKey("ColourSettings") == false)
+			if(setting.containsKey("SentenceboardSettings") == false)
 			{
 				TestData test = new TestData(this);
 				test.TESTsaveTestProfile();		
