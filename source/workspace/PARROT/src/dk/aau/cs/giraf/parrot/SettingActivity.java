@@ -45,7 +45,15 @@ public class SettingActivity extends Activity  {
 	}
 	
 	@Override
-	public void onResume() {
+	protected void onPause() {
+		super.onPause();
+		saveChanges();
+		
+	}
+		
+
+	@Override
+	protected void onResume() {
 		super.onResume();
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
 		// Create an ArrayAdapter using the string array and a default spinner layout
@@ -152,7 +160,7 @@ public class SettingActivity extends Activity  {
 	    }
 	}
 
-	public void saveChanges(View view)
+	public void saveChanges()
 	{
 		Log.v("MessageParrot", "Begin saving in save Profil");
 		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
@@ -177,4 +185,5 @@ public class SettingActivity extends Activity  {
 		help.appsHelper.modifyAppByProfile(app, prof);
 		
 	}
+
 }
