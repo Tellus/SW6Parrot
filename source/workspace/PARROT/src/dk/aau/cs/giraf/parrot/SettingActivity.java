@@ -9,8 +9,10 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import dk.aau.cs.giraf.parrot.PARROTProfile.PictogramSize;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.ClipData.Item;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -41,7 +43,22 @@ public class SettingActivity extends Activity  {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_setting, menu);
+				
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected (MenuItem item) {
+		switch(item.getItemId()){
+		case R.id.goToParrot:
+			returnToParrot();
+			break;
+		}
+		return true;
+	}
+	public void returnToParrot()
+	{
+		finish();
 	}
 	
 	@Override
@@ -57,7 +74,7 @@ public class SettingActivity extends Activity  {
 		super.onResume();
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
 		// Create an ArrayAdapter using the string array and a default spinner layout
-		Integer[] items = new Integer[]{1,2,3,4,5,6,7,8};
+		Integer[] items = new Integer[]{1,2,3,4,5,6,7};
 		ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, items);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

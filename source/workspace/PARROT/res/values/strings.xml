@@ -63,7 +63,9 @@
     <string name="copyThisCategoryToOtherProfileCategoryButton">Kopier Til Anden Profil Kategori</string>
     <string name="KlimTest">Her skal stå en lang tekst, som gerne skulle brydes</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+    <string name="menu_settings">Indstillinger</string>
+    <string name="clearSentenceBoard">Ryd sætning</string>
+    <string name="returnItem">Tilbage</string>
     <string name="title_activity_setting">SettingActivity</string>
     <string name="picture">default picture content description</string>
 
