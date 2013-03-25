@@ -58,7 +58,6 @@ public final class R {
         public static final int ambilwarna_viewSatBri=0x7f09000f;
         public static final int ambilwarna_warnaBaru=0x7f090015;
         public static final int ambilwarna_warnaLama=0x7f090014;
-        public static final int backButton=0x7f090036;
         public static final int button1=0x7f09002f;
         public static final int buttonChangeSentenceColor=0x7f090004;
         public static final int categories=0x7f09001b;
@@ -72,23 +71,25 @@ public final class R {
         public static final int changecategorynamebutton=0x7f090026;
         public static final int changesentencecolor=0x7f090003;
         public static final int checkBoxShowText=0x7f09000d;
+        public static final int clearBoard=0x7f09003d;
         public static final int copythiscategorytootherprofilebutton=0x7f090029;
         public static final int copythiscategorytootherprofilecategorybutton=0x7f09002a;
         public static final int create_new_pictogram_button=0x7f090024;
         public static final int create_new_subcategory_button=0x7f090023;
         public static final int createnewcategorybutton=0x7f090022;
-        public static final int filler=0x7f090037;
+        public static final int goToLauncher=0x7f09003c;
+        public static final int goToParrot=0x7f09003a;
+        public static final int goToSettings=0x7f09003b;
         public static final int largePicRadioButton=0x7f09000c;
         public static final int linearLayout1=0x7f090002;
         public static final int mediumPicRadioButton=0x7f09000b;
-        public static final int menu_settings=0x7f09003d;
         public static final int numberLayout=0x7f090000;
         public static final int options_layout=0x7f090031;
         public static final int pickNoSentenceBoard=0x7f090006;
         public static final int pictogramSetting=0x7f090008;
         public static final int pictogramSize=0x7f09000a;
         public static final int pictogrambitmap=0x7f090033;
-        public static final int pictogramgrid=0x7f09003b;
+        public static final int pictogramgrid=0x7f090038;
         public static final int pictograms=0x7f090030;
         public static final int pictogramtext=0x7f090034;
         public static final int profiles=0x7f09001a;
@@ -96,11 +97,10 @@ public final class R {
         public static final int rlinfoall=0x7f09001d;
         public static final int rlspincat=0x7f090019;
         public static final int sentenceSetting=0x7f090001;
-        public static final int sentenceboard=0x7f09003c;
-        public static final int settingsButton=0x7f090038;
+        public static final int sentenceboard=0x7f090039;
         public static final int spinnerNoOfsentence=0x7f090007;
-        public static final int subcategory=0x7f09003a;
-        public static final int supercategory=0x7f090039;
+        public static final int subcategory=0x7f090037;
+        public static final int supercategory=0x7f090036;
         public static final int textView1=0x7f090021;
         public static final int textView2=0x7f090025;
         public static final int textView3=0x7f090028;
@@ -118,6 +118,7 @@ public final class R {
     }
     public static final class menu {
         public static final int activity_setting=0x7f080000;
+        public static final int parrot_settings=0x7f080001;
     }
     public static final class string {
         public static final int KlimTest=0x7f040031;
@@ -142,6 +143,7 @@ public final class R {
         public static final int changeCategoryPicButton=0x7f04002c;
         public static final int changecategorycolor=0x7f040004;
         public static final int changesentencecolor=0x7f040005;
+        public static final int clearSentenceBoard=0x7f040034;
         public static final int copyThisCategoryToOtherProfileButton=0x7f04002f;
         public static final int copyThisCategoryToOtherProfileCategoryButton=0x7f040030;
         public static final int createNewCategoryButton=0x7f04002b;
@@ -165,7 +167,8 @@ public final class R {
         public static final int modifyPictureSaveButtonText=0x7f040018;
         public static final int modifyPictureSaveDescription=0x7f040017;
         public static final int pictogramOptions=0x7f040003;
-        public static final int picture=0x7f040035;
+        public static final int picture=0x7f040037;
+        public static final int returnItem=0x7f040035;
         public static final int secondTab=0x7f04000e;
         public static final int selectActiveSituationOkButtonText=0x7f040023;
         public static final int selectSituationSpinnerPromptText=0x7f040025;
@@ -179,7 +182,7 @@ public final class R {
         public static final int star=0x7f040013;
         public static final int textToPic=0x7f040009;
         public static final int thirdTab=0x7f04000f;
-        public static final int title_activity_setting=0x7f040034;
+        public static final int title_activity_setting=0x7f040036;
     }
     public static final class style {
         public static final int Text=0x7f070000;

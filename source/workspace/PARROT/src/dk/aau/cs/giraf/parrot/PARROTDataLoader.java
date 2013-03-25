@@ -150,6 +150,7 @@ public class PARROTDataLoader {
 		
 		return parrotUser;
 	}
+	
 	//This method loads category
 	public PARROTCategory loadCategory(String catName, String pictureIDs,int colour,String iconString)
 	{
@@ -163,6 +164,7 @@ public class PARROTDataLoader {
 		return cat;
 	}
 
+	
 	public Pictogram loadPictogram(long idPictogram)
 	{
 		Pictogram pic = null;
@@ -230,156 +232,5 @@ public class PARROTDataLoader {
 
 		return listOfID;
 	}
-
-	public void saveProfile(PARROTProfile user)
-	{
-		Log.v("MessageParrot", "Begin saving in save Profil");
-		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
-		//save profile settings
-		saveSettings(profileSetting, user);
-
-/*		for(int i=0;i<user.getCategories().size();i++)
-		{
-			profileSetting = saveCategory(user.getCategoryAt(i), i, profileSetting);
-		}*/
-		//after all the changes are made, we save the settings to the database
-		app.setSettings(profileSetting);
-		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
-		Log.v("MessageParrot", "before saving in db");
-		help.appsHelper.modifyAppByProfile(app, prof);
-		Log.v("MessageParrot", "End saving in save Profil");
-	}
-
-	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
-	{
-		Log.v("MessageParrot", "Begin saving in save saveSettings");
-		//First, we save the colour settings
-		profileSettings.addValue("ColourSettings", "SuperCategory", String.valueOf(user.getCategoryColor()));
-		profileSettings.get("ColourSettings").put("SentenceBoard", String.valueOf(user.getSentenceBoardColor()));
-		Log.v("MessageParrot", "saveSetting: save colour");
-		//Then we save the rights, which are the available tabs for the user.
-		profileSettings.addValue("Rights", "tab0", String.valueOf(user.getRights(0)));
-		profileSettings.get("Rights").put("tab1", String.valueOf(user.getRights(1)));
-		profileSettings.get("Rights").put("tab2", String.valueOf(user.getRights(2)));
-		Log.v("MessageParrot", "end saveSettings");
-		//Now we return the settings so that they can be saved.
-		return profileSettings;	
-	}
-
-	/*private Setting<String, String, String> saveCategory(PARROTCategory category, int categoryNumber, Setting<String, String, String> profileSetting ) {
-		//first, we save the pictograms
-		String pictogramString = "";
-		for(int i=0;i<category.getPictograms().size();i++)
-		{
-			Pictogram pic = category.getPictogramAtIndex(i);
-
-			pic = savePictogram(pic);
-
-			//In any case, save the references
-			pictogramString = pictogramString + pic.getImageID()+'#';
-
-		}
-		pictogramString += "$";
-		pictogramString = pictogramString.replace("#$", "$");	//Here we make sure that the end is $, and not #$
-		//now save the pictograms
-		profileSetting.addValue("category"+categoryNumber, "pictograms", pictogramString);
-		//And the name
-		profileSetting.get("category"+categoryNumber).put("name", category.getCategoryName());
-		//then we save the colour
-		profileSetting.get("category"+categoryNumber).put("colour", String.valueOf(category.getCategoryColour()));
-		//and then we save the icon
-		Pictogram icon = category.getIcon();
-		icon = savePictogram(icon);
-		profileSetting.get("category"+categoryNumber).put("icon", String.valueOf(icon.getImageID()));
-
-		return profileSetting;
-	}*/
-
-	/**
-	 * 
-	 * @PARROT
-	 *This method is used to save completely new pictograms to the database, as well as modify existing ones.
-	 */
-	/*private Pictogram savePictogram(Pictogram pic)
-	{
-		Media imageMedia = null;
-		Media soundMedia = null;
-		Media wordMedia = null;
-		
-		if(pic.getImageID() == -1) //if the picture is new in the database
-		{
-			imageMedia = new Media(pic.getName(), pic.getImagePath(), true, "IMAGE", PARROTActivity.getUser().getProfileID());
-			pic.setImageID(help.mediaHelper.insertMedia(imageMedia));
-			imageMedia.setId(pic.getImageID());
-		}
-		else
-		{
-			imageMedia = new Media(pic.getName(),pic.getImagePath(),true,"IMAGE",PARROTActivity.getUser().getProfileID());
-			imageMedia.setId(pic.getImageID());
-			help.mediaHelper.modifyMedia(imageMedia);
-		}
-
-		if(pic.getWordID() == -1 && pic.getWordPath() != null) //if the word is not in the database
-		{
-			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			pic.setWordID(help.mediaHelper.insertMedia(wordMedia));
-			wordMedia.setId(pic.getWordID());
-		}
-		else if(pic.getWordPath() != null)
-		{
-			wordMedia = new Media(pic.getName(), pic.getWordPath(), true, "WORD", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			wordMedia.setId(pic.getWordID());
-			help.mediaHelper.modifyMedia(wordMedia);
-		}
-
-		if(pic.getSoundID() == -1 && pic.getSoundPath() != null) //if the sound is new in the database
-		{
-			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			pic.setSoundID(help.mediaHelper.insertMedia(soundMedia));
-			soundMedia.setId(pic.getSoundID());
-		}
-		else if(pic.getSoundPath() != null)
-		{
-			soundMedia = new Media(pic.getName(), pic.getSoundPath(), true, "SOUND", PARROTActivity.getUser().getProfileID());	//TODO we might want to set the booleans to false
-			soundMedia.setId(pic.getSoundID());
-			help.mediaHelper.modifyMedia(soundMedia);
-		}
-
-		// save the submedia references for NEW pictograms
-		if(pic.isNewPictogram() == true)
-		{
-			if(soundMedia != null)
-			{
-				help.mediaHelper.attachSubMediaToMedia(soundMedia, imageMedia);
-			}
-			if(wordMedia !=null)
-			{
-				help.mediaHelper.attachSubMediaToMedia(wordMedia, imageMedia);
-			}
-		}
-		//save the submedia references for a MODIFIED pictogram
-		else if(pic.isChanged() == true)
-		{
-			List<Media> mediasToRemove = help.mediaHelper.getSubMediaByMedia(imageMedia);
-			for(int i = 0;i<mediasToRemove.size();i++)	//find all previous references, and remove them
-			{
-				help.mediaHelper.removeSubMediaAttachmentToMedia(mediasToRemove.get(i), imageMedia);
-			}
-			if(soundMedia != null)
-			{
-				help.mediaHelper.attachSubMediaToMedia(soundMedia, imageMedia);
-			}
-			if(wordMedia !=null)
-			{
-				help.mediaHelper.attachSubMediaToMedia(wordMedia, imageMedia);
-			}
-
-		}
-		//Update the information about the pictogram so that it is no longer new or changed from the version in the database.
-		pic.setChanged(false);
-		pic.setNewPictogram(false);
-		return pic;
-
-	}*/
 
 }

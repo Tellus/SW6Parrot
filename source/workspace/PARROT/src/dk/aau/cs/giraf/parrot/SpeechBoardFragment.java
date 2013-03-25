@@ -38,10 +38,7 @@ public class SpeechBoardFragment extends Fragment
 	private PARROTProfile user = null;
 	private Pictogram emptyPictogram;  
 	
-	public void returnToLauncher(View view)
-	{
-		/* Go back to launcher */
-	}
+	
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -86,6 +83,7 @@ public class SpeechBoardFragment extends Fragment
 			//Setup the view for the sentences
 			GridView sentenceBoardGrid = (GridView) parrent.findViewById(R.id.sentenceboard);
 			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, parrent));
+			sentenceBoardGrid.setNumColumns(PARROTActivity.getUser().getNumberOfSentencePictograms());
 			
 			//Setup the view for the categories 
 			GridView superCategoryGrid = (GridView) parrent.findViewById(R.id.supercategory);
