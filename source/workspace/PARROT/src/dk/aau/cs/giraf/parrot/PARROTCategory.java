@@ -15,6 +15,7 @@ public class PARROTCategory
 	private boolean newCategory;
 	private boolean changed;
 	private String categoryName;
+	public PARROTCategory parent = null;
 	
 	//This is the constructor method.
 	public PARROTCategory(int colour, Pictogram icon) //this is a constructor method that takes icon and color as input
@@ -96,4 +97,10 @@ public class PARROTCategory
 		this.categoryName = categoryName;
 	}
 
+	// Klim
+	public void addSubCategory(PARROTCategory newSubCategory)
+	{
+		newSubCategory.parent = this;
+	}
+	
 }

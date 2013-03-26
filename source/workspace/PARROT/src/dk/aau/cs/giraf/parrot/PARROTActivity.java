@@ -183,4 +183,6 @@ public class PARROTActivity extends Activity {
 	public static Intent getGirafIntent() {
 		return girafIntent;
 	}
+	
+
 }
