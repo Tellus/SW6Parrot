@@ -109,11 +109,18 @@
         </LinearLayout>
 
         <GridView
-            android:id="@+id/searched_pictograms"
+            android:id="@+id/pictogram_displayer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:numColumns="5" >
+            
+            <ImageView 
+                android:id="@+id/pict_disp_grid_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </ImageView>
+            
         </GridView>
 
         <LinearLayout
