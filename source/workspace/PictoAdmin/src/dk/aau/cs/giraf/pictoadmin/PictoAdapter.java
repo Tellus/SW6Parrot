@@ -35,7 +35,7 @@ public class PictoAdapter extends BaseAdapter {
 			gridview = inflater.inflate(R.layout.activity_picto_admin_main, null);
 			ImageView imageview = (ImageView) gridview.findViewById(R.id.pict_disp_grid_item);
 			
-			imageview.setImageBitmap(piclist);
+			//imageview.setImageBitmap(piclist);
 		}
 		
 		else {
