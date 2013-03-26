@@ -16,6 +16,6 @@ public class DisplayPictograms extends Activity {
 	// How do we display pictograms?
 	public void updatePictogramDisplayer(List<Media> pictograms) {
 		pictodisplay = (GridView) findViewById(R.id.pictogram_displayer);
-		pictodisplay.setAdapter((ListAdapter) new PictoAdapter(this, PICTO_DISP));
+		//pictodisplay.setAdapter((ListAdapter) new PictoAdapter(this, PICTO_DISP));
 	}
 }

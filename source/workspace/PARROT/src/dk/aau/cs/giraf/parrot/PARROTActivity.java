@@ -9,6 +9,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -100,16 +101,14 @@ public class PARROTActivity extends Activity {
 			 * Remember: Make sure the order of the Taps is consistent with the order of their rights in the
 			 * 			 Rights array.
 			 */
-			
 			ActionBar actionBar = getActionBar();
 			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 			//actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
-	
+
 			//Creating a new Tab, setting the text it is to show and construct and attach a Tab Listener to control it.
 			Tab tab = actionBar.newTab() 
-					.setText(R.string.firstTab)
 					.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
-			actionBar.addTab(tab);
+			tab.select();
 			
 		}
 
