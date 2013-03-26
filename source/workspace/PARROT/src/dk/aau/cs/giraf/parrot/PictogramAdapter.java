@@ -73,5 +73,4 @@ public class PictogramAdapter extends BaseAdapter {
 		view.setPadding(8, 8, 8, 8);
 		return view;
 	}
-
 }
