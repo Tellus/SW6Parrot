@@ -11,7 +11,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Media;
 public class PictoAdminMain extends Activity {
 	Button searchbutton;
 	DatabaseHandler dbhandler;
-	DisplayPictograms disphandler;
+	//DisplayPictograms disphandler;
 	String textinput;
 	EditText inputbox;
 	List<Media> pictograms;
@@ -52,7 +52,7 @@ public class PictoAdminMain extends Activity {
 			
 			pictograms.addAll(dbhandler.getPictograms(textinput));
 			
-			disphandler.updatePictogramDisplayer(pictograms);
+			//disphandler.updatePictogramDisplayer(pictograms);
 		}
 	};
 }
