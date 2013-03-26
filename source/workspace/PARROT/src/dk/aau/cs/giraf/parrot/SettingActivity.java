@@ -74,7 +74,7 @@ public class SettingActivity extends Activity  {
 		super.onResume();
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
 		// Create an ArrayAdapter using the string array and a default spinner layout
-		Integer[] items = new Integer[]{1,2,3,4,5,6,7};
+		Integer[] items = new Integer[]{1,2,3,4,5,6};
 		ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, items);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

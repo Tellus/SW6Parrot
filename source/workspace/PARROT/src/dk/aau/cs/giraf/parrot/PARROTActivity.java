@@ -110,6 +110,7 @@ public class PARROTActivity extends Activity {
 					.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
 			tab.select();
 			
+			
 		}
 
 
@@ -140,6 +141,7 @@ public class PARROTActivity extends Activity {
 	public boolean onOptionsItemSelected (MenuItem item) {
 		switch(item.getItemId()){
 		case R.id.clearBoard:
+			SpeechBoardFragment.clearSentenceboard(this);
 			break;
 		case R.id.goToLauncher:
 			returnToLauncher();
