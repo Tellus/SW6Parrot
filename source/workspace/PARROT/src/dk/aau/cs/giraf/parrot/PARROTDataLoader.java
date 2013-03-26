@@ -2,6 +2,7 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
 import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.Helper;
