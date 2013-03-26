@@ -7,7 +7,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Media;
 public class DatabaseHandler {
 	Helper helper;
 	List<Media> arraylist; 
-	DisplayPictograms displaypicto;
+	//DisplayPictograms displaypicto;
 	
 	// Lol
 	public List<Media> getPictograms(String pictogramname) {
