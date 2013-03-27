@@ -100,4 +100,16 @@ public class PictoAdminMain extends Activity {
 	{
 		
 	}
+
+/*	@Override
+	public void onClick(View v) {
+			// what happens when we click "search"
+			textinput = inputbox.getText().toString();
+			
+			pictograms.addAll(dbhandler.getPictograms(textinput));
+			
+			//disphandler.updatePictogramDisplayer(pictograms);
+	}*/
+
+
 }
