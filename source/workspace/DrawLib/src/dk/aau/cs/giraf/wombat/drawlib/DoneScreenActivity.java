@@ -1,7 +1,5 @@
 package dk.aau.cs.giraf.wombat.drawlib;
 
-import dk.aau.cs.giraf.TimerLib.Guardian;
-import dk.aau.cs.giraf.TimerLib.SubProfile;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

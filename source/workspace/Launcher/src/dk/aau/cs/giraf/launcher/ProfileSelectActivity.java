@@ -88,6 +88,7 @@ public class ProfileSelectActivity extends Activity {
  
 		// When a child is selected, launch the app that was chosen with the correct data in the extras.
 		listOfChildren.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				final long childID = ((Profile) parent.getAdapter().getItem(position)).getId();
 

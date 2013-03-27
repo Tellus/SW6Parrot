@@ -54,6 +54,7 @@ public class Tag {
 		_output = output;
 	}
 	
+	@Override
 	public String toString() {
 		String localOutput = _output;
 		localOutput = localOutput.replace("{0}", String.valueOf(getId()));

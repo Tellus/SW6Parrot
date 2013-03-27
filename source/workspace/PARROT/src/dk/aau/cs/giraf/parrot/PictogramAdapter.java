@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -57,21 +58,25 @@ public class PictogramAdapter extends BaseAdapter {
 
 		imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
 		imageView.setImageBitmap(pct.getBitmap());
-
-		textView = (TextView) view.findViewById(R.id.pictogramtext);
-		textView.setTextSize(20);	//TODO this value should be customizable
-		if(pct.isEmpty() == false)
+		LinearLayout.LayoutParams layoutParams;
+		if(PARROTActivity.getUser().getPictogramSize()== PARROTProfile.PictogramSize.LARGE)
 		{
-
-			textView.setText(pct.getName());
+			layoutParams = new LinearLayout.LayoutParams(190, 190);
 		}
 		else
 		{
-			textView.setText("");
+			layoutParams = new LinearLayout.LayoutParams(145, 145);	
 		}
-
+		
+		imageView.setLayoutParams(layoutParams);
+		if(pct.isEmpty() == false && PARROTActivity.getUser().getShowText()==true)
+		{
+			textView = (TextView) view.findViewById(R.id.pictogramtext);
+			textView.setTextSize(20);	//TODO this value should be customizable
+			textView.setText(pct.getName());
+		}
 		view.setPadding(8, 8, 8, 8);
+
 		return view;
 	}
-
 }

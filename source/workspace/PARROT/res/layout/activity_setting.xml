@@ -1,0 +1,126 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="40dp"
+    tools:context=".SettingActivity" >
+
+    <LinearLayout
+        android:id="@+id/numberLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/sentenceSetting"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sentensboardOptions"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/changesentencecolor"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/changesentencecolor"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/buttonChangeSentenceColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/button"
+                android:onClick="onSentenceboardColorChanged"
+                android:radius="7dp"
+                android:text="@string/buttonChangeColorSentence"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/alignChoseForNoInSentenceBoard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/pickNoSentenceBoard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/SentenceboardNo"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinnerNoOfsentence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/pictogramSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:text="@string/pictogramOptions"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupSizePictogram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/pictogramSize"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_weight="0.91"
+                android:text="@string/PictoSize"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/mediumPicRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.53"
+                android:onClick="onSizePictogramChanged"
+                android:text="@string/MediumPictogram"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/largePicRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5.14"
+                android:onClick="onSizePictogramChanged"
+                android:text="@string/LargePictogram"
+                android:textSize="20sp" />
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/checkBoxShowText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:onClick="onShowTextChanged"
+            android:text="@string/textToPic"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

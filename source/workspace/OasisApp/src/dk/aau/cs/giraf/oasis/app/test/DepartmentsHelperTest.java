@@ -18,6 +18,7 @@ public class DepartmentsHelperTest extends ActivityInstrumentationTestCase2<Main
 		super("dk.aau.cs.giraf.oasis.app", MainActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 

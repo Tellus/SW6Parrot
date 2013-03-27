@@ -65,6 +65,7 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 		return day_of_week + " den " + day_of_month + ". " + month + ", Uge " + week_num;
 	}
 	
+	@Override
 	public void updateDisplay(){
 		Calendar cal = Calendar.getInstance(Locale.getDefault());
 		day_of_month = Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
@@ -88,6 +89,7 @@ public class GWidgetCalendar extends TextView implements IGWidget {
 		}
 	}
 	
+	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		this.setOnClickListener(new View.OnClickListener() {
 			

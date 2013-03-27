@@ -33,15 +33,16 @@
 
             <ProgressBar
                 android:id="@+id/loadingPictograms"
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
         
         <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"	
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:background="@drawable/sentenceboardlayout" >
     </ListView>
        
     </LinearLayout>
@@ -109,16 +110,18 @@
         </LinearLayout>
 
         <GridView
-            android:id="@+id/searched_pictograms"
+            android:id="@+id/pictogram_displayer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:numColumns="5" >
+            android:numColumns="5"
+            android:background="@drawable/sentenceboardlayout" >
+            
         </GridView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:gravity="center" >
 
             <TextView
@@ -127,17 +130,16 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/errorMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/default_error_message"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ff0000" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/errorIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/navigation_accept"
                 android:contentDescription="@string/picture" />
 
         </LinearLayout>
@@ -175,7 +177,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/search_button"
-                android:src="@drawable/ic_action_search" />
+                android:src="@drawable/ic_action_search"
+                android:onClick="searchForPictogram" />
         </LinearLayout>
 		
         <LinearLayout 

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
 
 /**
  * 

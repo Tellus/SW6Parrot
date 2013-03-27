@@ -15,6 +15,7 @@ public class TagsHelperTest extends ActivityInstrumentationTestCase2<MainActivit
 		super("dk.aau.cs.giraf.oasis.app", MainActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 

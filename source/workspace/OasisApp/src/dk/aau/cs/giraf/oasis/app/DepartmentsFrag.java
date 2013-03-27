@@ -89,6 +89,7 @@ public class DepartmentsFrag extends ListFragment {
 				bDep.setClickable(false);
 				bDep.setEnabled(false);
 				cb.setOnCheckedChangeListener(new OnCheckedChangeListener()	{
+					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if ( isChecked ) {
 							cbChecked = true;

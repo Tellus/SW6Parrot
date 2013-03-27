@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.parrot;
 
+import java.util.ArrayList;
+
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
@@ -7,9 +9,21 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.DragShadowBuilder;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 
 public class PARROTActivity extends Activity {
@@ -21,6 +35,8 @@ public class PARROTActivity extends Activity {
 	private static App app;
 	private static Helper help;
 	private static Intent girafIntent;
+	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,10 +45,14 @@ public class PARROTActivity extends Activity {
 		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
 		girafIntent = getIntent();
-		Helper help = new Helper(this);
-		app = help.appsHelper.getAppByPackageName();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
 		childID = girafIntent.getLongExtra("currentChildID", -1);
+		Helper help = new Helper(this);
+		app = help.appsHelper.getAppByPackageName();
+		/*don't delete this is for lisbeth and anders when running on our own device
+		guardianID = 1;
+		childID=12;*/
+		
 		
 		if(guardianID == -1 )
 		{
@@ -47,7 +67,7 @@ public class PARROTActivity extends Activity {
 			//BEGIN testData
 			Setting<String, String, String> setting = help.appsHelper.getSettingByIds(app.getId(), childID);
 			//this write test data to database
-			if(setting.containsKey("ColourSettings") == false)
+			if(setting.containsKey("SentenceboardSettings") == false)
 			{
 				TestData test = new TestData(this);
 				test.TESTsaveTestProfile();		
@@ -81,16 +101,16 @@ public class PARROTActivity extends Activity {
 			 * Remember: Make sure the order of the Taps is consistent with the order of their rights in the
 			 * 			 Rights array.
 			 */
-			
 			ActionBar actionBar = getActionBar();
 			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 			//actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
-	
+
 			//Creating a new Tab, setting the text it is to show and construct and attach a Tab Listener to control it.
 			Tab tab = actionBar.newTab() 
-					.setText(R.string.firstTab)
 					.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
-			actionBar.addTab(tab);
+			tab.select();
+			
+			
 		}
 
 
@@ -99,10 +119,6 @@ public class PARROTActivity extends Activity {
 	@Override
 	protected void onPause() {
 		AudioPlayer.close();
-		if(guardianID != -1)
-		{
-			dataLoader.saveProfile(getUser());
-		}
 		super.onPause();
 	}
 
@@ -110,8 +126,42 @@ public class PARROTActivity extends Activity {
 	protected void onResume() {
 		AudioPlayer.open();
 		super.onResume();
+		
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.parrot_settings, menu);
+				
+		return true;
+	}
+	
+	
+	@Override
+	public boolean onOptionsItemSelected (MenuItem item) {
+		switch(item.getItemId()){
+		case R.id.clearBoard:
+			SpeechBoardFragment.clearSentenceboard(this);
+			break;
+		case R.id.goToLauncher:
+			returnToLauncher();
+			break;
+		case R.id.goToSettings:	
+			goToSettings();
+			break;
+		}
+		return true;
 	}
 
+	public void goToSettings(){
+		Intent intent = new Intent(this, SettingActivity.class);
+		startActivity(intent);
+	}
+	public void returnToLauncher()
+	{
+		finish();
+	}
+	
 	public static PARROTProfile getUser()
 	{
 		return parrotUser;
@@ -134,4 +184,5 @@ public class PARROTActivity extends Activity {
 		return girafIntent;
 	}
 	
+
 }

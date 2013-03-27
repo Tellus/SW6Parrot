@@ -12,13 +12,16 @@ public class PARROTProfile {
 	private String name;
 	private Pictogram icon;
 	private ArrayList<PARROTCategory> categories = new ArrayList<PARROTCategory>();
-	private long profileID;
-	private int NumberOfSentencePictograms = 4;
+	private long profileID =-1;
+	private int noOfboxesInSentenceboard = 1;
 	private boolean[] rights = new boolean[3];
-	private int categoryColor = 0;
-	private int sentenceBoardColor = 0;
-	
+	private int categoryColor = 0xb4b6b2;
+	private int sentenceBoardColor = 0xaaafff;
+	private PictogramSize pictogramSize = PictogramSize.MEDIUM; 
+	private boolean showText = false;
+			
 	//TODO add all applicable settings here.
+	public static enum PictogramSize{MEDIUM, LARGE}
 	
 	public PARROTProfile(String name, Pictogram icon)
 	{
@@ -76,11 +79,11 @@ public class PARROTProfile {
 	}
 
 	public int getNumberOfSentencePictograms() {
-		return NumberOfSentencePictograms;
+		return noOfboxesInSentenceboard;
 	}
 
 	public void setNumberOfSentencePictograms(int numberOfSentencePictograms) {
-		NumberOfSentencePictograms = numberOfSentencePictograms;
+		noOfboxesInSentenceboard = numberOfSentencePictograms;
 	}
 	
 	/*
@@ -122,4 +125,21 @@ public class PARROTProfile {
 		this.sentenceBoardColor = sentenceBoardColor;
 	}
 	
+	public void setPictogramSize(PictogramSize size){
+		this.pictogramSize = size;
+	}
+	
+	public PictogramSize getPictogramSize()
+	{
+		return pictogramSize;
+	}
+
+	public void setShowText(boolean showText){
+		this.showText = showText;
+	}
+	
+	public boolean getShowText()
+	{
+		return showText;
+	}
 }
