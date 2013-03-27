@@ -1,9 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
+    
     <item
-        android:id="@+id/menu_settings"
+        android:id="@+id/action_back"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/menu_settings"/>
+        android:title="Tilbage"
+        android:onClick="returnToLastActivity">
+        </item>
 
 </menu>
