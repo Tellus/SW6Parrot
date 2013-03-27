@@ -1,7 +1,9 @@
 package dk.aau.cs.giraf.pictoadmin;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -83,7 +86,7 @@ public class PictoAdminMain extends Activity {
 	}
 	
 	/**
-	 * Exist the current activity and returns to the latest active activity
+	 * MenuItem: Exist the current activity and returns to the latest active activity
 	 * @param item: This must be included for the function to work 
 	 */
 	public void returnToLastActivity(MenuItem item)
@@ -91,13 +94,46 @@ public class PictoAdminMain extends Activity {
 		finish();
 	}
 	
-	//TODO:
 	/**
-	 * Sends items from selected gridview to appropriate receiver
+	 * MenuItem: Sends items from selected gridview to appropriate receiver
 	 * @param item: This must be included for the function to work 
 	 */
 	public void sendContent(MenuItem item)
 	{
+		ArrayList<ParcelablePictogram> PicPackage = getCheckoutList();
+		
+		Intent newIntent = new Intent(this, AdminCategory.class);
+		newIntent.putParcelableArrayListExtra("Pictograms", PicPackage);
+		
+		startActivity(newIntent);
 		
 	}
+	
+	/**
+	 * MenuItem: Goto admin_category
+	 * @param item
+	 */
+	public void gotoAdminCategory(MenuItem item)
+	{
+		Intent intent = new Intent(this, AdminCategory.class);
+		startActivity(intent);
+	}
+	
+	/**
+	 * Assess the checkout gridview and load the pictograms into an ArrayList
+	 * @return ArrayList of checkout pictograms
+	 */
+	public ArrayList<ParcelablePictogram> getCheckoutList()
+	{
+		ArrayList<ParcelablePictogram> checkout = new ArrayList<ParcelablePictogram>();
+		//TODO: Load pictograms from checkout
+		
+		/* Example how to add pictogram to checkout */
+		ParcelablePictogram pictogram = new ParcelablePictogram("name", "imagepath", "soundpath", "wordpath");
+		checkout.add(pictogram);
+		
+		return checkout;
+	}
+	
+
 }

@@ -9,6 +9,14 @@
     </item>
     
     <item
+        android:id="@+id/gotoAdminCategory"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Rediger kategorier"
+        android:onClick="gotoAdminCategory">
+    </item>
+    
+    <item
         android:id="@+id/action_back"
         android:orderInCategory="100"
         android:showAsAction="never"

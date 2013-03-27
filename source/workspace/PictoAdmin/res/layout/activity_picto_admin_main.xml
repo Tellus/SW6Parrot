@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
         android:layout_weight="0.2"
         android:orientation="vertical" >
         
@@ -52,6 +53,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:orientation="vertical" >
 
@@ -192,13 +194,6 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:text="@string/kategori" />
-
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/collections_collection"
-                android:contentDescription="@string/picture" />
         </LinearLayout>
         
 		<LinearLayout
@@ -212,13 +207,6 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:text="@string/subKategori" />
-
-		    <ImageView
-		        android:id="@+id/imageView2"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:src="@drawable/collections_collection"
-		        android:contentDescription="@string/picture" />
 		</LinearLayout>
         
 		<LinearLayout
@@ -232,13 +220,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/add_existing_pictogram" />
-
-		    <ImageView
-		        android:id="@+id/imageView3"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:src="@drawable/content_new_picture"
-		        android:contentDescription="@string/picture" />
 		</LinearLayout>
         
 		<LinearLayout
@@ -252,13 +233,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/create_new_pictogram" />
-
-		    <ImageView
-		        android:id="@+id/imageView4"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:src="@drawable/device_access_camera"
-		        android:contentDescription="@string/picture" />
 
 		</LinearLayout>
         
