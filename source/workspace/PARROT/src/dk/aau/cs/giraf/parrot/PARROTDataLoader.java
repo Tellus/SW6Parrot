@@ -113,12 +113,6 @@ public class PARROTDataLoader {
 
 	private PARROTProfile loadSettings(PARROTProfile parrotUser, Setting<String, String, String> profileSettings) {
 
-		//Then we load the tab settings
-		for(int i = 0; i<profileSettings.get("Rights").size(); i++)
-		{
-			parrotUser.setRights(i, Boolean.valueOf(profileSettings.get("Rights").get("tab" + i)));
-		}
-		
 		/*new settings*/
 		int noOfBoxes = Integer.valueOf(profileSettings.get("SentenceboardSettings").get("NoOfBoxes"));
 		boolean showText = Boolean.valueOf(profileSettings.get("PictogramSettings").get("ShowText"));

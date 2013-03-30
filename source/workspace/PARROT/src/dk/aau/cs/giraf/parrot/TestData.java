@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.parrot;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class TestData {
 		long profileId;		
 		List<Profile> listOfChildren = help.profilesHelper.getChildren();
 
-		
+        
 		Log.v("MessageParrot","before for");
 		for(Profile tempProf: listOfChildren)
 		{
@@ -87,9 +89,6 @@ public class TestData {
 			
 			Log.v("MessageParrot", "settings bliver sat");
 			
-			testProfile.setRights(0, true);
-			testProfile.setRights(1, true);
-			testProfile.setRights(2, true);
 			testProfile.addCategory(tempCat4);
 			testProfile.setCategoryColor(0xff23ff12);
 			
@@ -165,15 +164,7 @@ public class TestData {
 	
 	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
 	{
-		//First, we save the colour settings
-//		profileSettings.addValue("ColourSettings", "SuperCategory", String.valueOf(user.getCategoryColor()));
-//		profileSettings.get("ColourSettings").put("SentenceBoard", String.valueOf(user.getSentenceBoardColor()));
 
-		//Then we save the rights, which are the available tabs for the user.
-		profileSettings.addValue("Rights", "tab0", String.valueOf(user.getRights(0)));
-		profileSettings.get("Rights").put("tab1", String.valueOf(user.getRights(1)));
-		profileSettings.get("Rights").put("tab2", String.valueOf(user.getRights(2)));
-		
 		profileSettings.addValue("SentenceboardSettings", "Color", String.valueOf(user.getSentenceBoardColor()));
 		profileSettings.get("SentenceboardSettings").put("NoOfBoxes", String.valueOf(user.getNumberOfSentencePictograms()));
 		profileSettings.addValue("PictogramSettings","PictogramSize", String.valueOf(user.getPictogramSize()));
