@@ -11,13 +11,13 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int cell_empty=0x7f070000;
+        public static final int cell_empty=0x7f060000;
     }
     public static final class dimen {
-        public static final int ambilwarna_hsvHeight=0x7f060000;
-        public static final int ambilwarna_hsvWidth=0x7f060001;
-        public static final int ambilwarna_hueWidth=0x7f060002;
-        public static final int ambilwarna_spacer=0x7f060003;
+        public static final int ambilwarna_hsvHeight=0x7f050000;
+        public static final int ambilwarna_hsvWidth=0x7f050001;
+        public static final int ambilwarna_hueWidth=0x7f050002;
+        public static final int ambilwarna_spacer=0x7f050003;
     }
     public static final class drawable {
         public static final int action_settings=0x7f020000;
@@ -185,31 +185,11 @@ public final class R {
         public static final int title_activity_setting=0x7f040036;
     }
     public static final class style {
-        /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-
-        Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
-    
- API 11 theme customizations can go here. 
-         */
-        public static final int AppBaseTheme=0x7f050000;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
-         */
-        public static final int AppTheme=0x7f050001;
-        public static final int Text=0x7f050002;
-        public static final int Text_Admin=0x7f050003;
-        public static final int Text_Admin_Catagory=0x7f050004;
-        public static final int Text_Admin_Catagory_Left=0x7f050007;
-        public static final int Text_Admin_Desc=0x7f050006;
-        public static final int Text_Admin_Head=0x7f050005;
+        public static final int Text=0x7f070000;
+        public static final int Text_Admin=0x7f070001;
+        public static final int Text_Admin_Catagory=0x7f070002;
+        public static final int Text_Admin_Catagory_Left=0x7f070005;
+        public static final int Text_Admin_Desc=0x7f070004;
+        public static final int Text_Admin_Head=0x7f070003;
     }
 }

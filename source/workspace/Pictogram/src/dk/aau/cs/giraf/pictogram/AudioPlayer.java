@@ -19,12 +19,6 @@
 
 package dk.aau.cs.giraf.pictogram;
 
-import java.io.IOException;
-
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
-import android.util.Log;
-
 
 /*
  * File kindly borrowed from Parrot, which previously borrowed it from digiPECS.

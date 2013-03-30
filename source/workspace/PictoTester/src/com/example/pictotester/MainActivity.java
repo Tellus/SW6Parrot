@@ -1,18 +1,4 @@
 package com.example.pictotester;
-import java.io.IOException;
-
-import android.media.MediaPlayer;
-import dk.aau.cs.giraf.pictogram.*;
-import android.os.Bundle;
-import android.os.Environment;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.widget.FrameLayout.LayoutParams;
-import android.widget.GridLayout;
-import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
