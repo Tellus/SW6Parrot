@@ -1,4 +1,4 @@
-package dk.aau.cs.giraf.parrot;
+package dk.aau.cs.giraf.categorylib;
 
 
 import java.util.ArrayList;

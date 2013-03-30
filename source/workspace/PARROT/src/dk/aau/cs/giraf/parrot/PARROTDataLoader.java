@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.categorylib.Pictogram;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;

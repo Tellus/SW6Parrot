@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.util.Log;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.categorylib.Pictogram;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
