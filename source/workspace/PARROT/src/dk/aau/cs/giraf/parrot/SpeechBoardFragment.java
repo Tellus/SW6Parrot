@@ -33,7 +33,7 @@ public class SpeechBoardFragment extends Fragment
 	//This category contains the pictograms on the sentenceboard
 	public static PARROTCategory speechBoardCategory = new PARROTCategory(0x00ff00,null);	
 	//This category contains the pictograms displayed on the big board
-	public static PARROTCategory displayedCategory = new PARROTCategory(PARROTActivity.getUser().getCategoryAt(0).getCategoryColour(),null);
+	public static PARROTCategory displayedCategory = new PARROTCategory(PARROTActivity.getUser().getCategoryAt(0).getCategoryColor(),null);
 	
 	private PARROTProfile user = null;
 	private static Pictogram emptyPictogram =null;  
@@ -194,7 +194,7 @@ public class SpeechBoardFragment extends Fragment
 		//setup colors of the pictogram listnings view
 		GridView pictogramGrid = (GridView) invoker.findViewById(R.id.pictogramgrid);
 		draw = parrent.getResources().getDrawable(R.drawable.gridviewlayout);
-		draw.setColorFilter(displayedCategory.getCategoryColour(),PorterDuff.Mode.OVERLAY);
+		draw.setColorFilter(displayedCategory.getCategoryColor(),PorterDuff.Mode.OVERLAY);
 		pictogramGrid.setBackgroundDrawable(draw);
 		
 	}

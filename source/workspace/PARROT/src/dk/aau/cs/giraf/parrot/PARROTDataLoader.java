@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.parrot;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,14 +110,7 @@ public class PARROTDataLoader {
 	}
 
 	private PARROTProfile loadSettings(PARROTProfile parrotUser, Setting<String, String, String> profileSettings) {
-				
-		//First we load the colour settings
-		//int catColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SuperCategory"));
-		
-		Log.v("MessageParrot","I loadSettings: efter get colour Settings");
-		//parrotUser.setCategoryColor(catColour);
-		
-		Log.v("MessageParrot","I loadSettings: efter set colour i parrotUser");
+
 		//Then we load the tab settings
 		for(int i = 0; i<profileSettings.get("Rights").size(); i++)
 		{
@@ -133,12 +127,10 @@ public class PARROTDataLoader {
 		parrotUser.setNumberOfSentencePictograms(noOfBoxes);
 		if(PictogramSize.equalsIgnoreCase("MEDIUM"))
 		{ 
-			Log.v("MessageParrot","PictogramSize: medium");
 			parrotUser.setPictogramSize(PARROTProfile.PictogramSize.MEDIUM);
 		}
 		else if(PictogramSize.equalsIgnoreCase("LARGE"))
 		{
-			Log.v("MessageParrot","PictogramSize: large");
 			parrotUser.setPictogramSize(PARROTProfile.PictogramSize.LARGE);
 		}
 		
@@ -231,6 +223,25 @@ public class PARROTDataLoader {
 		}
 
 		return listOfID;
+	}
+	public void saveChanges(PARROTProfile user)
+	{
+		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
+		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
+		profileSetting = help.appsHelper.getSettingByIds(app.getId(), prof.getId());
+		
+		profileSetting.remove("SentenceboardSettings");
+		profileSetting.remove("PictogramSettings");
+		
+		//save profile settings
+		profileSetting.addValue("SentenceboardSettings", "Color", String.valueOf(user.getSentenceBoardColor()));
+		profileSetting.get("SentenceboardSettings").put("NoOfBoxes", String.valueOf(user.getNumberOfSentencePictograms()));
+		profileSetting.addValue("PictogramSettings","PictogramSize", String.valueOf(user.getPictogramSize()));
+		profileSetting.get("PictogramSettings").put("ShowText", String.valueOf(user.getShowText()));
+		
+		app.setSettings(profileSetting);
+		help.appsHelper.modifyAppByProfile(app, prof);
+		
 	}
 
 }

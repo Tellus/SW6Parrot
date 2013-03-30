@@ -55,7 +55,7 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
 			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imageView.setPadding(8, 8, 8, 8);
-			imageView.setBackgroundColor(catList.get(position).getCategoryColour());
+			imageView.setBackgroundColor(catList.get(position).getCategoryColor());
 		} 
 		
 		else {

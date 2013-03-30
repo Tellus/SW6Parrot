@@ -201,7 +201,7 @@ public class TestData {
 		//And the name
 		profileSetting.get("category"+categoryNumber).put("name", category.getCategoryName());
 		//then we save the colour
-		profileSetting.get("category"+categoryNumber).put("colour", String.valueOf(category.getCategoryColour()));
+		profileSetting.get("category"+categoryNumber).put("colour", String.valueOf(category.getCategoryColor()));
 		//and then we save the icon
 		Pictogram icon = category.getIcon();
 		icon = savePictogram(icon);

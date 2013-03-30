@@ -25,8 +25,9 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class SettingActivity extends Activity  {
 	private PARROTProfile user;
-	private App app;
-	private Helper help;
+	private PARROTDataLoader dataloader;
+	/*private App app;
+	private Helper help;*/
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +35,9 @@ public class SettingActivity extends Activity  {
 		setContentView(R.layout.activity_setting);
 		
 		user = PARROTActivity.getUser();
-		app = PARROTActivity.getApp();
-		help = new Helper(this);
+		dataloader = new PARROTDataLoader(this);
+		/*app = PARROTActivity.getApp();
+		help = new Helper(this);*/
 		        
 	}
 	
@@ -64,7 +66,7 @@ public class SettingActivity extends Activity  {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		saveChanges();
+		dataloader.saveChanges(user);
 		
 	}
 		
@@ -177,7 +179,7 @@ public class SettingActivity extends Activity  {
 	    }
 	}
 
-	public void saveChanges()
+	/*public void saveChanges()
 	{
 		Log.v("MessageParrot", "Begin saving in save Profil");
 		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
@@ -201,6 +203,6 @@ public class SettingActivity extends Activity  {
 		app.setSettings(profileSetting);
 		help.appsHelper.modifyAppByProfile(app, prof);
 		
-	}
+	}*/
 
 }
