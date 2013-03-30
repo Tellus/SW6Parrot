@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
@@ -26,7 +27,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
  */
 public class PARROTDataLoader {
 
-	private Activity parrent;
+	private Activity parent;
 	private Helper help;
 	private App app;
 
@@ -34,8 +35,8 @@ public class PARROTDataLoader {
 
 	public PARROTDataLoader(Activity activity)
 	{
-		this.parrent = activity;
-		help = new Helper(parrent); 
+		this.parent = activity;
+		help = new Helper(parent); 
 		app = help.appsHelper.getAppById(PARROTActivity.getApp().getId()); 
 
 	}
@@ -83,34 +84,44 @@ public class PARROTDataLoader {
 			
 			parrotUser.setProfileID(prof.getId());
 			Setting<String, String, String> specialSettings = help.appsHelper.getSettingByIds(appId, childId);
-					//app.getSettings();//This object might be null
-			
-			try
+
+			//Load the settings
+			parrotUser = loadSettings(parrotUser, specialSettings);
+
+			//Add all of the categories to the profile
+			String categoryString = null;
+			Log.v("MessageParrot", "before categori");
+			if(specialSettings.containsKey("category0"))
 			{
-					
-				//Load the settings
-				parrotUser = loadSettings(parrotUser, specialSettings);
-				//Add all of the categories to the profile
-				String categoryString = null;
+				Log.v("MessageParrot", "ind categori");	
 				for(int number = 0; specialSettings.get("category"+number) != null; number++)
 				{
 					categoryString = specialSettings.get("category"+number).get("pictograms");
-					String colourString = specialSettings.get("category"+number).get("colour");
-					int col=Integer.valueOf(colourString);
+					String colorString = specialSettings.get("category"+number).get("colour");
+					int col=Integer.valueOf(colorString);
 					String iconString = specialSettings.get("category"+number).get("icon");
 					String catName = specialSettings.get("category"+number).get("name");
 					parrotUser.addCategory(loadCategory(catName,categoryString,col,iconString));					
 				}
 				return parrotUser;
 			}
-			
-			catch(NullPointerException e)
-			{
-				//TODO make a exception that can be catched later.
+			else
+			{	
+				AlertDialog alertDialog;
+				alertDialog = new AlertDialog.Builder(parent).create();
+				alertDialog.setTitle("Error");
+				alertDialog.setMessage("Child has no categories");
+				alertDialog.show();
 				return null;
 			}
+			
 		}
 		//If an error has happened, return null
+		AlertDialog alertDialog;
+		alertDialog = new AlertDialog.Builder(parent).create();
+		alertDialog.setTitle("Error");
+		alertDialog.setMessage("Child not found in database");
+		alertDialog.show();
 		return null;
 	}
 

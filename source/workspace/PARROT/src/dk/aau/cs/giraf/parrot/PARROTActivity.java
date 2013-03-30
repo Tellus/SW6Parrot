@@ -79,22 +79,11 @@ public class PARROTActivity extends Activity {
 			dataLoader = new PARROTDataLoader(this);
 			
 			//If an error occur parrotUser is null which must be cached  
-			try
+			parrotUser = dataLoader.loadProfile(childID, app.getId());	
+			Log.v("MessageParrot", "returned");	
+			if(parrotUser != null)
 			{
-				parrotUser = dataLoader.loadProfile(childID, app.getId());	
-			}
-			catch(NullPointerException e)
-			{
-				long id = girafIntent.getLongExtra("currentChildID", -1);
-				AlertDialog alertDialog;
-				alertDialog = new AlertDialog.Builder(this).create();
-				alertDialog.setTitle("null returned");
-				alertDialog.setMessage("childID "+ id);
-				alertDialog.show();
-				Log.e("MessageParrot", "error null was returned, childID: " + id);
-				return;
-			}
-	
+					
 			/* Here all the Tabs in the system is initialized based on whether or not a user
 			 * is allowed to use them. If not they will not be initialized.
 			 * We wish not make users aware that there exists functionality that they are not
@@ -110,6 +99,7 @@ public class PARROTActivity extends Activity {
 			Tab tab = actionBar.newTab() 
 					.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
 			tab.select();
+			}
 			
 			
 		}

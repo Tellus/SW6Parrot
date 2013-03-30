@@ -101,10 +101,10 @@ public class TestData {
 	
 			Log.v("MessageParrot", "gem kategorier");
 			
-			for(int i=0;i<testProfile.getCategories().size();i++)
+			/*for(int i=0;i<testProfile.getCategories().size();i++)
 			{
 				profileSetting = saveCategory(testProfile.getCategoryAt(i), i, profileSetting);
-			}
+			}*/
 			Log.v("MessageParrot", "gem settings");
 			
 			profileSetting = saveSettings(profileSetting, testProfile);
