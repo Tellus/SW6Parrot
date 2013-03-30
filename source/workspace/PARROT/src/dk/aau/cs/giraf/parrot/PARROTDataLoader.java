@@ -17,6 +17,7 @@ import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 
+
 /**
  * 
  * @PARROT
@@ -29,11 +30,13 @@ public class PARROTDataLoader {
 	private Helper help;
 	private App app;
 
+
+
 	public PARROTDataLoader(Activity activity)
 	{
 		this.parrent = activity;
 		help = new Helper(parrent); 
-		app = PARROTActivity.getApp();
+		app = help.appsHelper.getAppById(PARROTActivity.getApp().getId()); 
 
 	}
 
@@ -43,10 +46,10 @@ public class PARROTDataLoader {
 	 * @return
 	 * An ArrayList of all the children asociated with the guardian who is currently using the system.
 	 */
-	public ArrayList<PARROTProfile> getChildrenFromCurrentGuardian()
+	public ArrayList<PARROTProfile> getChildrenFromGuardian(long guardianID)
 	{
 		ArrayList<PARROTProfile> parrotChildren = new ArrayList<PARROTProfile>();
-		Profile guardian = help.profilesHelper.getProfileById(PARROTActivity.getGuardianID());
+		Profile guardian = help.profilesHelper.getProfileById(guardianID);
 		List<Profile> children = help.profilesHelper.getChildrenByGuardian(guardian);
 		
 		for(int i = 0;i<children.size();i++)

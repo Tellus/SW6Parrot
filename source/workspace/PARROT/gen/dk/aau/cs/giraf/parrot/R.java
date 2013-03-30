@@ -135,7 +135,7 @@ public final class R {
         /**  Old DigiPecs v1 String Values. 
          */
         public static final int admin_app_name=0x7f040012;
-        public static final int app_name=0x7f040000;
+        public static final int app_name=0x7f040001;
         public static final int buttonChangeColorSentence=0x7f04000b;
         public static final int buttonSaveChanges=0x7f04000c;
         public static final int changeCategoryColorButton=0x7f04002d;
@@ -157,7 +157,7 @@ public final class R {
         public static final int fourthTab=0x7f040010;
         /**  In ParrotActivity 
          */
-        public static final int hello=0x7f040001;
+        public static final int hello=0x7f040000;
         public static final int hello_world=0x7f040032;
         public static final int menu_settings=0x7f040033;
         public static final int modifyPictureDeleteButtonText=0x7f040019;
