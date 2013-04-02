@@ -21,18 +21,18 @@ public class PARROTCategory
 	public PARROTCategory parent = null;
 	
 	//This is the constructor method.
-	public PARROTCategory(int colour, Pictogram icon) //this is a constructor method that takes icon and color as input
+	public PARROTCategory(int color, Pictogram icon) //this is a constructor method that takes icon and color as input
 	{
 		pictograms = new ArrayList<Pictogram>();
-		setCategoryColor(colour);
+		setCategoryColor(color);
 		setIcon(icon);
 	}
 	
-	public PARROTCategory(String categoryName,int colour,Pictogram icon)  //this is a constructor method that takes name, icon and color as input
+	public PARROTCategory(String categoryName,int color,Pictogram icon)  //this is a constructor method that takes name, icon and color as input
 	{
 		pictograms = new ArrayList<Pictogram>();
 		subCategories = new ArrayList<PARROTCategory>();
-		setCategoryColor(colour);
+		setCategoryColor(color);
 		setIcon(icon);
 		setCategoryName(categoryName);
 	}

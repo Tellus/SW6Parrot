@@ -65,11 +65,13 @@ public class SpeechBoardFragment extends Fragment
 		if(user.getCategoryAt(0)!=null)
 		{
 			displayedCategory = user.getCategoryAt(0);
+			//displayedCategory= new PARROTCategory("første", 0xffffffff, new Pictogram(null, null, null, null));
 			clearSentenceboard(parrent);
 			
 			//Setup the view for the listing of pictograms
 			GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
 			pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent));
+			
 			if(PARROTProfile.PictogramSize.MEDIUM == user.getPictogramSize())
 			{
 				pictogramGrid.setNumColumns(7);
@@ -82,7 +84,7 @@ public class SpeechBoardFragment extends Fragment
 			//Setup the view for the categories 
 			GridView superCategoryGrid = (GridView) parrent.findViewById(R.id.supercategory);
 			superCategoryGrid.setAdapter(new PARROTCategoryAdapter(user.getCategories(), parrent));
-			
+		
 			//initialise the colours of the fragment
 			setColours(parrent);
 			
@@ -90,6 +92,7 @@ public class SpeechBoardFragment extends Fragment
 			parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
 			parrent.findViewById(R.id.sentenceboard).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
 			parrent.findViewById(R.id.supercategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
+			parrent.findViewById(R.id.subcategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
 
 			//for dragging pictogram from the pictogramlisting view
 			pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()
@@ -144,8 +147,22 @@ public class SpeechBoardFragment extends Fragment
 					displayedCategory = user.getCategoryAt(position);
 					GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
 					pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent));
+					//Setup the view for the categories 
+					GridView subCategoryGrid = (GridView) parrent.findViewById(R.id.subcategory);
+					subCategoryGrid.setAdapter(new PARROTCategoryAdapter(displayedCategory.getSubCategories(), parrent));
 					setColours(parrent);
 					
+					
+					subCategoryGrid.setOnItemClickListener(new OnItemClickListener() 
+					{
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
+						{
+							displayedCategory = displayedCategory.getSubCategoryAtIndex(position);
+							GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
+							pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent));
+						}
+					});
 				}
 			});
 		}

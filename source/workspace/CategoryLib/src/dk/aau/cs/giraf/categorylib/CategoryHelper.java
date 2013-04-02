@@ -13,15 +13,35 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 public class CategoryHelper {
 
 	Helper help=null;
-	Activity parent=null;
-	
-	
+	Activity activity=null;
+		
 	public CategoryHelper(Activity activity)
 	{
-		this.parent = activity;
-		help = new Helper(parent); 
+		this.activity = activity;
+		help = new Helper(activity); 
 	}
 	
+	public List<PARROTCategory> getChildsCategories(long childId)
+	{
+		List<PARROTCategory> cat=null;
+		return cat;
+	}
+	
+	public void saveChangesInCategory(PARROTCategory category,long childId)
+	{
+		
+	}
+	
+	public void deleteCategory(PARROTCategory category, long childId)
+	{
+		
+	}
+	
+	public void addNewCategory(PARROTCategory category,long childId)
+	{
+		
+	}
+
 	public List<PARROTCategory> getTempCategories(Profile childProfile)
 	{
 		List<PARROTCategory> categories= new ArrayList<PARROTCategory>();
@@ -49,14 +69,19 @@ public class CategoryHelper {
 		PARROTCategory tempCat3 = new PARROTCategory("Kategori 1", 0xff05ff12, pictograms.get(0));
 		PARROTCategory tempCatSUB1 = new PARROTCategory("SUB1",0xff05ff12, pictograms.get(0));
 		
-
+		int count=1;
 		for(Pictogram p : pictograms)
 		{
-			tempCat3.addPictogram(p);
 			tempCatSUB1.addPictogram(p);
+			
+			if(count%4==0)
+			{
+				tempCat3.addPictogram(p);
+			}
+			count++;
 		}
 
-		tempCat3.addSubCategory(tempCatSUB1);
+		
 
 		PARROTCategory tempCat4 = new PARROTCategory("Kategori 2", 0xffff0000, pictograms.get(10));
 		tempCat4.addPictogram(pictograms.get(10));
@@ -70,8 +95,9 @@ public class CategoryHelper {
 		tempCatSUB2.addPictogram(pictograms.get(9));
 		tempCatSUB2.addPictogram(pictograms.get(1));	
 		
+		tempCat3.addSubCategory(tempCatSUB1);
 		tempCat4.addSubCategory(tempCatSUB2);
-		
+				
 		categories.add(tempCat3);
 		categories.add(tempCat4);
 		
