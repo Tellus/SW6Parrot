@@ -1,19 +1,5 @@
 package dk.aau.cs.giraf.pictogram;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.media.MediaPlayer.OnCompletionListener;
-
-import dk.aau.cs.giraf.oasis.lib.*;
-import dk.aau.cs.giraf.oasis.lib.models.*;
-
 //TODO: Make custom ImageView and TextView with predefined "niceness"
 public class Pictogram extends FrameLayout implements IPictogram {
     private static final String TAG = "Pictogram";
@@ -38,12 +24,14 @@ public class Pictogram extends FrameLayout implements IPictogram {
     }
 
     @Override
+	@Override
     public void renderAll() {
         renderImage();
         renderText();
     }
 
     @Override
+	@Override
     public void renderText() {
         TextView text = new TextView(getContext());
         text.setText(textLabel);
@@ -60,6 +48,7 @@ public class Pictogram extends FrameLayout implements IPictogram {
     }
 
     @Override
+	@Override
     public void renderImage() {
         Bitmap img = BitmapFactory.decodeFile(imagePath);
         ImageView image = new ImageView(getContext());
@@ -74,6 +63,7 @@ public class Pictogram extends FrameLayout implements IPictogram {
     }
 
     @Override
+	@Override
     public void playAudio() {
         playAudio(null);
     }
@@ -95,21 +85,25 @@ public class Pictogram extends FrameLayout implements IPictogram {
     }
 
     @Override
+	@Override
     public String[] getTags() {
         return null;
     }
 
     @Override
+	@Override
     public String getImageData() {
         return null;
     }
 
     @Override
+	@Override
     public String getAudioData() {
         return null;
     }
 
     @Override
+	@Override
     public String getTextData() {
         return null;
     }

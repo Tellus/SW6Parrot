@@ -1,18 +1,5 @@
 package dk.aau.cs.giraf.pictogram;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import android.content.Context;
-import android.os.Environment;
-import android.util.Log;
-
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.controllers.MediaHelper;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
-
 
 //TODO: Make this a service that applications can hook to
 //TODO: If made local, set it to run in seperate thread (DBsync and traversing can be costly)
