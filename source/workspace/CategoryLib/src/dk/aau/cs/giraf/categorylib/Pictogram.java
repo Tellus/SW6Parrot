@@ -1,5 +1,7 @@
-package dk.aau.cs.giraf.parrot;
+package dk.aau.cs.giraf.categorylib;
 
+
+import com.example.categorymanager.R;
 
 import android.app.Activity;
 import android.content.res.Resources;

@@ -1,9 +1,4 @@
 package com.example.pictotester;
-import dk.aau.cs.giraf.pictogram.Pictogram;
-import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
 public class PictogramAdapter extends BaseAdapter{
 	

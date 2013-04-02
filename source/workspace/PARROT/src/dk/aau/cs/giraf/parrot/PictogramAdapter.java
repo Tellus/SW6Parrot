@@ -1,6 +1,8 @@
 package dk.aau.cs.giraf.parrot;
 
 
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.categorylib.Pictogram;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

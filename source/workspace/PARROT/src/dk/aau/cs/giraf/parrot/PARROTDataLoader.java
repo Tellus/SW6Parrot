@@ -1,18 +1,24 @@
 package dk.aau.cs.giraf.parrot;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import dk.aau.cs.giraf.categorylib.CategoryHelper;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.categorylib.Pictogram;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
+
 
 /**
  * 
@@ -22,15 +28,17 @@ import dk.aau.cs.giraf.oasis.lib.models.Setting;
  */
 public class PARROTDataLoader {
 
-	private Activity parrent;
+	private Activity parent;
 	private Helper help;
 	private App app;
 
+
+
 	public PARROTDataLoader(Activity activity)
 	{
-		this.parrent = activity;
-		help = new Helper(parrent); 
-		app = PARROTActivity.getApp();
+		this.parent = activity;
+		help = new Helper(parent); 
+		app = help.appsHelper.getAppById(PARROTActivity.getApp().getId()); 
 
 	}
 
@@ -40,10 +48,10 @@ public class PARROTDataLoader {
 	 * @return
 	 * An ArrayList of all the children asociated with the guardian who is currently using the system.
 	 */
-	public ArrayList<PARROTProfile> getChildrenFromCurrentGuardian()
+	public ArrayList<PARROTProfile> getChildrenFromGuardian(long guardianID)
 	{
 		ArrayList<PARROTProfile> parrotChildren = new ArrayList<PARROTProfile>();
-		Profile guardian = help.profilesHelper.getProfileById(PARROTActivity.getGuardianID());
+		Profile guardian = help.profilesHelper.getProfileById(guardianID);
 		List<Profile> children = help.profilesHelper.getChildrenByGuardian(guardian);
 		
 		for(int i = 0;i<children.size();i++)
@@ -77,52 +85,58 @@ public class PARROTDataLoader {
 			
 			parrotUser.setProfileID(prof.getId());
 			Setting<String, String, String> specialSettings = help.appsHelper.getSettingByIds(appId, childId);
-					//app.getSettings();//This object might be null
+
+			//Load the settings
+			parrotUser = loadSettings(parrotUser, specialSettings);
+
+			//Add all of the categories to the profile
+			String categoryString = null;
+			Log.v("MessageParrot", "before categori");
 			
-			try
+			CategoryHelper categoryHelper= new CategoryHelper(parent);
+			List<PARROTCategory> categories = categoryHelper.getTempCategories(prof);
+			for(PARROTCategory c : categories)
 			{
-					
-				//Load the settings
-				parrotUser = loadSettings(parrotUser, specialSettings);
-				//Add all of the categories to the profile
-				String categoryString = null;
+				parrotUser.addCategory(c);
+			}
+			
+			return parrotUser;
+			/* if(specialSettings.containsKey("category0"))
+			{
+				Log.v("MessageParrot", "ind categori");	
 				for(int number = 0; specialSettings.get("category"+number) != null; number++)
 				{
 					categoryString = specialSettings.get("category"+number).get("pictograms");
-					String colourString = specialSettings.get("category"+number).get("colour");
-					int col=Integer.valueOf(colourString);
+					String colorString = specialSettings.get("category"+number).get("colour");
+					int col=Integer.valueOf(colorString);
 					String iconString = specialSettings.get("category"+number).get("icon");
 					String catName = specialSettings.get("category"+number).get("name");
 					parrotUser.addCategory(loadCategory(catName,categoryString,col,iconString));					
 				}
 				return parrotUser;
 			}
-			
-			catch(NullPointerException e)
-			{
-				//TODO make a exception that can be catched later.
+			else
+			{	
+				AlertDialog alertDialog;
+				alertDialog = new AlertDialog.Builder(parent).create();
+				alertDialog.setTitle("Error");
+				alertDialog.setMessage("Child has no categories");
+				alertDialog.show();
 				return null;
 			}
+			*/
 		}
 		//If an error has happened, return null
+		AlertDialog alertDialog;
+		alertDialog = new AlertDialog.Builder(parent).create();
+		alertDialog.setTitle("Error");
+		alertDialog.setMessage("Child not found in database");
+		alertDialog.show();
 		return null;
 	}
 
 	private PARROTProfile loadSettings(PARROTProfile parrotUser, Setting<String, String, String> profileSettings) {
-				
-		//First we load the colour settings
-		//int catColour = Integer.valueOf(profileSettings.get("ColourSettings").get("SuperCategory"));
-		
-		Log.v("MessageParrot","I loadSettings: efter get colour Settings");
-		//parrotUser.setCategoryColor(catColour);
-		
-		Log.v("MessageParrot","I loadSettings: efter set colour i parrotUser");
-		//Then we load the tab settings
-		for(int i = 0; i<profileSettings.get("Rights").size(); i++)
-		{
-			parrotUser.setRights(i, Boolean.valueOf(profileSettings.get("Rights").get("tab" + i)));
-		}
-		
+
 		/*new settings*/
 		int noOfBoxes = Integer.valueOf(profileSettings.get("SentenceboardSettings").get("NoOfBoxes"));
 		boolean showText = Boolean.valueOf(profileSettings.get("PictogramSettings").get("ShowText"));
@@ -133,12 +147,10 @@ public class PARROTDataLoader {
 		parrotUser.setNumberOfSentencePictograms(noOfBoxes);
 		if(PictogramSize.equalsIgnoreCase("MEDIUM"))
 		{ 
-			Log.v("MessageParrot","PictogramSize: medium");
 			parrotUser.setPictogramSize(PARROTProfile.PictogramSize.MEDIUM);
 		}
 		else if(PictogramSize.equalsIgnoreCase("LARGE"))
 		{
-			Log.v("MessageParrot","PictogramSize: large");
 			parrotUser.setPictogramSize(PARROTProfile.PictogramSize.LARGE);
 		}
 		
@@ -231,6 +243,25 @@ public class PARROTDataLoader {
 		}
 
 		return listOfID;
+	}
+	public void saveChanges(PARROTProfile user)
+	{
+		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
+		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
+		profileSetting = help.appsHelper.getSettingByIds(app.getId(), prof.getId());
+		
+		profileSetting.remove("SentenceboardSettings");
+		profileSetting.remove("PictogramSettings");
+		
+		//save profile settings
+		profileSetting.addValue("SentenceboardSettings", "Color", String.valueOf(user.getSentenceBoardColor()));
+		profileSetting.get("SentenceboardSettings").put("NoOfBoxes", String.valueOf(user.getNumberOfSentencePictograms()));
+		profileSetting.addValue("PictogramSettings","PictogramSize", String.valueOf(user.getPictogramSize()));
+		profileSetting.get("PictogramSettings").put("ShowText", String.valueOf(user.getShowText()));
+		
+		app.setSettings(profileSetting);
+		help.appsHelper.modifyAppByProfile(app, prof);
+		
 	}
 
 }

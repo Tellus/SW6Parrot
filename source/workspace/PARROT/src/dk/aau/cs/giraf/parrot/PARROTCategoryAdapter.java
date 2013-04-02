@@ -2,6 +2,9 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
 
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.categorylib.Pictogram;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +58,7 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
 			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imageView.setPadding(8, 8, 8, 8);
-			imageView.setBackgroundColor(catList.get(position).getCategoryColour());
+			imageView.setBackgroundColor(catList.get(position).getCategoryColor());
 		} 
 		
 		else {

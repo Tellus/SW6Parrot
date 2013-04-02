@@ -17,7 +17,7 @@
  * along with digiPECS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dk.aau.cs.giraf.parrot;
+package dk.aau.cs.giraf.categorylib;
 
 import java.io.IOException;
 

@@ -25,8 +25,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class SettingActivity extends Activity  {
 	private PARROTProfile user;
-	private App app;
-	private Helper help;
+	private PARROTDataLoader dataloader;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +33,8 @@ public class SettingActivity extends Activity  {
 		setContentView(R.layout.activity_setting);
 		
 		user = PARROTActivity.getUser();
-		app = PARROTActivity.getApp();
-		help = new Helper(this);
+		dataloader = new PARROTDataLoader(this);
+
 		        
 	}
 	
@@ -64,7 +63,7 @@ public class SettingActivity extends Activity  {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		saveChanges();
+		dataloader.saveChanges(user);
 		
 	}
 		
@@ -177,30 +176,5 @@ public class SettingActivity extends Activity  {
 	    }
 	}
 
-	public void saveChanges()
-	{
-		Log.v("MessageParrot", "Begin saving in save Profil");
-		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
-		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
-		profileSetting = help.appsHelper.getSettingByIds(app.getId(), prof.getId());
-		
-		Log.v("MessageParrot", "saveChanges: remove old");
-		profileSetting.remove("SentenceboardSettings");
-		profileSetting.remove("PictogramSettings");
-		
-
-		//save profile settings
-		Log.v("MessageParrot", "Begin saving in save saveSettings");
-		//First, we save the color settings
-		profileSetting.addValue("SentenceboardSettings", "Color", String.valueOf(user.getSentenceBoardColor()));
-		profileSetting.get("SentenceboardSettings").put("NoOfBoxes", String.valueOf(user.getNumberOfSentencePictograms()));
-		profileSetting.addValue("PictogramSettings","PictogramSize", String.valueOf(user.getPictogramSize()));
-		profileSetting.get("PictogramSettings").put("ShowText", String.valueOf(user.getShowText()));
-
-		
-		app.setSettings(profileSetting);
-		help.appsHelper.modifyAppByProfile(app, prof);
-		
-	}
 
 }

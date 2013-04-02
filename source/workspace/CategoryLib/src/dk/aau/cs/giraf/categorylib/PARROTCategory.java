@@ -1,6 +1,8 @@
-package dk.aau.cs.giraf.parrot;
+package dk.aau.cs.giraf.categorylib;
+
 
 import java.util.ArrayList;
+
 
 /**
  * 
@@ -10,29 +12,31 @@ import java.util.ArrayList;
 public class PARROTCategory 
 {	
 	private ArrayList<Pictogram> pictograms; 
-	private int categoryColour;
+	private int categoryColor;
 	private Pictogram icon;
 	private boolean newCategory;
 	private boolean changed;
 	private String categoryName;
+	private ArrayList<PARROTCategory> subCategories;
 	public PARROTCategory parent = null;
 	
 	//This is the constructor method.
 	public PARROTCategory(int colour, Pictogram icon) //this is a constructor method that takes icon and color as input
 	{
 		pictograms = new ArrayList<Pictogram>();
-		setCategoryColour(colour);
+		setCategoryColor(colour);
 		setIcon(icon);
 	}
 	
 	public PARROTCategory(String categoryName,int colour,Pictogram icon)  //this is a constructor method that takes name, icon and color as input
 	{
 		pictograms = new ArrayList<Pictogram>();
-		setCategoryColour(colour);
+		subCategories = new ArrayList<PARROTCategory>();
+		setCategoryColor(colour);
 		setIcon(icon);
 		setCategoryName(categoryName);
 	}
-
+	/*-------------  Pictograms  -----------------------*/
 	public ArrayList<Pictogram> getPictograms() { 
 		return pictograms;
 	}
@@ -56,13 +60,37 @@ public class PARROTCategory
 	{
 		pictograms.remove(i);
 	}
-
-	public int getCategoryColour() {
-		return categoryColour;
+/*----------SUB categories------------*/
+	public ArrayList<PARROTCategory> getSubCategories() { 
+		return subCategories;
+	}
+	
+	public PARROTCategory getSubCategoryAtIndex(int i)
+	{
+		return subCategories.get(i);
+	}
+	
+	public void addSubCategory(PARROTCategory category)
+	{
+		subCategories.add(category);
+	}
+	
+	public void addSubCategoryAtIndex(PARROTCategory category, int index)
+	{
+		subCategories.add(index, category);
+	}
+	
+	public void removeSubCategory(int i)
+	{
+		subCategories.remove(i);
+	}
+	/*--------- others -----------*/
+	public int getCategoryColor() {
+		return categoryColor;
 	}
 
-	public void setCategoryColour(int categoryColour) {
-		this.categoryColour = categoryColour;
+	public void setCategoryColor(int categoryColor) {
+		this.categoryColor = categoryColor;
 	}
 
 	public Pictogram getIcon() {
@@ -96,11 +124,14 @@ public class PARROTCategory
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-
-	// Klim
-	public void addSubCategory(PARROTCategory newSubCategory)
+	
+	public void setSuperCategory(PARROTCategory superCategory)
 	{
-		newSubCategory.parent = this;
+		parent = superCategory;
+	}
+	public PARROTCategory getSuperCategory()
+	{
+		return parent;
 	}
 	
 }
