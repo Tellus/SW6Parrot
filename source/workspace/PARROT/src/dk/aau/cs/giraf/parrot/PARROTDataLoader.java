@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.categorylib.Pictogram;
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -91,7 +92,16 @@ public class PARROTDataLoader {
 			//Add all of the categories to the profile
 			String categoryString = null;
 			Log.v("MessageParrot", "before categori");
-			if(specialSettings.containsKey("category0"))
+			
+			CategoryHelper categoryHelper= new CategoryHelper(parent);
+			List<PARROTCategory> categories = categoryHelper.getTempCategories(prof);
+			for(PARROTCategory c : categories)
+			{
+				parrotUser.addCategory(c);
+			}
+			
+			return parrotUser;
+			/* if(specialSettings.containsKey("category0"))
 			{
 				Log.v("MessageParrot", "ind categori");	
 				for(int number = 0; specialSettings.get("category"+number) != null; number++)
@@ -114,7 +124,7 @@ public class PARROTDataLoader {
 				alertDialog.show();
 				return null;
 			}
-			
+			*/
 		}
 		//If an error has happened, return null
 		AlertDialog alertDialog;

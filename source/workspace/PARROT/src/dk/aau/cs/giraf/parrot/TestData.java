@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.os.Environment;
 import android.util.Log;
+import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.categorylib.Pictogram;
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -34,12 +36,19 @@ public class TestData {
 		app = help.appsHelper.getAppByPackageName();
 		long profileId;		
 		List<Profile> listOfChildren = help.profilesHelper.getChildren();
-
+		
+		File categoriesXML = new File(Environment.getExternalStorageDirectory().getPath() + "/Categories.xml");
+        try{
+        	categoriesXML.createNewFile();
+        }catch(IOException e)
+        {
+            Log.e("IOException", "Exception in create new File(");
+        }
         
 		Log.v("MessageParrot","before for");
 		for(Profile tempProf: listOfChildren)
 		{
-			ArrayList<Pictogram> pictograms = new ArrayList<Pictogram>();
+			/*ArrayList<Pictogram> pictograms = new ArrayList<Pictogram>();
 			List<Media> childMedia = help.mediaHelper.getMediaByProfile(tempProf);
 
 			Log.v("MessageParrot","hentet childMedia");
@@ -57,9 +66,9 @@ public class TestData {
 			{
 				Log.v("MessageParrot", "pictograms is empty");
 			}
-			Log.v("MessageParrot", "efter indlæsning af media");
-			
+			Log.v("MessageParrot", "efter indlæsning af media");*/
 			profileId = tempProf.getId();
+
 			
 			Setting<String, String, String> profileSetting = new Setting<String, String, String>();
 			
@@ -71,7 +80,7 @@ public class TestData {
 			Log.v("MessageParrot", "har indlæst test profil, til at lave kategori");
 			
 
-			PARROTCategory tempCat3 = new PARROTCategory("Kategori 1", 0xff05ff12, pictograms.get(0));
+			/*PARROTCategory tempCat3 = new PARROTCategory("Kategori 1", 0xff05ff12, pictograms.get(0));
 	
 			for(Pictogram p : pictograms)
 			{
@@ -90,7 +99,7 @@ public class TestData {
 			Log.v("MessageParrot", "settings bliver sat");
 			
 			testProfile.addCategory(tempCat4);
-			testProfile.setCategoryColor(0xff23ff12);
+			testProfile.setCategoryColor(0xff23ff12);*/
 			
 			testProfile.setNumberOfSentencePictograms(2);
 			testProfile.setPictogramSize(PARROTProfile.PictogramSize.MEDIUM);
