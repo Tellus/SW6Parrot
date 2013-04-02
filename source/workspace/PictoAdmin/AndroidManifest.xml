@@ -29,7 +29,8 @@
         </activity>
         <activity
             android:name="dk.aau.cs.giraf.pictoadmin.AdminCategory"
-            android:label="@string/title_activity_admin_category" >
+            android:label="@string/title_activity_admin_category"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 

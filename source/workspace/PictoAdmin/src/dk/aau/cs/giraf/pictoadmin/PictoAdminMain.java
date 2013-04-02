@@ -119,21 +119,6 @@ public class PictoAdminMain extends Activity {
 		startActivity(intent);
 	}
 	
-	/**
-	 * Assess the checkout gridview and load the pictograms into an ArrayList
-	 * @return ArrayList of checkout pictograms
-	 */
-	public ArrayList<ParcelablePictogram> getCheckoutList()
-	{
-		ArrayList<ParcelablePictogram> checkout = new ArrayList<ParcelablePictogram>();
-		//TODO: Load pictograms from checkout
-		
-		/* Example how to add pictogram to checkout */
-		ParcelablePictogram pictogram = new ParcelablePictogram("name", "imagepath", "soundpath", "wordpath");
-		checkout.add(pictogram);
-		
-		return checkout;
-	}
 	
 	/**
 	 * Assess the checkout gridview and load the pictograms into an ArrayList
