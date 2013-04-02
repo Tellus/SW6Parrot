@@ -15,7 +15,7 @@ import android.graphics.BitmapFactory;
  * The Pictogram class contains the pictures used in PARROT, as well as associated sounds and text.
  *
  */
-public class Pictogram {
+public class PictogramOLD {
 	private String name;              ///< Corresponding text.
 	private String imagePath;               ///< Corresponding image.
 	private String soundPath;             ///< Corresponding sound effect.
@@ -30,7 +30,7 @@ public class Pictogram {
 	private Bitmap bitmap;
 
 	//This are the constructor for the Pictogram class
-	public Pictogram(String name, String imagePath, String soundPath, String wordPath)
+	public PictogramOLD(String name, String imagePath, String soundPath, String wordPath)
 	{
 		this.setName(name);
 		this.setImagePath(imagePath);
@@ -38,7 +38,7 @@ public class Pictogram {
 		this.setWordPath(wordPath);
 	}
 	
-	public Pictogram(String name, String imagePath, String soundPath, String wordPath, Activity parrent)
+	public PictogramOLD(String name, String imagePath, String soundPath, String wordPath, Activity parrent)
 	{
 		this.setName(name);
 		this.setImagePath(imagePath);

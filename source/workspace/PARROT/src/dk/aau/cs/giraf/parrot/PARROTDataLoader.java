@@ -11,8 +11,8 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.categorylib.Pictogram;
+import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
+import dk.aau.cs.giraf.categorylib.PictogramOLD;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -80,7 +80,7 @@ public class PARROTDataLoader {
 				
 			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
 		
-			Pictogram pic = new Pictogram(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
+			PictogramOLD pic = new PictogramOLD(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 			
 			parrotUser.setProfileID(prof.getId());
@@ -94,8 +94,8 @@ public class PARROTDataLoader {
 			Log.v("MessageParrot", "before categori");
 			
 			CategoryHelper categoryHelper= new CategoryHelper(parent);
-			List<PARROTCategory> categories = categoryHelper.getTempCategories(prof);
-			for(PARROTCategory c : categories)
+			List<PARROTCategoryOLD> categories = categoryHelper.getTempCategories(prof);
+			for(PARROTCategoryOLD c : categories)
 			{
 				parrotUser.addCategory(c);
 			}
@@ -164,10 +164,10 @@ public class PARROTDataLoader {
 	}
 	
 	//This method loads category
-	public PARROTCategory loadCategory(String catName, String pictureIDs,int colour,String iconString)
+	public PARROTCategoryOLD loadCategory(String catName, String pictureIDs,int colour,String iconString)
 	{
 		Long iconId = Long.valueOf(iconString);
-		PARROTCategory cat = new PARROTCategory(catName, colour, loadPictogram(iconId));
+		PARROTCategoryOLD cat = new PARROTCategoryOLD(catName, colour, loadPictogram(iconId));
 		ArrayList<Long> listIDs = getIDsFromString(pictureIDs);
 		for(int i = 0; i<listIDs.size();i++)
 		{
@@ -177,9 +177,9 @@ public class PARROTDataLoader {
 	}
 
 	
-	public Pictogram loadPictogram(long idPictogram)
+	public PictogramOLD loadPictogram(long idPictogram)
 	{
-		Pictogram pic = null;
+		PictogramOLD pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(idPictogram); //This is the image media //TODO check type
 
 		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); 
@@ -206,7 +206,7 @@ public class PARROTDataLoader {
 				}
 			}
 		}
-		pic = new Pictogram(media.getName(), media.getMPath(), soundPath, wordPath);
+		pic = new PictogramOLD(media.getName(), media.getMPath(), soundPath, wordPath);
 		//set the different ID's
 		pic.setImageID(idPictogram);
 		pic.setSoundID(soundID);

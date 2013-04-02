@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @Rasmus
  *The Category class is used to store a number of pictograms
  */
-public class PARROTCategory 
+public class PARROTCategoryOLD 
 {	
 	private ArrayList<PictogramOLD> pictograms; 
 	private int categoryColor;
@@ -17,21 +17,21 @@ public class PARROTCategory
 	private boolean newCategory;
 	private boolean changed;
 	private String categoryName;
-	private ArrayList<PARROTCategory> subCategories;
-	public PARROTCategory parent = null;
+	private ArrayList<PARROTCategoryOLD> subCategories;
+	public PARROTCategoryOLD parent = null;
 	
 	//This is the constructor method.
-	public PARROTCategory(int color, PictogramOLD icon) //this is a constructor method that takes icon and color as input
+	public PARROTCategoryOLD(int color, PictogramOLD icon) //this is a constructor method that takes icon and color as input
 	{
 		pictograms = new ArrayList<PictogramOLD>();
 		setCategoryColor(color);
 		setIcon(icon);
 	}
 	
-	public PARROTCategory(String categoryName,int color,PictogramOLD icon)  //this is a constructor method that takes name, icon and color as input
+	public PARROTCategoryOLD(String categoryName,int color,PictogramOLD icon)  //this is a constructor method that takes name, icon and color as input
 	{
 		pictograms = new ArrayList<PictogramOLD>();
-		subCategories = new ArrayList<PARROTCategory>();
+		subCategories = new ArrayList<PARROTCategoryOLD>();
 		setCategoryColor(color);
 		setIcon(icon);
 		setCategoryName(categoryName);
@@ -61,21 +61,21 @@ public class PARROTCategory
 		pictograms.remove(i);
 	}
 /*----------SUB categories------------*/
-	public ArrayList<PARROTCategory> getSubCategories() { 
+	public ArrayList<PARROTCategoryOLD> getSubCategories() { 
 		return subCategories;
 	}
 	
-	public PARROTCategory getSubCategoryAtIndex(int i)
+	public PARROTCategoryOLD getSubCategoryAtIndex(int i)
 	{
 		return subCategories.get(i);
 	}
 	
-	public void addSubCategory(PARROTCategory category)
+	public void addSubCategory(PARROTCategoryOLD category)
 	{
 		subCategories.add(category);
 	}
 	
-	public void addSubCategoryAtIndex(PARROTCategory category, int index)
+	public void addSubCategoryAtIndex(PARROTCategoryOLD category, int index)
 	{
 		subCategories.add(index, category);
 	}
@@ -125,11 +125,11 @@ public class PARROTCategory
 		this.categoryName = categoryName;
 	}
 	
-	public void setSuperCategory(PARROTCategory superCategory)
+	public void setSuperCategory(PARROTCategoryOLD superCategory)
 	{
 		parent = superCategory;
 	}
-	public PARROTCategory getSuperCategory()
+	public PARROTCategoryOLD getSuperCategory()
 	{
 		return parent;
 	}

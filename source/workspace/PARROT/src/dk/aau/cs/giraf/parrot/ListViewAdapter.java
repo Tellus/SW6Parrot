@@ -2,7 +2,7 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
 
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,11 +19,11 @@ import android.widget.TextView;
  * This class takes a list of categories and loads them into a ListView, displaying the icon as well as name. 
  */
 
-public class ListViewAdapter extends ArrayAdapter<PARROTCategory> 
+public class ListViewAdapter extends ArrayAdapter<PARROTCategoryOLD> 
 {
-	private ArrayList<PARROTCategory> items;
+	private ArrayList<PARROTCategoryOLD> items;
 
-	public ListViewAdapter(Context context, int textViewResourceId, ArrayList<PARROTCategory> items)
+	public ListViewAdapter(Context context, int textViewResourceId, ArrayList<PARROTCategoryOLD> items)
 	{
 		super(context, textViewResourceId, items);
 		this.items = items;
@@ -43,7 +43,7 @@ public class ListViewAdapter extends ArrayAdapter<PARROTCategory>
 		}
 		
 		// Get current category  
-		PARROTCategory category = items.get(position);
+		PARROTCategoryOLD category = items.get(position);
 		if (category != null)
 		{
 			//We find the imageView and the textView of the categoriesitem from before.

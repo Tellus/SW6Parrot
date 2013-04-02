@@ -3,8 +3,8 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
 
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.categorylib.Pictogram;
+import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
+import dk.aau.cs.giraf.categorylib.PictogramOLD;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
@@ -31,15 +31,15 @@ public class SpeechBoardFragment extends Fragment
 	public static int draggedPictogramIndex = -1;
 	public static int dragOwnerID =-1;
 	//Serves as the back-end storage for the visual speechboard
-	public static ArrayList<Pictogram> speechboardPictograms = new ArrayList<Pictogram>();
+	public static ArrayList<PictogramOLD> speechboardPictograms = new ArrayList<PictogramOLD>();
 	
 	//This category contains the pictograms on the sentenceboard
-	public static PARROTCategory speechBoardCategory = new PARROTCategory(0x00ff00,null);	
+	public static PARROTCategoryOLD speechBoardCategory = new PARROTCategoryOLD(0x00ff00,null);	
 	//This category contains the pictograms displayed on the big board
-	public static PARROTCategory displayedCategory = new PARROTCategory(PARROTActivity.getUser().getCategoryAt(0).getCategoryColor(),null);
+	public static PARROTCategoryOLD displayedCategory = new PARROTCategoryOLD(PARROTActivity.getUser().getCategoryAt(0).getCategoryColor(),null);
 	
 	private PARROTProfile user = null;
-	private static Pictogram emptyPictogram =null;  
+	private static PictogramOLD emptyPictogram =null;  
 	
 	
 	
@@ -170,7 +170,7 @@ public class SpeechBoardFragment extends Fragment
 
 	public static void clearSentenceboard(Activity activity)
 	{
-			emptyPictogram = new Pictogram("#emptyPictogram#", null, null, null, activity);
+			emptyPictogram = new PictogramOLD("#emptyPictogram#", null, null, null, activity);
 			int count = speechBoardCategory.getPictograms().size()-1;
 			while(speechBoardCategory.getPictograms().size()!= 0)
 			{
