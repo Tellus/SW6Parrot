@@ -1,9 +1,12 @@
 package dk.aau.cs.giraf.parrot;
 
 
-import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
-import dk.aau.cs.giraf.categorylib.PictogramOLD;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +22,10 @@ import android.widget.TextView;
  */
 public class PictogramAdapter extends BaseAdapter {
 
-	private PARROTCategoryOLD cat;
+	private PARROTCategory cat;
 	private Context context;
 
-	public PictogramAdapter(PARROTCategoryOLD cat, Context c)
+	public PictogramAdapter(PARROTCategory cat, Context c)
 	{
 		super();
 		this.cat=cat;
@@ -53,13 +56,14 @@ public class PictogramAdapter extends BaseAdapter {
 		ImageView imageView;
 		View view = convertView;
 		TextView textView;
-		PictogramOLD pct=cat.getPictogramAtIndex(position);
+		Pictogram pct=cat.getPictogramAtIndex(position);
 
 		LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = layoutInflater.inflate(R.layout.pictogramview, null);
 
 		imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
-		imageView.setImageBitmap(pct.getBitmap());
+		imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
+		
 		LinearLayout.LayoutParams layoutParams;
 		if(PARROTActivity.getUser().getPictogramSize()== PARROTProfile.PictogramSize.LARGE)
 		{
@@ -71,11 +75,18 @@ public class PictogramAdapter extends BaseAdapter {
 		}
 		
 		imageView.setLayoutParams(layoutParams);
-		if(pct.isEmpty() == false && PARROTActivity.getUser().getShowText()==true)
+		if(pct.getPictogramID() != -1 && PARROTActivity.getUser().getShowText()==true)
 		{
 			textView = (TextView) view.findViewById(R.id.pictogramtext);
 			textView.setTextSize(20);	//TODO this value should be customizable
-			textView.setText(pct.getName());
+			textView.setText(pct.getTextLabel());
+			
+		}
+		else if(pct.getPictogramID() == -1)
+		{
+			
+			Bitmap bitmap=BitmapFactory.decodeResource(context.getResources(),R.drawable.usynlig);
+			imageView.setImageBitmap(bitmap);
 		}
 		view.setPadding(8, 8, 8, 8);
 

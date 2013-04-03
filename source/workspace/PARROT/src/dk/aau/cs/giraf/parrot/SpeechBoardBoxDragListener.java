@@ -1,7 +1,7 @@
 package dk.aau.cs.giraf.parrot;
 
 
-import dk.aau.cs.giraf.categorylib.PictogramOLD;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.app.Activity;
 import android.view.DragEvent;
 import android.view.View;
@@ -18,7 +18,7 @@ import android.widget.GridView;
 public class SpeechBoardBoxDragListener implements OnDragListener 
 {
 	private Activity parrent;
-	private PictogramOLD draggedPictogram = null;
+	private Pictogram draggedPictogram = null;
 	private PARROTProfile profile = PARROTActivity.getUser();
 	int numberOfSentencePictograms = profile.getNumberOfSentencePictograms();
 	boolean insideOfMe = false;
@@ -43,16 +43,13 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 			{
 				draggedPictogram = SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(SpeechBoardFragment.draggedPictogramIndex);
 				//Do not allow dragging empty pictograms, show do nothing
-				if(draggedPictogram.isEmpty()==true)
-				{
-				}
-				else
+				if(draggedPictogram.getPictogramID()!=-1)
 				{
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
 					
 					//remove pictogram from sentenceboard and add an empty pictogram 
 					SpeechBoardFragment.speechBoardCategory.removePictogram(SpeechBoardFragment.draggedPictogramIndex);	
-					SpeechBoardFragment.speechBoardCategory.addPictogram(new PictogramOLD("#emptyPictogram#", null, null, null, parrent));
+					SpeechBoardFragment.speechBoardCategory.addPictogram(new Pictogram(parrent.getApplicationContext(),"#emptyPictogram#", "", "", -1));
 					
 					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 				}
@@ -82,7 +79,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 
 
 						//Replaces a pictogram already in the sentencebord
-						if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).isEmpty() == false) 
+						if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).getPictogramID() != -1) 
 						{
 							SpeechBoardFragment.speechBoardCategory.removePictogram(index); //Removes the pictogram at the specific index
 							SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, index); //add the pictogram at the specific position
@@ -94,7 +91,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 							//place the new pictogram in the first empty filled
 							while (count < numberOfSentencePictograms) 
 							{
-								if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).isEmpty() == true) 
+								if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).getPictogramID() == -1) 
 								{
 									SpeechBoardFragment.speechBoardCategory.removePictogram(count); //Removes the pictogram at the specific index
 									SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, count); //add the pictogram at the specific position
@@ -124,14 +121,14 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 					}
 					else
 					{
-						if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).isEmpty() == true)
+						if(SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(index).getPictogramID() == -1)
 						{
 							//if it is empty, there might be empty spaces to the left of it too
 							int count = 0;
 							while (count < numberOfSentencePictograms) 
 							{
 
-								if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).isEmpty() == true) 
+								if (SpeechBoardFragment.speechBoardCategory.getPictogramAtIndex(count).getPictogramID() == -1) 
 								{
 									SpeechBoardFragment.speechBoardCategory.removePictogram(count); //Removes the pictogram at the specific index
 									SpeechBoardFragment.speechBoardCategory.addPictogramAtIndex(draggedPictogram, count); //add the pictogram at the specific position

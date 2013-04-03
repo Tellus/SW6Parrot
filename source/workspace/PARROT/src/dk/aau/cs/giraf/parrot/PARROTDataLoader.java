@@ -6,18 +6,19 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
-import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
-import dk.aau.cs.giraf.categorylib.PictogramOLD;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
 /**
@@ -79,8 +80,9 @@ public class PARROTDataLoader {
 		 {
 				
 			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
-		
-			PictogramOLD pic = new PictogramOLD(prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
+			//(Context context, final String image, final String text, final String audio, final long id)
+			Pictogram pic = new Pictogram(parent.getApplicationContext(), "","", null,-1);
+					//new Pictogram(parent.getApplicationContext(),prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
 			
 			parrotUser.setProfileID(prof.getId());
@@ -94,8 +96,8 @@ public class PARROTDataLoader {
 			Log.v("MessageParrot", "before categori");
 			
 			CategoryHelper categoryHelper= new CategoryHelper(parent);
-			List<PARROTCategoryOLD> categories = categoryHelper.getTempCategoriesOldPictograms(prof);
-			for(PARROTCategoryOLD c : categories)
+			List<PARROTCategory> categories = categoryHelper.getTempCategoriesWithNewPictogram(prof);
+			for(PARROTCategory c : categories)
 			{
 				parrotUser.addCategory(c);
 			}
@@ -164,19 +166,19 @@ public class PARROTDataLoader {
 	}
 	
 	//This method loads category
-	public PARROTCategoryOLD loadCategory(String catName, String pictureIDs,int colour,String iconString)
+	/*public PARROTCategory loadCategory(String catName, String pictureIDs,int colour,String iconString)
 	{
 		Long iconId = Long.valueOf(iconString);
-		PARROTCategoryOLD cat = new PARROTCategoryOLD(catName, colour, loadPictogram(iconId));
+		PARROTCategory cat = new PARROTCategory(catName, colour, loadPictogram(iconId));
 		ArrayList<Long> listIDs = getIDsFromString(pictureIDs);
 		for(int i = 0; i<listIDs.size();i++)
 		{
 			cat.addPictogram(loadPictogram(listIDs.get(i)));
 		}
 		return cat;
-	}
+	}*/
 
-	
+	/*
 	public PictogramOLD loadPictogram(long idPictogram)
 	{
 		PictogramOLD pic = null;
@@ -244,6 +246,7 @@ public class PARROTDataLoader {
 
 		return listOfID;
 	}
+*/
 	public void saveChanges(PARROTProfile user)
 	{
 		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
