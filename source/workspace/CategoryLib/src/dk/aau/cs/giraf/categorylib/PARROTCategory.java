@@ -3,6 +3,8 @@ package dk.aau.cs.giraf.categorylib;
 
 import java.util.ArrayList;
 
+import dk.aau.cs.giraf.pictogram.Pictogram;
+
 
 /**
  * 
@@ -11,9 +13,9 @@ import java.util.ArrayList;
  */
 public class PARROTCategory 
 {	
-	private ArrayList<PictogramOLD> pictograms; 
+	private ArrayList<Pictogram> pictograms; 
 	private int categoryColor;
-	private PictogramOLD icon;
+	private Pictogram icon;
 	private boolean newCategory;
 	private boolean changed;
 	private String categoryName;
@@ -21,37 +23,37 @@ public class PARROTCategory
 	public PARROTCategory parent = null;
 	
 	//This is the constructor method.
-	public PARROTCategory(int color, PictogramOLD icon) //this is a constructor method that takes icon and color as input
+	public PARROTCategory(int color, Pictogram icon) //this is a constructor method that takes icon and color as input
 	{
-		pictograms = new ArrayList<PictogramOLD>();
+		pictograms = new ArrayList<Pictogram>();
 		setCategoryColor(color);
 		setIcon(icon);
 	}
 	
-	public PARROTCategory(String categoryName,int color,PictogramOLD icon)  //this is a constructor method that takes name, icon and color as input
+	public PARROTCategory(String categoryName,int color,Pictogram icon)  //this is a constructor method that takes name, icon and color as input
 	{
-		pictograms = new ArrayList<PictogramOLD>();
+		pictograms = new ArrayList<Pictogram>();
 		subCategories = new ArrayList<PARROTCategory>();
 		setCategoryColor(color);
 		setIcon(icon);
 		setCategoryName(categoryName);
 	}
 	/*-------------  Pictograms  -----------------------*/
-	public ArrayList<PictogramOLD> getPictograms() { 
+	public ArrayList<Pictogram> getPictograms() { 
 		return pictograms;
 	}
 	
-	public PictogramOLD getPictogramAtIndex(int i)
+	public Pictogram getPictogramAtIndex(int i)
 	{
 		return pictograms.get(i);
 	}
 	
-	public void addPictogram(PictogramOLD pic)
+	public void addPictogram(Pictogram pic)
 	{
 		pictograms.add(pic);
 	}
 	
-	public void addPictogramAtIndex(PictogramOLD pic, int index)
+	public void addPictogramAtIndex(Pictogram pic, int index)
 	{
 		pictograms.add(index, pic);
 	}
@@ -93,11 +95,11 @@ public class PARROTCategory
 		this.categoryColor = categoryColor;
 	}
 
-	public PictogramOLD getIcon() {
+	public Pictogram getIcon() {
 		return icon;
 	}
 
-	public void setIcon(PictogramOLD icon) {
+	public void setIcon(Pictogram icon) {
 		this.icon = icon;
 	}
 

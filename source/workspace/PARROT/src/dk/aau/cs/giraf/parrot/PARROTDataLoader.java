@@ -94,7 +94,7 @@ public class PARROTDataLoader {
 			Log.v("MessageParrot", "before categori");
 			
 			CategoryHelper categoryHelper= new CategoryHelper(parent);
-			List<PARROTCategoryOLD> categories = categoryHelper.getTempCategories(prof);
+			List<PARROTCategoryOLD> categories = categoryHelper.getTempCategoriesOldPictograms(prof);
 			for(PARROTCategoryOLD c : categories)
 			{
 				parrotUser.addCategory(c);

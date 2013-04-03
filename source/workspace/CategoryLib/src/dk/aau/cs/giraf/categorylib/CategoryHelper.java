@@ -23,31 +23,31 @@ public class CategoryHelper {
 		help = new Helper(activity); 
 	}
 	
-	public List<PARROTCategoryOLD> getChildsCategories(long childId)
+	public List<PARROTCategory> getChildsCategories(long childId)
 	{
-		List<PARROTCategoryOLD> cat=null;
+		List<PARROTCategory> cat=null;
 		return cat;
 	}
 	
-	public void saveChangesInCategory(PARROTCategoryOLD category,long childId)
+	public void saveChangesInCategory(PARROTCategory category,long childId)
 	{
 		
 	}
 	
-	public void deleteCategory(PARROTCategoryOLD category, long childId)
+	public void deleteCategory(PARROTCategory category, long childId)
 	{
 		
 	}
 	
-	public void addNewCategory(PARROTCategoryOLD category,long childId)
+	public void addNewCategory(PARROTCategory category,long childId)
 	{
 		
 	}
 
-	public List<PARROTCategoryOLD> getTempCategoriesWithNewPictogram(Profile childProfile)
+	public List<PARROTCategory> getTempCategoriesWithNewPictogram(Profile childProfile)
 	{
-		PictoFactory pictogramFactory;
-		List<PARROTCategoryOLD> categories= new ArrayList<PARROTCategoryOLD>();
+		
+		List<PARROTCategory> categories= new ArrayList<PARROTCategory>();
 		
 		ArrayList<Pictogram> pictograms = new ArrayList<Pictogram>();
 		List<Media> childMedia = help.mediaHelper.getMediaByProfile(childProfile);
@@ -59,7 +59,7 @@ public class CategoryHelper {
 			if(m.getMType().equalsIgnoreCase("image"))
 			{
 				Log.v("MessageParrot", "in IMAGE if");
-				Pictogram pic = pictogramFactory.getPictogram(activity, m.getId());
+				Pictogram pic = PictoFactory.INSTANCE.getPictogram(activity, m.getId());
 				pictograms.add(pic);
 				//pictograms.add(loadPictogram(m.getId()));
 				Log.v("MessageParrot", "efter indlæsning af media");
@@ -67,11 +67,11 @@ public class CategoryHelper {
 		}
 		
 		
-		PARROTCategoryOLD tempCat3 = new PARROTCategoryOLD("Kategori 1", 0xff05ff12, pictograms.get(0));
-		PARROTCategoryOLD tempCatSUB1 = new PARROTCategoryOLD("SUB1",0xff05ff12, pictograms.get(0));
+		PARROTCategory tempCat3 = new PARROTCategory("Kategori 1", 0xff05ff12, pictograms.get(0));
+		PARROTCategory tempCatSUB1 = new PARROTCategory("SUB1",0xff05ff12, pictograms.get(0));
 		
 		int count=1;
-		for(PictogramOLD p : pictograms)
+		for(Pictogram p : pictograms)
 		{
 			tempCatSUB1.addPictogram(p);
 			
@@ -84,13 +84,13 @@ public class CategoryHelper {
 
 		
 
-		PARROTCategoryOLD tempCat4 = new PARROTCategoryOLD("Kategori 2", 0xffff0000, pictograms.get(10));
+		PARROTCategory tempCat4 = new PARROTCategory("Kategori 2", 0xffff0000, pictograms.get(10));
 		tempCat4.addPictogram(pictograms.get(10));
 		tempCat4.addPictogram(pictograms.get(13));
 		tempCat4.addPictogram(pictograms.get(12));
 		tempCat4.addPictogram(pictograms.get(11));
 
-		PARROTCategoryOLD tempCatSUB2 = new PARROTCategoryOLD("SUB2", 0xffff0000, pictograms.get(10));
+		PARROTCategory tempCatSUB2 = new PARROTCategory("SUB2", 0xffff0000, pictograms.get(10));
 		tempCatSUB2.addPictogram(pictograms.get(3));
 		tempCatSUB2.addPictogram(pictograms.get(5));
 		tempCatSUB2.addPictogram(pictograms.get(9));
@@ -106,7 +106,7 @@ public class CategoryHelper {
 	}
 	
 	
-	public List<PARROTCategoryOLD> getTempCategories(Profile childProfile)
+	public List<PARROTCategoryOLD> getTempCategoriesOldPictograms(Profile childProfile)
 	{
 		List<PARROTCategoryOLD> categories= new ArrayList<PARROTCategoryOLD>();
 		
