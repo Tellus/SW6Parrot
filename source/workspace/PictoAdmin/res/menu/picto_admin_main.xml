@@ -1,6 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
     <item
+        android:id="@+id/action_help"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Hjælp">
+    </item>
+    
+    <item
         android:id="@+id/action_send"
         android:orderInCategory="100"
         android:showAsAction="never"
@@ -22,6 +29,32 @@
         android:showAsAction="never"
         android:title="Tilbage"
         android:onClick="returnToLastActivity">
+    </item>
+    
+    <item
+        android:id="@+id/action_klim"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Test Klim"
+        android:onClick="klimTestMethod">
+    </item>
+    <item
+        android:id="@+id/action_lisbeth"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Test Lisbeth">
+    </item>
+    <item
+        android:id="@+id/action_jacob"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Test Jacob">
+    </item>
+    <item
+        android:id="@+id/action_anders"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Test Anders">
     </item>
 
 </menu>

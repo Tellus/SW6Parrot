@@ -18,27 +18,20 @@
         	android:layout_height="50dp"
         	android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/back"
-                android:src="@drawable/navigation_back" />
-
-            <ImageButton
-                android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/save_changes"
-                android:src="@drawable/content_save" />
-
-            <ProgressBar
-                android:id="@+id/loadingPictograms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible" />
+            <Spinner
+                android:id="@+id/select_search_field"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:entries="@array/select_search_field" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Checkout list:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
         
         <GridView
         android:id="@+id/checkout"
@@ -63,10 +56,32 @@
             android:layout_height="50dp"
             android:gravity="center" >
 
+            <EditText
+                android:id="@+id/text_input"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/text_input"
+                android:inputType="text"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="20sp" >
+
+                <requestFocus />
+            </EditText>
+
             <TextView
                 android:id="@+id/TextView09"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/search_button"
+                android:onClick="searchForPictogram"
+                android:src="@drawable/ic_action_search" />
 
             <TextView
                 android:id="@+id/TextView12"
@@ -95,43 +110,20 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/reset"
                 android:src="@drawable/navigation_cancel" />
-
-            <TextView
-                android:id="@+id/TextView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/help"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <ImageButton
-                android:id="@+id/ImageButton08"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/help"
-                android:gravity="right"
-                android:src="@drawable/action_help" />
         </LinearLayout>
-
-        <GridView
-            android:id="@+id/pictogram_displayer"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:numColumns="5"
-            android:background="@drawable/sentenceboardlayout" >
-            
-        </GridView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" >
+            android:gravity="left" >
 
             <TextView
-                android:id="@+id/TextView05"
+                android:id="@+id/PictoGridDescription"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:text="Pictograms: "
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            
             <TextView
                 android:id="@+id/errorMessage"
                 android:layout_width="wrap_content"
@@ -144,100 +136,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/picture" />
-
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight=".2"
-        android:orientation="vertical" >
-
-        <Spinner
-            android:id="@+id/select_search_field"
+        <GridView
+            android:id="@+id/pictogram_displayer"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:entries="@array/select_search_field" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp" >
-
-            <EditText
-                android:id="@+id/text_input"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:hint="@string/text_input"
-                android:inputType="text"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="20sp" />
-
-            <ImageButton
-                android:id="@+id/search_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/search_button"
-                android:src="@drawable/ic_action_search"
-                android:onClick="searchForPictogram" />
-        </LinearLayout>
-		
-        <LinearLayout 
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-            <Button
-            android:id="@+id/Kategori"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Test Klim"
-            android:onClick="klimTestMethod" />
-        </LinearLayout>
-        
-		<LinearLayout
-	    	android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-		    
-		    <Button
-            android:id="@+id/underKategori"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="@string/subKategori" />
-		</LinearLayout>
-        
-		<LinearLayout
-		    android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-		    
-		    <Button
-            android:id="@+id/addExistingButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/add_existing_pictogram" />
-		</LinearLayout>
-        
-		<LinearLayout
-		    android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-		    
-		    <Button
-            android:id="@+id/Title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/create_new_pictogram" />
+            android:numColumns="5"
+            android:background="@drawable/sentenceboardlayout" >
+            
+        </GridView>
 
-		</LinearLayout>
-        
     </LinearLayout>
 
 </LinearLayout>

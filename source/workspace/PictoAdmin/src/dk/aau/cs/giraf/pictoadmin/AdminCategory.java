@@ -34,10 +34,6 @@ public class AdminCategory extends Activity {
 		return true;
 	}
 	
-	public void returnToLastActivity(MenuItem item) {
-		finish();
-	}
-	
 	private void getAllExtras() {
 		if(getIntent().hasExtra("childId")){
 			childName = extras.get("childId").toString();
@@ -50,7 +46,7 @@ public class AdminCategory extends Activity {
 		}
 	}
 	
-	public void returnToCaller() {
+	public void returnToCaller(MenuItem item) {
 		startActivity(parentIntent);
 	}
 }

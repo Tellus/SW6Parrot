@@ -115,7 +115,6 @@ public class PictoAdminMain extends Activity {
 		intent.putExtra("childId", 1523);
 		
 		startActivity(intent);
-		
 	}
 	
 	/**
@@ -144,7 +143,7 @@ public class PictoAdminMain extends Activity {
 		return checkout;
 	}
 
-	public void klimTestMethod(View view) {
+	public void klimTestMethod(MenuItem item) {
 		GridView checkoutGrid = (GridView) findViewById(R.id.checkout);
 		
 		Helper help = new Helper(this);
@@ -161,6 +160,7 @@ public class PictoAdminMain extends Activity {
 		
 		checkoutGrid.setAdapter(new KlimAdapter(checkoutCategoryOld, this));
 	}
+	
 /*	@Override
 	public void onClick(View v) {
 			// what happens when we click "search"
