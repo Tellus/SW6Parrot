@@ -59,7 +59,7 @@ public class CategoryHelper {
 			if(m.getMType().equalsIgnoreCase("image"))
 			{
 				Log.v("MessageParrot", "in IMAGE if");
-				Pictogram pic = PictoFactory.INSTANCE.getPictogram(activity, m.getId());
+				Pictogram pic = PictoFactory.INSTANCE.getPictogram(activity.getApplicationContext(), m.getId());
 				pictograms.add(pic);
 				//pictograms.add(loadPictogram(m.getId()));
 				Log.v("MessageParrot", "efter indlæsning af media");

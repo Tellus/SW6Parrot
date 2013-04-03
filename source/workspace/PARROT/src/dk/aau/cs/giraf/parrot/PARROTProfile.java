@@ -1,8 +1,9 @@
 package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
-import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
-import dk.aau.cs.giraf.categorylib.PictogramOLD;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
+
 
 
 /**
@@ -13,8 +14,8 @@ import dk.aau.cs.giraf.categorylib.PictogramOLD;
  */
 public class PARROTProfile {
 	private String name;
-	private PictogramOLD icon;
-	private ArrayList<PARROTCategoryOLD> categories = new ArrayList<PARROTCategoryOLD>();
+	private Pictogram icon;
+	private ArrayList<PARROTCategory> categories = new ArrayList<PARROTCategory>();
 	private long profileID =-1;
 	private int noOfboxesInSentenceboard = 1;
 	private int categoryColor = 0xb4b6b2;
@@ -25,28 +26,28 @@ public class PARROTProfile {
 	//TODO add all applicable settings here.
 	public static enum PictogramSize{MEDIUM, LARGE}
 	
-	public PARROTProfile(String name, PictogramOLD icon)
+	public PARROTProfile(String name, Pictogram icon)
 	{
 		this.setName(name);
 		this.setIcon(icon);
 	}
 
-	public ArrayList<PARROTCategoryOLD> getCategories() {
+	public ArrayList<PARROTCategory> getCategories() {
 		return categories;
 	}
 	
 	
-	public PARROTCategoryOLD getCategoryAt(int i)
+	public PARROTCategory getCategoryAt(int i)
 	{
 		return categories.get(i);
 	}
 	
-	public void setCategoryAt(int i, PARROTCategoryOLD cat)
+	public void setCategoryAt(int i, PARROTCategory cat)
 	{
 		this.categories.set(i, cat);
 	}
 	
-	public void addCategory(PARROTCategoryOLD cat)
+	public void addCategory(PARROTCategory cat)
 	{
 		categories.add(cat);
 	}
@@ -64,11 +65,11 @@ public class PARROTProfile {
 		this.name = name;
 	}
 
-	public PictogramOLD getIcon() {
+	public Pictogram getIcon() {
 		return icon;
 	}
 
-	public void setIcon(PictogramOLD icon) {
+	public void setIcon(Pictogram icon) {
 		this.icon = icon;
 	}
 

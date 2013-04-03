@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
-import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
-import dk.aau.cs.giraf.categorylib.PictogramOLD;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -21,12 +22,13 @@ public class TestData {
 	private Activity parrent;
 	private Helper help;
 	private App app;
-	
+	private Context c;
 	public TestData(Activity activity)
 	{
 		this.parrent = activity;
 		help = PARROTActivity.getHelp();
 		app = PARROTActivity.getApp();
+		c = parrent.getApplicationContext();
 
 	}
 	
@@ -73,34 +75,15 @@ public class TestData {
 			Setting<String, String, String> profileSetting = new Setting<String, String, String>();
 			
 			//START TEMP LINES
-			PictogramOLD tempPic = new PictogramOLD(tempProf.getFirstname(),tempProf.getPicture(),null, null);
+			Pictogram tempPic = new Pictogram(c, tempProf.getPicture(),tempProf.getFirstname(), "", -1);
+			
 	
 			PARROTProfile testProfile = new PARROTProfile(tempProf.getFirstname(), tempPic);
 			testProfile.setProfileID(profileId);
 			Log.v("MessageParrot", "har indlæst test profil, til at lave kategori");
 			
 
-			/*PARROTCategory tempCat3 = new PARROTCategory("Kategori 1", 0xff05ff12, pictograms.get(0));
-	
-			for(Pictogram p : pictograms)
-			{
-				tempCat3.addPictogram(p);
-			}
-
-		
-			testProfile.addCategory(tempCat3);
-	
-			PARROTCategory tempCat4 = new PARROTCategory("Kategori 2", 0xffff0000, pictograms.get(10));
-			tempCat4.addPictogram(pictograms.get(10));
-			tempCat4.addPictogram(pictograms.get(13));
-			tempCat4.addPictogram(pictograms.get(12));
-			tempCat4.addPictogram(pictograms.get(11));
-			
-			Log.v("MessageParrot", "settings bliver sat");
-			
-			testProfile.addCategory(tempCat4);
-			testProfile.setCategoryColor(0xff23ff12);*/
-			
+					
 			testProfile.setNumberOfSentencePictograms(2);
 			testProfile.setPictogramSize(PARROTProfile.PictogramSize.MEDIUM);
 			testProfile.setSentenceBoardColor(0xffffffff);
@@ -110,10 +93,10 @@ public class TestData {
 	
 			Log.v("MessageParrot", "gem kategorier");
 			
-			for(int i=0;i<testProfile.getCategories().size();i++)
+		/*	for(int i=0;i<testProfile.getCategories().size();i++)
 			{
 				profileSetting = saveCategory(testProfile.getCategoryAt(i), i, profileSetting);
-			}
+			}*/
 			Log.v("MessageParrot", "gem settings");
 			
 			profileSetting = saveSettings(profileSetting, testProfile);
@@ -130,10 +113,21 @@ public class TestData {
 		
 		
 	}
-
-	public PictogramOLD loadPictogram(long idPictogram)
+	
+	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
 	{
-		PictogramOLD pic = null;
+
+		profileSettings.addValue("SentenceboardSettings", "Color", String.valueOf(user.getSentenceBoardColor()));
+		profileSettings.get("SentenceboardSettings").put("NoOfBoxes", String.valueOf(user.getNumberOfSentencePictograms()));
+		profileSettings.addValue("PictogramSettings","PictogramSize", String.valueOf(user.getPictogramSize()));
+		profileSettings.get("PictogramSettings").put("ShowText", String.valueOf(user.getShowText()));
+		//Now we return the settings so that they can be saved.
+		return profileSettings;	
+	}
+
+	/*public Pictogram loadPictogram(long idPictogram)
+	{
+		Pictogram pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(idPictogram); //This is the image media //TODO check type
 
 		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); 
@@ -160,35 +154,22 @@ public class TestData {
 				}
 			}
 		}
-		pic = new PictogramOLD(media.getName(), media.getMPath(), soundPath, wordPath);
+		pic = new Pictogram(media.getName(), media.getMPath(), soundPath, wordPath);
 		//set the different ID's
 		pic.setImageID(idPictogram);
 		pic.setSoundID(soundID);
 		pic.setWordID(wordID);
 
 		return pic;
-	}
+	}*/
 
-	
-	
-	public Setting<String, String, String> saveSettings(Setting<String, String, String> profileSettings, PARROTProfile user)
-	{
-
-		profileSettings.addValue("SentenceboardSettings", "Color", String.valueOf(user.getSentenceBoardColor()));
-		profileSettings.get("SentenceboardSettings").put("NoOfBoxes", String.valueOf(user.getNumberOfSentencePictograms()));
-		profileSettings.addValue("PictogramSettings","PictogramSize", String.valueOf(user.getPictogramSize()));
-		profileSettings.get("PictogramSettings").put("ShowText", String.valueOf(user.getShowText()));
-		//Now we return the settings so that they can be saved.
-		return profileSettings;	
-	}
-
-
-	private Setting<String, String, String> saveCategory(PARROTCategoryOLD category, int categoryNumber, Setting<String, String, String> profileSetting ) {
+/*
+	private Setting<String, String, String> saveCategory(PARROTCategory category, int categoryNumber, Setting<String, String, String> profileSetting ) {
 		//first, we save the pictograms
 		String pictogramString = "";
 		for(int i=0;i<category.getPictograms().size();i++)
 		{
-			PictogramOLD pic = category.getPictogramAtIndex(i);
+			Pictogram pic = category.getPictogramAtIndex(i);
 
 			pic = savePictogram(pic);
 
@@ -205,19 +186,19 @@ public class TestData {
 		//then we save the colour
 		profileSetting.get("category"+categoryNumber).put("colour", String.valueOf(category.getCategoryColor()));
 		//and then we save the icon
-		PictogramOLD icon = category.getIcon();
+		Pictogram icon = category.getIcon();
 		icon = savePictogram(icon);
 		profileSetting.get("category"+categoryNumber).put("icon", String.valueOf(icon.getImageID()));
 
 		return profileSetting;
-	}
+	}*/
 
 	/**
 	 * 
 	 * @PARROT
 	 *This method is used to save completely new pictograms to the database, as well as modify existing ones.
 	 */
-	private PictogramOLD savePictogram(PictogramOLD pic)
+	/*private Pictogram savePictogram(Pictogram pic)
 	{
 		Media imageMedia = null;
 		Media soundMedia = null;
@@ -300,7 +281,7 @@ public class TestData {
 		return pic;
 
 	}
-
+*/
 
 
 }

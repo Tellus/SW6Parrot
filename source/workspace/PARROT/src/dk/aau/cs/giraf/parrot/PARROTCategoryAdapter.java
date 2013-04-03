@@ -2,10 +2,12 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
 
-import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
-import dk.aau.cs.giraf.categorylib.PictogramOLD;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictogram.PictoFactory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,11 +23,11 @@ import android.widget.ImageView;
 
 public class PARROTCategoryAdapter extends BaseAdapter{
 
-	private ArrayList<PARROTCategoryOLD> catList;
+	private ArrayList<PARROTCategory> catList;
 	private Context context;
 
 	//Constructor taking List of PARROTCategories, and a Context.
-	public PARROTCategoryAdapter(ArrayList<PARROTCategoryOLD> catList, Context c)
+	public PARROTCategoryAdapter(ArrayList<PARROTCategory> catList, Context c)
 	{
 		this.catList=catList;
 		context = c;
@@ -52,7 +54,7 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView;
-		PictogramOLD pct=catList.get(position).getIcon();
+		Pictogram pct=catList.get(position).getIcon();
 		if (convertView == null) {  // if it's not recycled, initialize some attributes
 			imageView = new ImageView(context);
 			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
@@ -64,9 +66,10 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 		else {
 			imageView = (ImageView) convertView;
 		}
-
+		
 		//we then set the imageview to the icon of the category
-		imageView.setImageBitmap(pct.getBitmap());
+		imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
+		
 		return imageView;
 	}
 
