@@ -4,6 +4,7 @@ package dk.aau.cs.giraf.parrot;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,13 +79,15 @@ public class PictogramAdapter extends BaseAdapter {
 		{
 			textView = (TextView) view.findViewById(R.id.pictogramtext);
 			textView.setTextSize(20);	//TODO this value should be customizable
-			String write = pct.getTextLabel();
-			Log.v("PARROTMessage","label: "+ write);
-			textView.setText(write);
+			textView.setText(pct.getTextLabel());
 			
 		}
-		else if(pct.getPictogramID() != -1)
-		{}
+		else if(pct.getPictogramID() == -1)
+		{
+			
+			Bitmap bitmap=BitmapFactory.decodeResource(context.getResources(),R.drawable.usynlig);
+			imageView.setImageBitmap(bitmap);
+		}
 		view.setPadding(8, 8, 8, 8);
 
 		return view;
