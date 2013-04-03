@@ -40,7 +40,7 @@ public class AdminCategory extends Activity {
 	
 	private void getAllExtras() {
 		if(getIntent().hasExtra("childId")){
-			childName 	 = (String) extras.get("childId").toString();
+			childName = extras.get("childId").toString();
 		}
 		if(getIntent().hasExtra("myIntent")){
 			parentIntent = (Intent) extras.get("myIntent");

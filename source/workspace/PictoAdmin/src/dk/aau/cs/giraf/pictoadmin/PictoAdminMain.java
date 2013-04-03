@@ -14,7 +14,14 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import dk.aau.cs.giraf.categorylib.CategoryHelper;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
+import dk.aau.cs.giraf.categorylib.PictogramOLD;
+import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 public class PictoAdminMain extends Activity {
 	Button searchbutton;
@@ -23,6 +30,7 @@ public class PictoAdminMain extends Activity {
 	String textinput;
 	EditText inputbox;
 	List<Media> pictograms;
+	private Bundle extras;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,12 +108,13 @@ public class PictoAdminMain extends Activity {
 	public void sendContent(MenuItem item)
 	{
 		ArrayList<ParcelablePictogram> PicPackage = getCheckoutList();
-		Intent newIntent = new Intent(this, AdminCategory.class);
-		newIntent.putParcelableArrayListExtra("Pictograms", PicPackage);
-		newIntent.putExtra("myIntent", new Intent(this, PictoAdminMain.class));
-		newIntent.putExtra("childId", 1523);
 		
-		startActivity(newIntent);
+		Intent intent = new Intent(this, AdminCategory.class);
+		intent.putParcelableArrayListExtra("Pictograms", PicPackage);
+		intent.putExtra("myIntent", new Intent(this, PictoAdminMain.class));
+		intent.putExtra("childId", 1523);
+		
+		startActivity(intent);
 		
 	}
 	
@@ -135,6 +144,23 @@ public class PictoAdminMain extends Activity {
 		return checkout;
 	}
 
+	public void klimTestMethod(View view) {
+		GridView checkoutGrid = (GridView) findViewById(R.id.checkout);
+		
+		Helper help = new Helper(this);
+		Profile child = help.profilesHelper.getProfileById(11);
+		
+		PARROTCategory    checkoutCategoryNew = new PARROTCategory("TestNew", 0xffa500, null);
+		PARROTCategoryOLD checkoutCategoryOld = new PARROTCategoryOLD("TestOld", 0xff0000, null);
+		
+		// Test images added
+		checkoutCategoryOld.addPictogram(new PictogramOLD("test1", "testImagePath", "testSoundPath", "testWordPath"));
+		checkoutCategoryOld.addPictogram(new PictogramOLD("test2", "testImagePath", "testSoundPath", "testWordPath"));
+		checkoutCategoryOld.addPictogram(new PictogramOLD("test3", "testImagePath", "testSoundPath", "testWordPath"));
+		checkoutCategoryOld.addPictogram(new PictogramOLD("test4", "testImagePath", "testSoundPath", "testWordPath"));
+		
+		checkoutGrid.setAdapter(new KlimAdapter(checkoutCategoryOld, this));
+	}
 /*	@Override
 	public void onClick(View v) {
 			// what happens when we click "search"

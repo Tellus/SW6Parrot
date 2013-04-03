@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.widget.GridView;
-import android.widget.ListAdapter;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
 

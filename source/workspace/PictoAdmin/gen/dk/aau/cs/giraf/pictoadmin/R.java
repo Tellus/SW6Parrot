@@ -56,8 +56,8 @@ public final class R {
         public static final int TextView12=0x7f09001d;
         public static final int Title=0x7f09002d;
         public static final int access_pictocreator_button=0x7f090010;
-        public static final int action_back=0x7f09002e;
-        public static final int action_send=0x7f090030;
+        public static final int action_back=0x7f090030;
+        public static final int action_send=0x7f090032;
         public static final int addExistingButton=0x7f09002c;
         public static final int add_new_category_button=0x7f090006;
         public static final int add_new_picture_button=0x7f090011;
@@ -66,6 +66,7 @@ public final class R {
         public static final int category_columb=0x7f090004;
         public static final int category_gridview=0x7f090008;
         public static final int category_text=0x7f090005;
+        public static final int checkout=0x7f09001a;
         public static final int currentChildName=0x7f090002;
         public static final int delete_selected_category_button=0x7f090007;
         public static final int delete_selected_picture_button=0x7f090012;
@@ -73,15 +74,16 @@ public final class R {
         public static final int description_bar=0x7f090000;
         public static final int errorIcon=0x7f090026;
         public static final int errorMessage=0x7f090025;
-        public static final int gotoAdminCategory=0x7f090031;
-        public static final int listView1=0x7f09001a;
+        public static final int gotoAdminCategory=0x7f090033;
         public static final int loadingPictograms=0x7f090019;
         public static final int main_category_admin_layout=0x7f090003;
-        public static final int menu_settings=0x7f09002f;
+        public static final int menu_settings=0x7f090031;
         public static final int pictogram_coloumb=0x7f09000e;
         public static final int pictogram_displayer=0x7f090023;
         public static final int pictogram_gridview=0x7f090013;
         public static final int pictogram_text=0x7f09000f;
+        public static final int pictogrambitmap=0x7f09002e;
+        public static final int pictogramtext=0x7f09002f;
         public static final int saveButton=0x7f090018;
         public static final int search_button=0x7f090029;
         public static final int select_search_field=0x7f090027;
@@ -100,6 +102,7 @@ public final class R {
         public static final int activity_help_menu=0x7f030001;
         public static final int activity_picto_admin_main=0x7f030002;
         public static final int main=0x7f030003;
+        public static final int pictogramview=0x7f030004;
     }
     public static final class menu {
         public static final int activity_admin_category=0x7f080000;

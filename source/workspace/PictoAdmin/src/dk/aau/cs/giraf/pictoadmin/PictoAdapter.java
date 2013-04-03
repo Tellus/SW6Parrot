@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
 
@@ -25,7 +24,7 @@ public class PictoAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 		View gridview;
 		
@@ -39,7 +38,7 @@ public class PictoAdapter extends BaseAdapter {
 		}
 		
 		else {
-			gridview = (View) convertView;
+			gridview = convertView;
 		}
 		
 		return gridview;
