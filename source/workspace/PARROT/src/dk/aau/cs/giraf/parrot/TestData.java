@@ -9,8 +9,8 @@ import android.app.Activity;
 import android.os.Environment;
 import android.util.Log;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.categorylib.Pictogram;
+import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
+import dk.aau.cs.giraf.categorylib.PictogramOLD;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -73,7 +73,7 @@ public class TestData {
 			Setting<String, String, String> profileSetting = new Setting<String, String, String>();
 			
 			//START TEMP LINES
-			Pictogram tempPic = new Pictogram(tempProf.getFirstname(),tempProf.getPicture(),null, null);
+			PictogramOLD tempPic = new PictogramOLD(tempProf.getFirstname(),tempProf.getPicture(),null, null);
 	
 			PARROTProfile testProfile = new PARROTProfile(tempProf.getFirstname(), tempPic);
 			testProfile.setProfileID(profileId);
@@ -131,9 +131,9 @@ public class TestData {
 		
 	}
 
-	public Pictogram loadPictogram(long idPictogram)
+	public PictogramOLD loadPictogram(long idPictogram)
 	{
-		Pictogram pic = null;
+		PictogramOLD pic = null;
 		Media media=help.mediaHelper.getSingleMediaById(idPictogram); //This is the image media //TODO check type
 
 		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); 
@@ -160,7 +160,7 @@ public class TestData {
 				}
 			}
 		}
-		pic = new Pictogram(media.getName(), media.getMPath(), soundPath, wordPath);
+		pic = new PictogramOLD(media.getName(), media.getMPath(), soundPath, wordPath);
 		//set the different ID's
 		pic.setImageID(idPictogram);
 		pic.setSoundID(soundID);
@@ -183,12 +183,12 @@ public class TestData {
 	}
 
 
-	private Setting<String, String, String> saveCategory(PARROTCategory category, int categoryNumber, Setting<String, String, String> profileSetting ) {
+	private Setting<String, String, String> saveCategory(PARROTCategoryOLD category, int categoryNumber, Setting<String, String, String> profileSetting ) {
 		//first, we save the pictograms
 		String pictogramString = "";
 		for(int i=0;i<category.getPictograms().size();i++)
 		{
-			Pictogram pic = category.getPictogramAtIndex(i);
+			PictogramOLD pic = category.getPictogramAtIndex(i);
 
 			pic = savePictogram(pic);
 
@@ -205,7 +205,7 @@ public class TestData {
 		//then we save the colour
 		profileSetting.get("category"+categoryNumber).put("colour", String.valueOf(category.getCategoryColor()));
 		//and then we save the icon
-		Pictogram icon = category.getIcon();
+		PictogramOLD icon = category.getIcon();
 		icon = savePictogram(icon);
 		profileSetting.get("category"+categoryNumber).put("icon", String.valueOf(icon.getImageID()));
 
@@ -217,7 +217,7 @@ public class TestData {
 	 * @PARROT
 	 *This method is used to save completely new pictograms to the database, as well as modify existing ones.
 	 */
-	private Pictogram savePictogram(Pictogram pic)
+	private PictogramOLD savePictogram(PictogramOLD pic)
 	{
 		Media imageMedia = null;
 		Media soundMedia = null;

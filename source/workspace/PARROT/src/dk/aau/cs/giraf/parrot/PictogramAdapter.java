@@ -1,8 +1,8 @@
 package dk.aau.cs.giraf.parrot;
 
 
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.categorylib.Pictogram;
+import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
+import dk.aau.cs.giraf.categorylib.PictogramOLD;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +19,10 @@ import android.widget.TextView;
  */
 public class PictogramAdapter extends BaseAdapter {
 
-	private PARROTCategory cat;
+	private PARROTCategoryOLD cat;
 	private Context context;
 
-	public PictogramAdapter(PARROTCategory cat, Context c)
+	public PictogramAdapter(PARROTCategoryOLD cat, Context c)
 	{
 		super();
 		this.cat=cat;
@@ -53,7 +53,7 @@ public class PictogramAdapter extends BaseAdapter {
 		ImageView imageView;
 		View view = convertView;
 		TextView textView;
-		Pictogram pct=cat.getPictogramAtIndex(position);
+		PictogramOLD pct=cat.getPictogramAtIndex(position);
 
 		LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = layoutInflater.inflate(R.layout.pictogramview, null);
