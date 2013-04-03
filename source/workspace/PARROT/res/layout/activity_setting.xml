@@ -15,11 +15,19 @@
 
         <TextView
             android:id="@+id/sentenceSetting"
+<<<<<<< HEAD
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/sentensboardOptions"
             android:textColor="#ffffff"
             android:textSize="40sp" />
+=======
+          	android:textSize="40sp"
+			android:textColor="#ffffff"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sentensboardOptions" />
+>>>>>>> tilbage med designet i activity_setting.xml
 
         <LinearLayout
             android:id="@+id/linearLayout1"
@@ -29,11 +37,19 @@
 
             <TextView
                 android:id="@+id/changesentencecolor"
+<<<<<<< HEAD
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/changesentencecolor"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
+=======
+                android:textSize="20sp"
+				android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/changesentencecolor" />
+>>>>>>> tilbage med designet i activity_setting.xml
 
             <Button
                 android:id="@+id/buttonChangeSentenceColor"
@@ -41,7 +57,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:background="@drawable/button"
+<<<<<<< HEAD
                 android:onClick="onSentenceboardColorChanged"
+=======
+>>>>>>> tilbage med designet i activity_setting.xml
                 android:radius="7dp"
                 android:text="@string/buttonChangeColorSentence"
                 android:textSize="20sp" />
@@ -55,11 +74,19 @@
 
             <TextView
                 android:id="@+id/pickNoSentenceBoard"
+<<<<<<< HEAD
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/SentenceboardNo"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
+=======
+                android:textSize="20sp"
+				android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/SentenceboardNo" />
+>>>>>>> tilbage med designet i activity_setting.xml
 
             <Spinner
                 android:id="@+id/spinnerNoOfsentence"
@@ -70,12 +97,21 @@
 
         <TextView
             android:id="@+id/pictogramSetting"
+<<<<<<< HEAD
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="150dp"
             android:text="@string/pictogramOptions"
             android:textColor="#ffffff"
             android:textSize="40sp" />
+=======
+            android:textSize="40sp"
+			android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="271dp"
+            android:text="@string/pictogramOptions" />
+>>>>>>> tilbage med designet i activity_setting.xml
 
         <RadioGroup
             android:id="@+id/radioGroupSizePictogram"
@@ -85,21 +121,34 @@
 
             <TextView
                 android:id="@+id/pictogramSize"
+<<<<<<< HEAD
+=======
+                android:textSize="20sp"
+				android:textColor="#ffffff"
+>>>>>>> tilbage med designet i activity_setting.xml
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
                 android:layout_weight="0.91"
+<<<<<<< HEAD
                 android:text="@string/PictoSize"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
+=======
+                android:text="@string/PictoSize" />
+>>>>>>> tilbage med designet i activity_setting.xml
 
             <RadioButton
                 android:id="@+id/mediumPicRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.53"
+<<<<<<< HEAD
                 android:onClick="onSizePictogramChanged"
                 android:text="@string/MediumPictogram"
+=======
+                android:text="@string/LargePictogram"
+>>>>>>> tilbage med designet i activity_setting.xml
                 android:textSize="20sp" />
 
             <RadioButton
@@ -107,12 +156,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5.14"
+<<<<<<< HEAD
                 android:onClick="onSizePictogramChanged"
                 android:text="@string/LargePictogram"
+=======
+                android:text="@string/MediumPictogram"
+>>>>>>> tilbage med designet i activity_setting.xml
                 android:textSize="20sp" />
         </RadioGroup>
 
         <CheckBox
+<<<<<<< HEAD
             android:id="@+id/checkBoxShowText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -121,6 +175,14 @@
             android:text="@string/textToPic"
             android:textSize="20sp" />
 
+=======
+            android:id="@+id/checkBox1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="@string/textToPic"
+            android:textSize="20sp" />
+>>>>>>> tilbage med designet i activity_setting.xml
     </LinearLayout>
 
 </RelativeLayout>
