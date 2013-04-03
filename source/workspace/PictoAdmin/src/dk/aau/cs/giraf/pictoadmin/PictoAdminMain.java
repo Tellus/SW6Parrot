@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
@@ -101,9 +100,10 @@ public class PictoAdminMain extends Activity {
 	public void sendContent(MenuItem item)
 	{
 		ArrayList<ParcelablePictogram> PicPackage = getCheckoutList();
-		
 		Intent newIntent = new Intent(this, AdminCategory.class);
 		newIntent.putParcelableArrayListExtra("Pictograms", PicPackage);
+		newIntent.putExtra("myIntent", new Intent(this, PictoAdminMain.class));
+		newIntent.putExtra("childId", 1523);
 		
 		startActivity(newIntent);
 		
@@ -124,8 +124,7 @@ public class PictoAdminMain extends Activity {
 	 * Assess the checkout gridview and load the pictograms into an ArrayList
 	 * @return ArrayList of checkout pictograms
 	 */
-	public ArrayList<ParcelablePictogram> getCheckoutList()
-	{
+	public ArrayList<ParcelablePictogram> getCheckoutList() {
 		ArrayList<ParcelablePictogram> checkout = new ArrayList<ParcelablePictogram>();
 		//TODO: Load pictograms from checkout
 		

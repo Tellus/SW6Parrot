@@ -1,24 +1,30 @@
 package dk.aau.cs.giraf.pictoadmin;
 
 import java.util.ArrayList;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 public class AdminCategory extends Activity {
-
+	private String childName;
+	private Intent parentIntent;
+	private Bundle extras;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_admin_category);
-		if(getIntent().getParcelableArrayListExtra("Pictograms") != null){
-		ArrayList<ParcelablePictogram> receiver = getIntent().getParcelableArrayListExtra("Pictograms");
-		TextView test = (TextView) findViewById(R.id.currentChildName);
-		test.setText(receiver.get(0).getSoundPath());
+		
+		extras = getIntent().getExtras();
+		if(extras != null){
+			getAllExtras();
 		}
+			
+		TextView displayChild = (TextView) findViewById(R.id.currentChildName);
+		displayChild.setText(childName);
 	}
 
 	@Override
@@ -28,9 +34,23 @@ public class AdminCategory extends Activity {
 		return true;
 	}
 	
-	public void returnToLastActivity(MenuItem item)
-	{
+	public void returnToLastActivity(MenuItem item) {
 		finish();
 	}
-
+	
+	private void getAllExtras() {
+		if(getIntent().hasExtra("childId")){
+			childName 	 = (String) extras.get("childId").toString();
+		}
+		if(getIntent().hasExtra("myIntent")){
+			parentIntent = (Intent) extras.get("myIntent");
+		}
+		if(getIntent().hasExtra("Pictograms")){
+			ArrayList<ParcelablePictogram> pictograms = getIntent().getParcelableArrayListExtra("Pictograms");
+		}
+	}
+	
+	public void returnToCaller() {
+		startActivity(parentIntent);
+	}
 }
