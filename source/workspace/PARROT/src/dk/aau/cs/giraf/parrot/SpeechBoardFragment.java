@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ public class SpeechBoardFragment extends Fragment
 	public static ArrayList<Pictogram> speechboardPictograms = new ArrayList<Pictogram>();
 	
 	//This category contains the pictograms on the sentenceboard
-	public static PARROTCategory speechBoardCategory = new PARROTCategory(0x00ff00,null);	
+	public static PARROTCategory speechBoardCategory = new PARROTCategory(0xffffff,null);	
 	//This category contains the pictograms displayed on the big board
 	public static PARROTCategory displayedCategory = new PARROTCategory(PARROTActivity.getUser().getCategoryAt(0).getCategoryColor(),null);
 	
@@ -61,12 +62,14 @@ public class SpeechBoardFragment extends Fragment
 		super.onResume();
 		parrent.setContentView(R.layout.speechboard_layout);
 		
-
 		user=PARROTActivity.getUser();	//FIXME this might mean that the user is not updated. It would be better to us the static user from PARROTActivity
+		
 		if(user.getCategoryAt(0)!=null)
 		{
 			displayedCategory = user.getCategoryAt(0);
 			clearSentenceboard(parrent);
+			
+
 			
 			//Setup the view for the listing of pictograms
 			GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
@@ -85,8 +88,8 @@ public class SpeechBoardFragment extends Fragment
 			GridView superCategoryGrid = (GridView) parrent.findViewById(R.id.supercategory);
 			superCategoryGrid.setAdapter(new PARROTCategoryAdapter(user.getCategories(), parrent.getApplicationContext()));
 		
-			//initialise the colours of the fragment
-			setColours(parrent);
+			//initialise the colors of the fragment
+			setColours();
 			
 			//setup drag listeners for the views
 			parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
@@ -150,8 +153,7 @@ public class SpeechBoardFragment extends Fragment
 					//Setup the view for the categories 
 					GridView subCategoryGrid = (GridView) parrent.findViewById(R.id.subcategory);
 					subCategoryGrid.setAdapter(new PARROTCategoryAdapter(displayedCategory.getSubCategories(), parrent.getApplicationContext()));
-					setColours(parrent);
-					
+					setPictogramGridColor();					
 					
 					subCategoryGrid.setOnItemClickListener(new OnItemClickListener() 
 					{
@@ -190,34 +192,37 @@ public class SpeechBoardFragment extends Fragment
 
 	/**
 	 * This function set the colors in the speechBoardFragment
-	 * @param invoker 
+	 * 
 	 */
-	public void setColours(Activity invoker)
+	private void setColours()
 	{
-		//setup colors of the sentenceBoard view
-		/*LinearLayout sentenceBoardLayout = (LinearLayout) invoker.findViewById(R.id.sentenceboardlinearhelper);
+		//setup colors of the sentenceBoard view	
+		GridView sentenceBoardGrid = (GridView) parrent.findViewById(R.id.sentenceboard);
 		Drawable draw = parrent.getResources().getDrawable(R.drawable.sentenceboardlayout);
-		draw.setColorFilter(PARROTActivity.getUser().getSentenceBoardColor(), PorterDuff.Mode.OVERLAY);
-		sentenceBoardLayout.setBackgroundDrawable(draw);*/
-		
-		GridView sentenceBoardGrid = (GridView) invoker.findViewById(R.id.sentenceboard);
-		Drawable draw = parrent.getResources().getDrawable(R.drawable.sentenceboardlayout);
-		draw.setColorFilter(PARROTActivity.getUser().getSentenceBoardColor(), PorterDuff.Mode.OVERLAY);
+		draw.setColorFilter(user.getSentenceBoardColor(), PorterDuff.Mode.OVERLAY);
 		sentenceBoardGrid.setBackgroundDrawable(draw);
-
+		
 		//setup colors of the catagory listnings view
-
-		GridView superCategoryGrid = (GridView) invoker.findViewById(R.id.supercategory);
+		GridView superCategoryGrid = (GridView) parrent.findViewById(R.id.supercategory);
 		draw=parrent.getResources().getDrawable(R.drawable.catlayout);
-		draw.setColorFilter(PARROTActivity.getUser().getCategoryColor(), PorterDuff.Mode.OVERLAY);
+		draw.setColorFilter(Color.DKGRAY, PorterDuff.Mode.OVERLAY);
 		superCategoryGrid.setBackgroundDrawable(draw);
 		
-		//setup colors of the pictogram listnings view
-		GridView pictogramGrid = (GridView) invoker.findViewById(R.id.pictogramgrid);
-		draw = parrent.getResources().getDrawable(R.drawable.gridviewlayout);
-		draw.setColorFilter(displayedCategory.getCategoryColor(),PorterDuff.Mode.OVERLAY);
-		pictogramGrid.setBackgroundDrawable(draw);
+		GridView subCategoryGrid = (GridView) parrent.findViewById(R.id.subcategory);
+		draw=parrent.getResources().getDrawable(R.drawable.catlayout);
+		draw.setColorFilter(Color.DKGRAY, PorterDuff.Mode.OVERLAY);
+		subCategoryGrid.setBackgroundDrawable(draw);
+		setPictogramGridColor();
 		
+	}
+	private void setPictogramGridColor()
+	{
+		//setup colors of the pictogram listnings view
+				GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
+				Drawable draw = parrent.getResources().getDrawable(R.drawable.gridviewlayout);
+				draw.setColorFilter(displayedCategory.getCategoryColor(),PorterDuff.Mode.OVERLAY);
+				pictogramGrid.setBackgroundDrawable(draw);
+				
 	}
 }
 
