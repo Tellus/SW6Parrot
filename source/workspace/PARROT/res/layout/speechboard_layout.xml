@@ -13,15 +13,15 @@
         android:orientation="horizontal" >
 
         <!-- Screen Design for Photos -->
-
 		<GridView
 			android:id="@+id/supercategory"
 			android:layout_width="90dp"
 			android:layout_height="match_parent"
 			android:gravity="center"
 			android:numColumns="1"
-			android:listSelector="@color/cell_empty"
-			android:background="@drawable/sentenceboardlayout" />
+			android:listSelector="@color/cell_empty" 
+			android:background="@drawable/sentenceboardlayout"
+			 />
 	
 		<GridView
 			android:id="@+id/subcategory"
@@ -41,7 +41,6 @@
 	        android:gravity="center"
 	        android:horizontalSpacing="5dp"
 	        android:numColumns="5"
-	        android:fadeScrollbars="false"
 	        android:stretchMode="columnWidth"
 	        android:verticalSpacing="5dp"
 	        android:background="@drawable/sentenceboardlayout" >
@@ -54,6 +53,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:numColumns="7"
+	    android:gravity="center"
 	    android:stretchMode="columnWidth"
    	    android:horizontalSpacing="5dp"
 	    android:verticalSpacing="5dp" >
