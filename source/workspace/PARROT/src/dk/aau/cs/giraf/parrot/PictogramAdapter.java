@@ -53,6 +53,7 @@ public class PictogramAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
+		
 		ImageView imageView;
 		View view = convertView;
 		TextView textView;
@@ -67,7 +68,7 @@ public class PictogramAdapter extends BaseAdapter {
 		LinearLayout.LayoutParams layoutParams;
 		if(PARROTActivity.getUser().getPictogramSize()== PARROTProfile.PictogramSize.LARGE)
 		{
-			layoutParams = new LinearLayout.LayoutParams(190, 190);
+			layoutParams = new LinearLayout.LayoutParams(180, 180);
 		}
 		else
 		{
@@ -89,6 +90,7 @@ public class PictogramAdapter extends BaseAdapter {
 			imageView.setImageBitmap(bitmap);
 		}
 		view.setPadding(8, 8, 8, 8);
+		
 
 		return view;
 	}
