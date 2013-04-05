@@ -8,7 +8,6 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -19,8 +18,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 /**
  * @author PARROT spring 2012

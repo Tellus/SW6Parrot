@@ -6,16 +6,11 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.util.Log;
-import android.widget.CheckBox;
-import android.widget.RadioButton;
-import android.widget.Spinner;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import dk.aau.cs.giraf.pictogram.Pictogram;
@@ -96,7 +91,7 @@ public class PARROTDataLoader {
 			Log.v("MessageParrot", "before categori");
 			
 			CategoryHelper categoryHelper= new CategoryHelper(parent);
-			List<PARROTCategory> categories = categoryHelper.getTempCategoriesWithNewPictogram(prof);
+			List<PARROTCategory> categories = categoryHelper.getTempCategoriesWithNewPictogram(prof.getId());
 			for(PARROTCategory c : categories)
 			{
 				parrotUser.addCategory(c);
