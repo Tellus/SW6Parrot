@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 public class AdminCategory extends Activity {
 	private String childName;
-	private Intent parentIntent;
 	private Bundle extras;
+	private ArrayList<ParcelablePictogram> pictograms;
+	private String testString;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class AdminCategory extends Activity {
 		}
 			
 		TextView displayChild = (TextView) findViewById(R.id.currentChildName);
-		displayChild.setText(childName);
+		displayChild.setText(testString);
 	}
 
 	@Override
@@ -38,15 +39,23 @@ public class AdminCategory extends Activity {
 		if(getIntent().hasExtra("childId")){
 			childName = extras.get("childId").toString();
 		}
-		if(getIntent().hasExtra("myIntent")){
-			parentIntent = (Intent) extras.get("myIntent");
-		}
 		if(getIntent().hasExtra("Pictograms")){
-			ArrayList<ParcelablePictogram> pictograms = getIntent().getParcelableArrayListExtra("Pictograms");
+			pictograms = getIntent().getParcelableArrayListExtra("Pictograms");
+		}
+		if(getIntent().hasExtra("sendTest")) {
+			testString = (String) extras.get("sendTest");
 		}
 	}
 	
 	public void returnToCaller(MenuItem item) {
-		startActivity(parentIntent);
+		Intent data = this.getIntent();
+		data.putParcelableArrayListExtra("testParcel", pictograms);
+		if(getParent() == null){
+			setResult(Activity.RESULT_OK, data);
+		}
+		else{
+			getParent().setResult(Activity.RESULT_OK, data);
+		}
+		finish();
 	}
 }

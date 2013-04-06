@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginRight="5dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.13"
         android:orientation="vertical" >
         
         <LinearLayout
@@ -34,10 +34,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
         
         <GridView
-        android:id="@+id/checkout"
-        android:layout_width="match_parent"	
-        android:layout_height="fill_parent"
-        android:background="@drawable/sentenceboardlayout" >
+            android:id="@+id/checkout"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/sentenceboardlayout"
+            android:stretchMode="columnWidth" >
+
     </GridView>
        
     </LinearLayout>
