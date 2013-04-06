@@ -19,7 +19,7 @@ public final class R {
 		public static final int main = 0x7f030003;
 	}
 	public static final class drawable {
-		public static final int ic_launcher = 0x7f02000b;
-		public static final int usynlig = 0x7f020014;
+		public static final int ic_launcher = 0x7f02000c;
+		public static final int usynlig = 0x7f020011;
 	}
 }
