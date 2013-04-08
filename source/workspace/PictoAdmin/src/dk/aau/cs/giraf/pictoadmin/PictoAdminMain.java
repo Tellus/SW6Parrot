@@ -2,7 +2,6 @@ package dk.aau.cs.giraf.pictoadmin;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 public class PictoAdminMain extends Activity {
 	Button searchbutton;
@@ -34,6 +34,7 @@ public class PictoAdminMain extends Activity {
 	PARROTCategory checkoutList;
 	ArrayList<ParcelablePictogram> output;
 	GridView checkout;
+	GridView picto_display;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,18 @@ public class PictoAdminMain extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
 				checkoutList.removePictogram(position);
-				checkout.setAdapter(new KlimAdapter(checkoutList, getApplicationContext()));
+				checkout.setAdapter(new PictoAdapter1(checkoutList, getApplicationContext()));
 				return true;
+			}
+		});
+		
+		picto_display = (GridView) findViewById(R.id.pictogram_displayer);
+		picto_display.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View v, int position,
+					long arg3) {
+				//Add selected pictogram to checkoutList
+				//Update checkout view, by setting adapter
 			}
 		});
 		
@@ -122,15 +133,20 @@ public class PictoAdminMain extends Activity {
 	public void sendContent(MenuItem item)
 	{
 		output = getCheckoutList();
+		ArrayList<KlimPictogram> test = new ArrayList<KlimPictogram>();
+		KlimPictogram test1 = new KlimPictogram(getApplicationContext(), "imagepath", "textlabel", "audiopath", 11);
+		test.add(test1);
 		
 		Intent data = this.getIntent();
-		data.putParcelableArrayListExtra("checkoutList", output);
+		
+		data.putParcelableArrayListExtra("checkoutList", test);
 		if(getParent() == null) {
 			setResult(Activity.RESULT_OK, data);
 		}
 		else {
 			getParent().setResult(Activity.RESULT_OK, data);
 		}
+		//startActivity(data);
 		finish();
 	}
 	
@@ -171,7 +187,7 @@ public class PictoAdminMain extends Activity {
 		
 		checkoutList = list.get(0);
 
-		checkout.setAdapter(new KlimAdapter(checkoutList, this));
+		checkout.setAdapter(new PictoAdapter1(checkoutList, this));
 	}
 	
 	/**

@@ -21,11 +21,11 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
  * @PARROT
  * This is the Pictogram Adapter class. It is used to import the pictograms into a gridview.
  */
-public class KlimAdapter extends BaseAdapter {
+public class PictoAdapter1 extends BaseAdapter {
 	private PARROTCategory	  categoryNew = null;
 	private Context context;
 	
-	public KlimAdapter(PARROTCategory cat, Context c)
+	public PictoAdapter1(PARROTCategory cat, Context c)
 	{
 		super();
 		this.categoryNew = cat;

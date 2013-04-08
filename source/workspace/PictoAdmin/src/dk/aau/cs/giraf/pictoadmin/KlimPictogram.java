@@ -145,19 +145,16 @@ public class KlimPictogram extends FrameLayout implements IPictogram, Parcelable
         return pictogramID;
     }
 
-
 	@Override
 	public int describeContents() {
 		return 0;
 	}
-
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(this.imagePath);
 		dest.writeString(this.textLabel);
 		dest.writeString(this.audioPath);
-		
 		dest.writeLong(this.pictogramID);
 	}
 	
@@ -173,5 +170,4 @@ public class KlimPictogram extends FrameLayout implements IPictogram, Parcelable
 			return new KlimPictogram[size];
 		}
 	};
-
 }
