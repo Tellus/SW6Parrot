@@ -162,23 +162,6 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 					speech.invalidate();
 
 				}
-				/*
-				//The folowing do not work at the moment. It is mean to let the child be able to move pictograms from one category into another if this functionality is given to the child. 
-				//This functionality is also handled in the ManageCategoryFragment.java.
-				if( self.getId() == R.id.supercategory && SpeechBoardFragment.dragOwnerID == R.id.pictogramgrid)	//We are about to copy a pictogram from one category to another
-				{
-					//TODO Create a OPTIONS boolean to insures that this can be turned on or off.
-					GridView gridCat = (GridView) parrent.findViewById(R.id.supercategory);
-					int x = (int)event.getX();
-					int y = (int)event.getY();
-					int index = gridCat.pointToPosition(x, y);
-
-					Category categoryDroppedIn = profile.getCategoryAt(index);
-					categoryDroppedIn.addPictogram(draggedPictogram);
-				}
-				 */
-
-
 			}
 			//To ensure that no wrong references will be made, the index is reset to -1
 			SpeechBoardFragment.draggedPictogramIndex = -1;

@@ -1,6 +1,8 @@
 package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
+
+import android.graphics.Color;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
@@ -18,10 +20,9 @@ public class PARROTProfile {
 	private ArrayList<PARROTCategory> categories = new ArrayList<PARROTCategory>();
 	private long profileID =-1;
 	private int noOfboxesInSentenceboard = 1;
-	private int categoryColor = 0xb4b6b2;
-	private int sentenceBoardColor = 0xaaafff;
+	private int sentenceBoardColor = Color.WHITE;
 	private PictogramSize pictogramSize = PictogramSize.MEDIUM; 
-	private boolean showText = false;
+	private boolean showText = true;
 			
 	//TODO add all applicable settings here.
 	public static enum PictogramSize{MEDIUM, LARGE}
@@ -89,13 +90,6 @@ public class PARROTProfile {
 		noOfboxesInSentenceboard = numberOfSentencePictograms;
 	}
 
-	public int getCategoryColor() {
-		return categoryColor;
-	}
-
-	public void setCategoryColor(int categoryColor) {
-		this.categoryColor = categoryColor;
-	}
 
 	public int getSentenceBoardColor() {
 		return sentenceBoardColor;

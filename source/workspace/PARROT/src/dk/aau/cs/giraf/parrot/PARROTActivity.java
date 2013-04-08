@@ -64,17 +64,7 @@ public class PARROTActivity extends Activity {
 		}
 		else
 		{ 
-			//this is new testData being written to database, such that we have some categories and colors
-			//BEGIN testData
-			Setting<String, String, String> setting = help.appsHelper.getSettingByIds(app.getId(), childID);
-			//this write test data to database
-			if(setting.containsKey("SentenceboardSettings") == false)
-			{
-				TestData test = new TestData(this);
-				test.TESTsaveTestProfile();		
-			}
-			//END testData
-			
+
 			
 			dataLoader = new PARROTDataLoader(this);
 			
