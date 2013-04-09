@@ -41,7 +41,7 @@ public class PictoAdminMain extends Activity {
 	public long guardianid;
 	private Intent girafIntent;
 	private Profile profile;
-	public ArrayList<Pictogram> pictograms;
+	public List<Pictogram> pictograms;
 	
 
 	@Override
@@ -60,21 +60,9 @@ public class PictoAdminMain extends Activity {
 		Helper help = new Helper(this);
 		profile = help.profilesHelper.getProfileById(childid);
 	
+		pictograms = PictoFactory.INSTANCE.getAllPictograms(getApplicationContext());
 		
-		List<Media> childMedia = help.mediaHelper.getMediaByProfile(profile);
 		
-		for(Media m : childMedia)
-		{
-			if(m.getMType().equalsIgnoreCase("image"))
-			{
-				Log.v("MessageParrot", "in IMAGE if");
-				Pictogram pic = PictoFactory.INSTANCE.getPictogram(getApplicationContext(), m.getId());
-				pictograms.add(pic);
-				//pictograms.add(loadPictogram(m.getId()));
-				Log.v("MessageParrot", "efter indlæsning af media");
-			}
-		}
-
 		setContentView(R.layout.activity_picto_admin_main);
 	}
 	
@@ -122,10 +110,8 @@ public class PictoAdminMain extends Activity {
 		}
 		
 		else if(tag.equals("Navn")) {
-			String error;
-			error = "Picto size:" ;
 			
-			updateErrorMessage(error, 0);
+			
 		}
 		
 		//TODO: If no pictograms found call below method
