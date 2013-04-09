@@ -32,7 +32,7 @@ public class PictoAdminMain extends Activity {
 	EditText inputbox;
 	List<Media> pictograms;
 	PARROTCategory checkoutList;
-	ArrayList<ParcelablePictogram> output;
+	long[] output;
 	GridView checkout;
 	GridView picto_display;
 
@@ -133,21 +133,25 @@ public class PictoAdminMain extends Activity {
 	public void sendContent(MenuItem item)
 	{
 		output = getCheckoutList();
-		ArrayList<KlimPictogram> test = new ArrayList<KlimPictogram>();
+		TextView display = (TextView) findViewById(R.id.textView1);
+		display.setText(checkoutList.getPictogramAtIndex(0).getTextLabel());
+		/*ArrayList<KlimPictogram> test = new ArrayList<KlimPictogram>();
 		KlimPictogram test1 = new KlimPictogram(getApplicationContext(), "imagepath", "textlabel", "audiopath", 11);
-		test.add(test1);
+		test.add(test1);*/
 		
 		Intent data = this.getIntent();
-		
-		data.putParcelableArrayListExtra("checkoutList", test);
+		Intent tester = new Intent(this, AdminCategory.class);
+		tester.putExtra("checkoutIds", output);
+		data.putExtra("checkoutIds", output);
+		//data.putParcelableArrayListExtra("checkoutList", test);
 		if(getParent() == null) {
 			setResult(Activity.RESULT_OK, data);
 		}
 		else {
 			getParent().setResult(Activity.RESULT_OK, data);
 		}
-		//startActivity(data);
-		finish();
+		startActivity(tester);
+		//finish();
 	}
 	
 	/**
@@ -165,13 +169,15 @@ public class PictoAdminMain extends Activity {
 	 * Assess the checkout gridview and load the pictograms into an ArrayList
 	 * @return ArrayList of checkout pictograms
 	 */
-	public ArrayList<ParcelablePictogram> getCheckoutList() {
-		ArrayList<ParcelablePictogram> checkout = new ArrayList<ParcelablePictogram>();
-		//TODO: Load pictograms from checkout
+	public long[] getCheckoutList() {
+		long[] checkout = new long[checkoutList.getPictograms().size()];
 		
+		for (int i = 0; i < 2; i++) { 
+			checkout[i] = checkoutList.getPictogramAtIndex(i).getPictogramID();
+		}
 		/* Example how to add pictogram to checkout */
-		ParcelablePictogram pictogram = new ParcelablePictogram("name", "imagepath", "soundpath", "wordpath");
-		checkout.add(pictogram);
+		//ParcelablePictogram pictogram = new ParcelablePictogram("name", "imagepath", "soundpath", "wordpath");
+		//checkout.add(pictogram);
 		
 		return checkout;
 	}
@@ -197,14 +203,14 @@ public class PictoAdminMain extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		// Define testList in outer scope
-		ArrayList<ParcelablePictogram> checkout = new ArrayList<ParcelablePictogram>();
-		
+		long[] checkout;
+		Bundle extras = data.getExtras();
 		/*
 		 * Add different cases for different resultCode
 		 * Source: http://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
 		 */
 		if(resultCode == RESULT_OK){
-			checkout = data.getParcelableArrayListExtra("checkoutList");
+			checkout = extras.getLongArray("checkoutIds");
 		}
 	}
 }

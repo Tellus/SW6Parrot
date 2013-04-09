@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
@@ -22,10 +25,12 @@ public class AdminCategory extends Activity {
 	private String childName = "defaultChild";
 	private String guardianName = "defaultGuardian";
 	private Bundle extras;
-	//private ArrayList<ParcelablePictogram> pictograms;
+	
 	private ArrayList<KlimPictogram> pictograms;
 	private PARROTCategory selectedCategory = null;
 	private PARROTCategory selectedSubCategory = null;
+	
+	private long[] testIds;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,16 @@ public class AdminCategory extends Activity {
 				//Populate subcategory gridview by using adapter
 			}
 		});
+		
+		categoryGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View v,
+					int position, long arg3) {
+				SettingDialogFragment testDialog = new SettingDialogFragment();
+				testDialog.show(getFragmentManager(), "test");
+				return false;
+			}
+		});
 		PARROTCategoryAdapter test = new PARROTCategoryAdapter(list, this);
 		categoryGrid.setAdapter(test);
 	}
@@ -73,14 +88,14 @@ public class AdminCategory extends Activity {
 		if(getIntent().hasExtra("guardianId")){
 			guardianName = extras.get("guardianId").toString();
 		}
-		if(getIntent().hasExtra("checkoutList")){
-			pictograms = getIntent().getParcelableArrayListExtra("checkoutList");
+		if(getIntent().hasExtra("checkoutIds")){
+			testIds = getIntent().getLongArrayExtra("checkoutIds");
 		}
 	}
 	
 	public void returnToCaller(MenuItem item) {
 		Intent data = this.getIntent();
-		data.putParcelableArrayListExtra("testParcel", pictograms);
+		data.putExtra("checkoutIds", testIds);
 		if(getParent() == null){
 			setResult(Activity.RESULT_OK, data);
 		}
