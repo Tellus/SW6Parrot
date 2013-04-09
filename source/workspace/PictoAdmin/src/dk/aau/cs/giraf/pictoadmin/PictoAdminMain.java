@@ -1,10 +1,14 @@
 package dk.aau.cs.giraf.pictoadmin;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Loader.ForceLoadContentObserver;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +25,9 @@ import dk.aau.cs.giraf.categorylib.PictogramOLD;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
+
 
 public class PictoAdminMain extends Activity {
 	Button searchbutton;
@@ -29,12 +35,46 @@ public class PictoAdminMain extends Activity {
 	//DisplayPictograms disphandler;
 	String textinput;
 	EditText inputbox;
-	List<Media> pictograms;
 	private Bundle extras;
+	
+	public long childid;
+	public long guardianid;
+	private Intent girafIntent;
+	private Profile profile;
+	public ArrayList<Pictogram> pictograms;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		girafIntent = getIntent();
+		
+		/* Dette outcommented segment er det korrekte at bruge men vi mangle en ordentligt tablet til at køre det på 
+		*  guardianid = girafIntent.getLongExtra("currentGuardianID", -1); 
+		*  childid = girafIntent.getLongExtra("currentChildID", -1); */
+		
+		childid = 12;
+		guardianid = 1;
+		
+		Helper help = new Helper(this);
+		profile = help.profilesHelper.getProfileById(childid);
+	
+		
+		List<Media> childMedia = help.mediaHelper.getMediaByProfile(profile);
+		
+		for(Media m : childMedia)
+		{
+			if(m.getMType().equalsIgnoreCase("image"))
+			{
+				Log.v("MessageParrot", "in IMAGE if");
+				Pictogram pic = PictoFactory.INSTANCE.getPictogram(getApplicationContext(), m.getId());
+				pictograms.add(pic);
+				//pictograms.add(loadPictogram(m.getId()));
+				Log.v("MessageParrot", "efter indlæsning af media");
+			}
+		}
+
 		setContentView(R.layout.activity_picto_admin_main);
 	}
 	
@@ -71,11 +111,25 @@ public class PictoAdminMain extends Activity {
 	 * category, subcategory or color
 	 */
 	private void loadPictoIntoGridView(String tag)
-	{
+	{	
 		GridView picGrid = (GridView) findViewById(R.id.pictogram_displayer);
+		EditText textinput = (EditText) findViewById(R.id.text_input);
+		String searchterm = textinput.getText().toString();
+		
+		if(tag.equals("Tags")) {
+			// TODO: tags not implemented yet
+			updateErrorMessage("You cannot search for tags yet", R.drawable.action_about);
+		}
+		
+		else if(tag.equals("Navn")) {
+			String error;
+			error = "Picto size:" ;
+			
+			updateErrorMessage(error, 0);
+		}
 		
 		//TODO: If no pictograms found call below method
-		updateErrorMessage("No such picture in database", R.drawable.action_about);
+		//updateErrorMessage("No such picture in database", R.drawable.action_about);
 	}
 	
 	/**
