@@ -1,8 +1,7 @@
 package dk.aau.cs.giraf.pictoadmin;
-import java.nio.Buffer;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +11,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -20,8 +22,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
-import dk.aau.cs.giraf.categorylib.PictogramOLD;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
@@ -35,6 +35,7 @@ public class PictoAdminMain extends Activity {
 	//DisplayPictograms disphandler;
 	String textinput;
 	EditText inputbox;
+
 	private Bundle extras;
 	
 	public long childid;
@@ -42,7 +43,12 @@ public class PictoAdminMain extends Activity {
 	private Intent girafIntent;
 	private Profile profile;
 	public List<Pictogram> pictograms;
-	
+
+	PARROTCategory checkoutList;
+	long[] output;
+	GridView checkout;
+	GridView picto_display;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,27 @@ public class PictoAdminMain extends Activity {
 		
 		
 		setContentView(R.layout.activity_picto_admin_main);
+		
+		checkout = (GridView) findViewById(R.id.checkout);
+		checkout.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
+				checkoutList.removePictogram(position);
+				checkout.setAdapter(new PictoAdapter1(checkoutList, getApplicationContext()));
+				return true;
+			}
+		});
+		
+		picto_display = (GridView) findViewById(R.id.pictogram_displayer);
+		picto_display.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View v, int position,
+					long arg3) {
+				//Add selected pictogram to checkoutList
+				//Update checkout view, by setting adapter
+			}
+		});
+		
 	}
 	
 	@Override
@@ -147,14 +174,26 @@ public class PictoAdminMain extends Activity {
 	 */
 	public void sendContent(MenuItem item)
 	{
-		ArrayList<ParcelablePictogram> PicPackage = getCheckoutList();
+		output = getCheckoutList();
+		TextView display = (TextView) findViewById(R.id.textView1);
+		display.setText(checkoutList.getPictogramAtIndex(0).getTextLabel());
+		/*ArrayList<KlimPictogram> test = new ArrayList<KlimPictogram>();
+		KlimPictogram test1 = new KlimPictogram(getApplicationContext(), "imagepath", "textlabel", "audiopath", 11);
+		test.add(test1);*/
 		
-		Intent intent = new Intent(this, AdminCategory.class);
-		intent.putParcelableArrayListExtra("Pictograms", PicPackage);
-		intent.putExtra("myIntent", new Intent(this, PictoAdminMain.class));
-		intent.putExtra("childId", 1523);
-		
-		startActivity(intent);
+		Intent data = this.getIntent();
+		Intent tester = new Intent(this, AdminCategory.class);
+		tester.putExtra("checkoutIds", output);
+		data.putExtra("checkoutIds", output);
+		//data.putParcelableArrayListExtra("checkoutList", test);
+		if(getParent() == null) {
+			setResult(Activity.RESULT_OK, data);
+		}
+		else {
+			getParent().setResult(Activity.RESULT_OK, data);
+		}
+		startActivity(tester);
+		//finish();
 	}
 	
 	/**
@@ -172,42 +211,48 @@ public class PictoAdminMain extends Activity {
 	 * Assess the checkout gridview and load the pictograms into an ArrayList
 	 * @return ArrayList of checkout pictograms
 	 */
-	public ArrayList<ParcelablePictogram> getCheckoutList() {
-		ArrayList<ParcelablePictogram> checkout = new ArrayList<ParcelablePictogram>();
-		//TODO: Load pictograms from checkout
+	public long[] getCheckoutList() {
+		long[] checkout = new long[checkoutList.getPictograms().size()];
 		
+		for (int i = 0; i < 2; i++) { 
+			checkout[i] = checkoutList.getPictogramAtIndex(i).getPictogramID();
+		}
 		/* Example how to add pictogram to checkout */
-		ParcelablePictogram pictogram = new ParcelablePictogram("name", "imagepath", "soundpath", "wordpath");
-		checkout.add(pictogram);
+		//ParcelablePictogram pictogram = new ParcelablePictogram("name", "imagepath", "soundpath", "wordpath");
+		//checkout.add(pictogram);
 		
 		return checkout;
 	}
 
 	public void klimTestMethod(MenuItem item) {
-		GridView checkoutGrid = (GridView) findViewById(R.id.checkout);
+		checkout = (GridView) findViewById(R.id.checkout);
 		
+		CategoryHelper helpCat = new CategoryHelper(this);
 		Helper help = new Helper(this);
 		Profile child = help.profilesHelper.getProfileById(11);
+		List<PARROTCategory> list = new ArrayList<PARROTCategory>();
+		list = helpCat.getTempCategoriesWithNewPictogram(child);
 		
-		PARROTCategory    checkoutCategoryNew = new PARROTCategory("TestNew", 0xffa500, null);
-		PARROTCategoryOLD checkoutCategoryOld = new PARROTCategoryOLD("TestOld", 0xff0000, null);
-		
-		// Test images added
-		checkoutCategoryOld.addPictogram(new PictogramOLD("test1", "testImagePath", "testSoundPath", "testWordPath"));
-		checkoutCategoryOld.addPictogram(new PictogramOLD("test2", "testImagePath", "testSoundPath", "testWordPath"));
-		checkoutCategoryOld.addPictogram(new PictogramOLD("test3", "testImagePath", "testSoundPath", "testWordPath"));
-		checkoutCategoryOld.addPictogram(new PictogramOLD("test4", "testImagePath", "testSoundPath", "testWordPath"));
-		
-		checkoutGrid.setAdapter(new KlimAdapter(checkoutCategoryOld, this));
+		checkoutList = list.get(0);
+
+		checkout.setAdapter(new PictoAdapter1(checkoutList, this));
 	}
 	
-/*	@Override
-	public void onClick(View v) {
-			// what happens when we click "search"
-			textinput = inputbox.getText().toString();
-			
-			pictograms.addAll(dbhandler.getPictograms(textinput));
-			
-			//disphandler.updatePictogramDisplayer(pictograms);
-	}*/
+	/**
+	 * This should be done by the calling activity
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		// Define testList in outer scope
+		long[] checkout;
+		Bundle extras = data.getExtras();
+		/*
+		 * Add different cases for different resultCode
+		 * Source: http://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
+		 */
+		if(resultCode == RESULT_OK){
+			checkout = extras.getLongArray("checkoutIds");
+		}
+	}
 }

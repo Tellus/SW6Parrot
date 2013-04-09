@@ -2,6 +2,8 @@ package dk.aau.cs.giraf.pictoadmin;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,20 +21,11 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
  * @PARROT
  * This is the Pictogram Adapter class. It is used to import the pictograms into a gridview.
  */
-public class KlimAdapter extends BaseAdapter {
-
-	private PARROTCategoryOLD categoryOld;
-	private PARROTCategory	  categoryNew;
+public class PictoAdapter1 extends BaseAdapter {
+	private PARROTCategory	  categoryNew = null;
 	private Context context;
-
-	public KlimAdapter(PARROTCategoryOLD cat, Context c)
-	{
-		super();
-		this.categoryOld = cat;
-		context = c;
-	}
 	
-	public KlimAdapter(PARROTCategory cat, Context c)
+	public PictoAdapter1(PARROTCategory cat, Context c)
 	{
 		super();
 		this.categoryNew = cat;
@@ -42,7 +35,7 @@ public class KlimAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		//return the number of pictograms
-		return categoryOld.getPictograms().size();
+		return categoryNew.getPictograms().size();
 	}
 
 	@Override
@@ -58,31 +51,22 @@ public class KlimAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
-		LinearLayout.LayoutParams layoutParams;
-		ImageView imageView;
-		View view = convertView;
-		TextView textView;
-		PictogramOLD pctOld = categoryOld.getPictogramAtIndex(position);
-		//TODO: Pictogram	 pctNew = categoryNew.getPictogramAtIndex(position);
+		Pictogram pctNew = categoryNew.getPictogramAtIndex(position);
+		Bitmap img = BitmapFactory.decodeFile(pctNew.getImagePath());
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
 
 		LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		view = layoutInflater.inflate(R.layout.pictogramview, null);
+		convertView = layoutInflater.inflate(R.layout.pictogramview, null);
 
-		imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
-		imageView.setImageBitmap(pctOld.getBitmap());
-		//TODO: imageView.setImageBitmap(pctNew.getBitmap());
-		
-		layoutParams = new LinearLayout.LayoutParams(145, 145);
-
+		ImageView imageView = (ImageView) convertView.findViewById(R.id.pictogrambitmap); 
+		imageView.setImageBitmap(img);
 		imageView.setLayoutParams(layoutParams);
 
-		textView = (TextView) view.findViewById(R.id.pictogramtext);
-		textView.setTextSize(20);
-		textView.setText(pctOld.getName());
-		//TODO: textView.setText(pctNew.getName());
+		TextView textView = (TextView) convertView.findViewById(R.id.pictogramtext);
+		textView.setText(pctNew.getTextLabel());
 		
-		view.setPadding(8, 8, 8, 8);
+		convertView.setPadding(20, 0, 0, 0);
 
-		return view;
+		return convertView;
 	}
 }
