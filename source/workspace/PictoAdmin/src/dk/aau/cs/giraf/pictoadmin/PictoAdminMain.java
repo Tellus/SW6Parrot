@@ -127,9 +127,13 @@ public class PictoAdminMain extends Activity {
 	 */
 	private void loadPictoIntoGridView(String tag)
 	{	
+		PictoAdapter pictoadapt = new PictoAdapter(getApplicationContext(), pictograms);
+		
 		GridView picGrid = (GridView) findViewById(R.id.pictogram_displayer);
 		EditText textinput = (EditText) findViewById(R.id.text_input);
 		String searchterm = textinput.getText().toString();
+		
+		picGrid.setAdapter(pictoadapt);
 		
 		if(tag.equals("Tags")) {
 			// TODO: tags not implemented yet
