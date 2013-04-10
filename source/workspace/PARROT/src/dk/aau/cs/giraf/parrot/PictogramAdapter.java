@@ -56,6 +56,7 @@ public class PictogramAdapter extends BaseAdapter {
 		ImageView imageView;
 		View view = convertView;
 		TextView textView;
+		
 		Pictogram pct=cat.getPictogramAtIndex(position);
 
 		LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

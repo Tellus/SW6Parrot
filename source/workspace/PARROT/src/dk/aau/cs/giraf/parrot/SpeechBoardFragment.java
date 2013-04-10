@@ -102,8 +102,9 @@ public class SpeechBoardFragment extends Fragment
 			//setup drag listeners for the views
 			parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
 			parrent.findViewById(R.id.sentenceboard).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
-			parrent.findViewById(R.id.supercategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
-			parrent.findViewById(R.id.subcategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
+			/* don't know why these have drag listenders
+			 * parrent.findViewById(R.id.supercategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
+			parrent.findViewById(R.id.subcategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));*/
 
 			//for dragging pictogram from the pictogramlisting view
 			pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()
@@ -162,17 +163,22 @@ public class SpeechBoardFragment extends Fragment
 					GridView subCategoryGrid = (GridView) parrent.findViewById(R.id.subcategory);
 					subCategoryGrid.setAdapter(new PARROTCategoryAdapter(displayedCategory.getSubCategories(), parrent.getApplicationContext()));
 					setPictogramGridColor();					
-					
-					subCategoryGrid.setOnItemClickListener(new OnItemClickListener() 
+				}
+			});
+			
+			GridView subCategoryGrid = (GridView) parrent.findViewById(R.id.subcategory);
+			subCategoryGrid.setOnItemClickListener(new OnItemClickListener() 
+			{
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
+				{
+					//this check is neccessary if you click twice at a subcategory it will crash since subCategories does not contain any subCategory
+					if(!displayedCategory.getSubCategories().isEmpty())
 					{
-						@Override
-						public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
-						{
-							displayedCategory = displayedCategory.getSubCategoryAtIndex(position);
-							GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
-							pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
-						}
-					});
+						displayedCategory = displayedCategory.getSubCategoryAtIndex(position);
+						GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
+						pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
+					}
 				}
 			});
 		}

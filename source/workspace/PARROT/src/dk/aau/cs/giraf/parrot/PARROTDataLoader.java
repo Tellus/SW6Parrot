@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
@@ -27,6 +28,7 @@ public class PARROTDataLoader {
 	private Activity parent;
 	private Helper help;
 	private App app;
+	private CategoryHelper categoryHelper= null;
 
 
 
@@ -35,6 +37,7 @@ public class PARROTDataLoader {
 		this.parent = activity;
 		help = new Helper(parent); 
 		app = help.appsHelper.getAppById(PARROTActivity.getApp().getId()); 
+		categoryHelper= new CategoryHelper(parent);
 
 	}
 
@@ -90,22 +93,51 @@ public class PARROTDataLoader {
 			String categoryString = null;
 			Log.v("MessageParrot", "before categori");
 			
-			CategoryHelper categoryHelper= new CategoryHelper(parent);
-			List<PARROTCategory> categories = categoryHelper.getTempCategoriesWithNewPictogram(prof.getId());
+			
+			//this return null if the child does not exist
+			List<PARROTCategory> categories = categoryHelper.getChildsCategories(prof.getId());
+			
+			if(categories ==null)
+			{
+				categories = categoryHelper.getTempCategoriesWithNewPictogram(prof.getId());
+				// 1. Instantiate an AlertDialog.Builder with its constructor
+				AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+		
+				// 2. Chain together various setter methods to set the dialog characteristics
+				builder.setMessage(R.string.dialog_message)
+		       .setTitle(R.string.dialog_title)
+		       .setPositiveButton( R.string.ok, new DialogInterface.OnClickListener() {
+	               @Override
+	               public void onClick(DialogInterface dialog, int id) {
+	                   // User clicked OK, so save the mSelectedItems results somewhere
+	                   // or return them to the component that opened the dialog
+	                   
+	               }
+		       })
+		       .setNegativeButton(R.string.returnItem, new DialogInterface.OnClickListener() {
+	               @Override
+	               public void onClick(DialogInterface dialog, int id) {
+	                   // User clicked OK, so save the mSelectedItems results somewhere
+	                   // or return them to the component that opened the dialog
+	            	   parent.finish();
+	               }
+		       });
+				// 3. Get the AlertDialog from create()
+					AlertDialog dialog = builder.create();
+					dialog.show();
+			}
+			
+			Log.v("MessageXML", "xmlChild does exist");
 			for(PARROTCategory c : categories)
 			{
 				parrotUser.addCategory(c);
 			}
 			
 			return parrotUser;
-			
+				
 		}
-		//If an error has happened, return null
-		AlertDialog alertDialog;
-		alertDialog = new AlertDialog.Builder(parent).create();
-		alertDialog.setTitle("Error");
-		alertDialog.setMessage("Child not found in database");
-		alertDialog.show();
+
+		
 		return null;
 	}
 
@@ -161,6 +193,21 @@ public class PARROTDataLoader {
 		app.setSettings(profileSetting);
 		help.appsHelper.modifyAppByProfile(app, prof);
 		
+	}
+	public void XMLTESTER()
+	{
+		Log.v("PARROTmessage","start xmltester");
+		long childid=11;
+		CategoryHelper helper = new CategoryHelper(parent);
+		List<PARROTCategory> categories = helper.getTempCategoriesWithNewPictogram(childid);
+		
+		Log.v("PARROTmessage","save categories");
+		for(PARROTCategory category : categories)
+		{
+			helper.saveCategory(category, childid);	
+		}
+		helper.saveChangesToXML();
+		Log.v("PARROTmessage","done xmltester");
 	}
 
 }
