@@ -17,7 +17,7 @@ public class SettingDialogFragment extends DialogFragment {
                        // FIRE ZE MISSILES!
                    }
                })
-               .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                        // User cancelled the dialog
                    }

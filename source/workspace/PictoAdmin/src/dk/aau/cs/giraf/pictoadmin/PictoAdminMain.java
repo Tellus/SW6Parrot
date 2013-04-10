@@ -46,7 +46,7 @@ public class PictoAdminMain extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
 				checkoutList.removePictogram(position);
-				checkout.setAdapter(new PictoAdapter1(checkoutList, getApplicationContext()));
+				checkout.setAdapter(new PictoAdapter2(checkoutList.getPictograms(), getApplicationContext()));
 				return true;
 			}
 		});
@@ -121,8 +121,7 @@ public class PictoAdminMain extends Activity {
 	 * MenuItem: Exist the current activity and returns to the latest active activity
 	 * @param item: This must be included for the function to work 
 	 */
-	public void returnToLastActivity(MenuItem item)
-	{
+	public void returnToLastActivity(MenuItem item) {
 		finish();
 	}
 	
@@ -130,8 +129,7 @@ public class PictoAdminMain extends Activity {
 	 * MenuItem: Sends items from selected gridview to appropriate receiver
 	 * @param item: This must be included for the function to work 
 	 */
-	public void sendContent(MenuItem item)
-	{
+	public void sendContent(MenuItem item) {
 		output = getCheckoutList();
 		TextView display = (TextView) findViewById(R.id.textView1);
 		display.setText(checkoutList.getPictogramAtIndex(0).getTextLabel());
@@ -158,8 +156,7 @@ public class PictoAdminMain extends Activity {
 	 * MenuItem: Goto admin_category
 	 * @param item
 	 */
-	public void gotoAdminCategory(MenuItem item)
-	{
+	public void gotoAdminCategory(MenuItem item) {
 		Intent intent = new Intent(this, AdminCategory.class);
 		startActivity(intent);
 	}
@@ -193,7 +190,7 @@ public class PictoAdminMain extends Activity {
 		
 		checkoutList = list.get(0);
 
-		checkout.setAdapter(new PictoAdapter1(checkoutList, this));
+		checkout.setAdapter(new PictoAdapter2(checkoutList.getPictograms(), this));
 	}
 	
 	/**
