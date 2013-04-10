@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,36 +32,37 @@ public class PictoAdminMain extends Activity {
 	String textinput;
 	EditText inputbox;
 	List<Media> pictograms;
-	PARROTCategory checkoutList;
+	ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
+	ArrayList<Pictogram> pictoList  = new ArrayList<Pictogram>();
 	long[] output;
-	GridView checkout;
-	GridView picto_display;
+	GridView checkoutGrid;
+	GridView pictoGrid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_picto_admin_main);
 		
-		checkout = (GridView) findViewById(R.id.checkout);
-		checkout.setOnItemLongClickListener(new OnItemLongClickListener() {
+		checkoutGrid = (GridView) findViewById(R.id.checkout);
+		checkoutGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
-				checkoutList.removePictogram(position);
-				checkout.setAdapter(new PictoAdapter2(checkoutList.getPictograms(), getApplicationContext()));
+				//checkoutList.removePictogram(position);
+				checkoutList.remove(position);
+				checkoutGrid.setAdapter(new PictoAdapter2(checkoutList, getApplicationContext()));
 				return true;
 			}
 		});
 		
-		picto_display = (GridView) findViewById(R.id.pictogram_displayer);
-		picto_display.setOnItemClickListener(new OnItemClickListener() {
+		pictoGrid = (GridView) findViewById(R.id.pictogram_displayer);
+		pictoGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position,
 					long arg3) {
-				//Add selected pictogram to checkoutList
-				//Update checkout view, by setting adapter
+				checkoutList.add(pictoList.get(position));
+				checkoutGrid.setAdapter(new PictoAdapter2(checkoutList, getApplicationContext()));
 			}
 		});
-		
 	}
 	
 	@Override
@@ -70,7 +72,6 @@ public class PictoAdminMain extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.picto_admin_main, menu);
 		return true;
 	}
@@ -131,25 +132,16 @@ public class PictoAdminMain extends Activity {
 	 */
 	public void sendContent(MenuItem item) {
 		output = getCheckoutList();
-		TextView display = (TextView) findViewById(R.id.textView1);
-		display.setText(checkoutList.getPictogramAtIndex(0).getTextLabel());
-		/*ArrayList<KlimPictogram> test = new ArrayList<KlimPictogram>();
-		KlimPictogram test1 = new KlimPictogram(getApplicationContext(), "imagepath", "textlabel", "audiopath", 11);
-		test.add(test1);*/
 		
 		Intent data = this.getIntent();
-		Intent tester = new Intent(this, AdminCategory.class);
-		tester.putExtra("checkoutIds", output);
 		data.putExtra("checkoutIds", output);
-		//data.putParcelableArrayListExtra("checkoutList", test);
 		if(getParent() == null) {
 			setResult(Activity.RESULT_OK, data);
 		}
 		else {
 			getParent().setResult(Activity.RESULT_OK, data);
 		}
-		startActivity(tester);
-		//finish();
+		finish();
 	}
 	
 	/**
@@ -167,30 +159,25 @@ public class PictoAdminMain extends Activity {
 	 * @return ArrayList of checkout pictograms
 	 */
 	public long[] getCheckoutList() {
-		long[] checkout = new long[checkoutList.getPictograms().size()];
-		
-		for (int i = 0; i < 2; i++) { 
-			checkout[i] = checkoutList.getPictogramAtIndex(i).getPictogramID();
+		long[] checkout = new long[checkoutList.size()];
+		int i = 0;
+		for(Pictogram p : checkoutList){
+			checkout[i] = p.getPictogramID();
+			i++;
 		}
-		/* Example how to add pictogram to checkout */
-		//ParcelablePictogram pictogram = new ParcelablePictogram("name", "imagepath", "soundpath", "wordpath");
-		//checkout.add(pictogram);
 		
 		return checkout;
 	}
 
 	public void klimTestMethod(MenuItem item) {
-		checkout = (GridView) findViewById(R.id.checkout);
-		
 		CategoryHelper helpCat = new CategoryHelper(this);
 		Helper help = new Helper(this);
 		Profile child = help.profilesHelper.getProfileById(11);
 		List<PARROTCategory> list = new ArrayList<PARROTCategory>();
 		list = helpCat.getTempCategoriesWithNewPictogram(child);
 		
-		checkoutList = list.get(0);
-
-		checkout.setAdapter(new PictoAdapter2(checkoutList.getPictograms(), this));
+		pictoList = list.get(0).getPictograms();
+		pictoGrid.setAdapter(new PictoAdapter2(pictoList, getApplicationContext()));
 	}
 	
 	/**

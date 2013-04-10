@@ -15,22 +15,22 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 public class AdminCategory extends Activity {
-	private String childName = "defaultChild";
-	private String guardianName = "defaultGuardian";
+	private String childName = "";
+	private String guardianName = "";
 	private Bundle extras;
 	
-	private ArrayList<KlimPictogram> pictograms;
 	private PARROTCategory selectedCategory = null;
 	private PARROTCategory selectedSubCategory = null;
-	
-	private long[] testIds;
+	private Pictogram 	   selectedPictogram = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,33 +45,52 @@ public class AdminCategory extends Activity {
 		CategoryHelper helpCat = new CategoryHelper(this);
 		Helper help = new Helper(this);
 		Profile child = help.profilesHelper.getProfileById(11);
-		ArrayList<PARROTCategory> list = new ArrayList<PARROTCategory>();
-		list = (ArrayList<PARROTCategory>) helpCat.getTempCategoriesWithNewPictogram(child);
-		
-		TextView displayChild = (TextView) findViewById(R.id.currentChildName);
-		displayChild.setText(childName);
-		
-		final GridView categoryGrid = (GridView) findViewById(R.id.category_gridview);
-		categoryGrid.setOnItemClickListener(new OnItemClickListener() {
+		final ArrayList<PARROTCategory> categoryList = (ArrayList<PARROTCategory>) helpCat.getTempCategoriesWithNewPictogram(child);
+		final ArrayList<PARROTCategory> subcategoryList = new ArrayList<PARROTCategory>();
+		final ArrayList<Pictogram> pictograms = new ArrayList<Pictogram>();
+		final GridView subcategoryGrid = (GridView) findViewById(R.id.subcategory_gridview);
+		subcategoryGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View v, int position,
-					long arg3) {
-				selectedCategory = (PARROTCategory) categoryGrid.getItemAtPosition(position);
-				//Populate subcategory gridview by using adapter
+			public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
+				selectedSubCategory = (PARROTCategory) subcategoryList.get(position);
+				ArrayList<Pictogram> pictograms = selectedSubCategory.getPictograms();
+				GridView pictoGrid = (GridView) findViewById(R.id.pictogram_gridview);
+				pictoGrid.setAdapter(new PictoAdapter2(pictograms, getApplicationContext()));
+				// TODO Auto-generated method stub
+			}
+		});
+		subcategoryGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				return false;
 			}
 		});
 		
+		GridView categoryGrid = (GridView) findViewById(R.id.category_gridview);
+		categoryGrid.setAdapter(new PARROTCategoryAdapter(categoryList, this));
+		categoryGrid.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
+				selectedCategory = (PARROTCategory) categoryList.get(position);
+				ArrayList<PARROTCategory> subcategoryList = selectedCategory.getSubCategories();
+				subcategoryGrid.setAdapter(new PARROTCategoryAdapter(subcategoryList, getApplicationContext()));
+				ImageButton addnewsub = (ImageButton) findViewById(R.id.add_new_subcategory_button);
+							addnewsub.setClickable(true);
+				
+				ImageButton delsubcat = (ImageButton) findViewById(R.id.delete_selected_subcategory_button);
+							delsubcat.setClickable(false);
+			}
+		});
 		categoryGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View v,
-					int position, long arg3) {
+			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
 				SettingDialogFragment testDialog = new SettingDialogFragment();
 				testDialog.show(getFragmentManager(), "test");
 				return false;
 			}
 		});
-		PARROTCategoryAdapter test = new PARROTCategoryAdapter(list, this);
-		categoryGrid.setAdapter(test);
+		
 	}
 
 	@Override
@@ -81,6 +100,30 @@ public class AdminCategory extends Activity {
 		return true;
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(selectedCategory != null) {
+			ImageButton delcat = (ImageButton) findViewById(R.id.delete_selected_category_button);
+			ImageButton addsub = (ImageButton) findViewById(R.id.add_new_subcategory_button);
+			ImageButton accpic = (ImageButton) findViewById(R.id.access_pictocreator_button);
+			ImageButton addpic = (ImageButton) findViewById(R.id.add_new_picture_button);
+						
+			delcat.setClickable(true);
+			addsub.setClickable(true);
+			accpic.setClickable(true);
+			addpic.setClickable(true);
+		}
+		if(selectedSubCategory != null) {
+			ImageButton delsub = (ImageButton) findViewById(R.id.delete_selected_subcategory_button);
+						delsub.setClickable(true);
+		}
+		if(selectedPictogram != null) {
+			ImageButton delpic = (ImageButton) findViewById(R.id.delete_selected_picture_button);
+						delpic.setClickable(true);
+		}
+	}
+	
 	private void getAllExtras() {
 		if(getIntent().hasExtra("childId")){
 			childName = extras.get("childId").toString();
@@ -88,14 +131,10 @@ public class AdminCategory extends Activity {
 		if(getIntent().hasExtra("guardianId")){
 			guardianName = extras.get("guardianId").toString();
 		}
-		if(getIntent().hasExtra("checkoutIds")){
-			testIds = getIntent().getLongArrayExtra("checkoutIds");
-		}
 	}
 	
 	public void returnToCaller(MenuItem item) {
 		Intent data = this.getIntent();
-		data.putExtra("checkoutIds", testIds);
 		if(getParent() == null){
 			setResult(Activity.RESULT_OK, data);
 		}

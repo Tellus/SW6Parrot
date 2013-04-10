@@ -17,6 +17,12 @@
         <item>Under kategori</item>
         <item>Farve?</item>
     </string-array>
+    
+    <string-array name="dialog_options">
+        <item>Titel</item>
+        <item>Farve</item>
+        <item>Icon</item>
+    </string-array>
 
     <string name="save_changes">Gem</string>
     <string name="delete">Slet</string>
