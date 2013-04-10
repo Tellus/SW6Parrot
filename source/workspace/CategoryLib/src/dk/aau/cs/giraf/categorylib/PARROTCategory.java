@@ -25,6 +25,7 @@ public class PARROTCategory
 	//This is the constructor method.
 	public PARROTCategory(int color, Pictogram icon) //this is a constructor method that takes icon and color as input
 	{
+		subCategories = new ArrayList<PARROTCategory>();
 		pictograms = new ArrayList<Pictogram>();
 		setCategoryColor(color);
 		setIcon(icon);

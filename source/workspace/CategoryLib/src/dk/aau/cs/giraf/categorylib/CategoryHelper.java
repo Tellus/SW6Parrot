@@ -1,8 +1,7 @@
 package dk.aau.cs.giraf.categorylib;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.ArrayList;
 import android.app.Activity;
 import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -14,55 +13,226 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 
 public class CategoryHelper {
 
+	
 	Helper help=null;
 	Activity activity=null;
-		
+	XMLCommunicater communicater= null;
+	ArrayList<XMLProfile> xmlData= new ArrayList<XMLProfile>();
+	PictoFactory factory= PictoFactory.INSTANCE;
+	
+	
 	public CategoryHelper(Activity activity)
 	{
 		this.activity = activity;
 		help = new Helper(activity); 
+		communicater = new XMLCommunicater(); 
+		
+		
+		
 	}
 	
-	public List<PARROTCategory> getChildsCategories(long childId)
+	
+	
+	public void saveChangesToXML()
 	{
-		List<PARROTCategory> cat=null;
-		return cat;
+		communicater.setXMLDataAndUpdate(xmlData);
 	}
 	
-	public void saveChangesInCategory(PARROTCategory category,long childId)
+ 	
+	
+	private XMLCategoryProfile transformToXMLCategoryProfile(PARROTCategory category)
 	{
+		Log.v("XMLTESTER","start transformToXMLCategoryProfile");
+		XMLCategoryProfile xmlCategory = new XMLCategoryProfile();
+		
+		xmlCategory.setColor(category.getCategoryColor());
+		xmlCategory.setIconID(category.getIcon().getPictogramID());
+		xmlCategory.setName(category.getCategoryName());
+		
+		for(Pictogram p: category.getPictograms())
+		{
+			xmlCategory.addPictogramId(Long.valueOf(p.getPictogramID()));
+		}
+		for(PARROTCategory subCategory : category.getSubCategories())
+		{
+			xmlCategory.addSubcategory(transformToXMLCategoryProfile(subCategory));
+		
+		}
+		
+		return xmlCategory;
+		
+	}
+	
+	//used when saving or adding a category to child 
+	public void saveCategory(PARROTCategory category,long childId)
+	{
+		Log.v("XMLTESTER","Start saveCategory");
+		XMLCategoryProfile categoryProfile = transformToXMLCategoryProfile(category);
+		Log.v("XMLTESTER", "_color "+ categoryProfile.getColor() + " _name: "+ categoryProfile.getName());
+		ArrayList<XMLCategoryProfile> categoryProfileList = null; 
+		
+		boolean childExist = false;
+		/*if(!xmlData.isEmpty())
+		{*/
+			for(XMLProfile x: xmlData)
+			{
+				
+				if(x.getChildID()==childId)
+				{
+					categoryProfileList = x.getCategories();
+					childExist=true;
+					break;
+				}
+			}
+		//}
+		if(!childExist)
+		{
+			
+			XMLProfile prof= new XMLProfile();
+			prof.setChildID(childId);
+			categoryProfileList = prof.getCategories();
+			xmlData.add(prof);
+		}
+		else
+		{
+			
+			deleteCategory(category, childId, categoryProfileList);
+		}
+		//if the category exist then delete
+		
+		categoryProfileList.add(categoryProfile);
+		Log.v("XMLTESTER","done in saveCategory");
+
+		
+	}
+	
+	private void deleteCategory(PARROTCategory category, long childId, ArrayList<XMLCategoryProfile> categoryProfileList)
+	{	 
+		
+		for(XMLCategoryProfile cp : categoryProfileList)
+		{
+			if(cp.getName()==category.getCategoryName())
+			{
+				categoryProfileList.remove(cp);
+
+			}
+		}
 		
 	}
 	
 	public void deleteCategory(PARROTCategory category, long childId)
 	{
+		XMLProfile childProfile=null;
+		ArrayList<XMLCategoryProfile> categoryProfileList = null; 
+		for(XMLProfile prof: xmlData)
+		{
+			if(prof.getChildID()==childId)
+			{
+				childProfile=prof;
+				categoryProfileList = prof.getCategories();
+				break;
+			}
+		}
+		deleteCategory(category, childId, categoryProfileList);
+	/*	for(XMLCategoryProfile cp : categoryProfileList)
+		{
+			if(cp.getName()==category.getCategoryName())
+			{
+				categoryProfileList.remove(cp);
+
+			}
+		}*/
+		if(categoryProfileList.isEmpty())
+		{
+			xmlData.remove(childProfile);
+		}
 		
+	
+	}
+
+	
+	//from here from xml to parrotcategories 
+	private PARROTCategory transformToPARROTCategory(XMLCategoryProfile categoryProfile)
+	{	
+		Log.v("MessageXML","transformToPARROTCategory begin");
+		Pictogram icon = factory.getPictogram(activity.getApplicationContext(), categoryProfile.getIconID());
+		PARROTCategory category = new PARROTCategory(categoryProfile.getName(), categoryProfile.getColor(), icon);
+		
+		for(Long pictogramId : categoryProfile.getPictogramsID())
+		{
+			//Log.v("MessageXML","pic begin");
+			Pictogram pictoId = factory.getPictogram(activity.getApplicationContext(), pictogramId);
+			category.addPictogram(pictoId);	
+			//Log.v("MessageXML","pic end");
+		}
+		Log.v("MessageXML","pic final end");
+		Log.v("MessageXML","catego final begin");
+		Log.v("","sub/category not empty");
+
+		for(XMLCategoryProfile cp : categoryProfile.getSubcategories())
+		{
+			Log.v("MessageXML","sub/cate begin");
+			category.addSubCategory(transformToPARROTCategory(cp));
+			Log.v("MessageXML","sub/cate end");
+		}
+		
+		Log.v("MessageXML","transformToPARROTCategory end");
+		return category;
 	}
 	
-	public void addNewCategory(PARROTCategory category,long childId)
+	public ArrayList<PARROTCategory> getChildsCategories(long childId)
 	{
+		xmlData = communicater.getXMLData();
+		Log.v("XMLTESTER", "after getXMLData");
+		ArrayList<PARROTCategory> categories=null;
+		XMLProfile xmlChild = null;
+		for(XMLProfile profile: xmlData)
+		{
+			if(profile.getChildID()==childId)
+			{
+				
+				categories = new ArrayList<PARROTCategory>();
+				xmlChild=profile;
+				break;
+			}
+		}		
 		
-	}
+		if(xmlChild==null)
+		{
+			Log.v("MessageXML", "xmlChild does not exist return null");return null;}
+		
+		for(XMLCategoryProfile cp : xmlChild.getCategories())
+		{
+			Log.v("MessageXML", "category found begin");
+			PARROTCategory category= transformToPARROTCategory(cp);
+			Log.v("MessageXML","category: " + category.getCategoryName());
+			categories.add(category);
+			Log.v("MessageXML", "category found end");
+			
+		}
 
-	public List<PARROTCategory> getTempCategoriesWithNewPictogram(Profile childProfile)
+		return categories;
+	}
+	
+	
+	/** temp file **/
+	public ArrayList<PARROTCategory> getTempCategoriesWithNewPictogram(long childid)
 	{
 		
-		List<PARROTCategory> categories= new ArrayList<PARROTCategory>();
+		Profile childProfile= help.profilesHelper.getProfileById(childid);
+		ArrayList<PARROTCategory> categories= new ArrayList<PARROTCategory>();
 		
 		ArrayList<Pictogram> pictograms = new ArrayList<Pictogram>();
-		List<Media> childMedia = help.mediaHelper.getMediaByProfile(childProfile);
-
-		Log.v("MessageParrot","hentet childMedia");
+		ArrayList<Media> childMedia = (ArrayList<Media>)help.mediaHelper.getMediaByProfile(childProfile);
 
 		for(Media m : childMedia)
 		{
 			if(m.getMType().equalsIgnoreCase("image"))
 			{
-				Log.v("MessageParrot", "in IMAGE if");
+				
 				Pictogram pic = PictoFactory.INSTANCE.getPictogram(activity.getApplicationContext(), m.getId());
 				pictograms.add(pic);
-				//pictograms.add(loadPictogram(m.getId()));
-				Log.v("MessageParrot", "efter indlæsning af media");
+				
 			}
 		}
 		
@@ -106,35 +276,34 @@ public class CategoryHelper {
 	}
 	
 	
-	public List<PARROTCategoryOLD> getTempCategoriesOldPictograms(Profile childProfile)
+	public ArrayList<PARROTCategory> getTempCategoriesWithNewPictogram(Profile childProfile)
 	{
-		List<PARROTCategoryOLD> categories= new ArrayList<PARROTCategoryOLD>();
 		
-		ArrayList<PictogramOLD> pictograms = new ArrayList<PictogramOLD>();
-		List<Media> childMedia = help.mediaHelper.getMediaByProfile(childProfile);
+		ArrayList<PARROTCategory> categories= new ArrayList<PARROTCategory>();
+		
+		ArrayList<Pictogram> pictograms = new ArrayList<Pictogram>();
+		ArrayList<Media> childMedia =(ArrayList<Media>) help.mediaHelper.getMediaByProfile(childProfile);
 
-		Log.v("MessageParrot","hentet childMedia");
+
 
 		for(Media m : childMedia)
 		{
 			if(m.getMType().equalsIgnoreCase("image"))
 			{
-				Log.v("MessageParrot", "in IMAGE if");
-				pictograms.add(loadPictogram(m.getId()));
-				Log.v("MessageParrot", "efter indlæsning af media");
+
+				Pictogram pic = PictoFactory.INSTANCE.getPictogram(activity.getApplicationContext(), m.getId());
+				pictograms.add(pic);
+				//pictograms.add(loadPictogram(m.getId()));
+			
 			}
 		}
-		if(pictograms.isEmpty())
-		{
-			Log.v("MessageParrot", "pictograms is empty");
-		}
-		Log.v("MessageParrot", "efter indlæsning af media");
 		
-		PARROTCategoryOLD tempCat3 = new PARROTCategoryOLD("Kategori 1", 0xff05ff12, pictograms.get(0));
-		PARROTCategoryOLD tempCatSUB1 = new PARROTCategoryOLD("SUB1",0xff05ff12, pictograms.get(0));
 		
-		int count=1;
-		for(PictogramOLD p : pictograms)
+		PARROTCategory tempCat3 = new PARROTCategory("Kategori 1", 0xff05ff12, pictograms.get(0));
+		PARROTCategory tempCatSUB1 = new PARROTCategory("SUB1",0xff05ff12, pictograms.get(0));
+		
+		/*int count=1;
+		for(Pictogram p : pictograms)
 		{
 			tempCatSUB1.addPictogram(p);
 			
@@ -143,21 +312,21 @@ public class CategoryHelper {
 				tempCat3.addPictogram(p);
 			}
 			count++;
-		}
+		}*/
 
 		
 
-		PARROTCategoryOLD tempCat4 = new PARROTCategoryOLD("Kategori 2", 0xffff0000, pictograms.get(10));
-		tempCat4.addPictogram(pictograms.get(10));
+		PARROTCategory tempCat4 = new PARROTCategory("Kategori 2", 0xffff0000, pictograms.get(10));
+		/*tempCat4.addPictogram(pictograms.get(10));
 		tempCat4.addPictogram(pictograms.get(13));
 		tempCat4.addPictogram(pictograms.get(12));
-		tempCat4.addPictogram(pictograms.get(11));
+		tempCat4.addPictogram(pictograms.get(11));*/
 
-		PARROTCategoryOLD tempCatSUB2 = new PARROTCategoryOLD("SUB2", 0xffff0000, pictograms.get(10));
-		tempCatSUB2.addPictogram(pictograms.get(3));
+		PARROTCategory tempCatSUB2 = new PARROTCategory("SUB2", 0xffff0000, pictograms.get(10));
+		/*tempCatSUB2.addPictogram(pictograms.get(3));
 		tempCatSUB2.addPictogram(pictograms.get(5));
 		tempCatSUB2.addPictogram(pictograms.get(9));
-		tempCatSUB2.addPictogram(pictograms.get(1));	
+		tempCatSUB2.addPictogram(pictograms.get(1));	*/
 		
 		tempCat3.addSubCategory(tempCatSUB1);
 		tempCat4.addSubCategory(tempCatSUB2);
@@ -168,42 +337,6 @@ public class CategoryHelper {
 		return categories;
 	}
 	
-	private PictogramOLD loadPictogram(long idPictogram)
-	{
-		PictogramOLD pic = null;
-		Media media=help.mediaHelper.getSingleMediaById(idPictogram); //This is the image media //TODO check type
-
-		List<Media> subMedias =	help.mediaHelper.getSubMediaByMedia(media); 
-		String soundPath = null;
-		String wordPath = null;
-		long soundID = -1; //If this value is still -1 when we save a media, it is because the pictogram has no sound.
-		long wordID = -1;
-		
-		if(subMedias != null)	//Media files can have a link to a sub-media file, check if this one does.
-		{	
-			Media investigatedMedia;
-			for(int i = 0; i<subMedias.size();i++) 		
-			{
-				investigatedMedia = subMedias.get(i);
-				if(investigatedMedia.getMType().equals("SOUND"))
-				{
-					soundPath = investigatedMedia.getMPath();
-					soundID= investigatedMedia.getId();
-				}
-				else if(investigatedMedia.getMType().equals("WORD"))
-				{
-					wordPath = investigatedMedia.getMPath();
-					wordID = investigatedMedia.getId();
-				}
-			}
-		}
-		pic = new PictogramOLD(media.getName(), media.getMPath(), soundPath, wordPath);
-		//set the different ID's
-		pic.setImageID(idPictogram);
-		pic.setSoundID(soundID);
-		pic.setWordID(wordID);
-
-		return pic;
-	}
+	
 
 }

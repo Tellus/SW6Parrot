@@ -8,7 +8,6 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -74,15 +73,24 @@ public class SpeechBoardFragment extends Fragment
 			//Setup the view for the listing of pictograms
 			GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
 			pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
-			
-			if(PARROTProfile.PictogramSize.MEDIUM == user.getPictogramSize())
-			{
-				pictogramGrid.setNumColumns(7);
-			}
 			//Setup the view for the sentences
 			GridView sentenceBoardGrid = (GridView) parrent.findViewById(R.id.sentenceboard);
 			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, parrent.getApplicationContext()));
-			sentenceBoardGrid.setNumColumns(PARROTActivity.getUser().getNumberOfSentencePictograms());
+			int noInSentence=user.getNumberOfSentencePictograms();
+			sentenceBoardGrid.setNumColumns(noInSentence);
+
+			if(PARROTProfile.PictogramSize.MEDIUM == user.getPictogramSize())
+			{
+				pictogramGrid.setNumColumns(7);
+				sentenceBoardGrid.setColumnWidth(160);
+		
+			}
+			else
+			{
+				pictogramGrid.setNumColumns(5);
+				sentenceBoardGrid.setColumnWidth(205);
+			}
+
 			
 			//Setup the view for the categories 
 			GridView superCategoryGrid = (GridView) parrent.findViewById(R.id.supercategory);
@@ -94,8 +102,9 @@ public class SpeechBoardFragment extends Fragment
 			//setup drag listeners for the views
 			parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
 			parrent.findViewById(R.id.sentenceboard).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
-			parrent.findViewById(R.id.supercategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
-			parrent.findViewById(R.id.subcategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
+			/* don't know why these have drag listenders
+			 * parrent.findViewById(R.id.supercategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
+			parrent.findViewById(R.id.subcategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));*/
 
 			//for dragging pictogram from the pictogramlisting view
 			pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()
@@ -154,17 +163,22 @@ public class SpeechBoardFragment extends Fragment
 					GridView subCategoryGrid = (GridView) parrent.findViewById(R.id.subcategory);
 					subCategoryGrid.setAdapter(new PARROTCategoryAdapter(displayedCategory.getSubCategories(), parrent.getApplicationContext()));
 					setPictogramGridColor();					
-					
-					subCategoryGrid.setOnItemClickListener(new OnItemClickListener() 
+				}
+			});
+			
+			GridView subCategoryGrid = (GridView) parrent.findViewById(R.id.subcategory);
+			subCategoryGrid.setOnItemClickListener(new OnItemClickListener() 
+			{
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
+				{
+					//this check is neccessary if you click twice at a subcategory it will crash since subCategories does not contain any subCategory
+					if(!displayedCategory.getSubCategories().isEmpty())
 					{
-						@Override
-						public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
-						{
-							displayedCategory = displayedCategory.getSubCategoryAtIndex(position);
-							GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
-							pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
-						}
-					});
+						displayedCategory = displayedCategory.getSubCategoryAtIndex(position);
+						GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
+						pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
+					}
 				}
 			});
 		}
@@ -180,13 +194,14 @@ public class SpeechBoardFragment extends Fragment
 				speechBoardCategory.removePictogram(count);
 				count--;
 			}
-				
+			count=0;
 			//Fills the sentenceboard with emptyPictogram pictograms
 			while(speechBoardCategory.getPictograms().size() <PARROTActivity.getUser().getNumberOfSentencePictograms())
 			{
 				speechBoardCategory.addPictogram(emptyPictogram);
 			}
 			GridView sentenceBoardGrid = (GridView) activity.findViewById(R.id.sentenceboard);
+		
 			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, activity.getApplicationContext()));
 	}
 

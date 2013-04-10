@@ -1,30 +1,18 @@
 package dk.aau.cs.giraf.parrot;
 
-import java.util.ArrayList;
-
 import dk.aau.cs.giraf.categorylib.AudioPlayer;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
-import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.DragShadowBuilder;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 
 public class PARROTActivity extends Activity {
@@ -52,7 +40,7 @@ public class PARROTActivity extends Activity {
 		app = help.appsHelper.getAppByPackageName();
 		/*don't delete this is for lisbeth and anders when running on our own device*/
 		guardianID = 1;
-		childID=12;
+		childID=11;
 		
 		
 		if(guardianID == -1 )
@@ -63,38 +51,57 @@ public class PARROTActivity extends Activity {
 			alertDialog.show();
 		}
 		else
-		{ 
-
-			
+		{ 	
 			dataLoader = new PARROTDataLoader(this);
 			
-			//If an error occur parrotUser is null which must be cached  
-			parrotUser = dataLoader.loadProfile(childID, app.getId());	
+			parrotUser = dataLoader.loadProfile(childID, app.getId());
 			Log.v("MessageParrot", "returned");	
 			if(parrotUser != null)
 			{
-					
-			/* Here all the Tabs in the system is initialized based on whether or not a user
-			 * is allowed to use them. If not they will not be initialized.
-			 * We wish not make users aware that there exists functionality that they are not
-			 * entitled to.
-			 * Remember: Make sure the order of the Taps is consistent with the order of their rights in the
-			 * 			 Rights array.
-			 */
-			ActionBar actionBar = getActionBar();
-			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-			//actionBar.setDisplayShowTitleEnabled(false);	//TODO figure out what this does
-
-			//Creating a new Tab, setting the text it is to show and construct and attach a Tab Listener to control it.
-			Tab tab = actionBar.newTab() 
-					.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
-			tab.select();
+						
+				/* Here all the Tabs in the system is initialized based on whether or not a user
+				 * is allowed to use them. If not they will not be initialized.
+				 * We wish not make users aware that there exists functionality that they are not
+				 * entitled to.
+				 * Remember: Make sure the order of the Taps is consistent with the order of their rights in the
+				 * 			 Rights array.
+				 */
+				ActionBar actionBar = getActionBar();
+				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+				//Creating a new Tab, setting the text it is to show and construct and attach a Tab Listener to control it.
+				Tab tab = actionBar.newTab() 
+						.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
+				tab.select();
 			}
-			
-			
+			else
+			{
+				// 1. Instantiate an AlertDialog.Builder with its constructor
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		
+				// 2. Chain together various setter methods to set the dialog characteristics
+				builder.setMessage(R.string.dialog_message)
+				       .setTitle(R.string.dialog_title)
+				       .setPositiveButton( R.string.ok, new DialogInterface.OnClickListener() {
+			               @Override
+			               public void onClick(DialogInterface dialog, int id) {
+			                   // User clicked OK, so save the mSelectedItems results somewhere
+			                   // or return them to the component that opened the dialog
+			                   
+			               }
+				       })
+				       .setNegativeButton(R.string.returnItem, new DialogInterface.OnClickListener() {
+			               @Override
+			               public void onClick(DialogInterface dialog, int id) {
+			                   // User clicked OK, so save the mSelectedItems results somewhere
+			                   // or return them to the component that opened the dialog
+			            	   returnToLauncher();
+			               }
+				       });
+				// 3. Get the AlertDialog from create()
+					AlertDialog dialog = builder.create();
+					dialog.show();
+			}
 		}
-
-
 	}
 	
 	@Override
@@ -134,6 +141,9 @@ public class PARROTActivity extends Activity {
 		return true;
 	}
 
+
+	
+	
 	public void goToSettings(){
 		Intent intent = new Intent(this, SettingActivity.class);
 		startActivity(intent);
