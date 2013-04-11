@@ -70,7 +70,7 @@ public class PictoAdapter2 extends BaseAdapter {
 		TextView textView = (TextView) convertView.findViewById(R.id.pictogramtext);
 		textView.setText(pctNew.getTextLabel());
 		
-		convertView.setPadding(20, 0, 0, 0);
+		convertView.setPadding(5, 5, 5, 5);
 
 		return convertView;
 	}

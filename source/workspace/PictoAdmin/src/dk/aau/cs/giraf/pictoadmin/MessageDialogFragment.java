@@ -7,21 +7,13 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 
-public class SettingDialogFragment extends DialogFragment {
+public class MessageDialogFragment extends DialogFragment {
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Rediger kategori")
-        	   .setItems(R.array.dialog_options, new OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
-				}
-			})
-               .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
+        builder.setMessage("Not implemented")
+               .setPositiveButton("Øv", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                        // User cancelled the dialog
                    }
