@@ -28,7 +28,12 @@ public class CategoryHelper {
 		this.activity = activity;
 		help = new Helper(activity); 
 		communicater = new XMLCommunicater(); 
-		
+		//this should be an easy temperaty way to get static data into the xml
+		if(XMLCommunicater.isNewFile==true)
+		{
+			XMLTESTER();
+			XMLCommunicater.isNewFile=false;
+		}
 	}
 	
 	
@@ -270,6 +275,15 @@ public class CategoryHelper {
 		categories.add(tempCat3);
 		categories.add(tempCat4);
 		
+
+		return categories;
+	}
+	
+	public void XMLTESTER()
+	{
+		Log.v("PARROTmessage","start xmltester");
+		List<PARROTCategory> categories = getTempCategoriesWithNewPictogram(11);
+		
 		Log.v("PARROTmessage","save categories");
 		List<Profile> children = help.profilesHelper.getChildren();
 		for(Profile child : children)
@@ -282,11 +296,10 @@ public class CategoryHelper {
 			}
 		}
 		
-		
 		saveChangesToXML();
-		return categories;
+		
+		Log.v("PARROTmessage","done xmltester");
 	}
-	
 	
 	public ArrayList<PARROTCategory> getTempCategoriesWithNewPictogram(Profile childProfile)
 	{

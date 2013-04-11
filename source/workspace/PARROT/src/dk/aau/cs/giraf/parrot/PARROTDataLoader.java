@@ -186,13 +186,6 @@ public class PARROTDataLoader {
 		help.appsHelper.modifyAppByProfile(app, prof);
 		
 	}
-	public void XMLTESTER()
-	{
-		Log.v("PARROTmessage","start xmltester");
-		CategoryHelper helper = new CategoryHelper(parent);
-		List<PARROTCategory> categories = helper.getTempCategoriesWithNewPictogram(11);
-		
-	Log.v("PARROTmessage","done xmltester");
-	}
+
 
 }

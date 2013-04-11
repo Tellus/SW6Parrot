@@ -25,7 +25,8 @@ import android.util.Log;
 import android.util.Xml;
 
 public class XMLCommunicater {
-	File categoryXmlData=null;
+	private File categoryXmlData=null;
+	public static boolean isNewFile = false;
 	
 	ArrayList<XMLProfile> xmlData= new ArrayList<XMLProfile>();
 	
@@ -45,6 +46,7 @@ public class XMLCommunicater {
 			    {
 			    	Log.v("MessagePARROT","no xml exist, creating xml");
 			    	categoryXmlData.createNewFile();
+			    	isNewFile=true;
 			    	
 			    	
 			    }
@@ -55,11 +57,8 @@ public class XMLCommunicater {
 			}
 		    else
 		    {
-		    	/*new Thread(new Runnable(){
-	                public void run(){*/
-	                	getDataFromXML();
-	            /*    }
-	            }).start();*/
+		      	getDataFromXML();
+	         
 		    }
 
 		}  
@@ -75,11 +74,11 @@ public class XMLCommunicater {
 	{
 		xmlData= newXMLData;
 		
-		/*new Thread(new Runnable(){
-            public void run(){*/
+		new Thread(new Runnable(){
+            public void run(){
             	insertInToXML();
-       /*     }
-        }).start();*/
+            }
+        }).start();
 		
 		
 		
@@ -196,7 +195,7 @@ public class XMLCommunicater {
 		XMLCategoryProfile subCategory=null;
 		ArrayList<XMLCategoryProfile> categoryList = null;
 		String inSuperOrSubcategory = XMLProfile.CATEGORY;
-		Log.v("XMLTESTER", "begin FileInputStream");
+		//Log.v("XMLTESTER", "begin FileInputStream");
 	    InputStream is;
 		try {
 			is = new FileInputStream(categoryXmlData);
@@ -204,7 +203,7 @@ public class XMLCommunicater {
 			Log.v("MessageParrot","reading from file with exceptions");
 			return;
 		}
-		Log.v("XMLTESTER", "end FileInputStream");
+		//Log.v("XMLTESTER", "end FileInputStream");
 		try {
             // get a new XmlPullParser object from Factory
             XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
@@ -212,14 +211,14 @@ public class XMLCommunicater {
             parser.setInput(is, null);
             // get event type
             int eventType = parser.getEventType();
-            Log.v("XMLTESTER", "parser get event type: "+ eventType);
+           // Log.v("XMLTESTER", "parser get event type: "+ eventType);
             // process tag while not reaching the end of document
             while(eventType != XmlPullParser.END_DOCUMENT) {
             	
                 switch(eventType) {
                     // at start of document: START_DOCUMENT
                     case XmlPullParser.START_DOCUMENT:
-                    	Log.v("XMLTESTER", "start dok");
+                    	//Log.v("XMLTESTER", "start dok");
                         break;
  
                     // at start of a tag: START_TAG
@@ -227,10 +226,10 @@ public class XMLCommunicater {
                     	Log.v("XMLTESTER", "start tag");
                         // get tag name
                         String tagName = parser.getName();
-                        Log.v("XMLTESTER", "tag= " + tagName);
+                        //Log.v("XMLTESTER", "tag= " + tagName);
                         // if <ChildId>, get attribute: 'id'
                         if(tagName.equalsIgnoreCase(profile.CHILDID)) {
-                        	Log.v("XMLTESTER","starttag childid");
+                        	//Log.v("XMLTESTER","starttag childid");
                         	
                         	
                         	profile = new XMLProfile();
@@ -239,11 +238,11 @@ public class XMLCommunicater {
                         }
                         // if <Category>
                         else if(tagName.equalsIgnoreCase(XMLProfile.CATEGORY)) {
-                        	Log.v("XMLTESTER","starttag category");
+                        	//Log.v("XMLTESTER","starttag category");
                         	int color= Integer.parseInt(parser.getAttributeValue(null, XMLProfile.COLOR));
                         	String name= parser.getAttributeValue(null, XMLProfile.ICON);
                         	Long iconid= Long.parseLong(parser.getAttributeValue(null, XMLProfile.ICON));
-                        	Log.v("XMLTESTER","_Color: "+ color +" _icon: "+iconid+" _name; "+ name);
+                        	//Log.v("XMLTESTER","_Color: "+ color +" _icon: "+iconid+" _name; "+ name);
                             
                         	superCategory= new XMLCategoryProfile();
                         	superCategory.setColor(color);
@@ -254,55 +253,55 @@ public class XMLCommunicater {
                         }
                         // if <SubCategory>
                         else if(tagName.equalsIgnoreCase(XMLProfile.SUBCATEGORY)) {
-                        	Log.v("XMLTESTER","starttag subcate");
+                        	//Log.v("XMLTESTER","starttag subcate");
                         	inSuperOrSubcategory = XMLProfile.SUBCATEGORY;
                         	subCategory= new XMLCategoryProfile();
                         	subCategory.setColor(Integer.parseInt(parser.getAttributeValue(null, XMLProfile.COLOR)));
                         	subCategory.setIconID(Long.parseLong(parser.getAttributeValue(null, XMLProfile.ICON)));
                         	subCategory.setName(parser.getAttributeValue(null, XMLProfile.ICON));
                         	
-                        	Log.v("XMLTESTER","_Color: "+ subCategory.getColor()+" _icon: "+subCategory.getIconID()+" _name; "+ subCategory.getName());
-                           // profile.mTopic = parser.nextText();
+                        	//Log.v("XMLTESTER","_Color: "+ subCategory.getColor()+" _icon: "+subCategory.getIconID()+" _name; "+ subCategory.getName());
+                           
                         }
                         // if <Pictogram>
                         else if(tagName.equalsIgnoreCase(XMLProfile.PICTOGRAM)) {
-                        	Log.v("XMLTESTER","starttag picto");
+                        	//Log.v("XMLTESTER","starttag picto");
                         	if(inSuperOrSubcategory.equalsIgnoreCase(XMLProfile.SUBCATEGORY))
                         	{
-                        		Log.v("XMLTESTER","starttag picto is sub");
+                        		//Log.v("XMLTESTER","starttag picto is sub");
                         		Long picId = Long.parseLong(parser.getAttributeValue(null, XMLProfile.ID));
                         		
                         		subCategory.addPictogramId(picId);
-                        		Log.v("XMLTESTER","starttag picto is sub end");
+                        		//Log.v("XMLTESTER","starttag picto is sub end");
                         	}
                         	else
                         	{
-                        		Log.v("XMLTESTER","starttag picto is cate");
+                        		//Log.v("XMLTESTER","starttag picto is cate");
                         		superCategory.addPictogramId(Long.parseLong(parser.getAttributeValue(null, XMLProfile.ID)));
                         	}
-                            //profile.mDate = parser.nextText();
-                        	Log.v("XMLTESTER"," ending starttag picto");
+                           
+                        	//Log.v("XMLTESTER"," ending starttag picto");
                         }
                         break;
 
                     case XmlPullParser.END_TAG:
                     	String tagName2 = parser.getName();
-                    	Log.v("XMLTESTER", "start tag " + tagName2);
+                    	//Log.v("XMLTESTER", "start tag " + tagName2);
                     	// if <ChildId>, get attribute: 'id'
                     	if(tagName2.equalsIgnoreCase(profile.CHILDID)) 
                     	{
-                    		Log.v("XMLTESTER","endtag childid");
+                    		//Log.v("XMLTESTER","endtag childid");
                     		profile.setCategories(categoryList);
                     		xmlData.add(profile);
                     	}
                     	// if <Category>
                         else if(tagName2.equalsIgnoreCase(XMLProfile.CATEGORY)) {
-                        	Log.v("XMLTESTER","endtag catego");
+                        	//Log.v("XMLTESTER","endtag catego");
                         	categoryList.add(superCategory);
                         }
                         // if <SubCategory>
                         else if(tagName2.equalsIgnoreCase(XMLProfile.SUBCATEGORY)) {
-                        	Log.v("XMLTESTER","endtag subcatego");
+                        	//Log.v("XMLTESTER","endtag subcatego");
                         	superCategory.addSubcategory(subCategory);
                         	inSuperOrSubcategory = XMLProfile.CATEGORY;
                         }
