@@ -6,16 +6,12 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
-import android.widget.CheckBox;
-import android.widget.RadioButton;
-import android.widget.Spinner;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import dk.aau.cs.giraf.pictogram.Pictogram;
@@ -32,6 +28,7 @@ public class PARROTDataLoader {
 	private Activity parent;
 	private Helper help;
 	private App app;
+	private CategoryHelper categoryHelper= null;
 
 
 
@@ -40,6 +37,8 @@ public class PARROTDataLoader {
 		this.parent = activity;
 		help = new Helper(parent); 
 		app = help.appsHelper.getAppById(PARROTActivity.getApp().getId()); 
+		categoryHelper= new CategoryHelper(parent);
+		//XMLTESTER();
 
 	}
 
@@ -74,7 +73,7 @@ public class PARROTDataLoader {
 	public PARROTProfile loadProfile(long childId,long appId)	
 	{
 		Profile prof =null;
-
+		List<PARROTCategory> categories = null;
 		
 		if(childId != -1 && appId >=0)
 		 {
@@ -95,22 +94,42 @@ public class PARROTDataLoader {
 			String categoryString = null;
 			Log.v("MessageParrot", "before categori");
 			
-			CategoryHelper categoryHelper= new CategoryHelper(parent);
-			List<PARROTCategory> categories = categoryHelper.getTempCategoriesWithNewPictogram(prof);
-			for(PARROTCategory c : categories)
+			
+			//this return null if the child does not exist
+			categories = categoryHelper.getChildsCategories(prof.getId());
+			
+				
+			Log.v("MessageXML", "xmlChild does exist");
+			if(categories!=null)
 			{
-				parrotUser.addCategory(c);
+				for(PARROTCategory c : categories)
+				{
+					parrotUser.addCategory(c);
+				}
+				
+				return parrotUser;
 			}
-			
-			return parrotUser;
-			
 		}
-		//If an error has happened, return null
-		AlertDialog alertDialog;
-		alertDialog = new AlertDialog.Builder(parent).create();
-		alertDialog.setTitle("Error");
-		alertDialog.setMessage("Child not found in database");
-		alertDialog.show();
+		
+			// 1. Instantiate an AlertDialog.Builder with its constructor
+			AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+	
+			// 2. Chain together various setter methods to set the dialog characteristics
+			builder.setMessage(R.string.dialog_message)
+	       .setTitle(R.string.dialog_title)
+	       .setNegativeButton(R.string.returnItem, new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int id) {
+                   // User clicked OK, so save the mSelectedItems results somewhere
+                   // or return them to the component that opened the dialog
+            	   parent.finish();
+               }
+	       });
+			// 3. Get the AlertDialog from create()
+				AlertDialog dialog = builder.create();
+				dialog.show();
+	
+		
 		return null;
 	}
 
@@ -166,6 +185,14 @@ public class PARROTDataLoader {
 		app.setSettings(profileSetting);
 		help.appsHelper.modifyAppByProfile(app, prof);
 		
+	}
+	public void XMLTESTER()
+	{
+		Log.v("PARROTmessage","start xmltester");
+		CategoryHelper helper = new CategoryHelper(parent);
+		List<PARROTCategory> categories = helper.getTempCategoriesWithNewPictogram(11);
+		
+	Log.v("PARROTmessage","done xmltester");
 	}
 
 }

@@ -6,7 +6,6 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,9 +52,11 @@ public class PictogramAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
+		
 		ImageView imageView;
 		View view = convertView;
 		TextView textView;
+		
 		Pictogram pct=cat.getPictogramAtIndex(position);
 
 		LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,7 +68,7 @@ public class PictogramAdapter extends BaseAdapter {
 		LinearLayout.LayoutParams layoutParams;
 		if(PARROTActivity.getUser().getPictogramSize()== PARROTProfile.PictogramSize.LARGE)
 		{
-			layoutParams = new LinearLayout.LayoutParams(190, 190);
+			layoutParams = new LinearLayout.LayoutParams(180, 180);
 		}
 		else
 		{
@@ -89,6 +90,7 @@ public class PictogramAdapter extends BaseAdapter {
 			imageView.setImageBitmap(bitmap);
 		}
 		view.setPadding(8, 8, 8, 8);
+		
 
 		return view;
 	}

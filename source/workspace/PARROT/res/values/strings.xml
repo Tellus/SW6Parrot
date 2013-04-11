@@ -21,7 +21,13 @@
     <string name="app_name">PARROT</string>
     <string name="firstTab">Tale</string>
     <string name="secondTab">Administrer</string>
+	<string name="dialog_title">Fejl</string>
+	<string name="dialog_message">Barnets id blev ikke fundet</string>
+	<string name="ok">Ok</string>
 
+
+    
+    
     <color name="cell_empty">#FF993311</color>
     <string name="thirdTab">Indstillinger</string>
     <string name="fourthTab">Kamera</string>

@@ -2,22 +2,15 @@ package dk.aau.cs.giraf.parrot;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.App;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
-import dk.aau.cs.giraf.oasis.lib.models.Setting;
 import dk.aau.cs.giraf.parrot.PARROTProfile.PictogramSize;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.ClipData.Item;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -86,13 +79,15 @@ public class SettingActivity extends Activity  {
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-            public void onItemSelected(AdapterView<?> parent, View view, 
+            @Override
+			public void onItemSelected(AdapterView<?> parent, View view, 
                     int pos, long id) {
                 user.setNumberOfSentencePictograms((Integer)parent.getItemAtPosition(pos));
                 
             }
 
-            public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+			public void onNothingSelected(AdapterView<?> parent) {
                 // do nothing   
             }        
         }); 
