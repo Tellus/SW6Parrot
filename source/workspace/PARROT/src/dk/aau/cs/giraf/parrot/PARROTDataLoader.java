@@ -38,7 +38,7 @@ public class PARROTDataLoader {
 		help = new Helper(parent); 
 		app = help.appsHelper.getAppById(PARROTActivity.getApp().getId()); 
 		categoryHelper= new CategoryHelper(parent);
-		//XMLTESTER();
+		
 
 	}
 
