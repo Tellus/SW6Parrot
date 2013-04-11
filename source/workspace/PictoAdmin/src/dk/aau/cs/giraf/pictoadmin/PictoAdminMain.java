@@ -1,6 +1,8 @@
 package dk.aau.cs.giraf.pictoadmin;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import android.app.Activity;
 import android.content.Context;
@@ -36,13 +38,11 @@ public class PictoAdminMain extends Activity {
 	String textinput;
 	EditText inputbox;
 
-	private Bundle extras;
-	
 	public long childid;
 	public long guardianid;
-	private Intent girafIntent;
 	private Profile profile;
-	public List<Pictogram> pictograms;
+	public List<Pictogram> pictotemp; // Vi bruger denne kun til at gette elementer fra pictofactory som returner list
+	public ArrayList<Pictogram> pictograms; // Den egentlige liste af pictogrammer vi ønsker at bruge
 
 	PARROTCategory checkoutList;
 	long[] output;
@@ -53,23 +53,12 @@ public class PictoAdminMain extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		girafIntent = getIntent();
-		
-		/* Dette outcommented segment er det korrekte at bruge men vi mangle en ordentligt tablet til at køre det på 
-		*  guardianid = girafIntent.getLongExtra("currentGuardianID", -1); 
-		*  childid = girafIntent.getLongExtra("currentChildID", -1); */
-		
-		childid = 12;
-		guardianid = 1;
-		
-		Helper help = new Helper(this);
-		profile = help.profilesHelper.getProfileById(childid);
-	
-		pictograms = PictoFactory.INSTANCE.getAllPictograms(getApplicationContext());
-		
-		
 		setContentView(R.layout.activity_picto_admin_main);
+
+		//girafIntent = getIntent();
+		getAllPictograms();
+		getProfile();
+		
 		
 		checkout = (GridView) findViewById(R.id.checkout);
 		checkout.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -91,6 +80,29 @@ public class PictoAdminMain extends Activity {
 			}
 		});
 		
+	}
+	
+	public void getProfile() {
+		/* Dette outcommented segment er det korrekte at bruge men vi mangle en ordentligt tablet til at køre det på 
+		*  guardianid = girafIntent.getLongExtra("currentGuardianID", -1); 
+		*  childid = girafIntent.getLongExtra("currentChildID", -1); 
+		*  Indtil da bliver børn og guardians ID hardcoded */
+		
+		childid = 12;
+		guardianid = 1;
+
+		Helper help = new Helper(this);
+		profile = help.profilesHelper.getProfileById(childid);
+	}
+	
+	public void getAllPictograms() {
+		pictotemp = PictoFactory.INSTANCE.getAllPictograms(getApplicationContext());
+		pictograms = new ArrayList<Pictogram>();
+		
+		//Manuel casting fra  list til ArrayList
+		for (Pictogram p : pictotemp) {
+			pictograms.add(p);
+		}
 	}
 	
 	@Override
@@ -127,13 +139,8 @@ public class PictoAdminMain extends Activity {
 	 */
 	private void loadPictoIntoGridView(String tag)
 	{	
-		PictoAdapter pictoadapt = new PictoAdapter(getApplicationContext(), pictograms);
-		
-		GridView picGrid = (GridView) findViewById(R.id.pictogram_displayer);
-		EditText textinput = (EditText) findViewById(R.id.text_input);
-		String searchterm = textinput.getText().toString();
-		
-		picGrid.setAdapter(pictoadapt);
+		GridView picgrid = (GridView) findViewById(R.id.pictogram_displayer);		
+		EditText searchterm = (EditText) findViewById(R.id.text_input);
 		
 		if(tag.equals("Tags")) {
 			// TODO: tags not implemented yet
@@ -141,12 +148,75 @@ public class PictoAdminMain extends Activity {
 		}
 		
 		else if(tag.equals("Navn")) {
+			ArrayList<Pictogram> searchlist = new ArrayList<Pictogram>();
 			
+			String pictoname;
+			String input = searchterm.getText().toString();
 			
+			for (Pictogram p : pictograms) {
+				pictoname = p.getTextLabel();
+				if(pictoname.equals(input) || searchMatcher(pictoname, input)) {
+					searchlist.add(p);
+				}
+			}
+			
+			//searchlist = sortList(searchlist, input);
+			
+			PictoAdapter2 picto = new PictoAdapter2(searchlist, this);
+			picgrid.setAdapter(picto);
 		}
 		
 		//TODO: If no pictograms found call below method
 		//updateErrorMessage("No such picture in database", R.drawable.action_about);
+	}
+	
+	
+	private boolean searchMatcher(String pictoname, String searchinput) {
+		// Mulighed for at gøre søgefunktionen endnu mere intelligent.
+		Boolean result = true;
+		
+		if(pictoname.contains(searchinput)) {
+			result = true;
+		} else {
+			result = false;
+		}
+		
+		
+		return result;
+	}
+	
+	private ArrayList<Pictogram> sortList(ArrayList<Pictogram> listtobesorted, String searchterm) {
+		ArrayList<Pictogram> sortedlist = new ArrayList<Pictogram>();
+		
+		char [] letters;
+		
+		int [] weight = null; // Bruges til at gemme vægten af alle strenge i listen
+		int [][] index = null; // Bruges til at gemme indexet for læste karakterer for den relative streng
+		int i = 0; // Counter til vægtningen
+		int j = 0; // Counter til at huske index for sidste læste karakter relativt til dens streng
+		
+		for (Pictogram p : listtobesorted) {
+
+			letters = p.getTextLabel().toCharArray();
+			
+			for (char c : letters) {
+				if(searchterm.indexOf(c) != -1) { // Hvis bogstavet findes i søgestrengen skal vi gemme indexet og øge vægtningen
+					weight[i] += 1;
+					index[i][j] = c;
+					j++;
+				}
+			}
+			
+			i++;
+		}
+		
+		
+		/*else if (letters.equals(searchterm)) { // Hvis ordet matcher lige præcist søgetermen så får den en giga-weight.
+			weight[i] += 50;
+			break;
+		}*/
+		
+		return listtobesorted;
 	}
 	
 	/**
@@ -245,15 +315,13 @@ public class PictoAdminMain extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		// Define testList in outer scope
-		long[] checkout;
 		Bundle extras = data.getExtras();
 		/*
 		 * Add different cases for different resultCode
 		 * Source: http://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
 		 */
 		if(resultCode == RESULT_OK){
-			checkout = extras.getLongArray("checkoutIds");
+			extras.getLongArray("checkoutIds");
 		}
 	}
 }
