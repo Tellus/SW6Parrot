@@ -1,21 +1,24 @@
 package dk.aau.cs.giraf.pictoadmin;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
+import dk.aau.cs.giraf.pictogram.*;
 
 
 public class PictoAdapter extends BaseAdapter {
 	private Context context;
-	private ArrayList<Media> pictogramlist;
+	private List<Pictogram> pictogramlist;
 	
 	
-	public PictoAdapter(Context cont, ArrayList<Media> piclist) {
+	public PictoAdapter(Context cont, List<Pictogram> piclist) {
 		this.context = cont;
 		this.pictogramlist = piclist;
 	}
@@ -32,8 +35,13 @@ public class PictoAdapter extends BaseAdapter {
 			gridview = new View(context);
 			
 			gridview = inflater.inflate(R.layout.activity_picto_admin_main, null);
-			//ImageView imageview = (ImageView) gridview.findViewById(R.id.pict_disp_grid_item);
+			ImageView imageview = (ImageView) gridview.findViewById(R.id.pictogram_displayer);
 			
+			for (Pictogram p : pictogramlist) {
+				p.renderImage();
+			}
+			
+			//ImageView imageview = (ImageView) gridview.findViewById(R.id.pict_disp_grid_item);
 			//imageview.setImageBitmap(piclist);
 		}
 		
