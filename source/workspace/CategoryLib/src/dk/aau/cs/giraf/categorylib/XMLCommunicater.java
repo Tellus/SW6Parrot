@@ -13,6 +13,12 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
+import dk.aau.cs.giraf.oasis.lib.models.Media;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.pictogram.AudioPlayer;
+import dk.aau.cs.giraf.pictogram.PictoFactory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
+
 import android.app.Activity;
 import android.os.Environment;
 import android.util.Log;
@@ -39,6 +45,8 @@ public class XMLCommunicater {
 			    {
 			    	Log.v("MessagePARROT","no xml exist, creating xml");
 			    	categoryXmlData.createNewFile();
+			    	
+			    	
 			    }
 			    catch(IOException e)
 			    {
@@ -47,8 +55,11 @@ public class XMLCommunicater {
 			}
 		    else
 		    {
-		    	
-		    	getDataFromXML();
+		    	/*new Thread(new Runnable(){
+	                public void run(){*/
+	                	getDataFromXML();
+	            /*    }
+	            }).start();*/
 		    }
 
 		}  
@@ -63,7 +74,13 @@ public class XMLCommunicater {
 	public void setXMLDataAndUpdate(ArrayList<XMLProfile> newXMLData)
 	{
 		xmlData= newXMLData;
-		insertInToXML();
+		
+		/*new Thread(new Runnable(){
+            public void run(){*/
+            	insertInToXML();
+       /*     }
+        }).start();*/
+		
 		
 		
 	}
@@ -309,6 +326,5 @@ public class XMLCommunicater {
 		
 		
     }
-
 	
 }

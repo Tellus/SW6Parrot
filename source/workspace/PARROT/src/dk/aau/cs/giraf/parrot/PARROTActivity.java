@@ -33,14 +33,14 @@ public class PARROTActivity extends Activity {
 		setContentView(R.layout.main);
 		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
-		/*girafIntent = getIntent();
+		girafIntent = getIntent();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
-		childID = girafIntent.getLongExtra("currentChildID", -1);*/
+		childID = girafIntent.getLongExtra("currentChildID", -1);
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		/*don't delete this is for lisbeth and anders when running on our own device*/
-		guardianID = 1;
-		childID=11;
+		/*guardianID = 1;
+		childID=11;*/
 		
 		
 		if(guardianID == -1 )
@@ -72,34 +72,6 @@ public class PARROTActivity extends Activity {
 				Tab tab = actionBar.newTab() 
 						.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
 				tab.select();
-			}
-			else
-			{
-				// 1. Instantiate an AlertDialog.Builder with its constructor
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		
-				// 2. Chain together various setter methods to set the dialog characteristics
-				builder.setMessage(R.string.dialog_message)
-				       .setTitle(R.string.dialog_title)
-				       .setPositiveButton( R.string.ok, new DialogInterface.OnClickListener() {
-			               @Override
-			               public void onClick(DialogInterface dialog, int id) {
-			                   // User clicked OK, so save the mSelectedItems results somewhere
-			                   // or return them to the component that opened the dialog
-			                   
-			               }
-				       })
-				       .setNegativeButton(R.string.returnItem, new DialogInterface.OnClickListener() {
-			               @Override
-			               public void onClick(DialogInterface dialog, int id) {
-			                   // User clicked OK, so save the mSelectedItems results somewhere
-			                   // or return them to the component that opened the dialog
-			            	   returnToLauncher();
-			               }
-				       });
-				// 3. Get the AlertDialog from create()
-					AlertDialog dialog = builder.create();
-					dialog.show();
 			}
 		}
 	}

@@ -2,6 +2,8 @@ package dk.aau.cs.giraf.categorylib;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -26,8 +28,6 @@ public class CategoryHelper {
 		this.activity = activity;
 		help = new Helper(activity); 
 		communicater = new XMLCommunicater(); 
-		
-		
 		
 	}
 	
@@ -72,8 +72,8 @@ public class CategoryHelper {
 		ArrayList<XMLCategoryProfile> categoryProfileList = null; 
 		
 		boolean childExist = false;
-		/*if(!xmlData.isEmpty())
-		{*/
+		if(!xmlData.isEmpty())
+		{
 			for(XMLProfile x: xmlData)
 			{
 				
@@ -84,7 +84,7 @@ public class CategoryHelper {
 					break;
 				}
 			}
-		//}
+		}
 		if(!childExist)
 		{
 			
@@ -168,14 +168,12 @@ public class CategoryHelper {
 		Log.v("MessageXML","pic final end");
 		Log.v("MessageXML","catego final begin");
 		Log.v("","sub/category not empty");
-
 		for(XMLCategoryProfile cp : categoryProfile.getSubcategories())
 		{
 			Log.v("MessageXML","sub/cate begin");
 			category.addSubCategory(transformToPARROTCategory(cp));
 			Log.v("MessageXML","sub/cate end");
 		}
-		
 		Log.v("MessageXML","transformToPARROTCategory end");
 		return category;
 	}
@@ -272,6 +270,20 @@ public class CategoryHelper {
 		categories.add(tempCat3);
 		categories.add(tempCat4);
 		
+		Log.v("PARROTmessage","save categories");
+		List<Profile> children = help.profilesHelper.getChildren();
+		for(Profile child : children)
+		{
+			Log.v("PARROTmessage","child; " + child.getId());
+			for(PARROTCategory category : categories)
+			{
+				Log.v("PARROTmessage","child; " + category.getCategoryName());
+				saveCategory(category, child.getId());	
+			}
+		}
+		
+		
+		saveChangesToXML();
 		return categories;
 	}
 	
