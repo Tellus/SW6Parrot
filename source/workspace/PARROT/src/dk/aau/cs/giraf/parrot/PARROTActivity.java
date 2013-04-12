@@ -112,9 +112,6 @@ public class PARROTActivity extends Activity {
 		}
 		return true;
 	}
-
-
-	
 	
 	public void goToSettings(){
 		Intent intent = new Intent(this, SettingActivity.class);
