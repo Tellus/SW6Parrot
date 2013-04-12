@@ -28,7 +28,7 @@ public class XMLCommunicater {
 	private File categoryXmlData=null;
 	public static boolean isNewFile = false;
 	
-	ArrayList<XMLProfile> xmlData= new ArrayList<XMLProfile>();
+	public static ArrayList<XMLProfile> xmlData= new ArrayList<XMLProfile>();
 	
 	public XMLCommunicater( )
 	{
@@ -64,15 +64,51 @@ public class XMLCommunicater {
 		}  
 	}
 	
-	public ArrayList<XMLProfile> getXMLData()
+	public XMLProfile getChildXMLData(long childId)
 	{
 		//temp remove after test
+		for(XMLProfile profile: xmlData)
+		{
+			if(profile.getChildID()==childId)
+			{
+				return profile;
+			}
+		}		
 		
-		return xmlData;
+		Log.v("MessageXML", "xmlChild does not exist return null");
+		return null;
+		
 	}
-	public void setXMLDataAndUpdate(ArrayList<XMLProfile> newXMLData)
+	
+	public void setXMLDataAndUpdate(XMLProfile xmlChild)//ArrayList<XMLProfile> newXMLData)
 	{
-		xmlData= newXMLData;
+		if(xmlChild==null){}
+		else if(!xmlData.isEmpty())
+		{
+			for(XMLProfile profile: xmlData)
+			{
+				if(profile.getChildID()== xmlChild.getChildID())
+				{
+					if(xmlChild.getCategories().isEmpty())
+					{
+						xmlData.remove(profile);
+					} 
+					else
+					{
+						xmlData.remove(profile);
+						xmlData.add(xmlChild);
+					}
+				}
+				else
+				{
+					xmlData.add(xmlChild);
+				}
+			}
+		}
+		else
+		{
+			xmlData.add(xmlChild);
+		}
 		
 		new Thread(new Runnable(){
             public void run(){

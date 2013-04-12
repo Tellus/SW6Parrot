@@ -19,7 +19,8 @@ public class CategoryHelper {
 	Helper help=null;
 	Activity activity=null;
 	XMLCommunicater communicater= null;
-	ArrayList<XMLProfile> xmlData= new ArrayList<XMLProfile>();
+	//ArrayList<XMLProfile> xmlData= new ArrayList<XMLProfile>();
+	XMLProfile xmlChild = null;
 	PictoFactory factory= PictoFactory.INSTANCE;
 	
 	
@@ -40,7 +41,7 @@ public class CategoryHelper {
 	
 	public void saveChangesToXML()
 	{
-		communicater.setXMLDataAndUpdate(xmlData);
+		communicater.setXMLDataAndUpdate(xmlChild);
 	}
 	
  	
@@ -76,15 +77,32 @@ public class CategoryHelper {
 		Log.v("XMLTESTER", "_color "+ categoryProfile.getColor() + " _name: "+ categoryProfile.getName());
 		ArrayList<XMLCategoryProfile> categoryProfileList = null; 
 		
-		boolean childExist = false;
-		if(!xmlData.isEmpty())
+		if(xmlChild != null)
+		{
+			categoryProfileList = xmlChild.getCategories();
+			deleteCategory(category, childId, categoryProfileList);
+		}
+		else
+		{
+			Log.v("","xmlChild is null");
+			xmlChild= new XMLProfile();
+			xmlChild.setChildID(childId);
+			categoryProfileList = xmlChild.getCategories();
+			
+		}
+		
+		//if the category exist then delete
+		categoryProfileList.add(categoryProfile);
+		Log.v("XMLTESTER","done in saveCategory");
+				
+		/*if(!xmlData.isEmpty())
 		{
 			for(XMLProfile x: xmlData)
 			{
 				
 				if(x.getChildID()==childId)
 				{
-					categoryProfileList = x.getCategories();
+					
 					childExist=true;
 					break;
 				}
@@ -102,11 +120,8 @@ public class CategoryHelper {
 		{
 			
 			deleteCategory(category, childId, categoryProfileList);
-		}
-		//if the category exist then delete
+		}*/
 		
-		categoryProfileList.add(categoryProfile);
-		Log.v("XMLTESTER","done in saveCategory");
 
 		
 	}
@@ -127,9 +142,18 @@ public class CategoryHelper {
 	
 	public void deleteCategory(PARROTCategory category, long childId)
 	{
-		XMLProfile childProfile=null;
+		
 		ArrayList<XMLCategoryProfile> categoryProfileList = null; 
-		for(XMLProfile prof: xmlData)
+		if(xmlChild != null)
+		{
+			categoryProfileList = xmlChild.getCategories();
+			deleteCategory(category, childId, categoryProfileList);
+		
+
+
+		}
+		
+		/*for(XMLProfile prof: xmlData)
 		{
 			if(prof.getChildID()==childId)
 			{
@@ -139,18 +163,20 @@ public class CategoryHelper {
 			}
 		}
 		deleteCategory(category, childId, categoryProfileList);
-	/*	for(XMLCategoryProfile cp : categoryProfileList)
+		for(XMLCategoryProfile cp : categoryProfileList)
 		{
 			if(cp.getName()==category.getCategoryName())
 			{
 				categoryProfileList.remove(cp);
 
 			}
-		}*/
-		if(categoryProfileList.isEmpty())
-		{
-			xmlData.remove(childProfile);
 		}
+		
+		if(categoryProfileList.isEmpty())
+			{
+				xmlData.remove(childProfile);
+			}*/
+
 		
 	
 	}
@@ -185,11 +211,15 @@ public class CategoryHelper {
 	
 	public ArrayList<PARROTCategory> getChildsCategories(long childId)
 	{
-		xmlData = communicater.getXMLData();
-		Log.v("XMLTESTER", "after getXMLData");
-		ArrayList<PARROTCategory> categories=null;
-		XMLProfile xmlChild = null;
-		for(XMLProfile profile: xmlData)
+		/*xmlData = communicater.getXMLData();
+		Log.v("XMLTESTER", "after getXMLData");*/
+		ArrayList<PARROTCategory> categories=new ArrayList<PARROTCategory>();
+		xmlChild = communicater.getChildXMLData(childId);
+		if(xmlChild==null)
+		{
+			return null;
+		}
+		/*for(XMLProfile profile: xmlData)
 		{
 			if(profile.getChildID()==childId)
 			{
@@ -203,7 +233,7 @@ public class CategoryHelper {
 		if(xmlChild==null)
 		{
 			Log.v("MessageXML", "xmlChild does not exist return null");return null;}
-		
+		*/
 		for(XMLCategoryProfile cp : xmlChild.getCategories())
 		{
 			Log.v("MessageXML", "category found begin");
@@ -286,6 +316,7 @@ public class CategoryHelper {
 		
 		Log.v("PARROTmessage","save categories");
 		List<Profile> children = help.profilesHelper.getChildren();
+		
 		for(Profile child : children)
 		{
 			Log.v("PARROTmessage","child; " + child.getId());
@@ -294,9 +325,11 @@ public class CategoryHelper {
 				Log.v("PARROTmessage","child; " + category.getCategoryName());
 				saveCategory(category, child.getId());	
 			}
+			XMLCommunicater.xmlData.add(xmlChild);
+			xmlChild=null;
 		}
-		
 		saveChangesToXML();
+		
 		
 		Log.v("PARROTmessage","done xmltester");
 	}
