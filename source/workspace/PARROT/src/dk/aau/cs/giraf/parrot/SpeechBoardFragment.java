@@ -12,8 +12,10 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -71,8 +73,12 @@ public class SpeechBoardFragment extends Fragment
 
 			
 			//Setup the view for the listing of pictograms
-			GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
-			pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
+			final GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
+			new Thread(new Runnable(){
+	            public void run(){
+	            	pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
+				 }
+		    }).start();
 			//Setup the view for the sentences
 			GridView sentenceBoardGrid = (GridView) parrent.findViewById(R.id.sentenceboard);
 			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, parrent.getApplicationContext()));
@@ -107,6 +113,14 @@ public class SpeechBoardFragment extends Fragment
 			parrent.findViewById(R.id.subcategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));*/
 
 			//for dragging pictogram from the pictogramlisting view
+			/*pictogramGrid.setOnTouchListener(new OnTouchListener() {
+				
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					// TODO Auto-generated method stub
+					return false;
+				}
+			})*/
 			pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
 

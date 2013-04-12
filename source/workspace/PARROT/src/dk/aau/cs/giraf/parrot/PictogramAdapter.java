@@ -63,7 +63,7 @@ public class PictogramAdapter extends BaseAdapter {
 		view = layoutInflater.inflate(R.layout.pictogramview, null);
 
 		imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
-		imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
+		//ordi: imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
 		
 		LinearLayout.LayoutParams layoutParams;
 		if(PARROTActivity.getUser().getPictogramSize()== PARROTProfile.PictogramSize.LARGE)
@@ -76,19 +76,28 @@ public class PictogramAdapter extends BaseAdapter {
 		}
 		
 		imageView.setLayoutParams(layoutParams);
-		if(pct.getPictogramID() != -1 && PARROTActivity.getUser().getShowText()==true)
+		if(PARROTActivity.getUser().getShowText()==true)//pct.getPictogramID() != -1 && PARROTActivity.getUser().getShowText()==true)
 		{
 			textView = (TextView) view.findViewById(R.id.pictogramtext);
 			textView.setTextSize(20);	//TODO this value should be customizable
 			textView.setText(pct.getTextLabel());
 			
 		}
-		else if(pct.getPictogramID() == -1)
+	/*(pct.getPictogramID() == -1)
 		{
-			
-			Bitmap bitmap=BitmapFactory.decodeResource(context.getResources(),R.drawable.usynlig);
-			imageView.setImageBitmap(bitmap);
+			imageView.setTag("-1");
 		}
+		else
+		{
+		imageView.setTag(pct.getImagePath());//tag of imageView == path to image
+		}*/
+		LoadImage task = new LoadImage(imageView,context);
+	    task.execute(pct);
+		/*else if(pct.getPictogramID() == -1)
+		{
+        	Bitmap bitmap=BitmapFactory.decodeResource(context.getResources(),R.drawable.usynlig);
+			imageView.setImageBitmap(bitmap);
+		}*/
 		view.setPadding(8, 8, 8, 8);
 		
 

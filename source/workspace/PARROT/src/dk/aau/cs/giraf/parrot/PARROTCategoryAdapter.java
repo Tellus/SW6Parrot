@@ -70,9 +70,10 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 		}
 		
 		//we then set the imageview to the icon of the category
+	
 		imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
 		imageView.setBackgroundColor(catList.get(position).getCategoryColor());
 		return imageView;
 	}
-
+	
 }
