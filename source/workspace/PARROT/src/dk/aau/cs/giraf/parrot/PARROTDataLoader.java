@@ -90,14 +90,8 @@ public class PARROTDataLoader {
 			//Load the settings
 			parrotUser = loadSettings(parrotUser, specialSettings);
 
-			//Add all of the categories to the profile
-			String categoryString = null;
-			Log.v("MessageParrot", "before categori");
-			
-			
 			//this return null if the child does not exist
 			categories = categoryHelper.getChildsCategories(prof.getId());
-			
 				
 			Log.v("MessageXML", "xmlChild does exist");
 			if(categories!=null)

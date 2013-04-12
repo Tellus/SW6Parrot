@@ -7,6 +7,9 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -59,16 +62,16 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
 			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imageView.setPadding(8, 8, 8, 8);
-			imageView.setBackgroundColor(catList.get(position).getCategoryColor());
-		} 
+			} 
 		
 		else {
 			imageView = (ImageView) convertView;
+			
 		}
 		
 		//we then set the imageview to the icon of the category
 		imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
-		
+		imageView.setBackgroundColor(catList.get(position).getCategoryColor());
 		return imageView;
 	}
 
