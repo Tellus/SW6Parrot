@@ -114,14 +114,6 @@ public class SpeechBoardFragment extends Fragment
 			parrent.findViewById(R.id.subcategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));*/
 
 			//for dragging pictogram from the pictogramlisting view
-			/*pictogramGrid.setOnTouchListener(new OnTouchListener() {
-				
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					// TODO Auto-generated method stub
-					return false;
-				}
-			})*/
 			pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
 

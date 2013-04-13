@@ -1,5 +1,4 @@
-package dk.aau.cs.giraf.parrot;
-
+ package dk.aau.cs.giraf.parrot;
 
 import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.app.Activity;
@@ -15,6 +14,7 @@ import android.widget.GridView;
  * It handles drag and drop functionality with objects in the SpeechboardFragment.
  *
  */
+
 public class SpeechBoardBoxDragListener implements OnDragListener 
 {
 	private Activity parrent;
@@ -172,4 +172,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 	}
 }
 
+
+
+ 
 

@@ -3,12 +3,16 @@ package dk.aau.cs.giraf.parrot;
 
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.DragShadowBuilder;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -86,7 +90,8 @@ public class PictogramAdapter extends BaseAdapter {
 			textView.setText(pct.getTextLabel());
 			
 		}
-
+		imageView.setTag(String.valueOf(position));
+		Log.v("MessageLisbeth", "position: " + position);
 		LoadImage task = new LoadImage(imageView,textView, context);
 	    task.execute(pct);
 		/*else if(pct.getPictogramID() == -1)
