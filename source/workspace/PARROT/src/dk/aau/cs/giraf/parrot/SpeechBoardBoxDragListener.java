@@ -51,7 +51,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 					SpeechBoardFragment.speechBoardCategory.removePictogram(SpeechBoardFragment.draggedPictogramIndex);	
 					SpeechBoardFragment.speechBoardCategory.addPictogram(new Pictogram(parrent.getApplicationContext(),"#emptyPictogram#", "", "", -1));
 					
-					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+					speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 				}
 			}
 		} else if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED){ 
@@ -102,7 +102,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 						}
 
 
-						speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+						speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 						speech.invalidate();
 					}
 				}
@@ -143,7 +143,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 						}
 
 
-						speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+						speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 						speech.invalidate();
 						draggedPictogram = null;
 					}
@@ -158,7 +158,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 				{
 
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
-					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+					speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 					speech.invalidate();
 
 				}

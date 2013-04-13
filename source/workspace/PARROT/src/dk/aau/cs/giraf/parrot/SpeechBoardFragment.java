@@ -82,7 +82,7 @@ public class SpeechBoardFragment extends Fragment
 		    }).start();
 			//Setup the view for the sentences
 			GridView sentenceBoardGrid = (GridView) parrent.findViewById(R.id.sentenceboard);
-			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, parrent.getApplicationContext()));
+			sentenceBoardGrid.setAdapter(new SentenceboardAdapter(speechBoardCategory, parrent.getApplicationContext()));
 			int noInSentence=user.getNumberOfSentencePictograms();
 			sentenceBoardGrid.setNumColumns(noInSentence);
 
@@ -218,7 +218,7 @@ public class SpeechBoardFragment extends Fragment
 			}
 			GridView sentenceBoardGrid = (GridView) activity.findViewById(R.id.sentenceboard);
 		
-			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, activity.getApplicationContext()));
+			sentenceBoardGrid.setAdapter(new SentenceboardAdapter(speechBoardCategory, activity.getApplicationContext()));
 	}
 
 	/**
