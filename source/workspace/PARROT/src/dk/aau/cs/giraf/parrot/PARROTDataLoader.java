@@ -130,7 +130,7 @@ public class PARROTDataLoader {
 	private PARROTProfile loadSettings(PARROTProfile parrotUser, Setting<String, String, String> profileSettings) {
 		/*new settings*/
 		//if(profileSettings.containsKey(SentenceboardSettings))
-		Log.v("PARROTMessAGE", "BEFORE get from settings");
+		//Log.v("PARROTMessAGE", "BEFORE get from settings");
 		try{
 			int noOfBoxes = Integer.valueOf(profileSettings.get("SentenceboardSettings").get("NoOfBoxes"));
 			boolean showText = Boolean.valueOf(profileSettings.get("PictogramSettings").get("ShowText"));
@@ -152,6 +152,10 @@ public class PARROTDataLoader {
 			{
 				parrotUser.setShowText(true);
 			}
+			else
+			{
+				parrotUser.setShowText(false);
+			}
 		}
 		catch(Exception e)
 		{
@@ -163,6 +167,7 @@ public class PARROTDataLoader {
 	
 	public void saveChanges(PARROTProfile user)
 	{
+		
 		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
 		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
 		profileSetting = help.appsHelper.getSettingByIds(app.getId(), prof.getId());

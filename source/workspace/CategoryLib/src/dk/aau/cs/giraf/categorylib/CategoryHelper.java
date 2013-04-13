@@ -48,7 +48,7 @@ public class CategoryHelper {
 	
 	private XMLCategoryProfile transformToXMLCategoryProfile(PARROTCategory category)
 	{
-		Log.v("MessageXML","start transformToXMLCategoryProfile");
+		//Log.v("MessageXML","start transformToXMLCategoryProfile");
 		XMLCategoryProfile xmlCategory = new XMLCategoryProfile();
 		
 		xmlCategory.setColor(category.getCategoryColor());
@@ -64,7 +64,7 @@ public class CategoryHelper {
 			xmlCategory.addSubcategory(transformToXMLCategoryProfile(subCategory));
 		
 		}
-		Log.v("MessageXML","end transformToXMLCategoryProfile");
+		//Log.v("MessageXML","end transformToXMLCategoryProfile");
 		return xmlCategory;
 		
 	}
@@ -72,7 +72,7 @@ public class CategoryHelper {
 	//used when saving or adding a category to child 
 	public void saveCategory(PARROTCategory category,long childId)
 	{
-		Log.v("MessageXML","Start saveCategory");
+		//Log.v("MessageXML","Start saveCategory");
 		XMLCategoryProfile categoryProfile = transformToXMLCategoryProfile(category);
 		ArrayList<XMLCategoryProfile> categoryProfileList = null; 
 		
@@ -91,7 +91,7 @@ public class CategoryHelper {
 		
 		//if the category exist then delete
 		categoryProfileList.add(categoryProfile);
-		Log.v("MessageXML","done in saveCategory");
+		//Log.v("MessageXML","done in saveCategory");
 						
 	}
 	
@@ -126,7 +126,7 @@ public class CategoryHelper {
 	//from here from xml to parrotcategories 
 	private PARROTCategory transformToPARROTCategory(XMLCategoryProfile categoryProfile)
 	{	
-		Log.v("MessageXML","transformToPARROTCategory begin");
+		//Log.v("MessageXML","transformToPARROTCategory begin");
 		Pictogram icon = factory.getPictogram(activity.getApplicationContext(), categoryProfile.getIconID());
 		PARROTCategory category = new PARROTCategory(categoryProfile.getName(), categoryProfile.getColor(), icon);
 		
@@ -140,18 +140,18 @@ public class CategoryHelper {
 		{
 			category.addSubCategory(transformToPARROTCategory(cp));
 		}
-		Log.v("MessageXML","transformToPARROTCategory end");
+		//Log.v("MessageXML","transformToPARROTCategory end");
 		return category;
 	}
 	
 	public ArrayList<PARROTCategory> getChildsCategories(long childId)
 	{
-		Log.v("CategoryHelperMessage"," start getChildsCategories");
+		//Log.v("CategoryHelperMessage"," start getChildsCategories");
 		ArrayList<PARROTCategory> categories=new ArrayList<PARROTCategory>();
 		xmlChild = communicater.getChildXMLData(childId);
 		if(xmlChild==null)
 		{
-			Log.v("CategoryHelperMessage"," end getChildsCategories");
+			//Log.v("CategoryHelperMessage"," end getChildsCategories");
 			
 			return null;
 		}
@@ -162,7 +162,7 @@ public class CategoryHelper {
 			categories.add(category);
 			
 		}
-		Log.v("CategoryHelperMessage"," end getChildsCategories");
+		//Log.v("CategoryHelperMessage"," end getChildsCategories");
 		
 		return categories;
 	}
@@ -290,18 +290,18 @@ public class CategoryHelper {
 	
 	public void XMLTESTER()
 	{
-		Log.v("PARROTmessage","start xmltester");
+		//Log.v("PARROTmessage","start xmltester");
 		List<PARROTCategory> categories = getTempCategoriesWithNewPictogram(11);
 		
-		Log.v("PARROTmessage","save categories");
+		//Log.v("PARROTmessage","save categories");
 		List<Profile> children = help.profilesHelper.getChildren();
 		
 		for(Profile child : children)
 		{
-			Log.v("PARROTmessage","child; " + child.getId());
+			//Log.v("PARROTmessage","child; " + child.getId());
 			for(PARROTCategory category : categories)
 			{
-				Log.v("PARROTmessage","child; " + category.getCategoryName());
+				//Log.v("PARROTmessage","child; " + category.getCategoryName());
 				saveCategory(category, child.getId());	
 			}
 			XMLCommunicater.xmlData.add(xmlChild);
@@ -314,7 +314,7 @@ public class CategoryHelper {
 		saveChangesToXML();
 		
 		
-		Log.v("PARROTmessage","done xmltester");
+		//Log.v("PARROTmessage","done xmltester");
 	}
 	
 	public ArrayList<PARROTCategory> getTempCategoriesWithNewPictogram(Profile childProfile)

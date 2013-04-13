@@ -6,6 +6,7 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class PictogramAdapter extends BaseAdapter {
 		view = layoutInflater.inflate(R.layout.pictogramview, null);
 
 		imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
+		textView = (TextView) view.findViewById(R.id.pictogramtext);
 		//ordi: imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
 		
 		LinearLayout.LayoutParams layoutParams;
@@ -76,22 +78,16 @@ public class PictogramAdapter extends BaseAdapter {
 		}
 		
 		imageView.setLayoutParams(layoutParams);
+		//Log.v("message", "show text: " + PARROTActivity.getUser().getShowText());
 		if(PARROTActivity.getUser().getShowText()==true)//pct.getPictogramID() != -1 && PARROTActivity.getUser().getShowText()==true)
 		{
-			textView = (TextView) view.findViewById(R.id.pictogramtext);
+			
 			textView.setTextSize(20);	//TODO this value should be customizable
 			textView.setText(pct.getTextLabel());
 			
 		}
-	/*(pct.getPictogramID() == -1)
-		{
-			imageView.setTag("-1");
-		}
-		else
-		{
-		imageView.setTag(pct.getImagePath());//tag of imageView == path to image
-		}*/
-		LoadImage task = new LoadImage(imageView,context);
+
+		LoadImage task = new LoadImage(imageView,textView, context);
 	    task.execute(pct);
 		/*else if(pct.getPictogramID() == -1)
 		{

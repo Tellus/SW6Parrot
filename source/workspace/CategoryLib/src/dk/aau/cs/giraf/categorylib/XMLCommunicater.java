@@ -25,7 +25,7 @@ public class XMLCommunicater {
 	
 	public XMLCommunicater( )
 	{
-		Log.v("MessageXML", "begin XMLCommunicater");
+		//Log.v("MessageXML", "begin XMLCommunicater");
 		String state = Environment.getExternalStorageState();
 		
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -36,7 +36,7 @@ public class XMLCommunicater {
 			{
 			    try
 			    {
-			    	Log.v("MessagePARROT","no xml exist, creating xml");
+			    	//Log.v("MessagePARROT","no xml exist, creating xml");
 			    	categoryXmlData.createNewFile();
 			    	isNewFile=true;
 			    	
@@ -44,7 +44,7 @@ public class XMLCommunicater {
 			    }
 			    catch(IOException e)
 			    {
-			        Log.e("IOException", "Exception in create new File(");
+			        //Log.e("IOException", "Exception in create new File(");
 			    }
 			}
 		    else
@@ -54,12 +54,12 @@ public class XMLCommunicater {
 		    }
 
 		}  
-		Log.v("MessageXML", "end XMLCommunicater");
+		//Log.v("MessageXML", "end XMLCommunicater");
 	}
 	
 	public XMLProfile getChildXMLData(long childId)
 	{
-		Log.v("MessageXML", "begin getChildXMLData");
+		//Log.v("MessageXML", "begin getChildXMLData");
 		//temp remove after test
 		for(XMLProfile profile: xmlData)
 		{
@@ -69,15 +69,15 @@ public class XMLCommunicater {
 			}
 		}		
 		
-		Log.v("MessageXML", "xmlChild does not exist return null");
-		Log.v("MessageXML", "end getChildXMLData");
+		//Log.v("MessageXML", "xmlChild does not exist return null");
+		//Log.v("MessageXML", "end getChildXMLData");
 		return null;
 		
 	}
 	
 	public void setXMLDataAndUpdate(XMLProfile xmlChild)//ArrayList<XMLProfile> newXMLData)
 	{
-		Log.v("XMLComMessage", "begin setXMLDataAndUpdate");
+		//Log.v("XMLComMessage", "begin setXMLDataAndUpdate");
 		if(xmlChild==null){}
 		else if(!xmlData.isEmpty())
 		{
@@ -113,12 +113,12 @@ public class XMLCommunicater {
         }).start();
 		
 		
-		Log.v("XMLComMessage", "end setXMLDataAndUpdate");
+		//Log.v("XMLComMessage", "end setXMLDataAndUpdate");
 	}
 	
 	public XmlSerializer insertCommonAtributes(XMLCategoryProfile category, XmlSerializer serializer)
 	{
-		Log.v("XMLComMessage", "begin insertCommonAtributes");
+		//Log.v("XMLComMessage", "begin insertCommonAtributes");
 		try{
 			serializer.attribute(null, XMLProfile.NAME, category.getName());
 			serializer.attribute(null, XMLProfile.COLOR, Integer.toString(category.getColor()));
@@ -131,18 +131,18 @@ public class XMLCommunicater {
 				serializer.endTag(null, XMLProfile.PICTOGRAM);
 			}
 		}catch(Exception e){}
-		Log.v("XMLComMessage", "end insertCommonAtributes");
+		//Log.v("XMLComMessage", "end insertCommonAtributes");
 		return serializer;
 	}
 	
 	private void insertInToXML()
 	{
-		Log.v("XMLComMessage", "begin insertInToXML");
+		//Log.v("XMLComMessage", "begin insertInToXML");
 		FileOutputStream fileos = null;       	
         try{
         	fileos = new FileOutputStream(categoryXmlData);
         }catch(FileNotFoundException e){
-        	Log.e("FileNotFoundException", "can't create FileOutputStream");
+        	//Log.e("FileNotFoundException", "can't create FileOutputStream");
         }
         XmlSerializer serializer = Xml.newSerializer();
 
@@ -182,11 +182,11 @@ public class XMLCommunicater {
 						}
 						for(Long pictogramId : category.getPictogramsID())
 						{
-							Log.v("PARROTMESSAGE",XMLProfile.PICTOGRAM);
+							//Log.v("PARROTMESSAGE",XMLProfile.PICTOGRAM);
 							serializer.startTag(null, XMLProfile.PICTOGRAM);
 							serializer.attribute(null, XMLProfile.ID, Long.toString(pictogramId));
 							serializer.endTag(null, XMLProfile.PICTOGRAM);
-							Log.v("PARROTMESSAGE","Pictogram end");
+							//Log.v("PARROTMESSAGE","Pictogram end");
 						}
 						
 					serializer.endTag(null, XMLProfile.CATEGORY);
@@ -204,14 +204,14 @@ public class XMLCommunicater {
 			
 	       
 		} catch (Exception e) {
-			Log.v("PARROTMESSAGE","error occurred while creating xml file");
+			//Log.v("PARROTMESSAGE","error occurred while creating xml file");
 		}
-        Log.v("XMLComMessage", "end insertInToXML");
+        //Log.v("XMLComMessage", "end insertInToXML");
 	}
 
 	private void getDataFromXML()
 	{
-		Log.v("XMLComMessage", "begin getDataFromXML");
+		//Log.v("XMLComMessage", "begin getDataFromXML");
 		XMLProfile profile = null;
 		XMLCategoryProfile superCategory=null;
 		XMLCategoryProfile subCategory=null;
@@ -222,7 +222,7 @@ public class XMLCommunicater {
 		try {
 			is = new FileInputStream(categoryXmlData);
 		} catch (FileNotFoundException e) {
-			Log.v("MessageParrot","reading from file with exceptions");
+			//Log.v("MessageParrot","reading from file with exceptions");
 			return;
 		}
 		try {
@@ -311,13 +311,13 @@ public class XMLCommunicater {
         // exception stuffs
         } catch (XmlPullParserException e) {
             profile = null;
-            Log.v("XMLComMessage", "XmlPullParserException");
+            //Log.v("XMLComMessage", "XmlPullParserException");
         } catch (IOException e) {
             profile = null;
-            Log.v("XMLComMessage", "IOException");
+            //Log.v("XMLComMessage", "IOException");
         }
 	
-		Log.v("XMLComMessage", "end getDataFromXML");
+		//Log.v("XMLComMessage", "end getDataFromXML");
 		
 		
     }

@@ -26,6 +26,7 @@ public class SettingActivity extends Activity  {
 		setContentView(R.layout.activity_setting);
 		
 		user = PARROTActivity.getUser();
+		
 		dataloader = new PARROTDataLoader(this);
 
 		        
@@ -43,6 +44,7 @@ public class SettingActivity extends Activity  {
 	public boolean onOptionsItemSelected (MenuItem item) {
 		switch(item.getItemId()){
 		case R.id.goToParrot:
+			
 			returnToParrot();
 			break;
 		}
@@ -114,10 +116,15 @@ public class SettingActivity extends Activity  {
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
 		spinner.setSelection(noOfPlacesInSentenceboard-1,true);
 		
+		CheckBox checkBox  = (CheckBox) findViewById(R.id.checkBoxShowText);
 		if(showText)
 		{
-			CheckBox checkBox  = (CheckBox) findViewById(R.id.checkBoxShowText);
+			
 			checkBox.setChecked(true);
+		}
+		else
+		{
+			checkBox.setChecked(false);
 		}
 	}
 	
@@ -160,7 +167,6 @@ public class SettingActivity extends Activity  {
 	{
 		 // Is the view now checked?
 	    boolean checked = ((CheckBox) view).isChecked();
-
 	    if (checked)
 	    {
 	    	user.setShowText(true);

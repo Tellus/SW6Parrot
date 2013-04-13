@@ -37,7 +37,7 @@
 	        android:layout_height="match_parent"
 	        android:columnWidth="150dp"
 	        android:numColumns="5"
-	        android:stretchMode="none"
+	        android:stretchMode="columnWidth"
 	        android:horizontalSpacing="5dp"
 	        android:verticalSpacing="5dp"
 	        android:background="@drawable/sentenceboardlayout"
