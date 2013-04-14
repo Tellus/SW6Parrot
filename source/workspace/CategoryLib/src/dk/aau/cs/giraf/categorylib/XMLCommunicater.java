@@ -16,7 +16,11 @@ import org.xmlpull.v1.XmlSerializer;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
-
+/**
+ * 
+ * @author SW605f13-PARROT
+ * read from and write to the XML file
+ */
 public class XMLCommunicater {
 	private File categoryXmlData=null;
 	public static boolean isNewFile = false;

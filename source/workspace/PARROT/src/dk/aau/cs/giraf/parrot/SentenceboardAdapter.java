@@ -13,13 +13,23 @@
 	import android.widget.ImageView;
 	import android.widget.LinearLayout;
 	import android.widget.TextView;
-
+	/**
+	 * 
+	 * @author PARROT spring 2012 and adapted by sw605f13-PARROT
+	 * This is the SentenceboardAdapter class. 
+	 * It is used to import the pictograms into a gridview where Async is not used eg. the sentenceboard, 
+	 * its a copy of the original PictogramAdapter.
+	 */
 public class SentenceboardAdapter extends BaseAdapter {
 
 
 	private PARROTCategory cat;
 	private Context context;
-
+	
+	/**
+	 * @param cat, a PARROTCategory
+	 * @param c, the applications context
+	 */
 	public SentenceboardAdapter(PARROTCategory cat, Context c)
 	{
 		super();
@@ -44,7 +54,10 @@ public class SentenceboardAdapter extends BaseAdapter {
 			// TODO Auto-generated method stub
 			return 0;
 		}
-		//create an image view for each pictogram in the list.
+		
+		/**
+		 * create an image view for each pictogram in the pictogram list from the PARROTCategory.
+		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) 
 		{
@@ -57,11 +70,11 @@ public class SentenceboardAdapter extends BaseAdapter {
 
 			LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = layoutInflater.inflate(R.layout.pictogramview, null);
-
+			//setup views
 			imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
 			textView = (TextView) view.findViewById(R.id.pictogramtext);
-			//ordi: imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
 			
+			//setup layout for imageView
 			LinearLayout.LayoutParams layoutParams;
 			if(PARROTActivity.getUser().getPictogramSize()== PARROTProfile.PictogramSize.LARGE)
 			{
@@ -73,8 +86,9 @@ public class SentenceboardAdapter extends BaseAdapter {
 			}
 			
 			imageView.setLayoutParams(layoutParams);
-			//Log.v("message", "show text: " + PARROTActivity.getUser().getShowText());
-			if(PARROTActivity.getUser().getShowText()==true)//pct.getPictogramID() != -1 && PARROTActivity.getUser().getShowText()==true)
+
+			//load the Bitmap and set the setImageBitmap
+			if(PARROTActivity.getUser().getShowText()==true)
 			{
 				
 				textView.setTextSize(20);	//TODO this value should be customizable

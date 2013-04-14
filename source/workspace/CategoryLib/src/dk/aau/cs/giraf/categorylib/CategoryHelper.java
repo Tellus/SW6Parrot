@@ -13,6 +13,12 @@ import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
+/**
+ * 
+ * @author SW605-PARROT
+ * This is a temporary class that handles the xml communication to get the categories.
+ */
+//TODO This class should be changed when the categories tables in the local database are included
 
 public class CategoryHelper {
 
@@ -23,13 +29,17 @@ public class CategoryHelper {
 	XMLProfile xmlChild = null;
 	PictoFactory factory= PictoFactory.INSTANCE;
 	
-	
+	/**
+	 * setup the CategoryHelper and connect to XMLCommunicater
+	 * @param activity
+	 */
 	public CategoryHelper(Activity activity)
 	{
 		this.activity = activity;
 		help = new Helper(activity); 
 		communicater = new XMLCommunicater(); 
-		//this should be an easy temperaty way to get static data into the xml
+		//this should be an easy temperaty way to get static data into the xml 
+		//TODO it deleted at some point
 		if(XMLCommunicater.isNewFile==true)
 		{
 			XMLTESTER();
@@ -38,14 +48,20 @@ public class CategoryHelper {
 	}
 	
 	
-	
+	/**
+	 * get the XMLCommunicater to save all changes to the xml-file
+	 */
 	public void saveChangesToXML()
 	{
 		communicater.setXMLDataAndUpdate(xmlChild);
 	}
 	
  	
-	
+	/**
+	 * transform a PARROTCategory into XMLCategoryProfile
+	 * @param category, a PARROTCategory
+	 * @return XMLCategoryProfile
+	 */
 	private XMLCategoryProfile transformToXMLCategoryProfile(PARROTCategory category)
 	{
 		//Log.v("MessageXML","start transformToXMLCategoryProfile");
@@ -69,7 +85,11 @@ public class CategoryHelper {
 		
 	}
 	
-	//used when saving or adding a category to child 
+	/**
+	 * used when saving an existing or adding a new category to child 
+	 * @param category, PARROTCategory
+	 * @param childId, child ProfileId
+	 */
 	public void saveCategory(PARROTCategory category,long childId)
 	{
 		//Log.v("MessageXML","Start saveCategory");
@@ -95,6 +115,12 @@ public class CategoryHelper {
 						
 	}
 	
+	/**
+	 * Finds the current version of a PARROTCategory  in XMLCategoryProfile and delete it from the list.
+	 * @param category, PARROTCategory
+	 * @param childId, child ProfileID
+	 * @param categoryProfileList, ArrayList of XMLCategoryProfile
+	 */
 	private void deleteCategory(PARROTCategory category, long childId, ArrayList<XMLCategoryProfile> categoryProfileList)
 	{	 
 		
@@ -109,6 +135,11 @@ public class CategoryHelper {
 		
 	}
 	
+	/**
+	 * Finds the current version of a PARROTCategory  in XMLCategoryProfile and delete it from the list.
+	 * @param category, PARROTCategory
+	 * @param childId, child ProfileID
+	 */
 	public void deleteCategory(PARROTCategory category, long childId)
 	{
 		
@@ -123,7 +154,11 @@ public class CategoryHelper {
 	}
 
 	
-	//from here from xml to parrotcategories 
+	/**
+	 * transform a XMLCategoryProfile into PARROTCategory
+	 * @param categoryProfile,XMLCategoryProfile
+	 * @return PARROTCategory
+	 */
 	private PARROTCategory transformToPARROTCategory(XMLCategoryProfile categoryProfile)
 	{	
 		//Log.v("MessageXML","transformToPARROTCategory begin");
@@ -144,6 +179,11 @@ public class CategoryHelper {
 		return category;
 	}
 	
+	/**
+	 * get a child's categories from xml data
+	 * @param childId, a child profileID
+	 * @return ArrayList<PARROTCategory>
+	 */
 	public ArrayList<PARROTCategory> getChildsCategories(long childId)
 	{
 		//Log.v("CategoryHelperMessage"," start getChildsCategories");
@@ -168,7 +208,10 @@ public class CategoryHelper {
 	}
 	
 	
-	/** temp file **/
+	/**---------------- temp file ---------------- **/
+	/**
+	 * Tempfiles TO be deleted at somepoint
+	 */
 	public ArrayList<PARROTCategory> getTempCategoriesWithNewPictogram(long childid)
 	{
 		ArrayList<Pictogram> pictograms = new ArrayList<Pictogram>();
@@ -288,6 +331,9 @@ public class CategoryHelper {
 		return categories;
 	}
 	
+	/**
+	 * Tempfiles TO be deleted at somepoint
+	 */
 	public void XMLTESTER()
 	{
 		//Log.v("PARROTmessage","start xmltester");
@@ -317,6 +363,9 @@ public class CategoryHelper {
 		//Log.v("PARROTmessage","done xmltester");
 	}
 	
+	/**
+	 * Tempfiles TO be deleted at somepoint
+	 */
 	public ArrayList<PARROTCategory> getTempCategoriesWithNewPictogram(Profile childProfile)
 	{
 		

@@ -9,10 +9,9 @@ import android.widget.GridView;
 
 /**
  * 
- * @author PARROT, spring 2012
+ * @author PARROT spring 2012 and small adaption made by SW605f13-PARROT
  * This is the BoxDragListener class.
  * It handles drag and drop functionality with objects in the SpeechboardFragment.
- *
  */
 
 public class SpeechBoardBoxDragListener implements OnDragListener 

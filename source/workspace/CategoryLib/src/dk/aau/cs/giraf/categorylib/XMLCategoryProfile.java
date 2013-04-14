@@ -1,7 +1,11 @@
 package dk.aau.cs.giraf.categorylib;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author SW605f13-PARROT
+ * Used to store the categories data from the xmlFiles, this is also a part of XMLProfile
+ */
 public class XMLCategoryProfile {
 
 		private int color; 	

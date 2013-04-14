@@ -18,7 +18,9 @@
  */
 
 package dk.aau.cs.giraf.categorylib;
-
+/**
+ * this should be unnessary class in the end, replaced by a media player in dk.aau.cs.giraf.pictogram
+ */
 import java.io.IOException;
 
 import android.media.MediaPlayer;

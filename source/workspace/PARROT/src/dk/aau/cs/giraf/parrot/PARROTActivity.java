@@ -1,6 +1,8 @@
 package dk.aau.cs.giraf.parrot;
 
 import dk.aau.cs.giraf.categorylib.AudioPlayer;
+import android.app.FragmentTransaction;
+
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import android.app.ActionBar;
@@ -13,7 +15,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * 
+ * @author SW605f13-PARROT and PARROT spring 2012.
+ *	This is the main Activity Class in Parrot.
+ */
 public class PARROTActivity extends Activity {
 
 	private static PARROTProfile parrotUser;
@@ -26,6 +32,7 @@ public class PARROTActivity extends Activity {
 	
 
 	/** Called when the activity is first created. */
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
@@ -75,18 +82,28 @@ public class PARROTActivity extends Activity {
 		}
 	}
 	
+	/**
+	 * This is called when exitting the activity 
+	 */
 	@Override
 	protected void onPause() {
 		AudioPlayer.close();
 		super.onPause();
 	}
-
+	
+	/**
+	 * This is called when upon returning to the activity or after onCreate
+	 */
 	@Override
 	protected void onResume() {
 		AudioPlayer.open();
 		super.onResume();
 		
 	}
+	
+	/**
+	 * A menu is created upon creation
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -95,7 +112,9 @@ public class PARROTActivity extends Activity {
 		return true;
 	}
 	
-	
+	/**
+	 * Selector for what happens when a menu Item is clicked
+	 */
 	@Override
 	public boolean onOptionsItemSelected (MenuItem item) {
 		switch(item.getItemId()){
@@ -112,33 +131,60 @@ public class PARROTActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * this activating a new  Activity class which handles the settings which can be changed. 
+	 */
 	public void goToSettings(){
 		Intent intent = new Intent(this, SettingActivity.class);
 		startActivity(intent);
 	}
+	/**
+	 * This exits the PARROTActivity and should return to the giraf-launcher. 
+	 */
 	public void returnToLauncher()
 	{
 		finish();
 	}
 	
+	/**
+	 * @return the child's user profile.
+	 */
 	public static PARROTProfile getUser()
 	{
 		return parrotUser;
 	}
+	/**
+	 * set the current child user profile
+	 * @param user, a PARROTProfile that is a childs profile.
+	 */
 	public static void setUser(PARROTProfile user) {
 		parrotUser = user;
 	}
+	/** 
+	 * @return the guardian/parents id.
+	 */
 	public static long getGuardianID() {
 		return guardianID;
 	}
+	
+	/**
+	 * @return an instance of Helper.
+	 */
 	public static Helper getHelp() {
 		return help;
 	}
-	
+	/**
+	 * 
+	 * @return instance of App with this apps data
+	 */
 	public static App getApp()
 	{
 		return app;
 	}
+	
+	/** 
+	 * @return The Intent received from the Launcher
+	 */
 	public static Intent getGirafIntent() {
 		return girafIntent;
 	}
