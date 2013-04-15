@@ -76,11 +76,9 @@ public class SpeechBoardFragment extends Fragment
 
 			//Setup the view for the listing of pictograms in pictogramgrid
 			final GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
-			/*new Thread(new Runnable(){
-	            public void run(){*/
-	            	pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
-				/* }
-		    }).start();*/
+			
+	        pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
+			
 			
 			//Setup the view for the sentences
 			GridView sentenceBoardGrid = (GridView) parrent.findViewById(R.id.sentenceboard);
