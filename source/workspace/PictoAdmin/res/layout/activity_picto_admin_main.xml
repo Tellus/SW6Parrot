@@ -37,8 +37,8 @@
             android:id="@+id/checkout"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/sentenceboardlayout"
-            android:stretchMode="columnWidth" >
+            android:gravity="center"
+            android:background="@drawable/sentenceboardlayout" >
 
     </GridView>
        
@@ -145,7 +145,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:numColumns="5"
+            android:numColumns="8"
             android:background="@drawable/sentenceboardlayout" >
             
         </GridView>

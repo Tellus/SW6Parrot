@@ -13,9 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
-import dk.aau.cs.giraf.categorylib.PictogramOLD;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
 /**

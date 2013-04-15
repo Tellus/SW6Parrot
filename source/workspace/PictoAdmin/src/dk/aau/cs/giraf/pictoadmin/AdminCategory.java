@@ -36,9 +36,9 @@ public class AdminCategory extends Activity {
 	private ArrayList<PARROTCategory> subcategoryList = new ArrayList<PARROTCategory>();
 	private ArrayList<Pictogram> 	  pictograms	  = new ArrayList<Pictogram>();
 	
-	GridView categoryGrid;
-	GridView subcategoryGrid;
-	GridView pictogramGrid;
+	private GridView categoryGrid;
+	private GridView subcategoryGrid;
+	private GridView pictogramGrid;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,7 @@ public class AdminCategory extends Activity {
 		}
 		
 		CategoryHelper helpCat = new CategoryHelper(this);
-		Helper help = new Helper(this);
-		Profile child = help.profilesHelper.getProfileById(11);
-		categoryList = (ArrayList<PARROTCategory>) helpCat.getTempCategoriesWithNewPictogram(child);
+		categoryList = (ArrayList<PARROTCategory>) helpCat.getTempCategoriesWithNewPictogram(11);
 		
 		// Setup subcategory gridview
 		subcategoryGrid = (GridView) findViewById(R.id.subcategory_gridview);
@@ -73,7 +71,7 @@ public class AdminCategory extends Activity {
 		
 		// Setuo category gridview
 		categoryGrid = (GridView) findViewById(R.id.category_gridview);
-		updateGrid(categoryGrid, new PictoAdminCategoryAdapter(categoryList, this));
+		categoryGrid.setAdapter(new PictoAdminCategoryAdapter(categoryList, this));
 		categoryGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
@@ -134,11 +132,12 @@ public class AdminCategory extends Activity {
 			selectedSubCategory = null;
 			selectedPictogram = null;
 			subcategoryList  = selectedCategory.getSubCategories();
-			pictograms = categoryList.get(position).getPictograms();
+			pictograms 		 = selectedCategory.getPictograms();
 		    
-			updateGrid(subcategoryGrid, new PictoAdminCategoryAdapter(subcategoryList, this));
-		    updateGrid(pictogramGrid, new PictoAdapter2(pictograms, this));
-			//pictogramGrid.setAdapter(new PictoAdapter2(pictograms, this));
+			//updateGrid(subcategoryGrid, new PictoAdminCategoryAdapter(subcategoryList, view.getContext()));
+			subcategoryGrid.setAdapter(new PictoAdminCategoryAdapter(subcategoryList, view.getContext()));
+			
+			pictogramGrid.setAdapter(new PictoAdapter2(pictograms, view.getContext()));
 		}
 		else if(id == 0) {
 			selectedSubCategory = subcategoryList.get(position);
@@ -146,12 +145,8 @@ public class AdminCategory extends Activity {
 			selectedPictogram = null;
 			pictograms = subcategoryList.get(position).getPictograms();
 			
-			updateGrid(pictogramGrid, new PictoAdapter2(pictograms, this));
+			pictogramGrid.setAdapter(new PictoAdapter2(pictograms, view.getContext()));
 		}
-	}
-	
-	public void updateGrid(GridView gv, BaseAdapter a) {
-		gv.setAdapter(a);
 	}
 	
 	public void returnToCaller(MenuItem item) {

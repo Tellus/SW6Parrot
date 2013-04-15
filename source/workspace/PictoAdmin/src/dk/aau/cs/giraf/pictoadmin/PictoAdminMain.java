@@ -40,7 +40,7 @@ public class PictoAdminMain extends Activity {
 
 	ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
 	ArrayList<Pictogram> pictoList  = new ArrayList<Pictogram>();
-
+	ArrayList<Pictogram> searchlist = new ArrayList<Pictogram>();
 
 	public long childid;
 	public long guardianid;
@@ -79,7 +79,7 @@ public class PictoAdminMain extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position,
 					long arg3) {
-				checkoutList.add(pictoList.get(position));
+				checkoutList.add(searchlist.get(position));
 				checkoutGrid.setAdapter(new PictoAdapter2(checkoutList, getApplicationContext()));
 			}
 		});
@@ -143,6 +143,7 @@ public class PictoAdminMain extends Activity {
 	{	
 		GridView picgrid = (GridView) findViewById(R.id.pictogram_displayer);		
 		EditText searchterm = (EditText) findViewById(R.id.text_input);
+		searchlist.clear();
 		
 		if(tag.equals("Tags")) {
 			// TODO: tags not implemented yet
@@ -150,8 +151,6 @@ public class PictoAdminMain extends Activity {
 		}
 		
 		else if(tag.equals("Navn")) {
-			ArrayList<Pictogram> searchlist = new ArrayList<Pictogram>();
-			
 			String pictoname;
 			String input = searchterm.getText().toString();
 			
@@ -287,14 +286,7 @@ public class PictoAdminMain extends Activity {
 	}
 
 	public void klimTestMethod(MenuItem item) {
-		CategoryHelper helpCat = new CategoryHelper(this);
-		Helper help = new Helper(this);
-		Profile child = help.profilesHelper.getProfileById(11);
-		List<PARROTCategory> list = new ArrayList<PARROTCategory>();
-		list = helpCat.getTempCategoriesWithNewPictogram(child);
-		
-		pictoList = list.get(0).getPictograms();
-		pictoGrid.setAdapter(new PictoAdapter2(pictoList, getApplicationContext()));
+
 	}
 	
 	/**
@@ -309,7 +301,7 @@ public class PictoAdminMain extends Activity {
 		 * Source: http://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
 		 */
 		if(resultCode == RESULT_OK){
-			extras.getLongArray("checkoutIds");
+			long[] picIds = extras.getLongArray("checkoutIds");
 		}
 	}
 }
