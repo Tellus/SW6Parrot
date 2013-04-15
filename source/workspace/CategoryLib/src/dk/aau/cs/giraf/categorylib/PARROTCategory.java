@@ -7,8 +7,7 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
 /**
- * 
- * @Rasmus
+ * @author PARROT and edited by SW605f13-PARROT
  *The Category class is used to store a number of pictograms
  */
 public class PARROTCategory 
@@ -23,7 +22,7 @@ public class PARROTCategory
 	public PARROTCategory parent = null;
 	
 	//This is the constructor method.
-	public PARROTCategory(int color, Pictogram icon) //this is a constructor method that takes icon and color as input
+	public PARROTCategory(int color, Pictogram icon) 
 	{
 		subCategories = new ArrayList<PARROTCategory>();
 		pictograms = new ArrayList<Pictogram>();
@@ -31,7 +30,7 @@ public class PARROTCategory
 		setIcon(icon);
 	}
 	
-	public PARROTCategory(String categoryName,int color,Pictogram icon)  //this is a constructor method that takes name, icon and color as input
+	public PARROTCategory(String categoryName,int color,Pictogram icon)  
 	{
 		pictograms = new ArrayList<Pictogram>();
 		subCategories = new ArrayList<PARROTCategory>();

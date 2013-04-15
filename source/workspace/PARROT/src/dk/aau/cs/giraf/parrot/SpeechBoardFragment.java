@@ -12,15 +12,18 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 
 /**
- * @author PARROT spring 2012
+ * @author PARROT spring 2012 and adapted by SW605f13
  * This class handles the views and actions of the speechLearning "Tale" function
  */
 public class SpeechBoardFragment extends Fragment
@@ -43,7 +46,6 @@ public class SpeechBoardFragment extends Fragment
 	private static Pictogram emptyPictogram =null;  
 	
 	
-	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -55,30 +57,36 @@ public class SpeechBoardFragment extends Fragment
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}
-	
+
+	/**
+	 * Most is done in this. eg setup the gridviews get data shown in the gridviews.
+	 */
 	@Override
 	public void onResume() {
 		super.onResume();
 		parrent.setContentView(R.layout.speechboard_layout);
 		
-		user=PARROTActivity.getUser();	//FIXME this might mean that the user is not updated. It would be better to us the static user from PARROTActivity
+		user=PARROTActivity.getUser();	
 		
+		//check whether there are categories
 		if(user.getCategoryAt(0)!=null)
 		{
 			displayedCategory = user.getCategoryAt(0);
 			clearSentenceboard(parrent);
-			
 
+			//Setup the view for the listing of pictograms in pictogramgrid
+			final GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
 			
-			//Setup the view for the listing of pictograms
-			GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
-			pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
+	        pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
+			
+			
 			//Setup the view for the sentences
 			GridView sentenceBoardGrid = (GridView) parrent.findViewById(R.id.sentenceboard);
-			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, parrent.getApplicationContext()));
+			sentenceBoardGrid.setAdapter(new SentenceboardAdapter(speechBoardCategory, parrent.getApplicationContext()));
 			int noInSentence=user.getNumberOfSentencePictograms();
 			sentenceBoardGrid.setNumColumns(noInSentence);
 
+			//setup pictogramGrid.setNumColumns and sentenceBoardGrid.setColumnWidth
 			if(PARROTProfile.PictogramSize.MEDIUM == user.getPictogramSize())
 			{
 				pictogramGrid.setNumColumns(7);
@@ -102,10 +110,7 @@ public class SpeechBoardFragment extends Fragment
 			//setup drag listeners for the views
 			parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
 			parrent.findViewById(R.id.sentenceboard).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
-			/* don't know why these have drag listenders
-			 * parrent.findViewById(R.id.supercategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
-			parrent.findViewById(R.id.subcategory).setOnDragListener(new SpeechBoardBoxDragListener(parrent));*/
-
+			
 			//for dragging pictogram from the pictogramlisting view
 			pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
@@ -132,7 +137,7 @@ public class SpeechBoardFragment extends Fragment
 				}
 			});
 			
-			//Drag pictogram from the sentenceBoard, 
+			//Drag pictogram from the sentenceBoard, start drag 
 			sentenceBoardGrid.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
 
@@ -156,6 +161,7 @@ public class SpeechBoardFragment extends Fragment
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
 				{
+
 					displayedCategory = user.getCategoryAt(position);
 					GridView pictogramGrid = (GridView) parrent.findViewById(R.id.pictogramgrid);
 					pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext()));
@@ -165,7 +171,7 @@ public class SpeechBoardFragment extends Fragment
 					setPictogramGridColor();					
 				}
 			});
-			
+			//change subcategory that is to be shown 
 			GridView subCategoryGrid = (GridView) parrent.findViewById(R.id.subcategory);
 			subCategoryGrid.setOnItemClickListener(new OnItemClickListener() 
 			{
@@ -183,7 +189,10 @@ public class SpeechBoardFragment extends Fragment
 			});
 		}
 	}
-
+	/**
+	 * fill the sentenceboard with empty pictograms
+	 * @param activity
+	 */
 	public static void clearSentenceboard(Activity activity)
 	{
 		//(Context context, final String image, final String text, final String audio, final long id)
@@ -202,12 +211,11 @@ public class SpeechBoardFragment extends Fragment
 			}
 			GridView sentenceBoardGrid = (GridView) activity.findViewById(R.id.sentenceboard);
 		
-			sentenceBoardGrid.setAdapter(new PictogramAdapter(speechBoardCategory, activity.getApplicationContext()));
+			sentenceBoardGrid.setAdapter(new SentenceboardAdapter(speechBoardCategory, activity.getApplicationContext()));
 	}
 
 	/**
-	 * This function set the colors in the speechBoardFragment
-	 * 
+	 *This function set the colors in the speechBoardFragment
 	 */
 	private void setColours()
 	{
@@ -230,6 +238,9 @@ public class SpeechBoardFragment extends Fragment
 		setPictogramGridColor();
 		
 	}
+	/**
+	 * set color for the PictogramGrid, which changes upon a change of category to be shown
+	 */
 	private void setPictogramGridColor()
 	{
 		//setup colors of the pictogram listnings view

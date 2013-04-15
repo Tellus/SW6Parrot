@@ -2,9 +2,12 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
 
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.categorylib.PARROTCategoryOLD;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * 
- * @author PARROT
+ * TODO This is not used in PARROT, should it be deleted.
+ * @author PARROT spring 2012
  * This is the ListViewAdapter class.
  * This class takes a list of categories and loads them into a ListView, displaying the icon as well as name. 
  */
 
-public class ListViewAdapter extends ArrayAdapter<PARROTCategoryOLD> 
+public class ListViewAdapter extends ArrayAdapter<PARROTCategory> 
 {
-	private ArrayList<PARROTCategoryOLD> items;
+	private ArrayList<PARROTCategory> items;
 
-	public ListViewAdapter(Context context, int textViewResourceId, ArrayList<PARROTCategoryOLD> items)
+	public ListViewAdapter(Context context, int textViewResourceId, ArrayList<PARROTCategory> items)
 	{
 		super(context, textViewResourceId, items);
 		this.items = items;
@@ -43,7 +46,7 @@ public class ListViewAdapter extends ArrayAdapter<PARROTCategoryOLD>
 		}
 		
 		// Get current category  
-		PARROTCategoryOLD category = items.get(position);
+		PARROTCategory category = items.get(position);
 		if (category != null)
 		{
 			//We find the imageView and the textView of the categoriesitem from before.
@@ -52,7 +55,9 @@ public class ListViewAdapter extends ArrayAdapter<PARROTCategoryOLD>
 				
 			if (imageView != null)
 			{
-				imageView.setImageBitmap(items.get(position).getIcon().getBitmap());
+				Bitmap bitmap=BitmapFactory.decodeFile(items.get(position).getIcon().getImagePath());
+				
+				imageView.setImageBitmap(bitmap);
 			}
 			if (textView != null)
 			{

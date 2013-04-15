@@ -3,7 +3,7 @@ package dk.aau.cs.giraf.categorylib;
 
 import java.util.ArrayList;
 
-
+//TODO delete, not used in parrot anymore
 /**
  * 
  * @Rasmus

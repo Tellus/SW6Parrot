@@ -16,21 +16,31 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+/**
+ * 
+ * @author SW605f13-PARROT
+ * In this Activity class the changeable settings of the PARROTActivity can be changed.
+ */
 public class SettingActivity extends Activity  {
 	private PARROTProfile user;
 	private PARROTDataLoader dataloader;
 	
+	/** Called when the activity is first created. */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_setting);
 		
 		user = PARROTActivity.getUser();
+		
 		dataloader = new PARROTDataLoader(this);
 
 		        
 	}
 	
+	/**
+	 * A menu is created upon creation
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -39,20 +49,31 @@ public class SettingActivity extends Activity  {
 		return true;
 	}
 	
+	/**
+	 * Selector for what happens when a menu Item is clicked
+	 */
 	@Override
 	public boolean onOptionsItemSelected (MenuItem item) {
 		switch(item.getItemId()){
 		case R.id.goToParrot:
+			
 			returnToParrot();
 			break;
 		}
 		return true;
 	}
+	
+	/**
+	 * finish this activity and return to PARROTActivity
+	 */
 	public void returnToParrot()
 	{
 		finish();
 	}
 	
+	/**
+	 * This is called when exitting the activity 
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -60,10 +81,14 @@ public class SettingActivity extends Activity  {
 		
 	}
 		
-
+	/**
+	 * This is called when upon returning to the activity or after onCreate.
+	 * 
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
+		//Setup of the spinner with is the selector of how many of boxes the child can handle in the sentenceboard
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		Integer[] items = new Integer[]{1,2,3,4,5,6};
@@ -72,9 +97,8 @@ public class SettingActivity extends Activity  {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
 		spinner.setAdapter(adapter);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
 
+		//get the current Settings
         readTheCurrentData();
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -93,6 +117,9 @@ public class SettingActivity extends Activity  {
         }); 
     }
 	
+	/**
+	 * get the current Settings and show it in the UI
+	 */
 	private void readTheCurrentData() {
 		
 		int noOfPlacesInSentenceboard = user.getNumberOfSentencePictograms();
@@ -114,13 +141,22 @@ public class SettingActivity extends Activity  {
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
 		spinner.setSelection(noOfPlacesInSentenceboard-1,true);
 		
+		CheckBox checkBox  = (CheckBox) findViewById(R.id.checkBoxShowText);
 		if(showText)
 		{
-			CheckBox checkBox  = (CheckBox) findViewById(R.id.checkBoxShowText);
+			
 			checkBox.setChecked(true);
+		}
+		else
+		{
+			checkBox.setChecked(false);
 		}
 	}
 	
+	/**
+	 * When buttonChangeSentenceColor is clicked this happens, change the color of the sentenceboard
+	 * @param view, the buttonChangeSentenceColor
+	 */
 	public void onSentenceboardColorChanged(View view)
 	{
 		AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, 
@@ -140,6 +176,11 @@ public class SettingActivity extends Activity  {
 
 	}
 	
+	/**
+	 * When mediumPicRadioButton or largePicRadioButton is clicked, this happens. 
+	 * Change pictogram size.
+	 * @param view, mediumPicRadioButton or largePicRadioButton
+	 */
 	public void onSizePictogramChanged(View view)
 	{
 	    boolean checked = ((RadioButton) view).isChecked();
@@ -156,11 +197,16 @@ public class SettingActivity extends Activity  {
 	            break;
 	    }
 	}
+	
+	/**
+	 * When checkBoxShowText is clicked, this happens.
+	 * change whether a child can handle text or not. 
+	 * @param view
+	 */
 	public void onShowTextChanged(View view)
 	{
 		 // Is the view now checked?
 	    boolean checked = ((CheckBox) view).isChecked();
-
 	    if (checked)
 	    {
 	    	user.setShowText(true);

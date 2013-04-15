@@ -7,7 +7,12 @@ import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 
 //Ref: http://developer.android.com/guide/topics/ui/actionbar.html
-
+/**
+ * 
+ * @author PARROT spring 2012
+ * TabListener which is used in PARROTActivity.
+ * @param <T>
+ */
 public class TabListener<T extends Fragment> implements ActionBar.TabListener {
 	private Fragment mFragment;
 	private final Activity mActivity;

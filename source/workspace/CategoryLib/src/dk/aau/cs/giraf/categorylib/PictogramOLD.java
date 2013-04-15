@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
+//TODO delete, not used in parrot anymore
 
 /**
  * 

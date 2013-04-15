@@ -19,9 +19,12 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 
 /**
  * 
- * @PARROT
- * The PARROT Data Loader is used for interacting with the admin functionality of the GIRAF Project.
- *
+ * @author sw605f13-PARROT and PARROT spring 2013
+ * The PARROT DataLoader is used for interacting with the admin functionality of the GIRAF Project,
+ *  which gets the data from the database.
+ *  
+ * It is also interacting with the temporary categoryLib which handles categories, but this should 
+ * be change when then category-table is put in to the database.  
  */
 public class PARROTDataLoader {
 
@@ -31,22 +34,26 @@ public class PARROTDataLoader {
 	private CategoryHelper categoryHelper= null;
 
 
-
+	/**
+	 * Constructor.
+	 * @param activity An activity.
+	 */
 	public PARROTDataLoader(Activity activity)
 	{
 		this.parent = activity;
 		help = new Helper(parent); 
 		app = help.appsHelper.getAppById(PARROTActivity.getApp().getId()); 
 		categoryHelper= new CategoryHelper(parent);
-		//XMLTESTER();
+		
 
 	}
 
 
 	/**
-	 * 
-	 * @return
-	 * An ArrayList of all the children asociated with the guardian who is currently using the system.
+	 * TODO This is not used in PARROT, should it be deleted.
+	 * gets all the children from guardian
+	 * @param An profile id of a guardian.
+	 * @return An ArrayList of all the children asociated with the guardian who is currently using the system.
 	 */
 	public ArrayList<PARROTProfile> getChildrenFromGuardian(long guardianID)
 	{
@@ -63,12 +70,11 @@ public class PARROTDataLoader {
 
 
 	/**
-	 * @param childId
-	 * The ID of the child using the app.
-	 * @param appId
-	 * The ID of the app.
-	 * @return
-	 * This methods loads a specific PARROTProfile.
+	 * This method loads a specific PARROTProfile, which are to be shown in PARROT
+	 * 
+	 * @param childId, The ID of the child using the app.
+	 * @param appId,  The ID of the app.
+	 * @return PARROTProfile or null.
 	 */
 	public PARROTProfile loadProfile(long childId,long appId)	
 	{
@@ -77,28 +83,18 @@ public class PARROTDataLoader {
 		
 		if(childId != -1 && appId >=0)
 		 {
-				
-			prof = help.profilesHelper.getProfileById(childId);	//It used to be "currentProfileId"
-			//(Context context, final String image, final String text, final String audio, final long id)
+			//Get the childs profile and setup the PARROTProfile.	
+			prof = help.profilesHelper.getProfileById(childId);	
 			Pictogram pic = new Pictogram(parent.getApplicationContext(), "","", null,-1);
-					//new Pictogram(parent.getApplicationContext(),prof.getFirstname(), prof.getPicture(), null, null);	//TODO discuss whether this image might be changed
 			PARROTProfile parrotUser = new PARROTProfile(prof.getFirstname(), pic);
-			
 			parrotUser.setProfileID(prof.getId());
 			Setting<String, String, String> specialSettings = help.appsHelper.getSettingByIds(appId, childId);
 
 			//Load the settings
 			parrotUser = loadSettings(parrotUser, specialSettings);
 
-			//Add all of the categories to the profile
-			String categoryString = null;
-			Log.v("MessageParrot", "before categori");
-			
-			
-			//this return null if the child does not exist
-			categories = categoryHelper.getChildsCategories(prof.getId());
-			
-				
+			//Get the child's categories. This return null if the child does not exist.
+			categories = categoryHelper.getChildsCategories(prof.getId());	
 			Log.v("MessageXML", "xmlChild does exist");
 			if(categories!=null)
 			{
@@ -110,7 +106,8 @@ public class PARROTDataLoader {
 				return parrotUser;
 			}
 		}
-		
+		/* No categories were found or childId == -1 && appId<0 
+		  then show error message*/
 			// 1. Instantiate an AlertDialog.Builder with its constructor
 			AlertDialog.Builder builder = new AlertDialog.Builder(parent);
 	
@@ -132,17 +129,23 @@ public class PARROTDataLoader {
 		
 		return null;
 	}
-
+	
+	/**
+	 * loads the specific settings from the database into a PARROTProfile,  
+	 * @param PARROTProfile parrotUser
+	 * @param Setting<String, String, String> profileSettings
+	 * @return PARROTProfile, an updated PARROTProfile of parrotUser.
+	 */
 	private PARROTProfile loadSettings(PARROTProfile parrotUser, Setting<String, String, String> profileSettings) {
-		/*new settings*/
-		//if(profileSettings.containsKey(SentenceboardSettings))
-		Log.v("PARROTMessAGE", "BEFORE get from settings");
+
 		try{
+			//get the Setting from the profileSettings
 			int noOfBoxes = Integer.valueOf(profileSettings.get("SentenceboardSettings").get("NoOfBoxes"));
 			boolean showText = Boolean.valueOf(profileSettings.get("PictogramSettings").get("ShowText"));
 			String PictogramSize = String.valueOf(profileSettings.get("PictogramSettings").get("PictogramSize"));
 			int sentenceColour = Integer.valueOf(profileSettings.get("SentenceboardSettings").get("Color"));	
 			
+			//load it into PARROTProfile
 			parrotUser.setSentenceBoardColor(sentenceColour);
 			parrotUser.setNumberOfSentencePictograms(noOfBoxes);
 			if(PictogramSize.equalsIgnoreCase("MEDIUM"))
@@ -158,6 +161,10 @@ public class PARROTDataLoader {
 			{
 				parrotUser.setShowText(true);
 			}
+			else
+			{
+				parrotUser.setShowText(false);
+			}
 		}
 		catch(Exception e)
 		{
@@ -166,9 +173,13 @@ public class PARROTDataLoader {
 		
 		return parrotUser;
 	}
-	
+	/**
+	 * Saves the settings from a PARROTProfile into the database
+	 * @param user, the child's PARROTProfile
+	 */
 	public void saveChanges(PARROTProfile user)
 	{
+		
 		Profile prof = help.profilesHelper.getProfileById(user.getProfileID());
 		Setting<String, String, String> profileSetting = new Setting<String, String, String>();
 		profileSetting = help.appsHelper.getSettingByIds(app.getId(), prof.getId());
@@ -186,13 +197,6 @@ public class PARROTDataLoader {
 		help.appsHelper.modifyAppByProfile(app, prof);
 		
 	}
-	public void XMLTESTER()
-	{
-		Log.v("PARROTmessage","start xmltester");
-		CategoryHelper helper = new CategoryHelper(parent);
-		List<PARROTCategory> categories = helper.getTempCategoriesWithNewPictogram(11);
-		
-	Log.v("PARROTmessage","done xmltester");
-	}
+
 
 }

@@ -1,5 +1,4 @@
-package dk.aau.cs.giraf.parrot;
-
+ package dk.aau.cs.giraf.parrot;
 
 import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.app.Activity;
@@ -10,11 +9,11 @@ import android.widget.GridView;
 
 /**
  * 
- * @author PARROT, spring 2012
+ * @author PARROT spring 2012 and small adaption made by SW605f13-PARROT
  * This is the BoxDragListener class.
  * It handles drag and drop functionality with objects in the SpeechboardFragment.
- *
  */
+
 public class SpeechBoardBoxDragListener implements OnDragListener 
 {
 	private Activity parrent;
@@ -51,7 +50,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 					SpeechBoardFragment.speechBoardCategory.removePictogram(SpeechBoardFragment.draggedPictogramIndex);	
 					SpeechBoardFragment.speechBoardCategory.addPictogram(new Pictogram(parrent.getApplicationContext(),"#emptyPictogram#", "", "", -1));
 					
-					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+					speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 				}
 			}
 		} else if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED){ 
@@ -102,7 +101,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 						}
 
 
-						speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+						speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 						speech.invalidate();
 					}
 				}
@@ -143,7 +142,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 						}
 
 
-						speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+						speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 						speech.invalidate();
 						draggedPictogram = null;
 					}
@@ -158,7 +157,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 				{
 
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
-					speech.setAdapter(new PictogramAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
+					speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 					speech.invalidate();
 
 				}
@@ -172,4 +171,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 	}
 }
 
+
+
+ 
 
