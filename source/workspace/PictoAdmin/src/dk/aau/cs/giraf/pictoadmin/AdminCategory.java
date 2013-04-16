@@ -69,7 +69,7 @@ public class AdminCategory extends Activity {
 			}
 		});
 		
-		// Setuo category gridview
+		// Setup category gridview
 		categoryGrid = (GridView) findViewById(R.id.category_gridview);
 		categoryGrid.setAdapter(new PictoAdminCategoryAdapter(categoryList, this));
 		categoryGrid.setOnItemClickListener(new OnItemClickListener() {
@@ -108,7 +108,6 @@ public class AdminCategory extends Activity {
 	
 	@Override
 	protected void onResume() {
-		
 		super.onResume();
 	}
 	

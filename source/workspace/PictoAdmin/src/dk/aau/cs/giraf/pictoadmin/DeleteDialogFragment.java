@@ -15,7 +15,7 @@ public class DeleteDialogFragment extends DialogFragment {
         builder.setMessage("Er du sikker på, at du vil slette?")
                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                       MessageDialogFragment message = new MessageDialogFragment();
+                       MessageDialogFragment message = new MessageDialogFragment("Not implemented");
                        message.show(getFragmentManager(), "NotImplementMessage");
                    }
                })
