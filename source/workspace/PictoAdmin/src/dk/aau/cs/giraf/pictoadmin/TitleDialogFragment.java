@@ -42,7 +42,7 @@ public class TitleDialogFragment extends DialogFragment{
         	   .setTitle("Ændre titel")
                .setPositiveButton("Færdig", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                	   changedCategory.setCategoryName(titel.getText().toString());
+                	   startActiviy.updateTitel(titel.getText().toString(), pos, isCategory);
                    }
                })
                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
