@@ -194,14 +194,12 @@ public class PictoAdminMain extends Activity {
 		int j = 0; // Counter til at huske index for sidste læste karakter relativt til dens streng
 		
 		for (Pictogram p : listtobesorted) {
-
+			j = 0;
 			letters = p.getTextLabel().toCharArray();
 			
 			for (char c : letters) {
 				if(searchterm.indexOf(c) != -1) { // Hvis bogstavet findes i søgestrengen skal vi gemme indexet og øge vægtningen
-					weight[i] += 1;
-					index[i][j] = c;
-					j++;
+					
 				}
 			}
 			
