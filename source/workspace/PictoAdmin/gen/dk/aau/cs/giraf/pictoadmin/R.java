@@ -60,12 +60,12 @@ public final class R {
         public static final int TextView02=0x7f09001d;
         public static final int TextView09=0x7f09001c;
         public static final int access_pictocreator_button=0x7f090010;
-        public static final int action_anders=0x7f09003d;
-        public static final int action_back=0x7f090036;
-        public static final int action_help=0x7f090038;
-        public static final int action_jacob=0x7f09003c;
-        public static final int action_klim=0x7f09003a;
-        public static final int action_lisbeth=0x7f09003b;
+        public static final int action_anders=0x7f09003e;
+        public static final int action_back=0x7f090037;
+        public static final int action_help=0x7f090039;
+        public static final int action_jacob=0x7f09003d;
+        public static final int action_klim=0x7f09003b;
+        public static final int action_lisbeth=0x7f09003c;
         public static final int add_new_category_button=0x7f090006;
         public static final int add_new_picture_button=0x7f090011;
         public static final int add_new_subcategory_button=0x7f09000b;
@@ -93,16 +93,16 @@ public final class R {
         public static final int description_bar=0x7f090000;
         public static final int errorIcon=0x7f090027;
         public static final int errorMessage=0x7f090026;
-        public static final int gotoAdminCategory=0x7f090039;
+        public static final int gotoAdminCategory=0x7f09003a;
         public static final int iconGrid=0x7f090033;
         public static final int main_category_admin_layout=0x7f090003;
-        public static final int menu_settings=0x7f090037;
+        public static final int menu_settings=0x7f090038;
         public static final int pictogram_coloumb=0x7f09000e;
         public static final int pictogram_displayer=0x7f090028;
         public static final int pictogram_gridview=0x7f090013;
         public static final int pictogram_text=0x7f09000f;
-        public static final int pictogrambitmap=0x7f090034;
-        public static final int pictogramtext=0x7f090035;
+        public static final int pictogrambitmap=0x7f090035;
+        public static final int pictogramtext=0x7f090036;
         public static final int search_button=0x7f09001e;
         public static final int search_button_description=0x7f090023;
         public static final int select_search_field=0x7f090017;
@@ -116,6 +116,7 @@ public final class R {
         public static final int tip_error_bar=0x7f090014;
         public static final int tip_error_icon=0x7f090016;
         public static final int tip_error_message=0x7f090015;
+        public static final int titelEdit=0x7f090034;
         public static final int username=0x7f090031;
     }
     public static final class layout {
@@ -124,8 +125,9 @@ public final class R {
         public static final int ambilwarna_dialog=0x7f030002;
         public static final int dialog_create=0x7f030003;
         public static final int dialog_icon=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int pictogramview=0x7f030006;
+        public static final int dialog_title=0x7f030005;
+        public static final int main=0x7f030006;
+        public static final int pictogramview=0x7f030007;
     }
     public static final class menu {
         public static final int activity_admin_category=0x7f080000;

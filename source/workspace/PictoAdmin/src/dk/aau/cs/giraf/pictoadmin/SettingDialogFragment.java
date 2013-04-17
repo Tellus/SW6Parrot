@@ -41,8 +41,8 @@ public class SettingDialogFragment extends DialogFragment{
 				public void onClick(DialogInterface dialog, int which) {
 					//Change title
 					if(which == 0) {
-						MessageDialogFragment message = new MessageDialogFragment("Missing");
-						message.show(getFragmentManager(), "");
+						TitleDialogFragment titelDialog = new TitleDialogFragment(startActivity, category, pos, isCategory);
+						titelDialog.show(getFragmentManager(), "changeTitle");
 					}
 					//Change color
 					if(which == 1) {
@@ -52,7 +52,7 @@ public class SettingDialogFragment extends DialogFragment{
 					//Change icon
 					if(which == 2) {
 						IconDialogFragment iconDialog = new IconDialogFragment(startActivity, category, pos, isCategory);
-						iconDialog.show(getFragmentManager(), "");
+						iconDialog.show(getFragmentManager(), "changeIcon");
 					}
 				}
 			})
