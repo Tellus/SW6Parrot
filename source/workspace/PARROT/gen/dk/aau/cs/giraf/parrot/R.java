@@ -37,13 +37,15 @@ public final class R {
         public static final int parrot=0x7f02000e;
         public static final int play=0x7f02000f;
         public static final int record=0x7f020010;
-        public static final int sentenceboardlayout=0x7f020011;
-        public static final int stop=0x7f020012;
-        public static final int trashbin=0x7f020013;
-        public static final int usynlig=0x7f020014;
+        public static final int scrollbar_vertical_thumb=0x7f020011;
+        public static final int scrollbar_vertical_track=0x7f020012;
+        public static final int sentenceboardlayout=0x7f020013;
+        public static final int stop=0x7f020014;
+        public static final int trashbin=0x7f020015;
+        public static final int usynlig=0x7f020016;
     }
     public static final class id {
-        public static final int SpeechBoard=0x7f09001a;
+        public static final int SpeechBoard=0x7f09001b;
         public static final int alignChoseForNoInSentenceBoard=0x7f090005;
         public static final int ambilwarna_cursor=0x7f090011;
         public static final int ambilwarna_state=0x7f090013;
@@ -58,10 +60,10 @@ public final class R {
         public static final int catpic=0x7f090016;
         public static final int changesentencecolor=0x7f090003;
         public static final int checkBoxShowText=0x7f09000d;
-        public static final int clearBoard=0x7f090022;
-        public static final int goToLauncher=0x7f090021;
-        public static final int goToParrot=0x7f09001f;
-        public static final int goToSettings=0x7f090020;
+        public static final int clearBoard=0x7f090023;
+        public static final int goToLauncher=0x7f090022;
+        public static final int goToParrot=0x7f090020;
+        public static final int goToSettings=0x7f090021;
         public static final int largePicRadioButton=0x7f09000c;
         public static final int linearLayout1=0x7f090002;
         public static final int mediumPicRadioButton=0x7f09000b;
@@ -69,15 +71,16 @@ public final class R {
         public static final int pickNoSentenceBoard=0x7f090006;
         public static final int pictogramSetting=0x7f090008;
         public static final int pictogramSize=0x7f09000a;
-        public static final int pictogrambitmap=0x7f090018;
-        public static final int pictogramgrid=0x7f09001d;
-        public static final int pictogramtext=0x7f090019;
+        public static final int pictogramView=0x7f090018;
+        public static final int pictogrambitmap=0x7f090019;
+        public static final int pictogramgrid=0x7f09001e;
+        public static final int pictogramtext=0x7f09001a;
         public static final int radioGroupSizePictogram=0x7f090009;
         public static final int sentenceSetting=0x7f090001;
-        public static final int sentenceboard=0x7f09001e;
+        public static final int sentenceboard=0x7f09001f;
         public static final int spinnerNoOfsentence=0x7f090007;
-        public static final int subcategory=0x7f09001c;
-        public static final int supercategory=0x7f09001b;
+        public static final int subcategory=0x7f09001d;
+        public static final int supercategory=0x7f09001c;
     }
     public static final class layout {
         public static final int activity_setting=0x7f030000;

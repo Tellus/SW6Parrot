@@ -35,13 +35,16 @@
 	        android:id="@+id/pictogramgrid"
 	        android:layout_width="wrap_content"
 	        android:layout_height="match_parent"
-	        android:columnWidth="150dp"
-	        android:numColumns="5"
-	        android:stretchMode="columnWidth"
-	        android:horizontalSpacing="5dp"
-	        android:verticalSpacing="5dp"
+	        android:stretchMode="none"
 	        android:background="@drawable/sentenceboardlayout"
-	        android:fastScrollEnabled="true"  >
+	        android:scrollbars="vertical"
+	        android:fadeScrollbars="false"
+	        android:scrollbarAlwaysDrawVerticalTrack="true"
+    		android:scrollbarTrackVertical="@drawable/scrollbar_vertical_track"
+    		android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+    		android:scrollbarSize="50dip"
+	        >
+	        
 		    </GridView>
 
     </LinearLayout>
@@ -57,6 +60,6 @@
 	    android:verticalSpacing="5dp" >
 	</GridView>
 
-<!-- android:stretchMode="spacingWidthUniform" -->
+
 
 </LinearLayout>

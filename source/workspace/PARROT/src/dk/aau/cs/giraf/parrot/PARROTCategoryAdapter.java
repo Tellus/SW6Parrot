@@ -60,25 +60,24 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 	 * Create an image view for each icon of the categories in the list.
 	 */
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ImageView imageView;
-		Pictogram pct=catList.get(position).getIcon();
-		if (convertView == null) {  // if it's not recycled, initialize some attributes
-			imageView = new ImageView(context);
-			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-			imageView.setPadding(8, 8, 8, 8);
+			public View getView(int position, View convertView, ViewGroup parent) {
+			ImageView imageView;
+			Pictogram pct=catList.get(position).getIcon();
+			if (convertView == null) {  // if it's not recycled, initialize some attributes
+				imageView = new ImageView(context);
+				imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+				imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+				imageView.setPadding(8, 8, 8, 8);
 			} 
-		
-		else {
-			imageView = (ImageView) convertView;
 			
+			else {
+				imageView = (ImageView) convertView;
+			}
+			
+			//we then set the imageview to the icon of the category
+			imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
+			
+			return imageView;
 		}
-		
-		//we then set the imageview to the icon of the category
-		imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
-		imageView.setBackgroundColor(catList.get(position).getCategoryColor());
-		return imageView;
-	}
 	
 }
