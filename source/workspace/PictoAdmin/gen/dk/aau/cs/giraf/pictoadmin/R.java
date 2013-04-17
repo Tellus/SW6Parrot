@@ -94,7 +94,7 @@ public final class R {
         public static final int errorIcon=0x7f090027;
         public static final int errorMessage=0x7f090026;
         public static final int gotoAdminCategory=0x7f09003a;
-        public static final int iconGrid=0x7f090034;
+        public static final int iconGrid=0x7f090033;
         public static final int main_category_admin_layout=0x7f090003;
         public static final int menu_settings=0x7f090038;
         public static final int pictogram_coloumb=0x7f09000e;
@@ -116,7 +116,7 @@ public final class R {
         public static final int tip_error_bar=0x7f090014;
         public static final int tip_error_icon=0x7f090016;
         public static final int tip_error_message=0x7f090015;
-        public static final int titelEdit=0x7f090033;
+        public static final int titelEdit=0x7f090034;
         public static final int username=0x7f090031;
     }
     public static final class layout {
