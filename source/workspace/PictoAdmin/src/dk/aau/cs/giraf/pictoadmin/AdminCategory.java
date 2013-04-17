@@ -1,36 +1,37 @@
 package dk.aau.cs.giraf.pictoadmin;
 
 import java.util.ArrayList;
+
+import yuku.ambilwarna.AmbilWarnaDialog;
+import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.Activity;
-import android.content.Intent;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.controllers.ProfilesHelper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.pictoadmin.CreateDialogFragment.CreateDialogListener;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
-public class AdminCategory extends Activity {
-	private String childName = "";
-	private String guardianName = "";
-	private Bundle extras;
+public class AdminCategory extends Activity implements CreateDialogListener{
+	private Profile child;
+	private Profile guardian;
+	private Bundle  extras;
 	
-	private PARROTCategory selectedCategory = null;
+	private PARROTCategory selectedCategory    = null;
 	private PARROTCategory selectedSubCategory = null;
-	private Pictogram 	   selectedPictogram = null;
+	private Pictogram 	   selectedPictogram   = null;
 	
 	private ArrayList<PARROTCategory> categoryList    = new ArrayList<PARROTCategory>();
 	private ArrayList<PARROTCategory> subcategoryList = new ArrayList<PARROTCategory>();
@@ -51,7 +52,7 @@ public class AdminCategory extends Activity {
 		}
 		
 		CategoryHelper helpCat = new CategoryHelper(this);
-		categoryList = (ArrayList<PARROTCategory>) helpCat.getTempCategoriesWithNewPictogram(11);
+		categoryList = (ArrayList<PARROTCategory>) helpCat.getTempCategoriesWithNewPictogram(child.getId());
 		
 		// Setup subcategory gridview
 		subcategoryGrid = (GridView) findViewById(R.id.subcategory_gridview);
@@ -65,6 +66,10 @@ public class AdminCategory extends Activity {
 		subcategoryGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
+				SettingDialogFragment settingDialog = new SettingDialogFragment(AdminCategory.this,
+																				subcategoryList.get(position),
+																				position, false);
+				settingDialog.show(getFragmentManager(), "chooseSettings");
 				return false;
 			}
 		});
@@ -82,8 +87,10 @@ public class AdminCategory extends Activity {
 		categoryGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
-				SettingDialogFragment testDialog = new SettingDialogFragment();
-				testDialog.show(getFragmentManager(), "chooseSettings");
+				SettingDialogFragment settingDialog = new SettingDialogFragment(AdminCategory.this,
+																			categoryList.get(position),
+																			position, true);
+				settingDialog.show(getFragmentManager(), "chooseSettings");
 				return false;
 			}
 		});
@@ -97,6 +104,9 @@ public class AdminCategory extends Activity {
 				updateButtonVisibility(v);
 			}
 		});
+		
+		TextView currentChild = (TextView) findViewById(R.id.currentChildName);
+		currentChild.setText(child.getFirstname()+ " " + child.getSurname());
 	}
 
 	@Override
@@ -111,12 +121,26 @@ public class AdminCategory extends Activity {
 		super.onResume();
 	}
 	
+	public void updateIcon(PARROTCategory category, int pos, boolean isCategory) {
+		category.setChanged(true);
+		
+		if(isCategory){
+			categoryList.set(pos, category);
+			categoryGrid.setAdapter(new PictoAdminCategoryAdapter(categoryList, this));
+		}
+		else {
+			subcategoryList.set(pos, category);
+			subcategoryGrid.setAdapter(new PictoAdminCategoryAdapter(subcategoryList, this));
+		}
+	}
+	
 	private void getAllExtras() {
+		ProfilesHelper help = new ProfilesHelper(this);
 		if(getIntent().hasExtra("childId")){
-			childName = extras.get("childId").toString();
+			child = help.getProfileById(extras.getLong("childId"));
 		}
 		if(getIntent().hasExtra("guardianId")){
-			guardianName = extras.get("guardianId").toString();
+			guardian = help.getProfileById(extras.getLong("guardianId"));
 		}
 	}
 	
@@ -136,7 +160,7 @@ public class AdminCategory extends Activity {
 			//updateGrid(subcategoryGrid, new PictoAdminCategoryAdapter(subcategoryList, view.getContext()));
 			subcategoryGrid.setAdapter(new PictoAdminCategoryAdapter(subcategoryList, view.getContext()));
 			
-			pictogramGrid.setAdapter(new PictoAdapter2(pictograms, view.getContext()));
+			pictogramGrid.setAdapter(new PictoAdapter(pictograms, true, view.getContext()));
 		}
 		else if(id == 0) {
 			selectedSubCategory = subcategoryList.get(position);
@@ -144,7 +168,7 @@ public class AdminCategory extends Activity {
 			selectedPictogram = null;
 			pictograms = subcategoryList.get(position).getPictograms();
 			
-			pictogramGrid.setAdapter(new PictoAdapter2(pictograms, view.getContext()));
+			pictogramGrid.setAdapter(new PictoAdapter(pictograms, true, view.getContext()));
 		}
 	}
 	
@@ -183,14 +207,10 @@ public class AdminCategory extends Activity {
 		}
 	}
 	
-	public void validTest(String input) {
-		TextView testView = (TextView) findViewById(R.id.currentChildName);
-		testView.setText(input);
-	}
-	
 	public void createCategory(View view)
 	{
-		
+		CreateDialogFragment dialog = new CreateDialogFragment("kategori");
+		dialog.show(getFragmentManager(), "dialog");
 	}
 	
 	public void deleteCategory(View view)
@@ -225,4 +245,41 @@ public class AdminCategory extends Activity {
 		DeleteDialogFragment option = new DeleteDialogFragment();
 		option.show(getFragmentManager(), "deletePictogram?");
 	}
+	
+	int newColor;
+	public void onSentenceboardColorChanged(View view)
+	{
+		AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, 0, new OnAmbilWarnaListener() {
+			@Override
+			public void onCancel(AmbilWarnaDialog dialog) {}
+
+			@Override
+			public void onOk(AmbilWarnaDialog dialog, int color) {
+				newColor = color;
+			}
+		});
+		dialog.show();
+	}
+	
+	@Override
+	public void onDialogPositiveClick(DialogFragment dialog, String titel) {
+		MessageDialogFragment message;
+		if(titel.isEmpty() == false && newColor != 0) {
+			message = new MessageDialogFragment("Titel: " + titel + " Color: " + String.valueOf(newColor));
+			message.show(getFragmentManager(), "message");
+			categoryList.add(new PARROTCategory(titel, newColor, categoryList.get(0).getIcon()));
+			categoryGrid.setAdapter(new PictoAdminCategoryAdapter(categoryList, this));
+		}
+		else {
+			message = new MessageDialogFragment("Mangler titel og farve");
+			message.show(getFragmentManager(), "message");
+		}
+		newColor = 0;
+	}
+
+	@Override
+	public void onDialogNegativeClick(DialogFragment dialog) {
+		
+	}
+
 }

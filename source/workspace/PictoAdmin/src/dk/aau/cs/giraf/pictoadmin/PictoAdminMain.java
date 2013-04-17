@@ -67,7 +67,7 @@ public class PictoAdminMain extends Activity {
 			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
 				//checkoutList.removePictogram(position);
 				checkoutList.remove(position);
-				checkoutGrid.setAdapter(new PictoAdapter2(checkoutList, getApplicationContext()));
+				checkoutGrid.setAdapter(new PictoAdapter(checkoutList, getApplicationContext()));
 				return true;
 			}
 		});
@@ -78,7 +78,7 @@ public class PictoAdminMain extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View v, int position,
 					long arg3) {
 				checkoutList.add(searchlist.get(position));
-				checkoutGrid.setAdapter(new PictoAdapter2(checkoutList, getApplicationContext()));
+				checkoutGrid.setAdapter(new PictoAdapter(checkoutList, getApplicationContext()));
 			}
 		});
 		
@@ -163,7 +163,7 @@ public class PictoAdminMain extends Activity {
 			
 			//searchlist = sortList(searchlist, input);
 			
-			PictoAdapter2 picto = new PictoAdapter2(searchlist, this);
+			PictoAdapter picto = new PictoAdapter(searchlist, this);
 			picgrid.setAdapter(picto);
 		}
 		
@@ -267,11 +267,13 @@ public class PictoAdminMain extends Activity {
 	
 	public void clearCheckoutList(View view) {
 		checkoutList.clear();
-		checkoutGrid.setAdapter(new PictoAdapter2(checkoutList, this));
+		checkoutGrid.setAdapter(new PictoAdapter(checkoutList, this));
 	}
 	
 	public void gotoAdminCategory(MenuItem item) {
 		Intent intent = new Intent(this, AdminCategory.class);
+		intent.putExtra("childId", childid);
+		intent.putExtra("guardianId", guardianid);
 		startActivity(intent);
 	}
 	
