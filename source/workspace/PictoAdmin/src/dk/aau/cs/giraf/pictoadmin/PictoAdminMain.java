@@ -2,7 +2,6 @@ package dk.aau.cs.giraf.pictoadmin;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -26,29 +24,28 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
 public class PictoAdminMain extends Activity {
-	Button searchbutton;
-	DatabaseHandler dbhandler;
-	//DisplayPictograms disphandler;
-	String textinput;
-	EditText inputbox;
+	private DatabaseHandler dbhandler;
+	private String textinput;
+	private EditText inputbox;
 
-	ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
-	ArrayList<Pictogram> pictoList  = new ArrayList<Pictogram>();
-	ArrayList<Pictogram> searchlist = new ArrayList<Pictogram>();
+	private ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
+	private ArrayList<Pictogram> pictoList  = new ArrayList<Pictogram>();
+	private ArrayList<Pictogram> searchlist = new ArrayList<Pictogram>();
 
-	public long childid;
-	public long guardianid;
+	private long childid;
+	private long guardianid;
 	private Profile profile;
-	public List<Pictogram> pictotemp; // Vi bruger denne kun til at gette elementer fra pictofactory som returner list
-	public ArrayList<Pictogram> pictograms; // Den egentlige liste af pictogrammer vi ønsker at bruge
+	private List<Pictogram> pictotemp; // Vi bruger denne kun til at gette elementer fra pictofactory som returner list
+	private ArrayList<Pictogram> pictograms; // Den egentlige liste af pictogrammer vi ønsker at bruge
 
 	long[] output;
-	GridView checkoutGrid;
-	GridView pictoGrid;
+	private GridView checkoutGrid;
+	private GridView pictoGrid;
 
-	ImageButton sendButton;
+	private ImageButton sendButton;
+	private ImageButton searchbutton;
 	
-	CheckoutGridHandler cgHandler;
+	private CheckoutGridHandler cgHandler;
 	
 
 	@Override

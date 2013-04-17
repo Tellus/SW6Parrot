@@ -134,6 +134,36 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		}
 	}
 	
+	public void updateTitel(String titel, int pos, boolean isCategory) {
+		boolean legal = true;
+		if(isCategory) {
+			for(PARROTCategory c : categoryList){
+				if(c.getCategoryName().equals(titel)) {
+					legal = false;
+					MessageDialogFragment message = new MessageDialogFragment("Navn er allerede brugt");
+					message.show(getFragmentManager(), "invalidName");
+					break;
+				}
+			}
+			if(legal) {
+				categoryList.get(pos).setCategoryName(titel);
+			}
+		}
+		else {
+			for(PARROTCategory sc : subcategoryList){
+				if(sc.getCategoryName().equals(titel)){
+					legal = false;
+					MessageDialogFragment message = new MessageDialogFragment("Navn er allerede brugt");
+					message.show(getFragmentManager(), "invalidName");
+					break;
+				}
+			}
+			if(legal){
+				subcategoryList.get(pos).setCategoryName(titel);
+			}
+		}
+	}
+	
 	private void getAllExtras() {
 		ProfilesHelper help = new ProfilesHelper(this);
 		if(getIntent().hasExtra("childId")){
