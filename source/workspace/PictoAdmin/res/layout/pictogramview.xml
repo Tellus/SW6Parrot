@@ -8,6 +8,7 @@
         android:id="@+id/pictogrambitmap"
         android:layout_width="145dp"
         android:layout_height="145dp"
+        android:layout_gravity="center"
         android:layout_marginBottom="3dp"/>
 
 

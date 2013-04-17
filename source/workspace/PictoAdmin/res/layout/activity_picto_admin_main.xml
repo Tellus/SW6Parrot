@@ -37,8 +37,8 @@
             android:id="@+id/checkout"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/sentenceboardlayout"
-            android:stretchMode="columnWidth" >
+            android:gravity="center"
+            android:background="@drawable/sentenceboardlayout" >
 
     </GridView>
        
@@ -77,6 +77,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <ImageButton
                 android:id="@+id/search_button"
                 android:layout_width="wrap_content"
@@ -86,32 +93,50 @@
                 android:src="@drawable/ic_action_search" />
 
             <TextView
-                android:id="@+id/TextView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/delete"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <ImageButton
-                android:id="@+id/ImageButton09"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/delete"
-                android:src="@drawable/content_discard" />
-
-            <TextView
-                android:id="@+id/TextView10"
+                android:id="@+id/clear_search_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/reset"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageButton
-                android:id="@+id/ImageButton07"
+                android:id="@+id/clearSearchFieldButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/reset"
+                android:onClick="clearSearchField"
                 android:src="@drawable/navigation_cancel" />
+
+            <TextView
+                android:id="@+id/delete_checkout_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageButton
+                android:id="@+id/deleteCheckoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/delete"
+                android:src="@drawable/content_discard"
+                android:onClick="clearCheckoutList" />
+
+            <TextView
+                android:id="@+id/search_button_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageButton
+                android:id="@+id/sendContentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/reset"
+                android:src="@drawable/action_send"
+                android:onClick="sendContent" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -145,7 +170,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:numColumns="5"
+            android:numColumns="8"
             android:background="@drawable/sentenceboardlayout" >
             
         </GridView>

@@ -21,13 +21,13 @@ import android.widget.ImageView;
  * This class takes a list of categories and loads them into a GridView.
  */
 
-public class PARROTCategoryAdapter extends BaseAdapter{
+public class PictoAdminCategoryAdapter extends BaseAdapter{
 
 	private ArrayList<PARROTCategory> catList;
 	private Context context;
 
 	//Constructor taking List of PARROTCategories, and a Context.
-	public PARROTCategoryAdapter(ArrayList<PARROTCategory> catList, Context c)
+	public PictoAdminCategoryAdapter(ArrayList<PARROTCategory> catList, Context c)
 	{
 		this.catList=catList;
 		context = c;
@@ -60,7 +60,6 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 			imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
 			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imageView.setPadding(8, 8, 8, 8);
-			imageView.setBackgroundColor(catList.get(position).getCategoryColor());
 		} 
 		
 		else {
