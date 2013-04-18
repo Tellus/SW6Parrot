@@ -1,12 +1,21 @@
 package dk.aau.cs.giraf.pictoadmin;
 
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+@SuppressLint("ValidFragment")
 public class DeleteDialogFragment extends DialogFragment {
+	
+	PARROTCategory category;
+	
+	public DeleteDialogFragment(PARROTCategory cat) {
+		this.category = cat;
+	}
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction

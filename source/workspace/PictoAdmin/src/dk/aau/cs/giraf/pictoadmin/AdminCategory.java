@@ -128,7 +128,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	 */
 	private int newCategoryColor; // Hold the value set when creating a new category or sub-category
 	@Override
-	public void onDialogPositiveClick(DialogFragment dialog, String titel, int pos, boolean isCategory) {
+	public void onDialogPositiveClick(DialogFragment dialog, String titel, boolean isCategory) {
 		MessageDialogFragment message;
 		boolean legal = true;
 
@@ -155,7 +155,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 					}
 				}
 				if(legal){
-					subcategoryList.add(new PARROTCategory(titel, newCategoryColor, categoryList.get(pos).getIcon()));
+					subcategoryList.add(new PARROTCategory(titel, newCategoryColor, categoryList.get(0).getIcon()));
 					subcategoryGrid.setAdapter(new PictoAdminCategoryAdapter(subcategoryList, this));
 				}
 				else {
@@ -269,7 +269,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		}
 	}
 	
-	
 	/*
 	 * This method gets all extras in the extras bundle from the intent that started this activity
 	 */
@@ -279,7 +278,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			child = help.getProfileById(extras.getLong("childId"));
 		}
 	}
-	
 
 	/*
 	 * The following methods handle menu pressing
@@ -361,7 +359,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	}
 	
 	public void deleteCategory(View view) {
-		DeleteDialogFragment deleteDialog = new DeleteDialogFragment();
+		DeleteDialogFragment deleteDialog = new DeleteDialogFragment(selectedCategory);
 		deleteDialog.show(getFragmentManager(), "deleteCategory?");
 	}
 	
