@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.pictoadmin;
 
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,16 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+@SuppressLint("ValidFragment")
 public class CreateDialogFragment extends DialogFragment{
 	
 	String message = "";
+	int position;
+	boolean isCategory;
 	
-	public CreateDialogFragment(String msg) {
+	public CreateDialogFragment(boolean isCategory, int pos, String msg) {
+		this.isCategory = isCategory;
+		this.position = pos;
 		this.message = msg;
 	}
 	
 	public interface CreateDialogListener {
-		public void onDialogPositiveClick(DialogFragment dialog, String titel);
+		public void onDialogPositiveClick(DialogFragment dialog, String titel, int pos, boolean isCategory);
 		public void onDialogNegativeClick(DialogFragment dialog);
 	}
 	
@@ -49,7 +56,7 @@ public class CreateDialogFragment extends DialogFragment{
         	   .setTitle("Opret ny " + message)
                .setPositiveButton("Færdig", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                	   listener.onDialogPositiveClick(CreateDialogFragment.this, titelText.getText().toString());
+                	   listener.onDialogPositiveClick(CreateDialogFragment.this, titelText.getText().toString(), position, isCategory);
                    }
                })
                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
