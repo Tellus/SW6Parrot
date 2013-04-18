@@ -33,6 +33,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	private PARROTCategory selectedCategory    = null;
 	private PARROTCategory selectedSubCategory = null;
 	private Pictogram 	   selectedPictogram   = null;
+	private int			   selectedLocation;
 	
 	private ArrayList<PARROTCategory> categoryList    = new ArrayList<PARROTCategory>();
 	private ArrayList<PARROTCategory> subcategoryList = new ArrayList<PARROTCategory>();
@@ -209,7 +210,34 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		else if(setting.toLowerCase().equals("icon")){
 			updateIcon(category, pos, isCategory);
 		}
+		else if(setting.toLowerCase().equals("delete")){
+			if(isCategory){
+				subcategoryList.removeAll(subcategoryList);
+				pictograms.removeAll(pictograms);
+				selectedCategory = null;
+				categoryList.remove(pos);
+			}
+			else {
+				pictograms.removeAll(pictograms);
+				selectedSubCategory = null;
+				subcategoryList.remove(pos);
+			}
+		}
+		else if(setting.toLowerCase().equals("deletepictogram")){
+			if(selectedSubCategory == null){
+				selectedPictogram = null;
+				selectedCategory.removePictogram(selectedLocation);
+			}
+		}
 		
+		if(isCategory){
+			categoryGrid.setAdapter(new PictoAdminCategoryAdapter(categoryList, this));
+		}
+		subcategoryGrid.setAdapter(new PictoAdminCategoryAdapter(subcategoryList, this));
+		pictogramGrid.setAdapter(new PictoAdapter(pictograms, this));
+		updateButtonVisibility(categoryGrid);
+		updateButtonVisibility(subcategoryGrid);
+		updateButtonVisibility(pictogramGrid);
 	}
 	
 	private void updateTitel(PARROTCategory tempCategory, int pos, boolean isCategory) {
@@ -225,7 +253,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			}
 			if(legal) {
 				categoryList.get(pos).setCategoryName(tempCategory.getCategoryName());
-				
 			}
 		}
 		else {
@@ -248,11 +275,9 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		
 		if(isCategory){
 			categoryList.set(pos, category);
-			categoryGrid.setAdapter(new PictoAdminCategoryAdapter(categoryList, this));
 		}
 		else {
 			subcategoryList.set(pos, category);
-			subcategoryGrid.setAdapter(new PictoAdminCategoryAdapter(subcategoryList, this));
 		}
 	}
 	
@@ -261,11 +286,9 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		
 		if(isCategory){
 			categoryList.set(pos, category);
-			categoryGrid.setAdapter(new PictoAdminCategoryAdapter(categoryList, this));
 		}
 		else {
 			subcategoryList.set(pos, category);
-			subcategoryGrid.setAdapter(new PictoAdminCategoryAdapter(subcategoryList, this));
 		}
 	}
 	
@@ -325,10 +348,9 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	 * This method update what is currently selected (category, sub-category or pictogram)
 	 */
 	private void updateSelected(View view, int position, int id) {
+		selectedLocation = position;
 		if(id == 2) {
 			selectedPictogram = pictograms.get(position);
-			selectedCategory = null;
-			selectedSubCategory = null;
 		}
 		if(id == 1) {
 			selectedCategory = categoryList.get(position);
@@ -342,7 +364,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		}
 		else if(id == 0) {
 			selectedSubCategory = subcategoryList.get(position);
-			selectedCategory = null;
 			selectedPictogram = null;
 			pictograms = subcategoryList.get(position).getPictograms();
 			
@@ -359,7 +380,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	}
 	
 	public void deleteCategory(View view) {
-		DeleteDialogFragment deleteDialog = new DeleteDialogFragment(selectedCategory);
+		DeleteDialogFragment deleteDialog = new DeleteDialogFragment(this, selectedCategory, selectedLocation, true);
 		deleteDialog.show(getFragmentManager(), "deleteCategory?");
 	}
 	
@@ -369,7 +390,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	}
 	
 	public void deleteSubCategory(View view) {
-		DeleteDialogFragment deleteDialog = new DeleteDialogFragment();
+		DeleteDialogFragment deleteDialog = new DeleteDialogFragment(this, selectedSubCategory, selectedLocation, false);
 		deleteDialog.show(getFragmentManager(), "deleteSubCategory?");
 	}
 	
@@ -378,8 +399,8 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	}
 	
 	public void deletePictogram(View view) {
-		DeleteDialogFragment option = new DeleteDialogFragment();
-		option.show(getFragmentManager(), "deletePictogram?");
+		DeleteDialogFragment deleteDialog = new DeleteDialogFragment(this, selectedPictogram, selectedLocation, false);
+		deleteDialog.show(getFragmentManager(), "deletePictogram?");
 	}
 	
 	/*
@@ -389,7 +410,4 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	{
 		//TODO: Make this
 	}
-	
-
-
 }
