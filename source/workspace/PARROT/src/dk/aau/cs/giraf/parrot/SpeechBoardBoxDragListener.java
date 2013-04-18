@@ -61,6 +61,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 			if (insideOfMe){
 
 				//We want to drop a view into the sentenceboard
+	//1
 				if( self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID != R.id.sentenceboard)	
 				{
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
@@ -70,6 +71,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 					if(index <0)	//If the pictorgram is dropped at an illegal index
 					{
 						//Do nothing
+						return false;
 						//TODO improve this situation.
 					}
 					else
@@ -105,7 +107,8 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 						speech.invalidate();
 					}
 				}
-				if(self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard) //We are rearanging the position of pictograms on the sentenceboard
+	//2			
+				else if(self.getId() == R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard) //We are rearanging the position of pictograms on the sentenceboard
 				{
 
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
@@ -153,18 +156,20 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 					}
 
 				}
-				if(self.getId() != R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard) //If we drag something from the sentenceboard to somewhere else
+		//3
+				else if(self.getId() != R.id.sentenceboard && SpeechBoardFragment.dragOwnerID == R.id.sentenceboard) //If we drag something from the sentenceboard to somewhere else
 				{
 
 					GridView speech = (GridView) parrent.findViewById(R.id.sentenceboard);
 					speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 					speech.invalidate();
-
 				}
 			}
 			//To ensure that no wrong references will be made, the index is reset to -1
 			SpeechBoardFragment.draggedPictogramIndex = -1;
+			SpeechBoardFragment.dragOwnerID = -1;
 		} else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
+			insideOfMe = false;
 			//Dummy				
 		}
 		return true;
