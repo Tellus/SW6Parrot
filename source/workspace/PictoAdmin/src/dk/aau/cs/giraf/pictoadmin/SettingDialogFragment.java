@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.pictoadmin;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -41,13 +43,26 @@ public class SettingDialogFragment extends DialogFragment{
 				public void onClick(DialogInterface dialog, int which) {
 					//Change title
 					if(which == 0) {
-						TitleDialogFragment titelDialog = new TitleDialogFragment(startActivity, category, pos, isCategory);
+						TitleDialogFragment titelDialog = new TitleDialogFragment(startActivity, pos, isCategory);
 						titelDialog.show(getFragmentManager(), "changeTitle");
 					}
 					//Change color
 					if(which == 1) {
-						MessageDialogFragment message = new MessageDialogFragment("Missing");
-						message.show(getFragmentManager(), "");
+						AmbilWarnaDialog colorDialog = new AmbilWarnaDialog(startActivity, category.getCategoryColor(), new OnAmbilWarnaListener() {	
+							@Override
+							public void onOk(AmbilWarnaDialog dialog, int color) {
+								category.setCategoryColor(color);
+								startActivity.updateSettings(category, pos, isCategory, "color");
+							}
+							
+							@Override
+							public void onCancel(AmbilWarnaDialog dialog) {
+								// Do nothing
+							}
+						});
+						colorDialog.show();
+						//MessageDialogFragment message = new MessageDialogFragment("Missing");
+						//message.show(getFragmentManager(), "");
 					}
 					//Change icon
 					if(which == 2) {
