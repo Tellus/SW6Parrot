@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.parrot;
 
-import dk.aau.cs.giraf.categorylib.AudioPlayer;
 import android.app.FragmentTransaction;
 
 import dk.aau.cs.giraf.oasis.lib.Helper;
@@ -87,7 +86,7 @@ public class PARROTActivity extends Activity {
 	 */
 	@Override
 	protected void onPause() {
-		AudioPlayer.close();
+		//AudioPlayer.close();
 		super.onPause();
 	}
 	
@@ -96,7 +95,7 @@ public class PARROTActivity extends Activity {
 	 */
 	@Override
 	protected void onResume() {
-		AudioPlayer.open();
+		//AudioPlayer.open();
 		super.onResume();
 		
 	}

@@ -3,10 +3,12 @@ package dk.aau.cs.giraf.parrot;
 
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,6 +17,7 @@ import android.view.View.DragShadowBuilder;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,17 +31,19 @@ public class PictogramAdapter extends BaseAdapter {
 
 	private PARROTCategory cat;
 	private Context context;
+	private Activity activity;
 	
 	/**
 	 * 
 	 * @param cat, a PARROTCategory
 	 * @param c, the applications context
 	 */
-	public PictogramAdapter(PARROTCategory cat, Context c)
+	public PictogramAdapter(PARROTCategory cat, Context c, Activity act)
 	{
 		super();
 		this.cat=cat;
 		context = c;
+		activity= act;
 	}
 
 	@Override
@@ -50,13 +55,13 @@ public class PictogramAdapter extends BaseAdapter {
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return null;
+		return cat.getPictogramAtIndex(arg0);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
-		return 0;
+		return cat.getPictogramAtIndex(arg0).getPictogramID();
 	}
 	/**
 	 * create an image view for each pictogram in the pictogram list from the PARROTCategory.
@@ -68,11 +73,13 @@ public class PictogramAdapter extends BaseAdapter {
 		ImageView imageView;
 		View view = convertView;
 		TextView textView;
-		
+		//view.setTag(position);
 		Pictogram pct=cat.getPictogramAtIndex(position);
 
 		LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = layoutInflater.inflate(R.layout.pictogramview, null);
+		view.setOnDragListener(new SpeechBoardBoxDragListener(activity));
+		view.setOnTouchListener(new pictogramTouchListener( position) );
 
 		//setup views
 		imageView = (ImageView) view.findViewById(R.id.pictogrambitmap); 
@@ -95,7 +102,7 @@ public class PictogramAdapter extends BaseAdapter {
 		LoadImage task = new LoadImage(imageView,textView, context);
 	    task.execute(pct);
 
-	    view.setPadding(8, 8, 8, 8);
+	    view.setPadding(4, 4, 4, 4);
 		
 
 		return view;

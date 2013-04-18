@@ -1,57 +1,53 @@
 package dk.aau.cs.giraf.pictoadmin;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.Loader.ForceLoadContentObserver;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import dk.aau.cs.giraf.categorylib.CategoryHelper;
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
 public class PictoAdminMain extends Activity {
-	Button searchbutton;
-	DatabaseHandler dbhandler;
-	//DisplayPictograms disphandler;
-	String textinput;
-	EditText inputbox;
+	private DatabaseHandler dbhandler;
+	private String textinput;
+	private EditText inputbox;
 
-	ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
-	ArrayList<Pictogram> pictoList  = new ArrayList<Pictogram>();
+	private ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
+	private ArrayList<Pictogram> pictoList  = new ArrayList<Pictogram>();
+	private ArrayList<Pictogram> searchlist = new ArrayList<Pictogram>();
 
-
-	public long childid;
-	public long guardianid;
+	private long childid;
+	private long guardianid;
 	private Profile profile;
-	public List<Pictogram> pictotemp; // Vi bruger denne kun til at gette elementer fra pictofactory som returner list
-	public ArrayList<Pictogram> pictograms; // Den egentlige liste af pictogrammer vi ønsker at bruge
+	private List<Pictogram> pictotemp; // Vi bruger denne kun til at gette elementer fra pictofactory som returner list
+	private ArrayList<Pictogram> pictograms; // Den egentlige liste af pictogrammer vi ønsker at bruge
 
 	long[] output;
-	GridView checkoutGrid;
-	GridView pictoGrid;
+	private GridView checkoutGrid;
+	private GridView pictoGrid;
 
+	private ImageButton sendButton;
+	private ImageButton searchbutton;
+	
+	private CheckoutGridHandler cgHandler;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +65,7 @@ public class PictoAdminMain extends Activity {
 			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
 				//checkoutList.removePictogram(position);
 				checkoutList.remove(position);
-				checkoutGrid.setAdapter(new PictoAdapter2(checkoutList, getApplicationContext()));
+				checkoutGrid.setAdapter(new PictoAdapter(checkoutList, getApplicationContext()));
 				return true;
 			}
 		});
@@ -79,10 +75,12 @@ public class PictoAdminMain extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position,
 					long arg3) {
-				checkoutList.add(pictoList.get(position));
-				checkoutGrid.setAdapter(new PictoAdapter2(checkoutList, getApplicationContext()));
+				checkoutList.add(searchlist.get(position));
+				checkoutGrid.setAdapter(new PictoAdapter(checkoutList, getApplicationContext()));
 			}
 		});
+		
+		cgHandler = new CheckoutGridHandler(checkoutList);
 	}
 	
 	public void getProfile() {
@@ -143,6 +141,7 @@ public class PictoAdminMain extends Activity {
 	{	
 		GridView picgrid = (GridView) findViewById(R.id.pictogram_displayer);		
 		EditText searchterm = (EditText) findViewById(R.id.text_input);
+		searchlist.clear();
 		
 		if(tag.equals("Tags")) {
 			// TODO: tags not implemented yet
@@ -150,8 +149,6 @@ public class PictoAdminMain extends Activity {
 		}
 		
 		else if(tag.equals("Navn")) {
-			ArrayList<Pictogram> searchlist = new ArrayList<Pictogram>();
-			
 			String pictoname;
 			String input = searchterm.getText().toString();
 			
@@ -164,7 +161,7 @@ public class PictoAdminMain extends Activity {
 			
 			//searchlist = sortList(searchlist, input);
 			
-			PictoAdapter2 picto = new PictoAdapter2(searchlist, this);
+			PictoAdapter picto = new PictoAdapter(searchlist, this);
 			picgrid.setAdapter(picto);
 		}
 		
@@ -198,14 +195,12 @@ public class PictoAdminMain extends Activity {
 		int j = 0; // Counter til at huske index for sidste læste karakter relativt til dens streng
 		
 		for (Pictogram p : listtobesorted) {
-
+			j = 0;
 			letters = p.getTextLabel().toCharArray();
 			
 			for (char c : letters) {
 				if(searchterm.indexOf(c) != -1) { // Hvis bogstavet findes i søgestrengen skal vi gemme indexet og øge vægtningen
-					weight[i] += 1;
-					index[i][j] = c;
-					j++;
+					
 				}
 			}
 			
@@ -246,9 +241,9 @@ public class PictoAdminMain extends Activity {
 	/**
 	 * MenuItem: Sends items from selected gridview to appropriate receiver
 	 * @param item: This must be included for the function to work 
-	 */
-	public void sendContent(MenuItem item) {
-		output = getCheckoutList();
+	 */	
+	public void sendContent(View view) {
+		output = cgHandler.getCheckoutList();
 		
 		Intent data = this.getIntent();
 		data.putExtra("checkoutIds", output);
@@ -261,55 +256,36 @@ public class PictoAdminMain extends Activity {
 		finish();
 	}
 	
-	/**
-	 * MenuItem: Goto admin_category
-	 * @param item
-	 */
+	public void clearSearchField(View view) {
+		EditText searchField = (EditText) findViewById(R.id.text_input);
+		searchField.setText(null);
+	}
+	
+	public void clearCheckoutList(View view) {
+		checkoutList.clear();
+		checkoutGrid.setAdapter(new PictoAdapter(checkoutList, this));
+	}
+	
 	public void gotoAdminCategory(MenuItem item) {
 		Intent intent = new Intent(this, AdminCategory.class);
+		intent.putExtra("childId", childid);
+		intent.putExtra("guardianId", guardianid);
 		startActivity(intent);
-	}
-	
-	
-	/**
-	 * Assess the checkout gridview and load the pictograms into an ArrayList
-	 * @return ArrayList of checkout pictograms
-	 */
-	public long[] getCheckoutList() {
-		long[] checkout = new long[checkoutList.size()];
-		int i = 0;
-		for(Pictogram p : checkoutList){
-			checkout[i] = p.getPictogramID();
-			i++;
-		}
-		
-		return checkout;
-	}
-
-	public void klimTestMethod(MenuItem item) {
-		CategoryHelper helpCat = new CategoryHelper(this);
-		Helper help = new Helper(this);
-		Profile child = help.profilesHelper.getProfileById(11);
-		List<PARROTCategory> list = new ArrayList<PARROTCategory>();
-		list = helpCat.getTempCategoriesWithNewPictogram(child);
-		
-		pictoList = list.get(0).getPictograms();
-		pictoGrid.setAdapter(new PictoAdapter2(pictoList, getApplicationContext()));
 	}
 	
 	/**
 	 * This should be done by the calling activity
 	 */
-	@Override
+	/*@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		Bundle extras = data.getExtras();
 		/*
 		 * Add different cases for different resultCode
 		 * Source: http://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
-		 */
+		 
 		if(resultCode == RESULT_OK){
-			extras.getLongArray("checkoutIds");
+			long[] picIds = extras.getLongArray("checkoutIds");
 		}
-	}
+	}*/
 }

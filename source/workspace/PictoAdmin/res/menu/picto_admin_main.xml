@@ -8,14 +8,6 @@
     </item>
     
     <item
-        android:id="@+id/action_send"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Send"
-        android:onClick="sendContent">
-    </item>
-    
-    <item
         android:id="@+id/gotoAdminCategory"
         android:orderInCategory="100"
         android:showAsAction="never"
@@ -35,8 +27,7 @@
         android:id="@+id/action_klim"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="Test Klim"
-        android:onClick="klimTestMethod">
+        android:title="Test Klim">
     </item>
     <item
         android:id="@+id/action_lisbeth"
