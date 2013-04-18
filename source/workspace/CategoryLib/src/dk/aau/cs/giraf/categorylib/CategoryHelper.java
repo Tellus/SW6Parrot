@@ -8,10 +8,11 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.util.Log;
 import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Media;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.oasis.lib.models.*;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
+import dk.aau.cs.giraf.pictogram.PictoFactory.*;
+import dk.aau.cs.giraf.pictogram.Pictogram.*;
 
 /**
  * 
@@ -173,7 +174,9 @@ public class CategoryHelper {
 
 		for(XMLCategoryProfile cp : categoryProfile.getSubcategories())
 		{
-			category.addSubCategory(transformToPARROTCategory(cp));
+			PARROTCategory c = transformToPARROTCategory(cp);
+			//c.setSuperCategory(category);
+			category.addSubCategory(c);
 		}
 		//Log.v("MessageXML","transformToPARROTCategory end");
 		return category;
