@@ -96,10 +96,10 @@ public final class R {
     }
     public static final class string {
         public static final int KlimTest=0x7f050034;
-        public static final int LargePictogram=0x7f050007;
-        public static final int MediumPictogram=0x7f050008;
-        public static final int PictoSize=0x7f050006;
-        public static final int SentenceboardNo=0x7f05000a;
+        public static final int LargePictogram=0x7f050006;
+        public static final int MediumPictogram=0x7f050007;
+        public static final int PictoSize=0x7f050005;
+        public static final int SentenceboardNo=0x7f050009;
         public static final int TakePictureButton=0x7f050014;
         public static final int addImageFromCameraButtonText=0x7f05002b;
         public static final int addImageFromPhoneButtonText=0x7f05002c;
@@ -109,14 +109,14 @@ public final class R {
         /**  Old DigiPecs v1 String Values. 
          */
         public static final int admin_app_name=0x7f050015;
-        public static final int app_name=0x7f050001;
-        public static final int buttonChangeColorSentence=0x7f05000b;
-        public static final int buttonSaveChanges=0x7f05000c;
+        public static final int app_name=0x7f050000;
+        public static final int buttonChangeColorSentence=0x7f05000a;
+        public static final int buttonSaveChanges=0x7f05000b;
         public static final int changeCategoryColorButton=0x7f050030;
         public static final int changeCategoryNameButton=0x7f050031;
         public static final int changeCategoryPicButton=0x7f05002f;
-        public static final int changecategorycolor=0x7f050004;
-        public static final int changesentencecolor=0x7f050005;
+        public static final int changecategorycolor=0x7f050003;
+        public static final int changesentencecolor=0x7f050004;
         public static final int clearSentenceBoard=0x7f050037;
         public static final int copyThisCategoryToOtherProfileButton=0x7f050032;
         public static final int copyThisCategoryToOtherProfileCategoryButton=0x7f050033;
@@ -133,7 +133,7 @@ public final class R {
         public static final int fourthTab=0x7f050013;
         /**  In ParrotActivity 
          */
-        public static final int hello=0x7f050000;
+        public static final int hello=0x7f05000c;
         public static final int hello_world=0x7f050035;
         public static final int menu_settings=0x7f050036;
         public static final int modifyPictureDeleteButtonText=0x7f05001c;
@@ -143,7 +143,7 @@ public final class R {
         public static final int modifyPictureSaveButtonText=0x7f05001b;
         public static final int modifyPictureSaveDescription=0x7f05001a;
         public static final int ok=0x7f050011;
-        public static final int pictogramOptions=0x7f050003;
+        public static final int pictogramOptions=0x7f050002;
         public static final int picture=0x7f05003a;
         public static final int returnItem=0x7f050038;
         public static final int secondTab=0x7f05000e;
@@ -151,13 +151,13 @@ public final class R {
         public static final int selectSituationSpinnerPromptText=0x7f050028;
         /**  In SettingsActivity 
          */
-        public static final int sentensboardOptions=0x7f050002;
+        public static final int sentensboardOptions=0x7f050001;
         public static final int situationListOptionMenuDeleteText=0x7f050025;
         public static final int situationListOptionsMenuEditText=0x7f05002a;
         public static final int situationsListContextMenuAddText=0x7f050020;
         public static final int situationsListContextMenuDeleteText=0x7f050024;
         public static final int star=0x7f050016;
-        public static final int textToPic=0x7f050009;
+        public static final int textToPic=0x7f050008;
         public static final int thirdTab=0x7f050012;
         public static final int title_activity_setting=0x7f050039;
     }

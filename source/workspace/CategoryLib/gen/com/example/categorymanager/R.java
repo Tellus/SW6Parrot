@@ -14,12 +14,8 @@ public final class R {
         public static int ic_launcher=0x7f020000;
         public static int usynlig=0x7f020001;
     }
-    public static final class layout {
-        public static int main=0x7f030000;
-    }
     public static final class string {
-        public static int app_name=0x7f040001;
-        public static int hello=0x7f040000;
+        public static int app_name=0x7f030000;
     }
     public static final class style {
         /** 
@@ -37,10 +33,10 @@ public final class R {
     
  API 11 theme customizations can go here. 
          */
-        public static int AppBaseTheme=0x7f050000;
+        public static int AppBaseTheme=0x7f040000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static int AppTheme=0x7f050001;
+        public static int AppTheme=0x7f040001;
     }
 }
