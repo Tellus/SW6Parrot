@@ -28,9 +28,9 @@ public final class R {
 		public static final int ambilwarna_cursor = 0x7f020003;
 	}
 	public static final class dimen {
-		public static final int ambilwarna_hsvWidth = 0x7f040001;
-		public static final int ambilwarna_spacer = 0x7f040003;
-		public static final int ambilwarna_hsvHeight = 0x7f040000;
-		public static final int ambilwarna_hueWidth = 0x7f040002;
+		public static final int ambilwarna_hsvWidth = 0x7f060001;
+		public static final int ambilwarna_spacer = 0x7f060003;
+		public static final int ambilwarna_hsvHeight = 0x7f060000;
+		public static final int ambilwarna_hueWidth = 0x7f060002;
 	}
 }

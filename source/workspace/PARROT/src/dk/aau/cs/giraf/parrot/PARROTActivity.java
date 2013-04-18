@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.parrot;
 
+import android.app.FragmentTransaction;
+
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.App;
 import android.app.ActionBar;

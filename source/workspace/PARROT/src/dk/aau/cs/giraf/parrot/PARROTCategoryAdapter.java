@@ -68,7 +68,6 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 				imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
 				imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 				imageView.setPadding(8, 8, 8, 8);
-				imageView.setBackgroundColor(catList.get(position).getCategoryColor());
 			} 
 			
 			else {
@@ -76,7 +75,6 @@ public class PARROTCategoryAdapter extends BaseAdapter{
 			}
 			
 			//we then set the imageview to the icon of the category
-			
 			imageView.setImageBitmap(BitmapFactory.decodeFile(pct.getImagePath()));
 			
 			return imageView;

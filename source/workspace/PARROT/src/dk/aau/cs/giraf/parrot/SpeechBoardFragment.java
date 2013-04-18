@@ -108,8 +108,6 @@ public class SpeechBoardFragment extends Fragment
 			GridView superCategoryGrid = (GridView) parrent.findViewById(R.id.supercategory);
 			superCategoryGrid.setAdapter(new PARROTCategoryAdapter(user.getCategories(), parrent.getApplicationContext()));
 			GridView subCategoryGrid = (GridView) parrent.findViewById(R.id.subcategory);
-			subCategoryGrid.setAdapter(new PARROTCategoryAdapter(displayedCategory.getSubCategories(), parrent.getApplicationContext()));
-			pictogramGrid.setAdapter(new PictogramAdapter(displayedCategory, parrent.getApplicationContext(),parrent));
 			
 			//initialise the colors of the fragment
 			setColours();
@@ -118,6 +116,69 @@ public class SpeechBoardFragment extends Fragment
 			//parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
 			parrent.findViewById(R.id.sentenceboard).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
 			
+			//for dragging pictogram from the pictogramlisting view
+			
+			/*pictogramGrid.setOnTouchListener(new OnTouchListener() {
+				
+				
+
+				 @Override
+					public boolean onTouch(View view, MotionEvent event) {
+					 /*	private View childAtPoint(int x, int y) {
+						final int numChildren = getChildCount();
+						for (int i = 0; i < numChildren; i++) {
+							View child = getChildAt(i);
+							Rect hitRect = new Rect();
+							child.getHitRect(hitRect);
+							if (hitRect.contains(x, y))
+								return child;
+						}
+						return null;
+						
+					}
+					      
+						 if (event.getAction() == MotionEvent.ACTION_DOWN) { 
+						     final int x = (int) event.getX(); 
+						     final int y = (int) event.getY();
+						     Log.v("DragMessage", "x: "+x+" _y: " +y);
+							 
+						 	GridView pictogramGrid=(GridView)view;
+						 	View child=null;
+							int position=-1;
+
+							final int numChildren = pictogramGrid.getChildCount();
+							pictogramGrid.getC
+							Log.v("DragMessage", "numChildren: " +numChildren);
+							for (int i = 0; i < numChildren; i++) {
+								child = pictogramGrid.getChildAt(i);
+								Rect hitRect = new Rect();
+								child.getHitRect(hitRect);
+								if (hitRect.contains(x, y))
+								{
+									position=i;
+									break;
+								}
+							}
+							if(position==-1 )
+							{return false;}		 
+							 
+							SpeechBoardFragment.draggedPictogramIndex = 0;
+							
+							 ClipData data = ClipData.newPlainText("label", "text");
+					    	DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
+					    	boolean startedDragging=view.startDrag(data, shadowBuilder, child, 0);
+					    	//Log.v("DraggingMessage", "startedDragging: "+ startedDragging);
+					        return true;
+							
+						 }
+						 else if (event.getAction() == MotionEvent.ACTION_DOWN) { 
+						       
+						    }
+					    
+					    return false;
+					}
+				
+			});*/
 			/*pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()
 			{
 
@@ -139,11 +200,7 @@ public class SpeechBoardFragment extends Fragment
 
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View view,	int position, long id) {
-					Pictogram p =speechBoardCategory.getPictogramAtIndex(position);
-					if(!(p.getPictogramID()==-1))
-					{
-						p.playAudio();
-					}
+					speechBoardCategory.getPictogramAtIndex(position).playAudio();
 				}
 			});
 			
@@ -154,17 +211,12 @@ public class SpeechBoardFragment extends Fragment
 				@Override
 				public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
 				{
-					Pictogram p = speechBoardCategory.getPictogramAtIndex(position);
-					if(!(p.getPictogramID()==-1))
-					{
-						draggedPictogramIndex = position; 
-						dragOwnerID = R.id.sentenceboard;			
-						ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
-						DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
-						view.startDrag(data, shadowBuilder, view, 0);
-						return true;
-					}
-					return false;
+					draggedPictogramIndex = position; 
+					dragOwnerID = R.id.sentenceboard;			
+					ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
+					DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
+					view.startDrag(data, shadowBuilder, view, 0);
+					return true;
 				}
 
 			});
@@ -239,7 +291,6 @@ public class SpeechBoardFragment extends Fragment
 		Drawable draw = parrent.getResources().getDrawable(R.drawable.sentenceboardlayout);
 		draw.setColorFilter(user.getSentenceBoardColor(), PorterDuff.Mode.OVERLAY);
 		sentenceBoardGrid.setBackgroundDrawable(draw);
-
 		
 		//setup colors of the catagory listnings view
 		GridView superCategoryGrid = (GridView) parrent.findViewById(R.id.supercategory);
