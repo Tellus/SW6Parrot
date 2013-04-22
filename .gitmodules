@@ -4,8 +4,8 @@
 [submodule "source/workspace/PictoAdmin"]
 	path = source/workspace/PictoAdmin
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/pictoadmin
-[submodule "source/workspace/Ambilwarna"]
-	path = source/workspace/Ambilwarna
+[submodule "source/workspace/AmbilWarna"]
+	path = source/workspace/AmbilWarna
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/ambilwarna
 [submodule "source/workspace/OasisLib"]
 	path = source/workspace/OasisLib
