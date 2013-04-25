@@ -1,0 +1,15 @@
+[submodule "source/workspace/CategoryLib"]
+	path = source/workspace/CategoryLib
+	url = http://Cs-cust06-int.cs.aau.dk/git-ro/category-lib
+[submodule "source/workspace/PictoAdmin"]
+	path = source/workspace/PictoAdmin
+	url = http://Cs-cust06-int.cs.aau.dk/git-ro/pictoadmin
+[submodule "source/workspace/AmbilWarna"]
+	path = source/workspace/AmbilWarna
+	url = http://Cs-cust06-int.cs.aau.dk/git-ro/ambilwarna
+[submodule "source/workspace/OasisLib"]
+	path = source/workspace/OasisLib
+	url = http://Cs-cust06-int.cs.aau.dk/git-ro/oasis-lib
+[submodule "source/workspace/PictogramLib"]
+	path = source/workspace/PictogramLib
+	url = http://Cs-cust06-int.cs.aau.dk/git-ro/pictogram-lib
