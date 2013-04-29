@@ -1,5 +1,6 @@
 package dk.aau.cs.giraf.pictoadmin;
 
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
 
 @SuppressLint("ValidFragment")
 public class TitleDialogFragment extends DialogFragment{
@@ -34,7 +34,8 @@ public class TitleDialogFragment extends DialogFragment{
         builder.setView(layout)
         	   .setTitle("Ændre titel")
                .setPositiveButton("Færdig", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                   @Override
+				public void onClick(DialogInterface dialog, int id) {
                 	   /* tempCategory is used to hold the new title. The reason for using a category instead of sending
                 	    * a string is to keep the updateSettings method simple
                 	    */
@@ -43,7 +44,8 @@ public class TitleDialogFragment extends DialogFragment{
                    }
                })
                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                   @Override
+				public void onClick(DialogInterface dialog, int id) {
                 	   
                    }
                });

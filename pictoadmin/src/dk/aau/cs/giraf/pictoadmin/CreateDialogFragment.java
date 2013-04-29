@@ -52,12 +52,14 @@ public class CreateDialogFragment extends DialogFragment{
         builder.setView(layout)
         	   .setTitle("Opret ny " + message)
                .setPositiveButton("Færdig", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                   @Override
+				public void onClick(DialogInterface dialog, int id) {
                 	   listener.onDialogPositiveClick(CreateDialogFragment.this, titelText.getText().toString(), isCategory);
                    }
                })
                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                   @Override
+				public void onClick(DialogInterface dialog, int id) {
                        listener.onDialogNegativeClick(CreateDialogFragment.this);
                    }
                });

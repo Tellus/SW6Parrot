@@ -3,6 +3,11 @@ package dk.aau.cs.giraf.pictoadmin;
 import java.util.ArrayList;
 import java.util.List;
 
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.pictogram.PictoFactory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,10 +23,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
-import dk.aau.cs.giraf.pictogram.PictoFactory;
-import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
 public class PictoAdminMain extends Activity {
