@@ -17,3 +17,4 @@
 [submodule "source/workspace/PictoAdmin"]
 	path = source/workspace/PictoAdmin
 	url = http://cs-cust06-int.cs.aau.dk/git-ro/pictoadmin
+	ignore = dirty
