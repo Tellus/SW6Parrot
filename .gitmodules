@@ -7,9 +7,12 @@
 [submodule "source/workspace/AmbilWarna"]
 	path = source/workspace/AmbilWarna
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/ambilwarna
+	ignore = dirty
 [submodule "source/workspace/OasisLib"]
 	path = source/workspace/OasisLib
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/oasis-lib
+	ignore = dirty
 [submodule "source/workspace/PictogramLib"]
 	path = source/workspace/PictogramLib
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/pictogram-lib
+	ignore = dirty
