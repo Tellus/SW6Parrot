@@ -100,6 +100,10 @@ public class PARROTDataLoader {
 			{
 				for(PARROTCategory c : categories)
 				{
+					for(PARROTCategory sc : c.getSubCategories())
+					{
+						Log.v("something", "subcategory"+ sc.getCategoryName()+ "super: " +sc.getSuperCategory().getCategoryName());
+					}
 					parrotUser.addCategory(c);
 				}
 				

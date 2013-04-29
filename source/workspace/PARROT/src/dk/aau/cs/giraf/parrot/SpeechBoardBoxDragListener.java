@@ -57,6 +57,7 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 			insideOfMe = true;
 		} else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED){
 			insideOfMe = false;
+
 		} else if (event.getAction() == DragEvent.ACTION_DROP){
 			if (insideOfMe){
 
@@ -164,12 +165,21 @@ public class SpeechBoardBoxDragListener implements OnDragListener
 					speech.setAdapter(new SentenceboardAdapter(SpeechBoardFragment.speechBoardCategory, parrent));
 					speech.invalidate();
 				}
+
 			}
+			
+		} else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
+			insideOfMe = false;
 			//To ensure that no wrong references will be made, the index is reset to -1
 			SpeechBoardFragment.draggedPictogramIndex = -1;
 			SpeechBoardFragment.dragOwnerID = -1;
-		} else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
-			insideOfMe = false;
+			draggedPictogram = null;
+			/*try {
+				Thread.currentThread().sleep(40);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
 			//Dummy				
 		}
 		return true;

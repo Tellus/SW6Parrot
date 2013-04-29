@@ -10,21 +10,14 @@ import android.app.Fragment;
 import android.content.ClipData;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.view.MotionEventCompat;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 /**
  * @author PARROT spring 2012 and adapted by SW605f13
@@ -44,8 +37,7 @@ public class SpeechBoardFragment extends Fragment
 	//This category contains the pictograms on the sentenceboard
 	public static PARROTCategory speechBoardCategory = new PARROTCategory(0xffffff,null);	
 	//This category contains the pictograms displayed on the big board
-	public static PARROTCategory displayedCategory = new PARROTCategory(PARROTActivity.getUser().getCategoryAt(0).getCategoryColor(),null);
-	
+	public static PARROTCategory displayedCategory = null;
 	private PARROTProfile user = null;
 	private static Pictogram emptyPictogram =null;  
 	
@@ -162,9 +154,8 @@ public class SpeechBoardFragment extends Fragment
 						ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
 						DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
 						view.startDrag(data, shadowBuilder, view, 0);
-						return true;
 					}
-					return false;
+					return true;
 				}
 
 			});

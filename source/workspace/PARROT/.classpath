@@ -5,5 +5,8 @@
 	<classpathentry kind="src" path="/CategoryLib"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="src" path="/OasisLib"/>
+	<classpathentry kind="src" path="/AmbilWarna"/>
+	<classpathentry kind="src" path="/PictogramLib"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

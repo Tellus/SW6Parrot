@@ -22,16 +22,13 @@ public class pictogramTouchListener implements OnTouchListener {
 			
 			ClipData data = ClipData.newPlainText("label", "text");
 	    	DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
-	    	boolean startedDragging=view.startDrag(data, shadowBuilder, view, 0);
-	    	//Log.v("DraggingMessage", "startedDragging: "+ startedDragging);
-	        return true;
-			
+	    	view.startDrag(data, shadowBuilder, view, 0);
+	    	return true;
 		 }
-		 else if (event.getAction() == MotionEvent.ACTION_DOWN) { 
-		       
-		    }
-	    
-	    return false;
+		else
+		{
+			return false;
+		}
 	}
 
 }

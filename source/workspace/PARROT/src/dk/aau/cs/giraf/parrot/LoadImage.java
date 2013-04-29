@@ -7,10 +7,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -22,7 +19,6 @@ import android.widget.TextView;
 class LoadImage extends AsyncTask<Object, Void, Bitmap>{
 
 		private final WeakReference<ImageView> imageView;
-        private String path;
         private Context context;
         private final WeakReference<TextView>text;
         private Pictogram pictogram;
