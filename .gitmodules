@@ -4,8 +4,8 @@
 [submodule "source/workspace/PictoAdmin"]
 	path = source/workspace/PictoAdmin
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/pictoadmin
-[submodule "source/workspace/AmbilWarna"]
-	path = source/workspace/AmbilWarna
+[submodule "source/workspace/Ambilwarna"]
+	path = source/workspace/Ambilwarna
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/ambilwarna
 	ignore = dirty
 [submodule "source/workspace/OasisLib"]
