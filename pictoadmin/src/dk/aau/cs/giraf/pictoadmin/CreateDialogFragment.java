@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+
 import android.widget.EditText;
 
 @SuppressLint("ValidFragment")
@@ -48,7 +50,14 @@ public class CreateDialogFragment extends DialogFragment{
         View layout = inflater.inflate(R.layout.dialog_create, null);
         
         final EditText titelText = (EditText) layout.findViewById(R.id.username);
-        
+        Button colorButton = (Button) layout.findViewById(R.id.colorButton);
+        /*  Only choose color if creating new category. Subcategories automatically has the
+         *  color of the supercategory
+         */
+        if(!isCategory) {
+        	colorButton.setVisibility(View.GONE);
+        }
+
         builder.setView(layout)
         	   .setTitle("Opret ny " + message)
                .setPositiveButton("Færdig", new DialogInterface.OnClickListener() {
