@@ -1,9 +1,11 @@
 [submodule "source/workspace/CategoryLib"]
 	path = source/workspace/CategoryLib
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/category-lib
+	ignore = dirty
 [submodule "source/workspace/PictoAdmin"]
 	path = source/workspace/PictoAdmin
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/pictoadmin
+	ignore = dirty
 [submodule "source/workspace/OasisLib"]
 	path = source/workspace/OasisLib
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/oasis-lib
