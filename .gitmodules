@@ -14,3 +14,6 @@
 	path = source/workspace/Ambilwarna
 	url = http://cs-cust06-int.cs.aau.dk/git-ro/ambilwarna.git
 	ignore = dirty
+[submodule "source/workspace/PictoAdmin"]
+	path = source/workspace/PictoAdmin
+	url = http://cs-cust06-int.cs.aau.dk/git-ro/pictoadmin
