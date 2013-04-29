@@ -12,3 +12,6 @@
 	path = source/workspace/PictogramLib
 	url = http://Cs-cust06-int.cs.aau.dk/git-ro/pictogram-lib
 	ignore = dirty
+[submodule "source/workspace/Ambilwarna"]
+	path = source/workspace/Ambilwarna
+	url = http://cs-cust06-int.cs.aau.dk/git-ro/ambilwarna.git
