@@ -8,13 +8,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.util.Log;
-import dk.aau.cs.giraf.categorylib.CategoryHelper;
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.App;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
-import dk.aau.cs.giraf.oasis.lib.models.Setting;
-import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
 /**

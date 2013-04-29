@@ -3,8 +3,6 @@ package dk.aau.cs.giraf.parrot;
 import java.util.ArrayList;
 
 import android.graphics.Color;
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
 
