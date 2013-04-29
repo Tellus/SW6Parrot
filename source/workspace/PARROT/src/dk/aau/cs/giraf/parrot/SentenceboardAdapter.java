@@ -1,5 +1,7 @@
 	package dk.aau.cs.giraf.parrot;
 	
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.pictoadmin;
 
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,8 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.pictogram.Pictogram;
 
 @SuppressLint("ValidFragment")
 public class IconDialogFragment extends DialogFragment{
@@ -49,7 +49,8 @@ public class IconDialogFragment extends DialogFragment{
         builder.setView(layout)
         	   .setTitle("Ændre icon")
                .setPositiveButton("Færdig", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                   @Override
+				public void onClick(DialogInterface dialog, int id) {
                 	   if(icon != null){
                 		   changedCategory.setIcon(icon);
                 		   startActiviy.updateSettings(changedCategory, pos, isCategory, "icon");
@@ -57,7 +58,8 @@ public class IconDialogFragment extends DialogFragment{
                    }
                })
                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                   @Override
+				public void onClick(DialogInterface dialog, int id) {
                    }
                });
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
+
 /**
  * @author PARROT and edited by SW605f13-PARROT
  *The Category class is used to store a number of pictograms
