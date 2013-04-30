@@ -14,6 +14,7 @@
 	path = source/workspace/PictoAdmin
 	url = http://cs-cust06-int.cs.aau.dk/git-ro/pictoadmin
 	ignore = dirty
-[submodule "source/TimerLib"]
-	path = source/TimerLib
-	url = http://cs-cust06-int.cs.aau.dk/git-ro/timer-lib.git
+
+[submodule "source/workspace/OasisLib"]
+	path = source/workspace/OasisLib
+	url = http://cs-cust06-int.cs.aau.dk/git-ro/oasis-lib.git
