@@ -43,7 +43,7 @@ public class PARROTActivity extends Activity {
 		app = help.appsHelper.getAppByPackageName();
 		/*don't delete this is for lisbeth and anders when running on our own device*/
 		guardianID = 1;
-		childID=11;
+		childID=12;
 		
 		
 		if(guardianID == -1 )

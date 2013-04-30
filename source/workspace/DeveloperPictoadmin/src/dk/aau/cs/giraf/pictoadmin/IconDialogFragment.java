@@ -49,8 +49,7 @@ public class IconDialogFragment extends DialogFragment{
         builder.setView(layout)
         	   .setTitle("Ændre icon")
                .setPositiveButton("Færdig", new DialogInterface.OnClickListener() {
-                   @Override
-				public void onClick(DialogInterface dialog, int id) {
+                   public void onClick(DialogInterface dialog, int id) {
                 	   if(icon != null){
                 		   changedCategory.setIcon(icon);
                 		   startActiviy.updateSettings(changedCategory, pos, isCategory, "icon");
@@ -58,8 +57,7 @@ public class IconDialogFragment extends DialogFragment{
                    }
                })
                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
-                   @Override
-				public void onClick(DialogInterface dialog, int id) {
+                   public void onClick(DialogInterface dialog, int id) {
                    }
                });
 

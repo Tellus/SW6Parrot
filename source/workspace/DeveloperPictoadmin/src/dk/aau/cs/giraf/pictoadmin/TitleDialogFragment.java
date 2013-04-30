@@ -34,8 +34,7 @@ public class TitleDialogFragment extends DialogFragment{
         builder.setView(layout)
         	   .setTitle("Ændre titel")
                .setPositiveButton("Færdig", new DialogInterface.OnClickListener() {
-                   @Override
-				public void onClick(DialogInterface dialog, int id) {
+                   public void onClick(DialogInterface dialog, int id) {
                 	   /* tempCategory is used to hold the new title. The reason for using a category instead of sending
                 	    * a string is to keep the updateSettings method simple
                 	    */
@@ -44,8 +43,7 @@ public class TitleDialogFragment extends DialogFragment{
                    }
                })
                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
-                   @Override
-				public void onClick(DialogInterface dialog, int id) {
+                   public void onClick(DialogInterface dialog, int id) {
                 	   
                    }
                });

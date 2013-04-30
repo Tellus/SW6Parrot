@@ -1,7 +1,10 @@
 package dk.aau.cs.giraf.pictoadmin;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/SubSprint4
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.view.View;

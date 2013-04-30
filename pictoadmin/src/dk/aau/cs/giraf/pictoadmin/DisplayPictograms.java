@@ -2,10 +2,9 @@ package dk.aau.cs.giraf.pictoadmin;
 
 import java.util.List;
 
-import dk.aau.cs.giraf.oasis.lib.models.Media;
-
 import android.app.Activity;
 import android.widget.GridView;
+import dk.aau.cs.giraf.oasis.lib.models.Media;
 
 
 public class DisplayPictograms extends Activity {

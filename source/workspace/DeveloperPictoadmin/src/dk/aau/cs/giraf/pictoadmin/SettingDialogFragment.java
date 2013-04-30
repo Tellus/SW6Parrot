@@ -1,5 +1,10 @@
 package dk.aau.cs.giraf.pictoadmin;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+
+>>>>>>> origin/SubSprint4
 import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.annotation.SuppressLint;
@@ -52,6 +57,10 @@ public class SettingDialogFragment extends DialogFragment{
 							@Override
 							public void onOk(AmbilWarnaDialog dialog, int color) {
 								category.setCategoryColor(color);
+								ArrayList<PARROTCategory> tempSub = category.getSubCategories();
+								for(PARROTCategory sc : tempSub){
+									sc.setCategoryColor(color);
+								}
 								startActivity.updateSettings(category, pos, isCategory, "color");
 							}
 							
@@ -72,8 +81,7 @@ public class SettingDialogFragment extends DialogFragment{
 				}
 			})
                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
-                   @Override
-				public void onClick(DialogInterface dialog, int id) {
+                   public void onClick(DialogInterface dialog, int id) {
                        // User cancelled the dialog
                    }
                });

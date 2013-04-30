@@ -223,7 +223,6 @@ public class SpeechBoardFragment extends Fragment
 	/**
 	 *This function set the colors in the speechBoardFragment
 	 */
-	@SuppressWarnings("deprecation")
 	private void setColours()
 	{
 		//setup colors of the sentenceBoard view	

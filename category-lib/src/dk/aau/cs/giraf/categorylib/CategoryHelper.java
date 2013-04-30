@@ -370,15 +370,17 @@ public class CategoryHelper {
 		//Log.v("PARROTmessage","start xmltester");
 		List<PARROTCategory> categories = getTempCategoriesWithNewPictogram();
 		
-		Log.v("PARROTmessage","Before for save categories");
+		//Log.v("PARROTmessage","Before for save categories");
 		List<Profile> children = help.profilesHelper.getChildren();
 		
 		for(Profile child : children)
 		{
-			Log.v("PARROTmessage","child; " + child.getId());
+			xmlChild= new XMLProfile();
+			xmlChild.setChildID(child.getId());
+			//Log.v("PARROT........","child; " + child.getId());
 			for(PARROTCategory category : categories)
 			{
-				Log.v("PARROTmessage","child; " + category.getCategoryName());
+				Log.v("PARROTmessage","category; " + category.getCategoryName());
 				saveCategory(category);	
 			}
 			communicater.xmlData.add(xmlChild);
