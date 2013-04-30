@@ -55,9 +55,10 @@ public class PARROTActivity extends Activity {
 		}
 		else
 		{ 	
-			dataLoader = new PARROTDataLoader(this);
+			dataLoader = new PARROTDataLoader(this, true);
 			
 			parrotUser = dataLoader.loadProfile(childID, app.getId());
+			Log.v("No in sentence", ""+ parrotUser.getNumberOfSentencePictograms());
 			Log.v("MessageParrot", "returned");	
 			if(parrotUser != null)
 			{

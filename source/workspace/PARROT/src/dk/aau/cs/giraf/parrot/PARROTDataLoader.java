@@ -39,12 +39,15 @@ public class PARROTDataLoader {
 	 * Constructor.
 	 * @param activity An activity.
 	 */
-	public PARROTDataLoader(Activity activity)
+	public PARROTDataLoader(Activity activity, boolean categories)
 	{
 		this.parent = activity;
 		help = new Helper(parent); 
 		app = help.appsHelper.getAppById(PARROTActivity.getApp().getId()); 
-		categoryHelper= new CategoryHelper(parent);
+		if(categories)
+		{
+			categoryHelper= new CategoryHelper(parent);
+		}
 		
 
 	}
