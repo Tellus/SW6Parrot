@@ -3,9 +3,6 @@ package dk.aau.cs.giraf.parrot;
 
 import java.util.ArrayList;
 
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.pictogram.Pictogram;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
@@ -19,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 /**
  * @author PARROT spring 2012 and adapted by SW605f13

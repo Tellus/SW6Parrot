@@ -1,11 +1,11 @@
  package dk.aau.cs.giraf.parrot;
 
-import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.app.Activity;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
 import android.widget.GridView;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 /**
  * 

@@ -3,8 +3,6 @@ package dk.aau.cs.giraf.pictoadmin;
 
 import java.util.ArrayList;
 
-import dk.aau.cs.giraf.pictogram.Pictogram;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 /**
  * 

@@ -1,7 +1,5 @@
 package dk.aau.cs.giraf.pictoadmin;
 
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 @SuppressLint("ValidFragment")
 public class IconDialogFragment extends DialogFragment{
