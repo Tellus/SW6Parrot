@@ -301,6 +301,11 @@ public class PictoAdminMain extends Activity {
 		startActivity(intent);
 	}
 	
+	public void callAndersSupport(MenuItem item) {
+		MessageDialogFragment message = new MessageDialogFragment("Call: +45 24 26 93 98 for tech support");
+		message.show(getFragmentManager(), "callTechSupport");
+	}
+	
 	/**
 	 * This should be done by the calling activity
 	 */

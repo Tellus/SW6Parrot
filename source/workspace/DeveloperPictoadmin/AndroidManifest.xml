@@ -14,8 +14,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="dk.aau.cs.giraf.pictoadmin.PictoAdminMain"
-            android:label="@string/app_name"
+            android:name="dk.aau.cs.giraf.pictoadmin.AdminCategory"
+            android:label="@string/title_activity_admin_category"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +28,8 @@
             android:label="@string/title_activity_help_menu" >
         </activity>
         <activity
-            android:name="dk.aau.cs.giraf.pictoadmin.AdminCategory"
-            android:label="@string/title_activity_admin_category"
+            android:name="dk.aau.cs.giraf.pictoadmin.PictoAdminMain"
+            android:label="@string/app_name"
             android:screenOrientation="landscape" >
         </activity>
     </application>
