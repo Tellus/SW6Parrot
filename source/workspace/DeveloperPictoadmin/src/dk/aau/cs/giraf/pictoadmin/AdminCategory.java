@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -359,6 +360,27 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	/*
 	 * DONE: The following methods handle menu pressing
 	 */
+	public void saveChanges(MenuItem item) {
+		for(PARROTCategory sc : subcategoryList){
+			if(sc.isChanged()){
+				sc.getSuperCategory().setChanged(true);
+				sc.setChanged(false);
+			}
+		}
+		for(PARROTCategory c : categoryList){
+			if(c.isChanged()){
+				somethingChanged = true;
+				catHelp.saveCategory(c);
+				c.setChanged(false);
+			}
+		}
+
+		if(somethingChanged){
+			catHelp.saveChangesToXML();
+		}
+		somethingChanged = false;
+	}
+	
 	public void returnToCaller(MenuItem item) {
 		finish();
 	}

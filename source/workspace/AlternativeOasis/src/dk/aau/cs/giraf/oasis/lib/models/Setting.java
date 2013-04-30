@@ -26,7 +26,7 @@ public class Setting<Key, Type, Value> extends HashMap<Key, HashMap<Type, Value>
 	}
 
 	public static String toStringSetting (Setting<String, String, String> setting) {
-		Object obj = (Object)setting;
+		Object obj = setting;
 		String returnString = null;
 		byte[] bytes = null;
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();

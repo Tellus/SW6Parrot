@@ -1,7 +1,5 @@
 package dk.aau.cs.giraf.parrot;
 
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.App;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -11,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.App;
 
 /**
  * 
@@ -36,14 +36,14 @@ public class PARROTActivity extends Activity {
 		setContentView(R.layout.main);
 		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
-		/*girafIntent = getIntent();
+		girafIntent = getIntent();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
-		childID = girafIntent.getLongExtra("currentChildID", -1);*/
+		childID = girafIntent.getLongExtra("currentChildID", -1);
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		/*don't delete this is for lisbeth and anders when running on our own device*/
-		guardianID = 1;
-		childID=12;
+		/*guardianID = 1;
+		childID=12;*/
 		
 		
 		if(guardianID == -1 )
@@ -55,9 +55,10 @@ public class PARROTActivity extends Activity {
 		}
 		else
 		{ 	
-			dataLoader = new PARROTDataLoader(this);
+			dataLoader = new PARROTDataLoader(this, true);
 			
 			parrotUser = dataLoader.loadProfile(childID, app.getId());
+			Log.v("No in sentence", ""+ parrotUser.getNumberOfSentencePictograms());
 			Log.v("MessageParrot", "returned");	
 			if(parrotUser != null)
 			{
