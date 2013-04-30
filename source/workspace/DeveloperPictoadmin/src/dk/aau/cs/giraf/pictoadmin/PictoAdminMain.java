@@ -94,14 +94,21 @@ public class PictoAdminMain extends Activity {
 	}
 	
 	private void getPurpose() {
-		if(getIntent().hasExtra("single")){
-			isSingle = true;
-			MessageDialogFragment message = new MessageDialogFragment("Vælg et pictogram");
-			message.show(getFragmentManager(), "choosingMessage");
-		}
-		if(getIntent().hasExtra("CAT")){
-			MessageDialogFragment message = new MessageDialogFragment("Vælg pictogrammer, som skal tilføjes til kategori");
-			message.show(getFragmentManager(), "CategoriAdministrationTool");
+		if(getIntent().hasExtra("purpose")){
+			if(getIntent().getStringExtra("purpose").equals("single")){
+				isSingle = true;
+				MessageDialogFragment message = new MessageDialogFragment("Vælg et pictogram og afslut med Send.");
+				message.show(getFragmentManager(), "choosingMessage");
+			}
+			else if(getIntent().getStringExtra("purpose").equals("multi")){
+				isSingle = false;
+				MessageDialogFragment message = new MessageDialogFragment("Vælg et eller flere pictogrammer og afslut med Send.");
+				message.show(getFragmentManager(), "choosingMessage");
+			}
+			else if(getIntent().getStringExtra("purpose").equals("CAT")){
+				MessageDialogFragment message = new MessageDialogFragment("Vælg pictogrammer, som skal tilføjes til kategori og afslut med Send.");
+				message.show(getFragmentManager(), "CATaccess");
+			}
 		}
 	}
 	

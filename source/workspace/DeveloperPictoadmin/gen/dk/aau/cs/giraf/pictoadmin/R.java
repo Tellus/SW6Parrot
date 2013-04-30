@@ -169,13 +169,14 @@ containing a value of this type.
         public static final int picture=0x7f040011;
         public static final int reset=0x7f04000b;
         public static final int save_changes=0x7f040009;
-        public static final int search=0x7f040015;
+        public static final int search=0x7f040016;
         public static final int search_button=0x7f040004;
-        public static final int send=0x7f040014;
+        public static final int send=0x7f040015;
         public static final int subKategori=0x7f040007;
         public static final int text_input=0x7f040005;
         public static final int title_activity_admin_category=0x7f040013;
         public static final int title_activity_help_menu=0x7f040010;
+        public static final int title_activity_picto_main=0x7f040014;
     }
     public static final class style {
         /** 

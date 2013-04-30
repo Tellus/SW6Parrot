@@ -55,9 +55,15 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_admin_category);
 		catHelp =  new CategoryHelper(this);
+		ProfilesHelper help = new ProfilesHelper(this);
 		extras = getIntent().getExtras();
 		if(extras != null){
 			getAllExtras();
+		}
+		else{
+			MessageDialogFragment message = new MessageDialogFragment("No childId found. Loading default child");
+			message.show(getFragmentManager(), "noChildFound");
+			child = help.getProfileById(11);
 		}
 		
 		categoryList = catHelp.getChildsCategories(child.getId());
@@ -352,8 +358,8 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	 */
 	private void getAllExtras() {
 		ProfilesHelper help = new ProfilesHelper(this);
-		if(getIntent().hasExtra("childId")){
-			child = help.getProfileById(extras.getLong("childId"));
+		if(getIntent().hasExtra("currentChildID")){
+			child = help.getProfileById(extras.getLong("currentChildID"));
 		}
 	}
 
@@ -476,6 +482,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	public void createPictogram(View view) {
 		//TODO: implement
 		Intent request = new Intent(this, PictoAdminMain.class);
+		request.putExtra("purpose", "CAT");
 		startActivityForResult(request, RESULT_FIRST_USER);
 	}
 	
@@ -504,21 +511,36 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			long[] checkoutIds = new long[extras.getLongArray("checkoutIds").length];
 			checkoutIds = extras.getLongArray("checkoutIds");
 			PictoFactory picto = null;
+			boolean legal = true;
 			// Add pictograms to selectedCategory if no subcategory is selected
 			if(selectedSubCategory == null){
 				for(long id : checkoutIds){
-					selectedCategory.addPictogram(picto.getPictogram(this, id));
-					selectedCategory.setChanged(true);
-					pictograms = selectedCategory.getPictograms();
-					
+					for(Pictogram p : pictograms){
+						if(p.getPictogramID() == id){
+							legal = false;
+						}
+					}
+					if(legal){
+						selectedCategory.addPictogram(picto.getPictogram(this, id));
+						selectedCategory.setChanged(true);
+						pictograms = selectedCategory.getPictograms();
+					}
+					legal = true;
 				}
-				
 			}
 			else{
 				for(long id : checkoutIds){
-					selectedSubCategory.addPictogram(picto.getPictogram(this, id));
-					selectedCategory.setChanged(true);
-					pictograms = selectedSubCategory.getPictograms();
+					for(Pictogram p : pictograms){
+						if(p.getPictogramID() == id){
+							legal = false;
+						}
+					}
+					if(legal){
+						selectedSubCategory.addPictogram(picto.getPictogram(this, id));
+						selectedCategory.setChanged(true);
+						pictograms = selectedSubCategory.getPictograms();
+					}
+					legal = true;
 				}
 			}
 			pictogramGrid.setAdapter(new PictoAdapter(pictograms, this));
