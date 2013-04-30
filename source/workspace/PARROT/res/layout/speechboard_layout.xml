@@ -42,7 +42,7 @@
 	        android:scrollbarAlwaysDrawVerticalTrack="true"
     		android:scrollbarTrackVertical="@drawable/scrollbar_vertical_track"
     		android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
-    		android:scrollbarSize="50dip"
+    		android:scrollbarSize="20dip"
 	        >
 	        
 		    </GridView>
