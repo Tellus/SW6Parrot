@@ -14,7 +14,7 @@
 	path = source/workspace/PictoAdmin
 	url = http://cs-cust06-int.cs.aau.dk/git-ro/pictoadmin
 	ignore = dirty
-
 [submodule "source/workspace/OasisLib"]
 	path = source/workspace/OasisLib
 	url = http://cs-cust06-int.cs.aau.dk/git-ro/oasis-lib.git
+	ignore = dirty
