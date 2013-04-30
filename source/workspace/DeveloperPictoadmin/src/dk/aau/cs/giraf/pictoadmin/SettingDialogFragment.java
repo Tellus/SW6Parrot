@@ -1,10 +1,6 @@
 package dk.aau.cs.giraf.pictoadmin;
 
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
-
->>>>>>> origin/SubSprint4
 import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.annotation.SuppressLint;
