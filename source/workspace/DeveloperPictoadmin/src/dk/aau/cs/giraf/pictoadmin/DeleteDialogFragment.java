@@ -1,13 +1,13 @@
 package dk.aau.cs.giraf.pictoadmin;
 
-import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.pictogram.Pictogram;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 @SuppressLint("ValidFragment")
 public class DeleteDialogFragment extends DialogFragment {
@@ -39,8 +39,7 @@ public class DeleteDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Er du sikker på, at du vil slette?")
                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
-                   @Override
-				public void onClick(DialogInterface dialog, int id) {
+                   public void onClick(DialogInterface dialog, int id) {
                 	   if(pictogram == null){
                 		   startActivity.updateSettings(category, pos, isCategory, "delete");
                 	   }
@@ -50,8 +49,7 @@ public class DeleteDialogFragment extends DialogFragment {
                    }
                })
                .setNegativeButton("Nej", new DialogInterface.OnClickListener() {
-                   @Override
-				public void onClick(DialogInterface dialog, int id) {
+                   public void onClick(DialogInterface dialog, int id) {
                        // User cancelled the dialog
                    }
                });

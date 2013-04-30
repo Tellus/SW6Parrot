@@ -3,11 +3,6 @@ package dk.aau.cs.giraf.pictoadmin;
 import java.util.ArrayList;
 import java.util.List;
 
-import dk.aau.cs.giraf.oasis.lib.Helper;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
-import dk.aau.cs.giraf.pictogram.PictoFactory;
-import dk.aau.cs.giraf.pictogram.Pictogram;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +18,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import dk.aau.cs.giraf.oasis.lib.Helper;
+import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.pictogram.PictoFactory;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
 public class PictoAdminMain extends Activity {
@@ -49,22 +48,29 @@ public class PictoAdminMain extends Activity {
 	
 	private CheckoutGridHandler cgHandler;
 	
+	/*
+	 *  Request from another group. It should be possible to only send one pictogram,
+	 *  and therefore only display one pictogram in the checkout list. isSingle is used
+	 *  to store information. Default = false, so multiple pictograms are possible.
+	 *  If the intent that started the search contain the extra "single", isSingle is set
+	 *  to true
+	 */
+	private boolean isSingle = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_picto_admin_main);
-
+		
+		getPurpose();
 		//girafIntent = getIntent();
 		getAllPictograms();
 		getProfile();
-		
 		
 		checkoutGrid = (GridView) findViewById(R.id.checkout);
 		checkoutGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
-				//checkoutList.removePictogram(position);
 				checkoutList.remove(position);
 				checkoutGrid.setAdapter(new PictoAdapter(checkoutList, getApplicationContext()));
 				return true;
@@ -74,14 +80,29 @@ public class PictoAdminMain extends Activity {
 		pictoGrid = (GridView) findViewById(R.id.pictogram_displayer);
 		pictoGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View v, int position,
-					long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
+				// if single pictogram requested, only one pictogram is displayed in checkout
+				if(isSingle){
+					checkoutList.clear();
+				}
 				checkoutList.add(searchlist.get(position));
 				checkoutGrid.setAdapter(new PictoAdapter(checkoutList, getApplicationContext()));
 			}
 		});
 		
 		cgHandler = new CheckoutGridHandler(checkoutList);
+	}
+	
+	private void getPurpose() {
+		if(getIntent().hasExtra("single")){
+			isSingle = true;
+			MessageDialogFragment message = new MessageDialogFragment("Vælg et pictogram");
+			message.show(getFragmentManager(), "choosingMessage");
+		}
+		if(getIntent().hasExtra("CAT")){
+			MessageDialogFragment message = new MessageDialogFragment("Vælg pictogrammer, som skal tilføjes til kategori");
+			message.show(getFragmentManager(), "CategoriAdministrationTool");
+		}
 	}
 	
 	public void getProfile() {
@@ -247,7 +268,13 @@ public class PictoAdminMain extends Activity {
 		output = cgHandler.getCheckoutList();
 		
 		Intent data = this.getIntent();
-		data.putExtra("checkoutIds", output);
+		if(isSingle && output.length > 0){
+			data.putExtra("checkoutId", output[0]);
+		}
+		else{
+			data.putExtra("checkoutIds", output);
+		}
+		
 		if(getParent() == null) {
 			setResult(Activity.RESULT_OK, data);
 		}
