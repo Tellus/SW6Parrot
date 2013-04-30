@@ -21,3 +21,4 @@
 [submodule "source/workspace/PictoCreater"]
 	path = source/workspace/PictoCreater
 	url = http://cs-cust06-int.cs.aau.dk/git-ro/pictocreator.git
+	ignore = dirty
