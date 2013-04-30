@@ -30,11 +30,11 @@ public class SettingActivity extends Activity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_setting);
-		
+		Log.v("SettingActivity","in settings oncreate");
 		user = PARROTActivity.getUser();
-		
-		dataloader = new PARROTDataLoader(this);
-
+		Log.v("SettingActivity","in settings user read");
+		dataloader = new PARROTDataLoader(this, false);
+		Log.v("SettingActivity","in settings oncreate done");
 		        
 	}
 	
@@ -78,6 +78,7 @@ public class SettingActivity extends Activity  {
 	protected void onPause() {
 		super.onPause();
 		dataloader.saveChanges(user);
+		PARROTActivity.setUser(user);
 		
 	}
 		
@@ -97,10 +98,10 @@ public class SettingActivity extends Activity  {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
 		spinner.setAdapter(adapter);
-
+		
 		//get the current Settings
         readTheCurrentData();
-
+        
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
             @Override
@@ -136,8 +137,7 @@ public class SettingActivity extends Activity  {
 			RadioButton radioB = (RadioButton) findViewById(R.id.largePicRadioButton);
 			radioB.setChecked(true);
 		}
-			
-			
+
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
 		spinner.setSelection(noOfPlacesInSentenceboard-1,true);
 		
