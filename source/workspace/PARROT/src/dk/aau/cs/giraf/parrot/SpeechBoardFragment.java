@@ -224,6 +224,7 @@ public class SpeechBoardFragment extends Fragment
 	/**
 	 *This function set the colors in the speechBoardFragment
 	 */
+	@SuppressWarnings("deprecation")
 	private void setColours()
 	{
 		//setup colors of the sentenceBoard view	
@@ -249,6 +250,7 @@ public class SpeechBoardFragment extends Fragment
 	/**
 	 * set color for the PictogramGrid, which changes upon a change of category to be shown
 	 */
+	@SuppressWarnings("deprecation")
 	private void setPictogramGridColor()
 	{
 		//setup colors of the pictogram listnings view
