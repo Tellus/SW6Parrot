@@ -36,14 +36,14 @@ public class PARROTActivity extends Activity {
 		setContentView(R.layout.main);
 		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
-		/*girafIntent = getIntent();
+		girafIntent = getIntent();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
-		childID = girafIntent.getLongExtra("currentChildID", -1);*/
+		childID = girafIntent.getLongExtra("currentChildID", -1);
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		/*don't delete this is for lisbeth and anders when running on our own device*/
-		guardianID = 1;
-		childID=12;
+		/*guardianID = 1;
+		childID=12;*/
 		
 		
 		if(guardianID == -1 )
