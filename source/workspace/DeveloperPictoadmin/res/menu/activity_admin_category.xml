@@ -13,7 +13,7 @@
         android:id="@+id/action_back"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="Tilbage"
+        android:title="Luk"
         android:onClick="returnToCaller">
         </item>
 

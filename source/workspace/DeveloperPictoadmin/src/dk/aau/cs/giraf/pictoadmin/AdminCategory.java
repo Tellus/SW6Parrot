@@ -7,9 +7,9 @@ import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,12 +33,12 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 @SuppressLint("DefaultLocale")
 public class AdminCategory extends Activity implements CreateDialogListener{
 	private Profile child;
+	private Profile guardian;
 	private Bundle  extras;
 	
 	private PARROTCategory selectedCategory    = null;
 	private PARROTCategory selectedSubCategory = null;
 	private Pictogram 	   selectedPictogram   = null;
-	private int			   selectedLocation;
 	
 	private ArrayList<PARROTCategory> categoryList    = new ArrayList<PARROTCategory>();
 	private ArrayList<PARROTCategory> subcategoryList = new ArrayList<PARROTCategory>();
@@ -48,48 +48,34 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	private GridView subcategoryGrid;
 	private GridView pictogramGrid;
 	
+	private boolean somethingChanged = false; // If something is deleted, is has to be noted
+	private int     selectedLocation;
+	private int     newCategoryColor; // Hold the value set when creating a new category or sub-category
+	
 	private CategoryHelper catHelp;
+	private ProfilesHelper proHelp;
+	
+	private MessageDialogFragment message;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_admin_category);
 		catHelp =  new CategoryHelper(this);
-		ProfilesHelper help = new ProfilesHelper(this);
+		proHelp =  new ProfilesHelper(this);
+		
 		extras = getIntent().getExtras();
 		if(extras != null){
 			getAllExtras();
 		}
 		else{
-			MessageDialogFragment message = new MessageDialogFragment("No childId found. Loading default child");
+			message = new MessageDialogFragment("No childId found. Loading default child");
 			message.show(getFragmentManager(), "noChildFound");
-			child = help.getProfileById(11);
+			child = proHelp.getProfileById(12);
+			guardian = proHelp.getProfileById(1);
 		}
 		
 		categoryList = catHelp.getChildsCategories(child.getId());
-		
-		// Setup subcategory gridview
-		subcategoryGrid = (GridView) findViewById(R.id.subcategory_gridview);
-		subcategoryGrid.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
-
-				subcategoryGrid.setBackgroundColor(subcategoryList.get(position).getCategoryColor());
-
-				updateSelected(v, position, 0);
-				updateButtonVisibility(v);
-			}
-		});
-		subcategoryGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
-				SettingDialogFragment settingDialog = new SettingDialogFragment(AdminCategory.this,
-																				subcategoryList.get(position),
-																				position, false);
-				settingDialog.show(getFragmentManager(), "chooseSettings");
-				return false;
-			}
-		});
 		
 		// Setup category gridview
 		categoryGrid = (GridView) findViewById(R.id.category_gridview);
@@ -99,8 +85,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
 				categoryGrid.setBackgroundColor(categoryList.get(position).getCategoryColor());
 				subcategoryGrid.setBackgroundColor(categoryList.get(position).getCategoryColor());
-				MessageDialogFragment message = new MessageDialogFragment(categoryList.get(position).getCategoryName());
-				message.show(getFragmentManager(), "");
 				updateSelected(v, position, 1);
 				updateButtonVisibility(v);
 			}
@@ -111,6 +95,27 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 				SettingDialogFragment settingDialog = new SettingDialogFragment(AdminCategory.this,
 																			categoryList.get(position),
 																			position, true);
+				settingDialog.show(getFragmentManager(), "chooseSettings");
+				return false;
+			}
+		});
+		
+		// Setup subcategory gridview
+		subcategoryGrid = (GridView) findViewById(R.id.subcategory_gridview);
+		subcategoryGrid.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
+				subcategoryGrid.setBackgroundColor(subcategoryList.get(position).getCategoryColor());
+				updateSelected(v, position, 0);
+				updateButtonVisibility(v);
+			}
+		});
+		subcategoryGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View v, int position, long arg3) {
+				SettingDialogFragment settingDialog = new SettingDialogFragment(AdminCategory.this,
+																				subcategoryList.get(position),
+																				position, false);
 				settingDialog.show(getFragmentManager(), "chooseSettings");
 				return false;
 			}
@@ -132,17 +137,9 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_admin_category, menu);
 		return true;
 	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-	
-	private boolean somethingChanged = false;
 	
 	@Override
 	protected void onPause() {
@@ -168,12 +165,9 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	/*
 	 * The following methods handle the creation of new categories and sub-categories
 	 */
-	private int newCategoryColor; // Hold the value set when creating a new category or sub-category
 	@Override
 	public void onDialogPositiveClick(DialogFragment dialog, String titel, boolean isCategory) {
-		MessageDialogFragment message = null;
 		boolean legal = true;
-
 
 		if(titel.isEmpty() == false) {
 			if(isCategory){
@@ -211,7 +205,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		}
 		else {
 			message = new MessageDialogFragment("Mangler titel");
-			message.show(getFragmentManager(), "message");
+			message.show(getFragmentManager(), "missingTitle");
 		}
 		newCategoryColor = 0;
 	}
@@ -220,7 +214,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	public void onDialogNegativeClick(DialogFragment dialog) {
 		// Do nothing
 	}
-	
 
 	// DONE: Called when pressing the @id/colorButton and updates the newCategoryColor
 	public void setNewCategoryColor(View view)
@@ -299,7 +292,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			for(PARROTCategory c : categoryList){
 				if(c.getCategoryName().equals(tempCategory.getCategoryName())) {
 					legal = false;
-					MessageDialogFragment message = new MessageDialogFragment("Titlen er anvendt");
+					message = new MessageDialogFragment("Titlen er anvendt");
 					message.show(getFragmentManager(), "invalidName");
 					break;
 				}
@@ -314,7 +307,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			for(PARROTCategory sc : subcategoryList){
 				if(sc.getCategoryName().equals(tempCategory.getCategoryName())){
 					legal = false;
-					MessageDialogFragment message = new MessageDialogFragment("Navn er allerede brugt");
+					message = new MessageDialogFragment("Navn er allerede brugt");
 					message.show(getFragmentManager(), "invalidName");
 					break;
 				}
@@ -357,9 +350,11 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	 * This method gets all extras in the extras bundle from the intent that started this activity
 	 */
 	private void getAllExtras() {
-		ProfilesHelper help = new ProfilesHelper(this);
 		if(getIntent().hasExtra("currentChildID")){
-			child = help.getProfileById(extras.getLong("currentChildID"));
+			child = proHelp.getProfileById(extras.getLong("currentChildID"));
+		}
+		if(getIntent().hasExtra("currentGuardianID")){
+			guardian = proHelp.getProfileById(extras.getLong("currentGuardianID"));
 		}
 	}
 
@@ -483,6 +478,8 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		//TODO: implement
 		Intent request = new Intent(this, PictoAdminMain.class);
 		request.putExtra("purpose", "CAT");
+		request.putExtra("currentChildID", child.getId());
+		request.putExtra("currentGuardianID", guardian.getId());
 		startActivityForResult(request, RESULT_FIRST_USER);
 	}
 	
@@ -497,9 +494,15 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	 */
 	public void gotoPictoCreator(View view)
 	{
-		//TODO: implement
-		MessageDialogFragment message = new MessageDialogFragment("Go to pictoCreator");
-		message.show(getFragmentManager(), "message");
+		try{
+			Intent croc = new Intent();
+			croc.setComponent(new ComponentName("dk.aau.cs.giraf.pictocreator", "dk.aau.cs.giraf.pictocreator.crocActivity"));
+			startActivity(croc);
+		}
+		catch (Exception e) {
+			message = new MessageDialogFragment("Croc not installed");
+			message.show(getFragmentManager(), "missingApp");
+		}
 	}
 	
 	@SuppressWarnings("static-access")

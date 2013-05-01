@@ -111,7 +111,6 @@ containing a value of this type.
         public static final int description_bar=0x7f090000;
         public static final int errorIcon=0x7f090027;
         public static final int errorMessage=0x7f090026;
-        public static final int gotoAdminCategory=0x7f09003b;
         public static final int iconGrid=0x7f090033;
         public static final int main_category_admin_layout=0x7f090003;
         public static final int menu_settings=0x7f090039;
