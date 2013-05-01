@@ -74,7 +74,7 @@ public class PictoAdapter extends BaseAdapter {
 			textView.setText(pctNew.getTextLabel());
 		}
 		
-		BitmapWorker worker = new BitmapWorker(imageView, context);
+		BitmapWorker worker = new BitmapWorker(imageView);
 		worker.execute(pctNew);
 		
 		convertView.setPadding(5, 5, 5, 5);
