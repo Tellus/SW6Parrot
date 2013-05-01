@@ -154,47 +154,6 @@ public class PictoAdminMain extends Activity {
 	}
 	
 	/**
-	 * Loads the pictograms into the gridview depending on the search tag
-	 * @param tag: String identifying whether the user searches for tags, name,
-	 * category, subcategory or color
-	 */
-	private void loadPictoIntoGridView(String tag)
-	{	
-		GridView picgrid = (GridView) findViewById(R.id.pictogram_displayer);		
-		EditText searchterm = (EditText) findViewById(R.id.text_input);
-		searchlist.clear();
-		
-		if(tag.equals("Alt")){
-			String pictoname;
-			String input = searchterm.getText().toString();
-			
-			for(Pictogram p : pictograms){
-				pictoname = p.getTextLabel();
-				if(pictoname.equals(input) || searchMatcher(pictoname, input)) {
-					searchlist.add(p);
-				}
-			}
-		}
-		else if(tag.equals("Tags")) {
-			// TODO: tags not implemented yet
-			updateErrorMessage("You cannot search for tags yet", R.drawable.action_about);
-		}
-		else if(tag.equals("Navn")) {
-			String pictoname;
-			String input = searchterm.getText().toString();
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.picto_admin_main, menu);
-		return true;
-	}
-	
-	/**
 	 * Called when pressing search_button
 	 * Depending on search_field, search for pictograms in database
 	 * @param view: This must be included for the function to work
@@ -251,7 +210,7 @@ public class PictoAdminMain extends Activity {
 			}
 			else if(tag.equals("Kategori"))
 			{
-				ArrayList<PARROTCategory> childcat = cathelp.getChildsCategories(childid);
+				ArrayList<PARROTCategory> childcat = cathelp.getChildsCategories(childId);
 				for(PARROTCategory pc : childcat)
 				{
 					for(int i = 0; i < splitinput.length; i++)
@@ -265,7 +224,7 @@ public class PictoAdminMain extends Activity {
 			}
 			else if(tag.equals("Under kategori"))
 			{
-				ArrayList<PARROTCategory> childcat = cathelp.getChildsCategories(childid);
+				ArrayList<PARROTCategory> childcat = cathelp.getChildsCategories(childId);
 				for(PARROTCategory pc : childcat)
 				{
 					ArrayList<PARROTCategory> catsubcat = pc.getSubCategories();
@@ -319,10 +278,6 @@ public class PictoAdminMain extends Activity {
 			//TODO: If no pictograms found call below method
 			//updateErrorMessage("No such picture in database", R.drawable.action_about);
 		}
-		//searchlist = sortList(searchlist, input);
-		
-		PictoAdapter picto = new PictoAdapter(searchlist, this);
-		picgrid.setAdapter(picto);
 		
 		private boolean searchMatcher(String pictoname, String searchinput) {
 			// Mulighed for at gøre søgefunktionen endnu mere intelligent
@@ -372,20 +327,6 @@ public class PictoAdminMain extends Activity {
 		
 		errorMessage.setText(message);
 		errorIcon.setImageResource(icon);
-	}
-	
-	/**
-	 * Called when pressing search_button
-	 * Depending on search_field, search for pictograms in database
-	 * @param view: This must be included for the function to work
-	 */
-	public void searchForPictogram(View view){
-		Spinner searchField = (Spinner)findViewById(R.id.select_search_field);
-		String  selectedTag =  searchField.getSelectedItem().toString();
-		
-		updateErrorMessage(null, 0); // Clear errorMessage
-		
-		loadPictoIntoGridView(selectedTag);
 	}
 	
 	public void clearSearchField(View view) {
