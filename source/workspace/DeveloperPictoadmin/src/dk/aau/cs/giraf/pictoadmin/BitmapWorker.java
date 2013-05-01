@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,11 +18,12 @@ public class BitmapWorker extends AsyncTask<Object, Integer, Bitmap> {
 	//private final WeakReference<TextView> textview;
 	private Pictogram pictogram;
 	private Context context;
-	//WeakReference<TextView> txtview, 
+	//WeakReference<TextView> textview; 
+	//TextView text, Context con
 	
 	public BitmapWorker(ImageView img, Context con) {
 		imageview = new WeakReference<ImageView>(img);
-		//this.textview = txtview;
+		//this.textview = new WeakReference<TextView>(text);
 		this.context = con;
 	}
 
@@ -30,20 +32,27 @@ public class BitmapWorker extends AsyncTask<Object, Integer, Bitmap> {
 		pictogram = (Pictogram) params[0];
 		Bitmap bmp = null;
 		
+		// Gammel og virkende kode below
 		if(pictogram.getPictogramID() == -1) {
 			bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.usynlig);
 		} else {
 			bmp = BitmapFactory.decodeFile(pictogram.getImagePath());
+			Log.v("doInBackground", "Found image at: "+pictogram.getImagePath().toString());
 		}
 		
+		
+		//return downloadBitmap(params[0]);
 		return bmp;
-}
+	}
 	
 	protected void onPostExecute(Bitmap result) {
 		if(result != null && imageview != null) {
 			final ImageView imgview = imageview.get();
+			//final TextView txtview = textview.get();
 			
-			imgview.setImageBitmap(result);
+			if(imgview != null) {
+				imgview.setImageBitmap(result);
+			}
 		}
 	}
 }
