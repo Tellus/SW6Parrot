@@ -35,15 +35,16 @@ public class PARROTActivity extends Activity {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main);
 		
+		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
-		girafIntent = getIntent();
+		/*girafIntent = getIntent();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
-		childID = girafIntent.getLongExtra("currentChildID", -1);
+		childID = girafIntent.getLongExtra("currentChildID", -1);*/
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		/*don't delete this is for lisbeth and anders when running on our own device*/
-		/*guardianID = 1;
-		childID=12;*/
+		guardianID = 1;
+		childID=12;
 		
 		
 		if(guardianID == -1 )
@@ -74,8 +75,14 @@ public class PARROTActivity extends Activity {
 				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 				//Creating a new Tab, setting the text it is to show and construct and attach a Tab Listener to control it.
 				Tab tab = actionBar.newTab() 
+						.setText(R.string.firstTab)
 						.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
+				actionBar.addTab(tab);
 				tab.select();
+				tab = actionBar.newTab()
+						.setText(R.string.secondTab)
+						.setTabListener(new TabListener<OptionFragment>(this,"options",OptionFragment.class));
+				actionBar.addTab(tab);
 			}
 		}
 	}
@@ -104,6 +111,7 @@ public class PARROTActivity extends Activity {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.parrot_settings, menu);
 				
@@ -113,7 +121,7 @@ public class PARROTActivity extends Activity {
 	/**
 	 * Selector for what happens when a menu Item is clicked
 	 */
-	@Override
+	/*@Override
 	public boolean onOptionsItemSelected (MenuItem item) {
 		switch(item.getItemId()){
 		case R.id.clearBoard:
@@ -127,22 +135,22 @@ public class PARROTActivity extends Activity {
 			break;
 		}
 		return true;
-	}
+	}*/
 	
 	/**
 	 * this activating a new  Activity class which handles the settings which can be changed. 
 	 */
-	public void goToSettings(){
+	/*public void goToSettings(){
 		Intent intent = new Intent(this, SettingActivity.class);
 		startActivity(intent);
-	}
+	}*/
 	/**
 	 * This exits the PARROTActivity and should return to the giraf-launcher. 
 	 */
-	public void returnToLauncher()
+	/*public void returnToLauncher()
 	{
 		finish();
-	}
+	}*/
 	
 	/**
 	 * @return the child's user profile.

@@ -21,10 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name="dk.aau.cs.giraf.parrot.SpeechBoardFragment" />
-        <activity
-            android:name="dk.aau.cs.giraf.parrot.SettingActivity"
-            android:label="@string/title_activity_setting" >
-        </activity>
+
         
     </application>
 	

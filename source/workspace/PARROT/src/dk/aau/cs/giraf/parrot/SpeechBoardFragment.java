@@ -6,13 +6,17 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
@@ -41,7 +45,54 @@ public class SpeechBoardFragment extends Fragment
 	private PARROTProfile user = null;
 	private static Pictogram emptyPictogram =null;  
 	
+	@Override
+	public void onPrepareOptionsMenu(Menu menu)
+	{
+		menu.findItem(R.id.goToParrot).setVisible(false);
+		menu.findItem(R.id.goToSettings).setVisible(true);
+		menu.findItem(R.id.goToLauncher).setVisible(true);
+		menu.findItem(R.id.clearBoard).setVisible(true);
+		
+		super.onPrepareOptionsMenu(menu);
+	}
 	
+	/**
+	 * Selector for what happens when a menu Item is clicked
+	 */
+	@Override
+	public boolean onOptionsItemSelected (MenuItem item) {
+		switch(item.getItemId()){
+		case R.id.clearBoard:
+			clearSentenceboard(parrent);
+			break;
+		case R.id.goToLauncher:
+			returnToLauncher();
+			break;
+		case R.id.goToSettings:	
+			goToSettings();
+			break;
+		}
+		return true;
+	}
+	
+	/**
+	 * this activating a new  Activity class which handles the settings which can be changed. 
+	 */
+	public void goToSettings(){
+		/*Intent intent = new Intent(this, SettingActivity.class);
+		startActivity(intent);*/
+		Toast.makeText(parrent, "go to settings", 1000);
+	}
+	/**
+	 * This exits the PARROTActivity and should return to the giraf-launcher. 
+	 */
+	public void returnToLauncher()
+	{
+		Toast.makeText(parrent, "return to lancher", 1000);
+		//parrent.finish();
+	}
+	
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -52,6 +103,7 @@ public class SpeechBoardFragment extends Fragment
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 	}
 
 	/**
@@ -60,6 +112,7 @@ public class SpeechBoardFragment extends Fragment
 	@Override
 	public void onResume() {
 		super.onResume();
+		parrent.invalidateOptionsMenu();
 		parrent.setContentView(R.layout.speechboard_layout);
 		
 		user=PARROTActivity.getUser();	

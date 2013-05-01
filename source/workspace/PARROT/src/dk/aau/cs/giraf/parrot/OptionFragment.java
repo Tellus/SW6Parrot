@@ -4,51 +4,52 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import dk.aau.cs.giraf.parrot.PARROTProfile.PictogramSize;
 import android.os.Bundle;
-import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
+import android.app.Activity;
+import android.app.Fragment;
 
-/**
- * 
- * @author SW605f13-PARROT
- * In this Activity class the changeable settings of the PARROTActivity can be changed.
- */
-public class SettingActivity extends Activity  {
+public class OptionFragment extends Fragment{
+
 	private PARROTProfile user;
 	private PARROTDataLoader dataloader;
+	private Activity parrent;
 	
-	/** Called when the activity is first created. */
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		this.parrent = activity;
+	}
+	
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
-		setContentView(R.layout.activity_setting);
-		Log.v("SettingActivity","in settings oncreate");
-		user = PARROTActivity.getUser();
-		Log.v("SettingActivity","in settings user read");
-		dataloader = new PARROTDataLoader(this, false);
-		Log.v("SettingActivity","in settings oncreate done");
-		        
+		setHasOptionsMenu(true);
+       
 	}
 	
-	/**
-	 * A menu is created upon creation
-	 */
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.activity_setting, menu);
-				
-		return true;
+	public void onPrepareOptionsMenu(Menu menu)
+	{
+		menu.findItem(R.id.goToParrot).setVisible(true);
+		menu.findItem(R.id.goToSettings).setVisible(false);
+		menu.findItem(R.id.goToLauncher).setVisible(false);
+		menu.findItem(R.id.clearBoard).setVisible(false);
+		
+		super.onPrepareOptionsMenu(menu);
 	}
-	
 	/**
 	 * Selector for what happens when a menu Item is clicked
 	 */
@@ -56,26 +57,18 @@ public class SettingActivity extends Activity  {
 	public boolean onOptionsItemSelected (MenuItem item) {
 		switch(item.getItemId()){
 		case R.id.goToParrot:
-			
-			returnToParrot();
+			Toast.makeText(parrent, "return to parrot", 1000);
+			//returnToParrot();
 			break;
 		}
 		return true;
 	}
 	
 	/**
-	 * finish this activity and return to PARROTActivity
-	 */
-	public void returnToParrot()
-	{
-		finish();
-	}
-	
-	/**
 	 * This is called when exitting the activity 
 	 */
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
 		dataloader.saveChanges(user);
 		PARROTActivity.setUser(user);
@@ -87,13 +80,19 @@ public class SettingActivity extends Activity  {
 	 * 
 	 */
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
+		parrent.setContentView(R.layout.activity_setting);
+		parrent.invalidateOptionsMenu();
+		user = PARROTActivity.getUser();
+		dataloader = new PARROTDataLoader(parrent, false);
+		
+		
 		//Setup of the spinner with is the selector of how many of boxes the child can handle in the sentenceboard
-		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
+		Spinner spinner = (Spinner) parrent.findViewById(R.id.spinnerNoOfsentence);
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		Integer[] items = new Integer[]{1,2,3,4,5,6};
-		ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, items);
+		ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(parrent,android.R.layout.simple_spinner_item, items);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
@@ -116,12 +115,43 @@ public class SettingActivity extends Activity  {
                 // do nothing   
             }        
         }); 
+        
+        Button changeColor = (Button) parrent.findViewById(R.id.buttonChangeSentenceColor);
+        changeColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	onSentenceboardColorChanged(v);
+            }
+        });
+        RadioButton mRadioButton = (RadioButton) parrent.findViewById(R.id.mediumPicRadioButton);
+        mRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	onSizePictogramChanged(v);
+            }
+        });
+        RadioButton lRadioButton = (RadioButton) parrent.findViewById(R.id.largePicRadioButton);
+        lRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	onSizePictogramChanged(v);
+            }
+        }); 
+        CheckBox textChangeCheckBox = (CheckBox) parrent.findViewById(R.id.checkBoxShowText);
+        textChangeCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	onShowTextChanged(v);
+            }
+        }); 
+        
+        
     }
 	
 	/**
 	 * get the current Settings and show it in the UI
 	 */
-	private void readTheCurrentData() {
+	public void readTheCurrentData() {
 		
 		int noOfPlacesInSentenceboard = user.getNumberOfSentencePictograms();
 		boolean showText = user.getShowText();
@@ -129,19 +159,19 @@ public class SettingActivity extends Activity  {
 		
 		if(pictogramSize == PARROTProfile.PictogramSize.MEDIUM)
 		{ 
-			RadioButton radioB = (RadioButton) findViewById(R.id.mediumPicRadioButton);
+			RadioButton radioB = (RadioButton) parrent.findViewById(R.id.mediumPicRadioButton);
 			radioB.setChecked(true);
 		}
 		else if(pictogramSize == PARROTProfile.PictogramSize.LARGE)
 		{
-			RadioButton radioB = (RadioButton) findViewById(R.id.largePicRadioButton);
+			RadioButton radioB = (RadioButton) parrent.findViewById(R.id.largePicRadioButton);
 			radioB.setChecked(true);
 		}
 
-		Spinner spinner = (Spinner) findViewById(R.id.spinnerNoOfsentence);
+		Spinner spinner = (Spinner) parrent.findViewById(R.id.spinnerNoOfsentence);
 		spinner.setSelection(noOfPlacesInSentenceboard-1,true);
 		
-		CheckBox checkBox  = (CheckBox) findViewById(R.id.checkBoxShowText);
+		CheckBox checkBox  = (CheckBox) parrent.findViewById(R.id.checkBoxShowText);
 		if(showText)
 		{
 			
@@ -159,7 +189,7 @@ public class SettingActivity extends Activity  {
 	 */
 	public void onSentenceboardColorChanged(View view)
 	{
-		AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, 
+		AmbilWarnaDialog dialog = new AmbilWarnaDialog(parrent, 
 				user.getSentenceBoardColor(),
 				new OnAmbilWarnaListener() {
 			@Override
@@ -219,3 +249,5 @@ public class SettingActivity extends Activity  {
 
 
 }
+
+
