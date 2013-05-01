@@ -12,7 +12,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class BitmapWorker extends AsyncTask<Object, Integer, Bitmap> {
+public class BitmapWorker extends AsyncTask<String, Void, Bitmap> {
 	// En weak reference gør den "flagged" som "garbage collectable" :)
 	private final WeakReference<ImageView> imageview;
 	//private final WeakReference<TextView> textview;
@@ -20,29 +20,29 @@ public class BitmapWorker extends AsyncTask<Object, Integer, Bitmap> {
 	private Context context;
 	//WeakReference<TextView> textview; 
 	//TextView text, Context con
+	ImageFetcher imgfetcher;
 	
-	public BitmapWorker(ImageView img, Context con) {
+	public BitmapWorker(ImageView img) {
 		imageview = new WeakReference<ImageView>(img);
 		//this.textview = new WeakReference<TextView>(text);
-		this.context = con;
+		//this.context = con;
 	}
 
 	@Override
-	protected Bitmap doInBackground(Object... params) {
-		pictogram = (Pictogram) params[0];
-		Bitmap bmp = null;
+	protected Bitmap doInBackground(String... params) {
+		//pictogram = (Pictogram) params[0];
+		//Bitmap bmp = null;
 		
 		// Gammel og virkende kode below
-		if(pictogram.getPictogramID() == -1) {
+		/*if(pictogram.getPictogramID() == -1) {
 			bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.usynlig);
 		} else {
 			bmp = BitmapFactory.decodeFile(pictogram.getImagePath());
-			Log.v("doInBackground", "Found image at: "+pictogram.getImagePath().toString());
-		}
+		}*/
 		
-		
+		return ImageFetcher.downloadBitmap(params[0]);
 		//return downloadBitmap(params[0]);
-		return bmp;
+		//return bmp;
 	}
 	
 	protected void onPostExecute(Bitmap result) {
