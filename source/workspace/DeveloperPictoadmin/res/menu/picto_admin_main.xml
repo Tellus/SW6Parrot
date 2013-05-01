@@ -7,13 +7,5 @@
         android:title="Hjælp"
         android:onClick="callAndersSupport">
     </item>
-    
-    <item
-        android:id="@+id/gotoAdminCategory"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Rediger kategorier"
-        android:onClick="gotoAdminCategory">
-    </item>
 
 </menu>

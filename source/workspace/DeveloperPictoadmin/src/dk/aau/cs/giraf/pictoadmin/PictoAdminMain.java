@@ -33,10 +33,10 @@ public class PictoAdminMain extends Activity {
 	private ArrayList<Pictogram> pictoList  = new ArrayList<Pictogram>();
 	private ArrayList<Pictogram> searchlist = new ArrayList<Pictogram>();
 
-	private long childid;
-	private long guardianid;
-	private Profile profile;
-	private List<Pictogram> pictotemp; // Vi bruger denne kun til at gette elementer fra pictofactory som returner list
+	private long childId;
+	private long guardianId;
+	private Profile child;
+	private Profile guardian;
 	private ArrayList<Pictogram> pictograms; // Den egentlige liste af pictogrammer vi ønsker at bruge
 
 	long[] output;
@@ -48,6 +48,7 @@ public class PictoAdminMain extends Activity {
 	
 	private CheckoutGridHandler cgHandler;
 	
+	private Bundle extras;
 	/*
 	 *  Request from another group. It should be possible to only send one pictogram,
 	 *  and therefore only display one pictogram in the checkout list. isSingle is used
@@ -62,10 +63,22 @@ public class PictoAdminMain extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_picto_admin_main);
 		
-		getPurpose();
-		//girafIntent = getIntent();
+		extras = getIntent().getExtras();
+		if(extras != null){
+			getProfile();
+			getPurpose();
+		}
+		else{
+			childId = 12;
+			guardianId = 1;
+		}
+		
+		Helper help = new Helper(this);
+		
+		child    = help.profilesHelper.getProfileById(childId);
+		guardian = help.profilesHelper.getProfileById(guardianId);
+		
 		getAllPictograms();
-		getProfile();
 		
 		checkoutGrid = (GridView) findViewById(R.id.checkout);
 		checkoutGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -93,6 +106,12 @@ public class PictoAdminMain extends Activity {
 		cgHandler = new CheckoutGridHandler(checkoutList);
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.picto_admin_main, menu);
+		return true;
+	}
+	
 	private void getPurpose() {
 		if(getIntent().hasExtra("purpose")){
 			if(getIntent().getStringExtra("purpose").equals("single")){
@@ -113,54 +132,20 @@ public class PictoAdminMain extends Activity {
 	}
 	
 	public void getProfile() {
-		/* Dette outcommented segment er det korrekte at bruge men vi mangle en ordentligt tablet til at køre det på 
-		*  guardianid = girafIntent.getLongExtra("currentGuardianID", -1); 
-		*  childid = girafIntent.getLongExtra("currentChildID", -1); 
-		*  Indtil da bliver børn og guardians ID hardcoded */
-		
-		childid = 12;
-		guardianid = 1;
-
-		Helper help = new Helper(this);
-		profile = help.profilesHelper.getProfileById(childid);
+		childId = extras.getLong("currentChildID");
+		guardianId = extras.getLong("currentGuardianID");
 	}
 	
+	@SuppressWarnings("static-access")
 	public void getAllPictograms() {
-		pictotemp = PictoFactory.INSTANCE.getAllPictograms(getApplicationContext());
+		List<Pictogram> pictotemp = PictoFactory.INSTANCE.getAllPictograms(getApplicationContext());
 		pictograms = new ArrayList<Pictogram>();
 		
-		//Manuel casting fra  list til ArrayList
 		for (Pictogram p : pictotemp) {
 			pictograms.add(p);
 		}
 	}
 	
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.picto_admin_main, menu);
-		return true;
-	}
-	
-	/**
-	 * Called when pressing search_button
-	 * Depending on search_field, search for pictograms in database
-	 * @param view: This must be included for the function to work
-	 */
-	public void searchForPictogram(View view){
-		Spinner searchField = (Spinner)findViewById(R.id.select_search_field);
-		String  selectedTag =  searchField.getSelectedItem().toString();
-		
-		updateErrorMessage(null, 0); // Clear errorMessage
-		
-		loadPictoIntoGridView(selectedTag);
-	}
-	
-	//TODO: Load pictograms depending on tag
 	/**
 	 * Loads the pictograms into the gridview depending on the search tag
 	 * @param tag: String identifying whether the user searches for tags, name,
@@ -172,11 +157,21 @@ public class PictoAdminMain extends Activity {
 		EditText searchterm = (EditText) findViewById(R.id.text_input);
 		searchlist.clear();
 		
-		if(tag.equals("Tags")) {
+		if(tag.equals("Alt")){
+			String pictoname;
+			String input = searchterm.getText().toString();
+			
+			for(Pictogram p : pictograms){
+				pictoname = p.getTextLabel();
+				if(pictoname.equals(input) || searchMatcher(pictoname, input)) {
+					searchlist.add(p);
+				}
+			}
+		}
+		else if(tag.equals("Tags")) {
 			// TODO: tags not implemented yet
 			updateErrorMessage("You cannot search for tags yet", R.drawable.action_about);
 		}
-		
 		else if(tag.equals("Navn")) {
 			String pictoname;
 			String input = searchterm.getText().toString();
@@ -187,12 +182,11 @@ public class PictoAdminMain extends Activity {
 					searchlist.add(p);
 				}
 			}
-			
-			//searchlist = sortList(searchlist, input);
-			
-			PictoAdapter picto = new PictoAdapter(searchlist, this);
-			picgrid.setAdapter(picto);
 		}
+		//searchlist = sortList(searchlist, input);
+		
+		PictoAdapter picto = new PictoAdapter(searchlist, this);
+		picgrid.setAdapter(picto);
 		
 		//TODO: If no pictograms found call below method
 		//updateErrorMessage("No such picture in database", R.drawable.action_about);
@@ -260,11 +254,27 @@ public class PictoAdminMain extends Activity {
 	}
 	
 	/**
-	 * MenuItem: Exist the current activity and returns to the latest active activity
-	 * @param item: This must be included for the function to work 
+	 * Called when pressing search_button
+	 * Depending on search_field, search for pictograms in database
+	 * @param view: This must be included for the function to work
 	 */
-	public void returnToLastActivity(MenuItem item) {
-		finish();
+	public void searchForPictogram(View view){
+		Spinner searchField = (Spinner)findViewById(R.id.select_search_field);
+		String  selectedTag =  searchField.getSelectedItem().toString();
+		
+		updateErrorMessage(null, 0); // Clear errorMessage
+		
+		loadPictoIntoGridView(selectedTag);
+	}
+	
+	public void clearSearchField(View view) {
+		EditText searchField = (EditText) findViewById(R.id.text_input);
+		searchField.setText(null);
+	}
+	
+	public void clearCheckoutList(View view) {
+		checkoutList.clear();
+		checkoutGrid.setAdapter(new PictoAdapter(checkoutList, this));
 	}
 	
 	/**
@@ -291,41 +301,8 @@ public class PictoAdminMain extends Activity {
 		finish();
 	}
 	
-	public void clearSearchField(View view) {
-		EditText searchField = (EditText) findViewById(R.id.text_input);
-		searchField.setText(null);
-	}
-	
-	public void clearCheckoutList(View view) {
-		checkoutList.clear();
-		checkoutGrid.setAdapter(new PictoAdapter(checkoutList, this));
-	}
-	
-	public void gotoAdminCategory(MenuItem item) {
-		Intent intent = new Intent(this, AdminCategory.class);
-		intent.putExtra("childId", childid);
-		intent.putExtra("guardianId", guardianid);
-		startActivity(intent);
-	}
-	
 	public void callAndersSupport(MenuItem item) {
 		MessageDialogFragment message = new MessageDialogFragment("Call: +45 24 26 93 98 for tech support");
 		message.show(getFragmentManager(), "callTechSupport");
 	}
-	
-	/**
-	 * This should be done by the calling activity
-	 */
-	/*@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		Bundle extras = data.getExtras();
-		/*
-		 * Add different cases for different resultCode
-		 * Source: http://stackoverflow.com/questions/1124548/how-to-pass-the-values-from-one-activity-to-previous-activity
-		 
-		if(resultCode == RESULT_OK){
-			long[] picIds = extras.getLongArray("checkoutIds");
-		}
-	}*/
 }
