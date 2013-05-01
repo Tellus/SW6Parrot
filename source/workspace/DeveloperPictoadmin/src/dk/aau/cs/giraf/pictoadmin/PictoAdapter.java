@@ -70,7 +70,6 @@ public class PictoAdapter extends BaseAdapter {
 		ImageView imageView = (ImageView) convertView.findViewById(R.id.pictogrambitmap); 
 		imageView.setLayoutParams(layoutParams);
 		
-		Log.v("Getview", "Før displaytext if");
 		if(displayText) {
 			TextView textView = (TextView) convertView.findViewById(R.id.pictogramtext);
 			textView.setText(pctNew.getTextLabel());
@@ -79,7 +78,6 @@ public class PictoAdapter extends BaseAdapter {
 		BitmapWorker worker = new BitmapWorker(imageView, context);
 		worker.execute(pctNew);
 		
-		Log.v("GetView", "BitmapWorker");
 		convertView.setPadding(5, 5, 5, 5);
 
 		return convertView;
