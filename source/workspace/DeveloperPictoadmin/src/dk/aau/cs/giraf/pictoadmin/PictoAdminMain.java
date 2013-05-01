@@ -1,6 +1,8 @@
 package dk.aau.cs.giraf.pictoadmin;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.app.Activity;
@@ -18,6 +20,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import dk.aau.cs.giraf.categorylib.CategoryHelper;
+import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
@@ -28,6 +32,7 @@ public class PictoAdminMain extends Activity {
 	private DatabaseHandler dbhandler;
 	private String textinput;
 	private EditText inputbox;
+	private CategoryHelper cathelp;
 
 	private ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
 	private ArrayList<Pictogram> pictoList  = new ArrayList<Pictogram>();
@@ -66,6 +71,7 @@ public class PictoAdminMain extends Activity {
 		//girafIntent = getIntent();
 		getAllPictograms();
 		getProfile();
+		cathelp = new CategoryHelper(this);
 		
 		checkoutGrid = (GridView) findViewById(R.id.checkout);
 		checkoutGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -161,89 +167,155 @@ public class PictoAdminMain extends Activity {
 	}
 	
 	//TODO: Load pictograms depending on tag
-	/**
-	 * Loads the pictograms into the gridview depending on the search tag
-	 * @param tag: String identifying whether the user searches for tags, name,
-	 * category, subcategory or color
-	 */
-	private void loadPictoIntoGridView(String tag)
-	{	
-		GridView picgrid = (GridView) findViewById(R.id.pictogram_displayer);		
-		EditText searchterm = (EditText) findViewById(R.id.text_input);
-		searchlist.clear();
-		
-		if(tag.equals("Tags")) {
-			// TODO: tags not implemented yet
-			updateErrorMessage("You cannot search for tags yet", R.drawable.action_about);
-		}
-		
-		else if(tag.equals("Navn")) {
-			String pictoname;
-			String input = searchterm.getText().toString();
+		/**
+		 * Loads the pictograms into the gridview depending on the search tag
+		 * @param tag: String identifying whether the user searches for tags, name,
+		 * category, subcategory or color
+		 */
+		private void loadPictoIntoGridView(String tag)
+		{	
+			GridView picgrid = (GridView) findViewById(R.id.pictogram_displayer);		
+			EditText searchterm = (EditText) findViewById(R.id.text_input);
+			searchlist.clear();
+			String[] splitinput = searchterm.getText().toString().replaceAll("\\s", "").split(",");
 			
-			for (Pictogram p : pictograms) {
-				pictoname = p.getTextLabel();
-				if(pictoname.equals(input) || searchMatcher(pictoname, input)) {
+			if(tag.equals("Alt")) 
+			{
+				for (Pictogram p : pictograms) 
+				{
 					searchlist.add(p);
 				}
 			}
 			
-			//searchlist = sortList(searchlist, input);
+			else if(tag.equals("Tags")) 
+			{
+				// TODO: tags not implemented yet
+				updateErrorMessage("You cannot search for tags yet", R.drawable.action_about);
+			}
 			
-			PictoAdapter picto = new PictoAdapter(searchlist, this);
-			picgrid.setAdapter(picto);
-		}
-		
-		//TODO: If no pictograms found call below method
-		//updateErrorMessage("No such picture in database", R.drawable.action_about);
-	}
-	
-	
-	private boolean searchMatcher(String pictoname, String searchinput) {
-		// Mulighed for at gøre søgefunktionen endnu mere intelligent.
-		Boolean result = true;
-		
-		if(pictoname.contains(searchinput)) {
-			result = true;
-		} else {
-			result = false;
-		}
-		
-		
-		return result;
-	}
-	
-	private ArrayList<Pictogram> sortList(ArrayList<Pictogram> listtobesorted, String searchterm) {
-		ArrayList<Pictogram> sortedlist = new ArrayList<Pictogram>();
-		
-		char [] letters;
-		
-		int [] weight = null; // Bruges til at gemme vægten af alle strenge i listen
-		int [][] index = null; // Bruges til at gemme indexet for læste karakterer for den relative streng
-		int i = 0; // Counter til vægtningen
-		int j = 0; // Counter til at huske index for sidste læste karakter relativt til dens streng
-		
-		for (Pictogram p : listtobesorted) {
-			j = 0;
-			letters = p.getTextLabel().toCharArray();
-			
-			for (char c : letters) {
-				if(searchterm.indexOf(c) != -1) { // Hvis bogstavet findes i søgestrengen skal vi gemme indexet og øge vægtningen
-					
+			else if(tag.equals("Navn")) 
+			{
+				String pictoname;
+				for (Pictogram p : pictograms) 
+				{
+					pictoname = p.getTextLabel().toLowerCase().replace("\\s", "");
+					for(int i = 0; i < splitinput.length; i++ )
+					{
+						if(searchMatcher(pictoname, splitinput[i]))
+						{
+							searchlist.add(p);
+						}
+					}
 				}
 			}
 			
-			i++;
+			else if(tag.equals("Kategori"))
+			{
+				ArrayList<PARROTCategory> childcat = cathelp.getChildsCategories(childid);
+				for(PARROTCategory pc : childcat)
+				{
+					for(int i = 0; i < splitinput.length; i++)
+					{
+						if(searchMatcher(pc.getCategoryName().toLowerCase().replaceAll("\\s", ""),splitinput[i]))
+						{
+							searchlist.add(pc.getIcon());
+						}
+					}
+				}
+			}
+			
+			else if(tag.equals("Under kategori"))
+			{
+				ArrayList<PARROTCategory> childcat = cathelp.getChildsCategories(childid);
+				for(PARROTCategory pc : childcat)
+				{
+					ArrayList<PARROTCategory> catsubcat = pc.getSubCategories();
+					for(PARROTCategory subc : catsubcat)
+					{
+						for(int i = 0; i < splitinput.length; i++)
+						{
+							if(searchMatcher(subc.getCategoryName().toLowerCase().replaceAll("\\s", ""),splitinput[i]))
+							{
+								searchlist.add(subc.getIcon());
+							}
+						}
+					}
+				}
+			}
+			
+			class SearchNode{
+				Pictogram pic;
+				int searchvalue;
+			}
+			
+			ArrayList<SearchNode> sortedsearchlist = new ArrayList<SearchNode>();
+			for(Pictogram p : searchlist)
+			{
+				SearchNode sn = new SearchNode();
+				sn.pic = p;
+				sn.searchvalue = calculateValueOfPictogram(p, splitinput);
+				sortedsearchlist.add(sn);
+			}
+			
+			Collections.sort(sortedsearchlist, new Comparator<SearchNode>() 
+			{
+				@Override
+		        public int compare(SearchNode o1, SearchNode o2) 
+		        {
+					if(o1.searchvalue > o2.searchvalue)
+						return 1;
+					else if(o1.searchvalue == o2.searchvalue)
+						return 0;
+					else
+						return -1;
+		        }
+		    });
+			searchlist.clear();
+			for(SearchNode sn : sortedsearchlist)
+			{
+				searchlist.add(sn.pic);
+			}
+			PictoAdapter picto = new PictoAdapter(searchlist, this);
+			picgrid.setAdapter(picto);
+			//TODO: If no pictograms found call below method
+			//updateErrorMessage("No such picture in database", R.drawable.action_about);
 		}
 		
+		private boolean searchMatcher(String pictoname, String searchinput) {
+			// Mulighed for at gøre søgefunktionen endnu mere intelligent
+			
+			if(pictoname.contains(searchinput)) 
+			{
+				return true;
+			} 
+			else 
+			{
+				return false;
+			}
+		}
 		
-		/*else if (letters.equals(searchterm)) { // Hvis ordet matcher lige præcist søgetermen så får den en giga-weight.
-			weight[i] += 50;
-			break;
-		}*/
-		
-		return listtobesorted;
-	}
+		private static int calculateValueOfPictogram(Pictogram p, String[] searchterm)
+	    {
+	    	int searchvalue = 0;
+	    	for(String s : searchterm)
+	    	{
+	    		s.toLowerCase().replaceAll("\\s", "");
+	    		if(p.getTextLabel().toLowerCase().replaceAll("\\s", "").equals(s))
+	    		{
+	    			searchvalue = 100;
+	    		}
+	    		String temps = s;
+	    		for(int i = 0; i < s.length(); i++)
+	    		{
+	    			if(p.getTextLabel().toLowerCase().replaceAll("\\s", "").contains(temps) || temps.contains(p.getTextLabel().toLowerCase().replaceAll("\\s", "")))
+	    			{
+	    				searchvalue++;
+	    			}
+	    			temps.substring(0, temps.length() - 1);
+	    		}
+	    	}
+	    	return searchvalue;
+	    }
 	
 	/**
 	 * Updates the errorMessage with appropriate error
