@@ -57,8 +57,8 @@ public class OptionFragment extends Fragment{
 	public boolean onOptionsItemSelected (MenuItem item) {
 		switch(item.getItemId()){
 		case R.id.goToParrot:
-			Toast.makeText(parrent, "return to parrot", 1000);
-			//returnToParrot();
+			PARROTActivity parrotA= new PARROTActivity();
+			parrotA.switchTabs();
 			break;
 		}
 		return true;

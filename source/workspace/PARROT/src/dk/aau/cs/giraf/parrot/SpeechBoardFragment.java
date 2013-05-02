@@ -69,7 +69,8 @@ public class SpeechBoardFragment extends Fragment
 			returnToLauncher();
 			break;
 		case R.id.goToSettings:	
-			goToSettings();
+			PARROTActivity parrotA= new PARROTActivity();
+			parrotA.switchTabs();
 			break;
 		}
 		return true;
@@ -79,17 +80,14 @@ public class SpeechBoardFragment extends Fragment
 	 * this activating a new  Activity class which handles the settings which can be changed. 
 	 */
 	public void goToSettings(){
-		/*Intent intent = new Intent(this, SettingActivity.class);
-		startActivity(intent);*/
-		Toast.makeText(parrent, "go to settings", 1000);
+		//TODO
 	}
 	/**
 	 * This exits the PARROTActivity and should return to the giraf-launcher. 
 	 */
 	public void returnToLauncher()
 	{
-		Toast.makeText(parrent, "return to lancher", 1000);
-		//parrent.finish();
+		parrent.finish();
 	}
 	
 
@@ -162,22 +160,7 @@ public class SpeechBoardFragment extends Fragment
 			//setup drag listeners for the views
 			//parrent.findViewById(R.id.pictogramgrid).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
 			parrent.findViewById(R.id.sentenceboard).setOnDragListener(new SpeechBoardBoxDragListener(parrent));
-			
-			/*pictogramGrid.setOnItemLongClickListener(new OnItemLongClickListener()
-			{
-
-				@Override
-				public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id)
-				{
-					draggedPictogramIndex = position; 
-					dragOwnerID = R.id.pictogramgrid;
-					ClipData data = ClipData.newPlainText("label", "text"); //TODO Dummy. Pictogram information can be placed here instead.
-					DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
-					view.startDrag(data, shadowBuilder, view, 0);
-					return true;
-				}
-
-			});*/
+	
 			
 			//Play sound, when click on a pictogram in the sentence board
 			sentenceBoardGrid.setOnItemClickListener(new OnItemClickListener() {

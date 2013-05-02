@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.parrot;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -26,6 +28,7 @@ public class PARROTActivity extends Activity {
 	private static App app;
 	private static Helper help;
 	private static Intent girafIntent;
+	private static ActionBar actionBar = null;
 	
 
 	/** Called when the activity is first created. */
@@ -37,14 +40,14 @@ public class PARROTActivity extends Activity {
 		
 		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
-		/*girafIntent = getIntent();
+		girafIntent = getIntent();
 		guardianID = girafIntent.getLongExtra("currentGuardianID", -1);
-		childID = girafIntent.getLongExtra("currentChildID", -1);*/
+		childID = girafIntent.getLongExtra("currentChildID", -1);
 		Helper help = new Helper(this);
 		app = help.appsHelper.getAppByPackageName();
 		/*don't delete this is for lisbeth and anders when running on our own device*/
-		guardianID = 1;
-		childID=12;
+		/*guardianID = 1;
+		childID=12;*/
 		
 		
 		if(guardianID == -1 )
@@ -71,18 +74,16 @@ public class PARROTActivity extends Activity {
 				 * Remember: Make sure the order of the Taps is consistent with the order of their rights in the
 				 * 			 Rights array.
 				 */
-				ActionBar actionBar = getActionBar();
+				actionBar = getActionBar();
 				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 				//Creating a new Tab, setting the text it is to show and construct and attach a Tab Listener to control it.
 				Tab tab = actionBar.newTab() 
-						.setText(R.string.firstTab)
 						.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
-				actionBar.addTab(tab);
-				tab.select();
-				tab = actionBar.newTab()
-						.setText(R.string.secondTab)
+				actionBar.addTab(tab, 0);
+				Tab tab2 = actionBar.newTab()
 						.setTabListener(new TabListener<OptionFragment>(this,"options",OptionFragment.class));
-				actionBar.addTab(tab);
+				actionBar.addTab(tab2, 1);
+				
 			}
 		}
 	}
@@ -118,39 +119,31 @@ public class PARROTActivity extends Activity {
 		return true;
 	}
 	
-	/**
-	 * Selector for what happens when a menu Item is clicked
-	 */
-	/*@Override
-	public boolean onOptionsItemSelected (MenuItem item) {
-		switch(item.getItemId()){
-		case R.id.clearBoard:
-			SpeechBoardFragment.clearSentenceboard(this);
-			break;
-		case R.id.goToLauncher:
-			returnToLauncher();
-			break;
-		case R.id.goToSettings:	
-			goToSettings();
-			break;
-		}
-		return true;
-	}*/
+	
 	
 	/**
 	 * this activating a new  Activity class which handles the settings which can be changed. 
 	 */
-	/*public void goToSettings(){
-		Intent intent = new Intent(this, SettingActivity.class);
-		startActivity(intent);
-	}*/
-	/**
-	 * This exits the PARROTActivity and should return to the giraf-launcher. 
-	 */
-	/*public void returnToLauncher()
-	{
-		finish();
-	}*/
+	public void switchTabs(){
+		Log.v("","switchTabs begin");
+		if(actionBar!=null)
+		{
+			Log.v("","switchTabs in 1 if");
+			int index = actionBar.getSelectedNavigationIndex();
+			if(index == 0)
+			{
+				Log.v("","switchTabs in 2 if");
+				actionBar.selectTab(actionBar.getTabAt(1));
+			}
+			else
+			{
+				Log.v("","switchTabs in else");
+				actionBar.selectTab(actionBar.getTabAt(0));
+			}
+		}
+		Log.v("","switchTabs end");
+	}
+
 	
 	/**
 	 * @return the child's user profile.
