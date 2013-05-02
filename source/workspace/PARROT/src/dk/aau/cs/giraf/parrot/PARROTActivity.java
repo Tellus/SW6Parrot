@@ -1,5 +1,7 @@
 package dk.aau.cs.giraf.parrot;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -26,6 +28,7 @@ public class PARROTActivity extends Activity {
 	private static App app;
 	private static Helper help;
 	private static Intent girafIntent;
+	private static ActionBar actionBar = null;
 	
 
 	/** Called when the activity is first created. */
@@ -34,6 +37,7 @@ public class PARROTActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main);
+		
 		
 		//These lines get the intent from the launcher //TODO use us when testing with the launcher.
 		//girafIntent = getIntent();
@@ -70,12 +74,16 @@ public class PARROTActivity extends Activity {
 				 * Remember: Make sure the order of the Taps is consistent with the order of their rights in the
 				 * 			 Rights array.
 				 */
-				ActionBar actionBar = getActionBar();
+				actionBar = getActionBar();
 				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 				//Creating a new Tab, setting the text it is to show and construct and attach a Tab Listener to control it.
 				Tab tab = actionBar.newTab() 
 						.setTabListener(new TabListener<SpeechBoardFragment>(this,"speechboard",SpeechBoardFragment.class));
-				tab.select();
+				actionBar.addTab(tab, 0);
+				Tab tab2 = actionBar.newTab()
+						.setTabListener(new TabListener<OptionFragment>(this,"options",OptionFragment.class));
+				actionBar.addTab(tab2, 1);
+				
 			}
 		}
 	}
@@ -104,45 +112,38 @@ public class PARROTActivity extends Activity {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.parrot_settings, menu);
 				
 		return true;
 	}
 	
-	/**
-	 * Selector for what happens when a menu Item is clicked
-	 */
-	@Override
-	public boolean onOptionsItemSelected (MenuItem item) {
-		switch(item.getItemId()){
-		case R.id.clearBoard:
-			SpeechBoardFragment.clearSentenceboard(this);
-			break;
-		case R.id.goToLauncher:
-			returnToLauncher();
-			break;
-		case R.id.goToSettings:	
-			goToSettings();
-			break;
-		}
-		return true;
-	}
+	
 	
 	/**
 	 * this activating a new  Activity class which handles the settings which can be changed. 
 	 */
-	public void goToSettings(){
-		Intent intent = new Intent(this, SettingActivity.class);
-		startActivity(intent);
+	public void switchTabs(){
+		Log.v("","switchTabs begin");
+		if(actionBar!=null)
+		{
+			Log.v("","switchTabs in 1 if");
+			int index = actionBar.getSelectedNavigationIndex();
+			if(index == 0)
+			{
+				Log.v("","switchTabs in 2 if");
+				actionBar.selectTab(actionBar.getTabAt(1));
+			}
+			else
+			{
+				Log.v("","switchTabs in else");
+				actionBar.selectTab(actionBar.getTabAt(0));
+			}
+		}
+		Log.v("","switchTabs end");
 	}
-	/**
-	 * This exits the PARROTActivity and should return to the giraf-launcher. 
-	 */
-	public void returnToLauncher()
-	{
-		finish();
-	}
+
 	
 	/**
 	 * @return the child's user profile.

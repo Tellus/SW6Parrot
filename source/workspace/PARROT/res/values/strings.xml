@@ -5,13 +5,12 @@
     <!-- In SettingsActivity --> 
     <string name="sentensboardOptions">Sætnings board</string>
     <string name="pictogramOptions">Pictogram</string>
-    <string name="changecategorycolor">Ændring af baggrunds farve på kategorilisten</string>
-    <string name="changesentencecolor">Ændring af baggrunds farve på sætningsbrættet</string>
+    <string name="changesentencecolor">Ændring af baggrunds farve på sætningsbrættet:</string>
     <string name="PictoSize">Pictogram størrelse:</string>
     <string name="LargePictogram">Stor</string>
     <string name="MediumPictogram">Medium</string>
-    <string name="textToPic">Vis text til pictogram:</string>
-    <string name="SentenceboardNo">Antal bokse i sætnings boarded</string>
+    <string name="textToPic">Vis text til pictogram</string>
+    <string name="SentenceboardNo">Antal bokse i sætningsboarded</string>
     <string name="buttonChangeColorSentence">Ændre farven</string>
     <string name="buttonSaveChanges">Gem ændringer</string>
     
