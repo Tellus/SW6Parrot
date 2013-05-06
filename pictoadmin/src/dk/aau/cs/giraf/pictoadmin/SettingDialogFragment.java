@@ -1,7 +1,5 @@
 package dk.aau.cs.giraf.pictoadmin;
 
-import java.util.ArrayList;
-
 import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.annotation.SuppressLint;
@@ -53,9 +51,11 @@ public class SettingDialogFragment extends DialogFragment{
 						AmbilWarnaDialog colorDialog = new AmbilWarnaDialog(startActivity, category.getCategoryColor(), new OnAmbilWarnaListener() {	
 							@Override
 							public void onOk(AmbilWarnaDialog dialog, int color) {
+								if(!isCategory){
+									category = category.getSuperCategory();
+								}
 								category.setCategoryColor(color);
-								ArrayList<PARROTCategory> tempSub = category.getSubCategories();
-								for(PARROTCategory sc : tempSub){
+								for(PARROTCategory sc : category.getSubCategories()){
 									sc.setCategoryColor(color);
 								}
 								startActivity.updateSettings(category, pos, isCategory, "color");
@@ -67,8 +67,6 @@ public class SettingDialogFragment extends DialogFragment{
 							}
 						});
 						colorDialog.show();
-						//MessageDialogFragment message = new MessageDialogFragment("Missing");
-						//message.show(getFragmentManager(), "");
 					}
 					//Change icon
 					if(which == 2) {

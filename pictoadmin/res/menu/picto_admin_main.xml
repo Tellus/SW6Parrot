@@ -4,48 +4,8 @@
         android:id="@+id/action_help"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="Hjælp">
-    </item>
-    
-    <item
-        android:id="@+id/gotoAdminCategory"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Rediger kategorier"
-        android:onClick="gotoAdminCategory">
-    </item>
-    
-    <item
-        android:id="@+id/action_back"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Tilbage"
-        android:onClick="returnToLastActivity">
-    </item>
-    
-    <item
-        android:id="@+id/action_klim"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Test Klim">
-    </item>
-    <item
-        android:id="@+id/action_lisbeth"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Test Lisbeth">
-    </item>
-    <item
-        android:id="@+id/action_jacob"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Test Jacob">
-    </item>
-    <item
-        android:id="@+id/action_anders"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Test Anders">
+        android:title="Hjælp"
+        android:onClick="callAndersSupport">
     </item>
 
 </menu>

@@ -81,12 +81,9 @@ containing a value of this type.
         public static final int TextView02=0x7f09001d;
         public static final int TextView09=0x7f09001c;
         public static final int access_pictocreator_button=0x7f090010;
-        public static final int action_anders=0x7f09003e;
-        public static final int action_back=0x7f090037;
-        public static final int action_help=0x7f090039;
-        public static final int action_jacob=0x7f09003d;
-        public static final int action_klim=0x7f09003b;
-        public static final int action_lisbeth=0x7f09003c;
+        public static final int action_back=0x7f090038;
+        public static final int action_help=0x7f09003a;
+        public static final int action_save=0x7f090037;
         public static final int add_new_category_button=0x7f090006;
         public static final int add_new_picture_button=0x7f090011;
         public static final int add_new_subcategory_button=0x7f09000b;
@@ -114,10 +111,9 @@ containing a value of this type.
         public static final int description_bar=0x7f090000;
         public static final int errorIcon=0x7f090027;
         public static final int errorMessage=0x7f090026;
-        public static final int gotoAdminCategory=0x7f09003a;
         public static final int iconGrid=0x7f090033;
         public static final int main_category_admin_layout=0x7f090003;
-        public static final int menu_settings=0x7f090038;
+        public static final int menu_settings=0x7f090039;
         public static final int pictogram_coloumb=0x7f09000e;
         public static final int pictogram_displayer=0x7f090028;
         public static final int pictogram_gridview=0x7f090013;
@@ -172,13 +168,14 @@ containing a value of this type.
         public static final int picture=0x7f040011;
         public static final int reset=0x7f04000b;
         public static final int save_changes=0x7f040009;
-        public static final int search=0x7f040015;
+        public static final int search=0x7f040016;
         public static final int search_button=0x7f040004;
-        public static final int send=0x7f040014;
+        public static final int send=0x7f040015;
         public static final int subKategori=0x7f040007;
         public static final int text_input=0x7f040005;
         public static final int title_activity_admin_category=0x7f040013;
         public static final int title_activity_help_menu=0x7f040010;
+        public static final int title_activity_picto_main=0x7f040014;
     }
     public static final class style {
         /** 
