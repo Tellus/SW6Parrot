@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,21 +61,21 @@ public class PictoAdapter extends BaseAdapter {
 	{
 		Pictogram pctNew = pictograms.get(position);
 		
-		Bitmap img = BitmapFactory.decodeFile(pctNew.getImagePath());
-		
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
 
 		LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		convertView = layoutInflater.inflate(R.layout.pictogramview, null);
 
 		ImageView imageView = (ImageView) convertView.findViewById(R.id.pictogrambitmap); 
-		imageView.setImageBitmap(img);
 		imageView.setLayoutParams(layoutParams);
-
+		
 		if(displayText) {
 			TextView textView = (TextView) convertView.findViewById(R.id.pictogramtext);
 			textView.setText(pctNew.getTextLabel());
 		}
+		
+		BitmapWorker worker = new BitmapWorker(imageView);
+		worker.execute(pctNew);
 		
 		convertView.setPadding(5, 5, 5, 5);
 
