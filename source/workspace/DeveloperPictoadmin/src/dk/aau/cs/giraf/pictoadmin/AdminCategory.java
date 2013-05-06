@@ -548,5 +548,9 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			}
 			pictogramGrid.setAdapter(new PictoAdapter(pictograms, this));
 		}
+		else{
+			MessageDialogFragment message = new MessageDialogFragment("testing");
+			message.show(getFragmentManager(), "");
+		}
 	}
 }
