@@ -364,10 +364,12 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	 * This method gets all extras in the extras bundle from the intent that started this activity
 	 */
 	private void getAllExtras() {
+		
 		if(getIntent().hasExtra("currentChildID")){
 			child = proHelp.getProfileById(extras.getLong("currentChildID"));
 		}
 		if(getIntent().hasExtra("currentGuardianID")){
+			
 			guardian = proHelp.getProfileById(extras.getLong("currentGuardianID"));
 		}
 	}

@@ -551,7 +551,7 @@ public class Helper {
                 App tortoise = new App("TORTOISE", basePackageName + "tortoise", basePackageName + "tortoise.MainActivity");
                 App train = new App("Train", basePackageName + "train", basePackageName + "train.MainActivity");
                 App croc = new App("Croc", basePackageName + "pictocreator", basePackageName + "pictocreator.crocActivity");
-                App pictoAdmin = new App("PictoAdmin", basePackageName + "pictoadmin", basePackageName + "pictoadmin.PictoAdminMain");
+                App pictoAdmin = new App("PictoAdmin", basePackageName + "pictoadmin", basePackageName + "pictoadmin.AdminCategory");
 
                 long launcherId = appsHelper.insertApp(launcher);
                 long parrotId = appsHelper.insertApp(parrot);
