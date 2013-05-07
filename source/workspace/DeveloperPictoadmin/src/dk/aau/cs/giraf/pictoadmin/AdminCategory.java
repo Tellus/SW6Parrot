@@ -59,6 +59,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.v("klim", "created");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_admin_category);
 		catHelp =  new CategoryHelper(this);
@@ -142,7 +143,20 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	}
 	
 	@Override
+	protected void onDestroy() {
+		Log.v("klim", "destroyed");
+		super.onDestroy();
+	}
+	
+	@Override
+	protected void onResume() {
+		Log.v("klim", "resumed");
+		super.onResume();
+	}
+	
+	@Override
 	protected void onPause() {
+		Log.v("klim", "paused");
 		super.onPause();
 		for(PARROTCategory sc : subcategoryList){
 			if(sc.isChanged()){
@@ -476,7 +490,8 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	
 	public void createPictogram(View view) {
 		//TODO: implement
-		Intent request = new Intent(this, PictoAdminMain.class);
+		Intent request = new Intent();
+		request.setComponent(new ComponentName("dk.aau.cs.giraf.pictoadmin", "dk.aau.cs.giraf.pictoadmin.PictoAdminMain"));
 		request.putExtra("purpose", "CAT");
 		request.putExtra("currentChildID", child.getId());
 		request.putExtra("currentGuardianID", guardian.getId());
@@ -511,9 +526,9 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		super.onActivityResult(requestCode, resultCode, data);
 		Bundle extras = data.getExtras();
 		if(data.hasExtra("checkoutIds")){
+			Log.v("klim", "ids returned");
 			long[] checkoutIds = new long[extras.getLongArray("checkoutIds").length];
 			checkoutIds = extras.getLongArray("checkoutIds");
-			PictoFactory picto = null;
 			boolean legal = true;
 			// Add pictograms to selectedCategory if no subcategory is selected
 			if(selectedSubCategory == null){
@@ -524,7 +539,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 						}
 					}
 					if(legal){
-						selectedCategory.addPictogram(picto.getPictogram(this, id));
+						selectedCategory.addPictogram(PictoFactory.getPictogram(this, id));
 						selectedCategory.setChanged(true);
 						pictograms = selectedCategory.getPictograms();
 					}
@@ -536,10 +551,11 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 					for(Pictogram p : pictograms){
 						if(p.getPictogramID() == id){
 							legal = false;
+							break;
 						}
 					}
 					if(legal){
-						selectedSubCategory.addPictogram(picto.getPictogram(this, id));
+						selectedSubCategory.addPictogram(PictoFactory.getPictogram(this, id));
 						selectedCategory.setChanged(true);
 						pictograms = selectedSubCategory.getPictograms();
 					}

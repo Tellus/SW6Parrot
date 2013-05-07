@@ -1,4 +1,4 @@
-package dk.aau.cs.giraf.pictoadmin;
+package dk.aau.cs.giraf.pictosearch;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -25,6 +24,7 @@ import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.oasis.lib.controllers.ProfilesHelper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
+import dk.aau.cs.giraf.pictoadmin.R;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
@@ -95,7 +95,6 @@ public class PictoAdminMain extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
 				// if single pictogram requested, only one pictogram is displayed in checkout
-				Log.v("klim", "Tryk");
 				if(isSingle){
 					checkoutList.clear();
 				}
@@ -115,22 +114,7 @@ public class PictoAdminMain extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		MessageDialogFragment message = new MessageDialogFragment("Klim is right");
-		message.show(getFragmentManager(), "");
-		super.onBackPressed();
-		//sendContent(getCurrentFocus());
-	}
-	
-	@Override
-	protected void onPause() {
-		Log.v("klim", "Search: paused");
-		super.onPause();
-	}
-	
-	@Override
-	protected void onDestroy() {
-		Log.v("klim", "Search: destroyed");
-		super.onDestroy();
+		sendContent(getCurrentFocus());
 	}
 	
 	private void getPurpose() {
@@ -165,27 +149,10 @@ public class PictoAdminMain extends Activity {
 	public void getAllpictoList() {
 		List<Pictogram> pictotemp = PictoFactory.INSTANCE.getAllPictograms(getApplicationContext());
 		pictoList = new ArrayList<Pictogram>();
-		boolean legal = true;
 		
-		for (Pictogram pt : pictotemp) {
-			if(pictoList != null){
-				legal = true;
-				
-				for(Pictogram p : pictoList) {
-					if(p.getPictogramID() == pt.getPictogramID()){
-						legal = false;
-					}
-				}
-				
-				if(legal) {
-					pictoList.add(pt);
-				}
-			}
-			else {
-				pictoList.add(pt);
-			}
+		for (Pictogram p : pictotemp) {
+			pictoList.add(p);
 		}
-		Log.v("klim", "Length pictolist: " + pictoList.size());
 	}
 	
 	/**
@@ -199,7 +166,6 @@ public class PictoAdminMain extends Activity {
 		
 		updateErrorMessage(null, 0); // Clear errorMessage
 		
-		Log.v("klim", "Ny søgning");
 		loadPictoIntoGridView(selectedTag);
 	}
 	

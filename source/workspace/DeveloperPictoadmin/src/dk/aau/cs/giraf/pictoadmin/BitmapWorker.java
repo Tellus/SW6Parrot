@@ -2,6 +2,7 @@ package dk.aau.cs.giraf.pictoadmin;
 
 import java.lang.ref.WeakReference;
 
+import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
 import android.content.Context;
@@ -33,6 +34,8 @@ public class BitmapWorker extends AsyncTask<Object, Void, Bitmap> {
 			bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.usynlig);
 		} else {
 			bmp = BitmapFactory.decodeFile(pictogram.getImagePath());
+			Log.v("Klim", "Working on: " + pictogram.getImagePath());
+			Log.v("Klim", "Working on: " + pictogram.getPictogramID());
 		}
 		
 		return bmp;

@@ -1,4 +1,4 @@
-package dk.aau.cs.giraf.pictoadmin;
+package dk.aau.cs.giraf.pictosearch;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -21,7 +21,13 @@ public class MessageDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(message);
+        builder.setMessage(message)
+        	.setPositiveButton("Ok", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//Do nothing
+			}
+		});
         // Create the AlertDialog object and return it
         return builder.create();
     }
