@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictoadmin.R;
 
 @SuppressLint("ValidFragment")
 public class TitleDialogFragment extends DialogFragment{

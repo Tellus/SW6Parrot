@@ -26,6 +26,7 @@ import dk.aau.cs.giraf.oasis.lib.controllers.ProfilesHelper;
 import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
+import dk.aau.cs.giraf.pictosearch.R;
 
 
 public class PictoAdminMain extends Activity {

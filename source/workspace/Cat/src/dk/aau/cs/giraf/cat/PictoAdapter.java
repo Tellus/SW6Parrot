@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import dk.aau.cs.giraf.pictoadmin.R;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
 /**

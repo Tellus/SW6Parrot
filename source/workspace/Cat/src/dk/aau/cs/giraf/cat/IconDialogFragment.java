@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictoadmin.R;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
 @SuppressLint("ValidFragment")

@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.widget.GridView;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
+import dk.aau.cs.giraf.pictosearch.R;
 
 
 public class DisplayPictograms extends Activity {

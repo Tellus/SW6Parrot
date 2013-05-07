@@ -2,6 +2,7 @@ package dk.aau.cs.giraf.cat;
 
 import java.lang.ref.WeakReference;
 
+import dk.aau.cs.giraf.pictoadmin.R;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 

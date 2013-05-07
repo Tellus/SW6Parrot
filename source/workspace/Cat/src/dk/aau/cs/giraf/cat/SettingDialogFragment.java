@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
+import dk.aau.cs.giraf.pictoadmin.R;
 
 @SuppressLint("ValidFragment")
 public class SettingDialogFragment extends DialogFragment{

@@ -1,6 +1,7 @@
 package dk.aau.cs.giraf.cat;
 
 
+import dk.aau.cs.giraf.pictoadmin.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;

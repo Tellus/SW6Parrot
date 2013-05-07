@@ -5,6 +5,7 @@ import java.lang.ref.WeakReference;
 
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
+import dk.aau.cs.giraf.pictosearch.R;
 
 import android.content.Context;
 import android.graphics.Bitmap;
