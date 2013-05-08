@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -14,20 +13,20 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
-import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
+
 /**
  * 
  * @author SW605f13-PARROT
  * read from and write to the XML file
  */
 public class XMLCommunicater {
-	//private File categoryXmlData=null;
 	public static boolean isNewFile = false;
 	private File xmlFile = null;
 	public ArrayList<XMLProfile> xmlData= new ArrayList<XMLProfile>();
+	private static Thread readingThread=null; 
 	
 	public XMLCommunicater()
 	{
@@ -42,24 +41,32 @@ public class XMLCommunicater {
 		    if(!xmlFile.exists())
 			{
 		    	
-			   /* try
+			    try
 			    {
 			    	//Log.v("MessagePARROT","no xml exist, creating xml");
-			    	categoryXmlData.createNewFile();*/
+			    	xmlFile.createNewFile();
+			    	//this will cause the program to read in the testdata
 			    	isNewFile=true;
 			    	
 			    	
-			   /* }
+			    }
 			    catch(IOException e)
 			    {
 			        //Log.e("IOException", "Exception in create new File(");
-			    }*/
+			    }
 			}
 		    else
 		    {
 		    	Log.v("xmlFuckUp", "before read: "+xmlData.size());
-		    	//xmlData=new ArrayList<XMLProfile>();
-		      	getDataFromXML();
+		    	
+		    	readingThread = new Thread(new Runnable(){
+		            public void run(){
+		            	getDataFromXML();
+
+		            }
+		    	});
+		    	readingThread.start();
+		      	
 		      	Log.v("xmlFuckUp", "after read: "+xmlData.size());
 	         
 		    }
@@ -72,13 +79,16 @@ public class XMLCommunicater {
 	{
 		//Log.v("MessageXML", "begin getChildXMLData");
 		//temp remove after test
-		for(XMLProfile profile: xmlData)
+		while(readingThread.isAlive())
 		{
-			if(profile.getChildID()==childId)
+			for(XMLProfile profile: xmlData)
 			{
-				return profile;
-			}
-		}		
+				if(profile.getChildID()==childId)
+				{
+					return profile;
+				}
+			}	
+		}
 		
 		//Log.v("MessageXML", "xmlChild does not exist return null");
 		//Log.v("MessageXML", "end getChildXMLData");
@@ -88,6 +98,15 @@ public class XMLCommunicater {
 	
 	public void setXMLDataAndUpdate(XMLProfile xmlChild)//ArrayList<XMLProfile> newXMLData)
 	{
+		while(readingThread.isAlive())
+		{
+			try {
+				Thread.currentThread().sleep(20);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		Log.v("XMLComMessage", "begin setXMLDataAndUpdate");
 		if(xmlChild==null){
 			

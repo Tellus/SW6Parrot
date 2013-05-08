@@ -1,6 +1,5 @@
 package dk.aau.cs.giraf.categorylib;
 
-
 import java.util.ArrayList;
 
 import dk.aau.cs.giraf.pictogram.Pictogram;
