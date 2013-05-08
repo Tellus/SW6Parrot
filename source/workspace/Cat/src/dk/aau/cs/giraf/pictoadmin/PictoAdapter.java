@@ -38,8 +38,7 @@ public class PictoAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		//return the number of pictograms
-		return pictograms.size();
+		return pictograms.size(); //return the number of pictograms
 	}
 
 	@Override

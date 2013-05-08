@@ -13,7 +13,7 @@ import dk.aau.cs.giraf.categorylib.PARROTCategory;
 
 @SuppressLint("ValidFragment")
 public class SettingDialogFragment extends DialogFragment{
-	AdminCategory startActivity;
+	private AdminCategory startActivity;
 	private PARROTCategory category;
 	private int pos;
 	private boolean isCategory;
@@ -54,10 +54,13 @@ public class SettingDialogFragment extends DialogFragment{
 								if(!isCategory){
 									category = category.getSuperCategory();
 								}
+								
 								category.setCategoryColor(color);
+								
 								for(PARROTCategory sc : category.getSubCategories()){
 									sc.setCategoryColor(color);
 								}
+								
 								startActivity.updateSettings(category, pos, isCategory, "color");
 							}
 							

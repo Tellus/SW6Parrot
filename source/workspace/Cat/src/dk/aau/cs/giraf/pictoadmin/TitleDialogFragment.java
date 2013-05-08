@@ -25,7 +25,6 @@ public class TitleDialogFragment extends DialogFragment{
 	
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View layout 			= inflater.inflate(R.layout.dialog_title, null);
         final EditText titel 	= (EditText) layout.findViewById(R.id.titelEdit);
@@ -44,7 +43,7 @@ public class TitleDialogFragment extends DialogFragment{
                })
                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                	   
+                	   // Do nothing
                    }
                });
 

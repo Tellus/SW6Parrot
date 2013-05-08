@@ -17,7 +17,7 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class CreateDialogFragment extends DialogFragment{
 	
-	String message = "";
+	String message;
 	boolean isCategory;
 	
 	public CreateDialogFragment(boolean yesOrNO, String msg) {
@@ -52,8 +52,8 @@ public class CreateDialogFragment extends DialogFragment{
         
         final EditText titelText = (EditText) layout.findViewById(R.id.username);
         Button colorButton = (Button) layout.findViewById(R.id.colorButton);
-        /*  Only choose color if creating new category. Subcategories automatically has the
-         *  color of the supercategory
+        /*  Only choose color if creating new category. Sub-categories automatically has the
+         *  color of the super-category
          */
         if(!isCategory) {
         	colorButton.setVisibility(View.GONE);

@@ -11,13 +11,11 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 
 @SuppressLint("ValidFragment")
 public class DeleteDialogFragment extends DialogFragment {
-	
-	AdminCategory startActivity;
-	PARROTCategory category;
-	Pictogram pictogram = null;
-	int pos;
-	boolean isCategory;
-	
+	private AdminCategory startActivity;
+	private PARROTCategory category;
+	private Pictogram pictogram = null;
+	private int pos;
+	private boolean isCategory;
 	
 	public DeleteDialogFragment(AdminCategory activity, PARROTCategory cat, int position, boolean yesOrNo) {
 		this.startActivity = activity;
