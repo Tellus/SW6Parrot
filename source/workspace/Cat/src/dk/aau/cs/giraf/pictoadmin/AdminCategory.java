@@ -539,7 +539,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 							legal = false;
 						}
 					}
-					
 					if(legal){
 						selectedCategory.addPictogram(PictoFactory.getPictogram(this, id));
 						selectedCategory.setChanged(true);
@@ -557,7 +556,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 							break;
 						}
 					}
-					
 					if(legal){
 						selectedSubCategory.addPictogram(PictoFactory.getPictogram(this, id));
 						selectedCategory.setChanged(true);
