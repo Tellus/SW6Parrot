@@ -2,22 +2,21 @@ package dk.aau.cs.giraf.parrot;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
-import dk.aau.cs.giraf.parrot.PARROTProfile.PictogramSize;
+import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Toast;
-import android.app.Activity;
-import android.app.Fragment;
+import dk.aau.cs.giraf.parrot.PARROTProfile.PictogramSize;
 
 public class OptionFragment extends Fragment{
 

@@ -522,7 +522,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		}
 	}
 	
-	@SuppressWarnings("static-access")
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

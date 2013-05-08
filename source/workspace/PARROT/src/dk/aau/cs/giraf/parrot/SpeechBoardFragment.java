@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -16,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
@@ -259,6 +257,7 @@ public class SpeechBoardFragment extends Fragment
 	/**
 	 *This function set the colors in the speechBoardFragment
 	 */
+	@SuppressWarnings("deprecation")
 	private void setColours()
 	{
 		//setup colors of the sentenceBoard view	
