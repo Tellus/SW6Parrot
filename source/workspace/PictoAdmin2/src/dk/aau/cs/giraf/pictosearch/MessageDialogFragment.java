@@ -14,7 +14,6 @@ import android.os.Bundle;
  */
 @SuppressLint("ValidFragment")
 public class MessageDialogFragment extends DialogFragment {
-	
 	public String message;
 		
 	public MessageDialogFragment(String msg) {
@@ -26,7 +25,7 @@ public class MessageDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(message)
-        	.setPositiveButton("Ok", new OnClickListener() {
+			.setPositiveButton("Ok", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				//Do nothing

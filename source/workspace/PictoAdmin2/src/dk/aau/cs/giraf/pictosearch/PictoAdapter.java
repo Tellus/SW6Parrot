@@ -37,8 +37,7 @@ public class PictoAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		//return the number of pictograms
-		return pictograms.size();
+		return pictograms.size(); // Return the number of pictograms
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class PictoAdapter extends BaseAdapter {
 		return 0;
 	}
 	
-	//create an image view for each pictogram in the list.
+	// Create an imageview for each pictogram in the list.
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{

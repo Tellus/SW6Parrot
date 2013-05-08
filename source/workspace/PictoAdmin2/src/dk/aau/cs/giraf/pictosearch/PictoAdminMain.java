@@ -258,10 +258,10 @@ public class PictoAdminMain extends Activity {
 		
 		ArrayList<SearchNode> sortedsearchlist = new ArrayList<SearchNode>();
 		
+		int value;
 		for(Pictogram p : searchlist){
-			SearchNode sn = new SearchNode();
-			sn.pic = p;
-			sn.searchvalue = calculateValueOfPictogram(p, splitinput);
+			value = calculateValueOfPictogram(p, splitinput);
+			SearchNode sn = new SearchNode(p, value);
 			sortedsearchlist.add(sn);
 		}
 		
@@ -269,12 +269,15 @@ public class PictoAdminMain extends Activity {
 			@Override
 	        public int compare(SearchNode o1, SearchNode o2) 
 	        {
-				if(o1.searchvalue > o2.searchvalue)
+				if(o1.searchvalue > o2.searchvalue){
 					return 1;
-				else if(o1.searchvalue == o2.searchvalue)
+				}
+				else if(o1.searchvalue == o2.searchvalue){
 					return 0;
-				else
+				}
+				else{
 					return -1;
+				}
 	        }
 	    });
 		
