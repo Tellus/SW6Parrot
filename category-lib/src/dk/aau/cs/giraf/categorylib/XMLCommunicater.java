@@ -28,6 +28,7 @@ public class XMLCommunicater {
 	public ArrayList<XMLProfile> xmlData= new ArrayList<XMLProfile>();
 	private static Thread readingThread=null; 
 	
+	
 	public XMLCommunicater()
 	{
 	
