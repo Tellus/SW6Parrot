@@ -10,7 +10,6 @@ import android.app.DialogFragment;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,13 +27,15 @@ import dk.aau.cs.giraf.pictoadmin.CreateDialogFragment.CreateDialogListener;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
-
-
+/**
+ * 
+ * @author Christian Klim
+ *
+ */
 @SuppressLint("DefaultLocale")
 public class AdminCategory extends Activity implements CreateDialogListener{
 	private Profile child;
 	private Profile guardian;
-	private Bundle  extras;
 	
 	private PARROTCategory selectedCategory    = null;
 	private PARROTCategory selectedSubCategory = null;
@@ -49,7 +50,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	private GridView pictogramGrid;
 	
 	private boolean somethingChanged = false; // If something is deleted, is has to be noted
-	private int     selectedLocation;
+	private int     selectedLocation; // Stores the location of the last pressed item in any gridview
 	private int     newCategoryColor; // Hold the value set when creating a new category or sub-category
 	
 	private CategoryHelper catHelp;
@@ -59,20 +60,19 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.v("klim", "created");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_admin_category);
 		catHelp =  new CategoryHelper(this);
 		proHelp =  new ProfilesHelper(this);
 		
-		extras = getIntent().getExtras();
+		Bundle extras = getIntent().getExtras();
 		if(extras != null){
-			getAllExtras();
+			getProfiles(extras);
 		}
 		else{
 			message = new MessageDialogFragment("No childId found. Loading default child");
 			message.show(getFragmentManager(), "noChildFound");
-			child = proHelp.getProfileById(12);
+			child    = proHelp.getProfileById(12);
 			guardian = proHelp.getProfileById(1);
 		}
 		
@@ -101,7 +101,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			}
 		});
 		
-		// Setup subcategory gridview
+		// Setup sub-category gridview
 		subcategoryGrid = (GridView) findViewById(R.id.subcategory_gridview);
 		subcategoryGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -143,25 +143,12 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	}
 	
 	@Override
-	protected void onDestroy() {
-		Log.v("klim", "destroyed");
-		super.onDestroy();
-	}
-	
-	@Override
-	protected void onResume() {
-		Log.v("klim", "resumed");
-		super.onResume();
-	}
-	
-	@Override
 	protected void onPause() {
-		Log.v("klim", "paused");
 		super.onPause();
+		
 		for(PARROTCategory sc : subcategoryList){
 			if(sc.isChanged()){
 				sc.getSuperCategory().setChanged(true);
-				Log.v("AdminCategory", "set changed to true");
 			}
 		}
 		for(PARROTCategory c : categoryList){
@@ -292,6 +279,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		if(isCategory){
 			categoryGrid.setAdapter(new PictoAdminCategoryAdapter(categoryList, this));
 		}
+		
 		subcategoryGrid.setAdapter(new PictoAdminCategoryAdapter(subcategoryList, this));
 		pictogramGrid.setAdapter(new PictoAdapter(pictograms, this));
 		updateButtonVisibility(categoryGrid);
@@ -302,8 +290,9 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	// DONE
 	private void updateTitel(PARROTCategory tempCategory, int pos, boolean isCategory) {
 		boolean legal = true;
+		
 		if(isCategory) {
-			for(PARROTCategory c : categoryList){
+			for(PARROTCategory c : categoryList) {
 				if(c.getCategoryName().equals(tempCategory.getCategoryName())) {
 					legal = false;
 					message = new MessageDialogFragment("Titlen er anvendt");
@@ -314,7 +303,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			if(legal) {
 				categoryList.get(pos).setCategoryName(tempCategory.getCategoryName());
 				categoryList.get(pos).setChanged(true);
-				Log.v("AdminCategory", "In updateTitel: set changed to true");
 			}
 		}
 		else {
@@ -328,8 +316,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 			}
 			if(legal){
 				subcategoryList.get(pos).setCategoryName(tempCategory.getCategoryName());
-				subcategoryList.get(pos).setChanged(true);
-				Log.v("AdminCategory", "In updateTitel: set sub changed to true");
+				selectedCategory.setChanged(true);
 			}
 		}
 	}
@@ -337,7 +324,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	// DONE
 	private void updateColor(PARROTCategory category, int pos, boolean isCategory) {
 		category.setChanged(true);
-		Log.v("AdminCategory", "In updateColor: set changed to true");
 		
 		if(isCategory){
 			categoryList.set(pos, category);
@@ -350,7 +336,6 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	// DONE
 	private void updateIcon(PARROTCategory category, int pos, boolean isCategory) {
 		category.setChanged(true);
-		Log.v("AdminCategory", "In updateIcon: set changed to true");
 		
 		if(isCategory){
 			categoryList.set(pos, category);
@@ -363,8 +348,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	/*
 	 * This method gets all extras in the extras bundle from the intent that started this activity
 	 */
-	private void getAllExtras() {
-		
+	private void getProfiles(Bundle extras) {
 		if(getIntent().hasExtra("currentChildID")){
 			child = proHelp.getProfileById(extras.getLong("currentChildID"));
 		}
@@ -384,6 +368,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 				sc.setChanged(false);
 			}
 		}
+		
 		for(PARROTCategory c : categoryList){
 			if(c.isChanged()){
 				somethingChanged = true;
@@ -395,6 +380,7 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		if(somethingChanged){
 			catHelp.saveChangesToXML();
 		}
+		
 		somethingChanged = false;
 	}
 	
@@ -442,25 +428,28 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	 */
 	private void updateSelected(View view, int position, int id) {
 		selectedLocation = position;
+		
 		if(id == 2) {
 			selectedPictogram = pictograms.get(position);
 		}
 		if(id == 1) {
-			selectedCategory = categoryList.get(position);
+			selectedCategory    = categoryList.get(position);
 			selectedSubCategory = null;
-			selectedPictogram = null;
+			selectedPictogram   = null;
+			
 			subcategoryList  = selectedCategory.getSubCategories();
 			pictograms 		 = selectedCategory.getPictograms();
 		    
 			subcategoryGrid.setAdapter(new PictoAdminCategoryAdapter(subcategoryList, view.getContext()));
-			pictogramGrid.setAdapter(new PictoAdapter(pictograms, true, view.getContext()));
+			pictogramGrid.setAdapter(new PictoAdapter(pictograms, view.getContext()));
 		}
 		else if(id == 0) {
 			selectedSubCategory = subcategoryList.get(position);
-			selectedPictogram = null;
+			selectedPictogram   = null;
+			
 			pictograms = subcategoryList.get(position).getPictograms();
 			
-			pictogramGrid.setAdapter(new PictoAdapter(pictograms, true, view.getContext()));
+			pictogramGrid.setAdapter(new PictoAdapter(pictograms, view.getContext()));
 		}
 	}
 	
@@ -490,14 +479,22 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 		deleteDialog.show(getFragmentManager(), "deleteSubCategory?");
 	}
 	
+	// Goes to pictogram search function
 	public void createPictogram(View view) {
-		//TODO: implement
 		Intent request = new Intent();
-		request.setComponent(new ComponentName("dk.aau.cs.giraf.pictosearch", "dk.aau.cs.giraf.pictosearch.PictoAdminMain"));
-		request.putExtra("purpose", "CAT");
-		request.putExtra("currentChildID", child.getId());
-		request.putExtra("currentGuardianID", guardian.getId());
-		startActivityForResult(request, RESULT_FIRST_USER);
+		
+		try{
+			request.setComponent(new ComponentName("dk.aau.cs.giraf.pictosearch", "dk.aau.cs.giraf.pictosearch.PictoAdminMain"));
+			request.putExtra("purpose", "CAT");
+			request.putExtra("currentChildID", child.getId());
+			request.putExtra("currentGuardianID", guardian.getId());
+			
+			startActivityForResult(request, RESULT_FIRST_USER);
+		}
+		catch (Exception e) {
+			message = new MessageDialogFragment("Search not installed");
+			message.show(getFragmentManager(), "notInstalled");
+		}
 	}
 	
 	// DONE
@@ -509,16 +506,16 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	/*
 	 * The following method handle how we access pictoCreator
 	 */
-	public void gotoPictoCreator(View view)
-	{
+	public void gotoPictoCreator(View view) {
+		Intent croc = new Intent();
+		
 		try{
-			Intent croc = new Intent();
 			croc.setComponent(new ComponentName("dk.aau.cs.giraf.pictocreator", "dk.aau.cs.giraf.pictocreator.crocActivity"));
 			startActivity(croc);
 		}
 		catch (Exception e) {
 			message = new MessageDialogFragment("Croc not installed");
-			message.show(getFragmentManager(), "missingApp");
+			message.show(getFragmentManager(), "notInstalled");
 		}
 	}
 	
@@ -526,48 +523,49 @@ public class AdminCategory extends Activity implements CreateDialogListener{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		Bundle extras = data.getExtras();
+		
 		if(data.hasExtra("checkoutIds")){
-			Log.v("klim", "ids returned");
 			long[] checkoutIds = new long[extras.getLongArray("checkoutIds").length];
 			checkoutIds = extras.getLongArray("checkoutIds");
 			boolean legal = true;
-			// Add pictograms to selectedCategory if no subcategory is selected
+			
+			// Add pictograms to selectedCategory if no sub-category is selected
 			if(selectedSubCategory == null){
 				for(long id : checkoutIds){
+					legal = true;
+					
 					for(Pictogram p : pictograms){
 						if(p.getPictogramID() == id){
 							legal = false;
 						}
 					}
+					
 					if(legal){
 						selectedCategory.addPictogram(PictoFactory.getPictogram(this, id));
 						selectedCategory.setChanged(true);
 						pictograms = selectedCategory.getPictograms();
 					}
-					legal = true;
 				}
 			}
 			else{
 				for(long id : checkoutIds){
+					legal = true;
+					
 					for(Pictogram p : pictograms){
 						if(p.getPictogramID() == id){
 							legal = false;
 							break;
 						}
 					}
+					
 					if(legal){
 						selectedSubCategory.addPictogram(PictoFactory.getPictogram(this, id));
 						selectedCategory.setChanged(true);
 						pictograms = selectedSubCategory.getPictograms();
 					}
-					legal = true;
 				}
 			}
 			pictogramGrid.setAdapter(new PictoAdapter(pictograms, this));
-		}
-		else{
-			MessageDialogFragment message = new MessageDialogFragment("testing");
-			message.show(getFragmentManager(), "");
 		}
 	}
 }
