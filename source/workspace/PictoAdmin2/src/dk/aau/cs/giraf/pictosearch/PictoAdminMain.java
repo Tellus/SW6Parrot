@@ -31,8 +31,6 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
 public class PictoAdminMain extends Activity {
 	private long    childId;
 	private long    guardianId;
-	private Profile child;
-	private Profile guardian;
 
 	private ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
 	private ArrayList<Pictogram> pictoList    = new ArrayList<Pictogram>();
@@ -42,7 +40,6 @@ public class PictoAdminMain extends Activity {
 	private GridView pictoGrid;
 	
 	private CategoryHelper      catHelp;
-	private ProfilesHelper 		proHelp;
 	private CheckoutGridHandler cgHandler;
 	private DatabaseHandler     dbhandler;
 	
@@ -72,10 +69,6 @@ public class PictoAdminMain extends Activity {
 		}
 		
 		catHelp = new CategoryHelper(this);
-		proHelp = new ProfilesHelper(this);
-		
-		child    = proHelp.getProfileById(childId);
-		guardian = proHelp.getProfileById(guardianId);
 		
 		getAllpictoList();
 		
