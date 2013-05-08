@@ -4,6 +4,10 @@ import java.util.List;
 import dk.aau.cs.giraf.oasis.lib.Helper;
 import dk.aau.cs.giraf.oasis.lib.models.Media;
 
+/**
+ * 
+ * @author 
+ */
 public class DatabaseHandler {
 	Helper helper;
 	List<Media> arraylist; 

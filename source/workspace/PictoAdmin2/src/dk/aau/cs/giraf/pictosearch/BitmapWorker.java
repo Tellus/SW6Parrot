@@ -10,8 +10,13 @@ import android.util.Log;
 import android.widget.ImageView;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
+/**
+ * 
+ * @author Anders Vinther
+ */
 public class BitmapWorker extends AsyncTask<Object, Void, Bitmap> {
 	// En weak reference gør den "flagged" som "garbage collectable" :)
+	// A weak reference flags the imageview as garbage collectable
 	private final WeakReference<ImageView> imageview;
 
 	private Pictogram pictogram;

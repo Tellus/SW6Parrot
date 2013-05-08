@@ -116,7 +116,11 @@ public class PARROTActivity extends Activity {
 		return true;
 	}
 	
-	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+	}
 	
 	/**
 	 * this activating a new  Activity class which handles the settings which can be changed. 

@@ -14,9 +14,8 @@ import android.widget.TextView;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
 /**
- * 
- * @PARROT
- * This is the Pictogram Adapter class. It is used to import the pictograms into a gridview.
+ * Used to import the pictograms into a gridview.
+ * @CAT
  */
 public class PictoAdapter extends BaseAdapter {
 	private Context context;

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
+/**
+ * Unused class
+ * @author Christian Klim
+ *
+ */
 public class CheckoutGridHandler {
 	ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
 	

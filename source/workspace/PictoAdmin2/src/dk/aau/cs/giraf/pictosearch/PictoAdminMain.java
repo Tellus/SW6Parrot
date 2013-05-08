@@ -25,7 +25,11 @@ import dk.aau.cs.giraf.categorylib.PARROTCategory;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
-
+/**
+ * 
+ * @author Christian Klim
+ *
+ */
 public class PictoAdminMain extends Activity {
 	private long    childId;
 
@@ -37,7 +41,6 @@ public class PictoAdminMain extends Activity {
 	private GridView pictoGrid;
 	
 	private CategoryHelper      catHelp;
-	private CheckoutGridHandler cgHandler;
 	
 	/*
 	 *  Request from another group. It should be possible to only send one pictogram,
@@ -89,8 +92,6 @@ public class PictoAdminMain extends Activity {
 				checkoutGrid.setAdapter(new PictoAdapter(checkoutList, getApplicationContext()));
 			}
 		});
-		
-		cgHandler = new CheckoutGridHandler(checkoutList);
 	}
 	
 	@Override
@@ -301,6 +302,21 @@ public class PictoAdminMain extends Activity {
     }
 	
 	/**
+	 * Assess the checkout gridview and load the pictograms into an ArrayList
+	 * @return ArrayList of checkout pictograms
+	 */
+	public long[] getCheckoutList() {
+		long[] checkout = new long[checkoutList.size()];
+		int i = 0;
+		for(Pictogram p : checkoutList){
+			checkout[i] = p.getPictogramID();
+			i++;
+		}
+		
+		return checkout;
+	}
+	
+	/**
 	 * Updates the errorMessage with appropriate error
 	 * @param message: Message to be displayed, null = clear
 	 * @param icon: get icon from R.drawable
@@ -330,7 +346,7 @@ public class PictoAdminMain extends Activity {
 	 */	
 	public void sendContent(View view) {
 		Log.v("klim", "send");
-		long[] output = cgHandler.getCheckoutList();
+		long[] output = getCheckoutList();
 		Log.v("klim", "size of output: " + (output.length * Long.SIZE));
 		Intent data = this.getIntent();
 		data.putExtra("checkoutIds", output);

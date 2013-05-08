@@ -8,11 +8,15 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 
+/**
+ * Used to display a message to the user. Message is included in constructor
+ * @author Christian Klim Hansen
+ */
 @SuppressLint("ValidFragment")
 public class MessageDialogFragment extends DialogFragment {
 	
-	public String message = "default message";
-	
+	public String message;
+		
 	public MessageDialogFragment(String msg) {
 		this.message = msg;
 	}
