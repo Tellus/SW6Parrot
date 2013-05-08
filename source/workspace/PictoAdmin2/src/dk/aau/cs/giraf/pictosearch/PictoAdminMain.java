@@ -8,7 +8,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +30,7 @@ import dk.aau.cs.giraf.pictogram.Pictogram;
  *
  */
 public class PictoAdminMain extends Activity {
-	private long    childId;
+	private long    childId = 12;
 
 	private ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
 	private ArrayList<Pictogram> pictoList    = new ArrayList<Pictogram>();
@@ -55,20 +54,12 @@ public class PictoAdminMain extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_picto_admin_main);
-		Log.v("mmmmmmmm","begin");
-		Bundle extras = getIntent().getExtras();
-		childId = 12;
-		if(extras != null){
-			Log.v("mmmmmmmm","before profile");
-			getProfile(extras);
-			Log.v("mmmmmmmm","before purpose");
-			getPurpose();
-			Log.v("mmmmmmmm","end");
-		}
 		
 		catHelp = new CategoryHelper(this);
 		
-		getAllpictoList();
+		getProfile();
+		getPurpose();
+		getAllPictograms();
 		
 		checkoutGrid = (GridView) findViewById(R.id.checkout);
 		checkoutGrid.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -100,38 +91,63 @@ public class PictoAdminMain extends Activity {
 		return true;
 	}
 	
+	/**
+	 * Makes sure, that when the application is suspended it is instead destroyed
+	 */
+	@Override
+	protected void onPause() {
+		super.onDestroy();
+	}
+	
+	/**
+	 * Override the function of the back button. Does the same as sendContent
+	 */
 	@Override
 	public void onBackPressed() {
 		sendContent(getCurrentFocus());
 	}
 	
+	/**
+	 * Get the current child id if information is send by calling application
+	 * Otherwise the standard value of childId is 12
+	 */
+	public void getProfile() {
+		if(getIntent().hasExtra("currentChildID")){
+			childId = getIntent().getLongExtra("currentChildID", -1);
+		}
+	}
+	
+	/**
+	 * Get the purpose from the calling application and displays a message to the user
+	 * describing what to do in the application and how to finish
+	 */
 	private void getPurpose() {
 		if(getIntent().hasExtra("purpose")){
 			if(getIntent().getStringExtra("purpose").equals("single")){
 				isSingle = true;
 				MessageDialogFragment message = new MessageDialogFragment("Vælg et pictogram og afslut med Send.");
-				message.show(getFragmentManager(), "choosingMessage");
+				message.show(getFragmentManager(), "choosingMessageSingle");
+				updateErrorMessage("Vælg et pictogram og afslut med Send", 0);
 			}
 			else if(getIntent().getStringExtra("purpose").equals("multi")){
 				isSingle = false;
-				//MessageDialogFragment message = new MessageDialogFragment("Vælg et eller flere pictogrammer og afslut med Send.");
-				//message.show(getFragmentManager(), "choosingMessage");
+				MessageDialogFragment message = new MessageDialogFragment("Vælg pictogrammer og afslut med Send.");
+				message.show(getFragmentManager(), "choosingMessageMulti");
+				updateErrorMessage("Vælg pictogrammer og afslut med Send", 0);
 			}
 			else if(getIntent().getStringExtra("purpose").equals("CAT")){
 				MessageDialogFragment message = new MessageDialogFragment("Vælg pictogrammer, som skal tilføjes til kategori og afslut med Send.");
 				message.show(getFragmentManager(), "CATaccess");
+				updateErrorMessage("Vælg pictogrammer, som skal tilføjes til kategori og afslut med Send", 0);
 			}
 		}
 	}
 	
-	public void getProfile(Bundle extras) {
-		if(getIntent().hasExtra("currentChildID")){
-			childId = extras.getLong("currentChildID", -1);
-		}
-	}
-	
+	/**
+	 * 
+	 */
 	@SuppressWarnings("static-access")
-	public void getAllpictoList() {
+	public void getAllPictograms() {
 		List<Pictogram> pictotemp = PictoFactory.INSTANCE.getAllPictograms(getApplicationContext());
 		pictoList = new ArrayList<Pictogram>();
 		
@@ -151,44 +167,61 @@ public class PictoAdminMain extends Activity {
 		
 		updateErrorMessage(null, 0); // Clear errorMessage
 		
-		loadPictoIntoGridView(selectedTag);
+		loadPictogramIntoGridView(selectedTag);
+	}
+	
+	/**
+	 * Updates the errorMessage with appropriate error
+	 * @param message: Message to be displayed, null = clear
+	 * @param icon: get icon from R.drawable
+	 */
+	private void updateErrorMessage(String message, int icon)
+	{
+		TextView  errorMessage = (TextView)  findViewById(R.id.errorMessage);
+		ImageView errorIcon    = (ImageView) findViewById(R.id.errorIcon);
+		
+		errorMessage.setText(message);
+		errorIcon.setImageResource(icon);
 	}
 	
 	/**
 	 * Loads the pictoList into the gridview depending on the search tag
 	 * @param tag: String identifying whether the user searches for tags, name,
-	 * category, subcategory or color
+	 * category, sub-category or color
 	 */
-	private void loadPictoIntoGridView(String tag)
+	private void loadPictogramIntoGridView(String tag)
 	{	
 		GridView picgrid = (GridView) findViewById(R.id.pictogram_displayer);		
 		EditText searchterm = (EditText) findViewById(R.id.text_input);
 		searchlist.clear();
 		String[] splitinput = searchterm.getText().toString().replaceAll("\\s", "").split(",");
 		
-		if(tag.equals("Alt")) 
-		{
-			for (Pictogram p : pictoList) 
-			{
-				searchlist.add(p);
+		if(tag.equals("Alt")) {
+			String pictoname;
+			
+			for (Pictogram p : pictoList){
+				pictoname = p.getTextLabel().toLowerCase().replace("\\s", "");
+				
+				for(int i = 0; i < splitinput.length; i++ ){
+					if(searchMatcher(pictoname, splitinput[i])){
+						searchlist.add(p);
+					}
+				}
 			}
 		}
-		else if(tag.equals("Tags")) 
-		{
+		else if(tag.equals("Tags")) {
 			// TODO: tags not implemented yet
-			updateErrorMessage("You cannot search for tags yet", R.drawable.action_about);
+			updateErrorMessage("You cannot search for tags yet", 0);
 		}
-		
 		else if(tag.equals("Navn")) 
 		{
 			String pictoname;
-			for (Pictogram p : pictoList) 
-			{
+			
+			for (Pictogram p : pictoList) {
 				pictoname = p.getTextLabel().toLowerCase().replace("\\s", "");
-				for(int i = 0; i < splitinput.length; i++ )
-				{
-					if(searchMatcher(pictoname, splitinput[i]))
-					{
+				
+				for(int i = 0; i < splitinput.length; i++ ){
+					if(searchMatcher(pictoname, splitinput[i])){
 						searchlist.add(p);
 					}
 				}
@@ -197,12 +230,10 @@ public class PictoAdminMain extends Activity {
 		else if(tag.equals("Kategori"))
 		{
 			ArrayList<PARROTCategory> childcat = catHelp.getChildsCategories(childId);
-			for(PARROTCategory pc : childcat)
-			{
-				for(int i = 0; i < splitinput.length; i++)
-				{
-					if(searchMatcher(pc.getCategoryName().toLowerCase().replaceAll("\\s", ""),splitinput[i]))
-					{
+			
+			for(PARROTCategory pc : childcat){
+				for(int i = 0; i < splitinput.length; i++){
+					if(searchMatcher(pc.getCategoryName().toLowerCase().replaceAll("\\s", ""),splitinput[i])){
 						searchlist.add(pc.getIcon());
 					}
 				}
@@ -211,15 +242,13 @@ public class PictoAdminMain extends Activity {
 		else if(tag.equals("Under kategori"))
 		{
 			ArrayList<PARROTCategory> childcat = catHelp.getChildsCategories(childId);
-			for(PARROTCategory pc : childcat)
-			{
+			
+			for(PARROTCategory pc : childcat){
 				ArrayList<PARROTCategory> catsubcat = pc.getSubCategories();
-				for(PARROTCategory subc : catsubcat)
-				{
-					for(int i = 0; i < splitinput.length; i++)
-					{
-						if(searchMatcher(subc.getCategoryName().toLowerCase().replaceAll("\\s", ""),splitinput[i]))
-						{
+				
+				for(PARROTCategory subc : catsubcat){
+					for(int i = 0; i < splitinput.length; i++){
+						if(searchMatcher(subc.getCategoryName().toLowerCase().replaceAll("\\s", ""),splitinput[i])){
 							searchlist.add(subc.getIcon());
 						}
 					}
@@ -227,22 +256,16 @@ public class PictoAdminMain extends Activity {
 			}
 		}
 		
-		class SearchNode{
-			Pictogram pic;
-			int searchvalue;
-		}
-		
 		ArrayList<SearchNode> sortedsearchlist = new ArrayList<SearchNode>();
-		for(Pictogram p : searchlist)
-		{
+		
+		for(Pictogram p : searchlist){
 			SearchNode sn = new SearchNode();
 			sn.pic = p;
 			sn.searchvalue = calculateValueOfPictogram(p, splitinput);
 			sortedsearchlist.add(sn);
 		}
 		
-		Collections.sort(sortedsearchlist, new Comparator<SearchNode>() 
-		{
+		Collections.sort(sortedsearchlist, new Comparator<SearchNode>() {
 			@Override
 	        public int compare(SearchNode o1, SearchNode o2) 
 	        {
@@ -254,50 +277,57 @@ public class PictoAdminMain extends Activity {
 					return -1;
 	        }
 	    });
+		
 		searchlist.clear();
-		for(SearchNode sn : sortedsearchlist)
-		{
+		
+		for(SearchNode sn : sortedsearchlist){
 			searchlist.add(sn.pic);
 		}
-		PictoAdapter picto = new PictoAdapter(searchlist, this);
-		picgrid.setAdapter(picto);
-		//TODO: If no pictoList found call below method
-		//updateErrorMessage("No such picture in database", R.drawable.action_about);
+		
+		if(searchlist.size() > 0){
+			picgrid.setAdapter(new PictoAdapter(searchlist, this));
+		}
+		else{
+			updateErrorMessage("No such picture in database", R.drawable.action_about);
+		}
 	}
 	
 	private boolean searchMatcher(String pictoname, String searchinput) {
 		// Mulighed for at gøre søgefunktionen endnu mere intelligent
+		// Made so that it is possible to make search function more intelligent
 		
-		if(pictoname.contains(searchinput)) 
-		{
+		if(pictoname.contains(searchinput)) {
 			return true;
 		} 
-		else 
-		{
+		else {
 			return false;
 		}
 	}
-		
+	
+	// Used in loadPictogramIntoGridview to
+	//TODO: INSERT description Jacob
 	private static int calculateValueOfPictogram(Pictogram p, String[] searchterm)
     {
     	int searchvalue = 0;
-    	for(String s : searchterm)
-    	{
+    	
+    	for(String s : searchterm){
     		s.toLowerCase().replaceAll("\\s", "");
-    		if(p.getTextLabel().toLowerCase().replaceAll("\\s", "").equals(s))
-    		{
+    		
+    		if(p.getTextLabel().toLowerCase().replaceAll("\\s", "").equals(s)){
     			searchvalue = 100;
     		}
+    		
     		String temps = s;
-    		for(int i = 0; i < s.length(); i++)
-    		{
-    			if(p.getTextLabel().toLowerCase().replaceAll("\\s", "").contains(temps) || temps.contains(p.getTextLabel().toLowerCase().replaceAll("\\s", "")))
-    			{
+    		
+    		for(int i = 0; i < s.length(); i++){
+    			if(p.getTextLabel().toLowerCase().replaceAll("\\s", "").contains(temps) || temps.contains(p.getTextLabel().toLowerCase().replaceAll("\\s", ""))){
     				searchvalue++;
     			}
+    			
     			temps.substring(0, temps.length() - 1);
     		}
     	}
+    	
     	return searchvalue;
     }
 	
@@ -308,26 +338,13 @@ public class PictoAdminMain extends Activity {
 	public long[] getCheckoutList() {
 		long[] checkout = new long[checkoutList.size()];
 		int i = 0;
+		
 		for(Pictogram p : checkoutList){
 			checkout[i] = p.getPictogramID();
 			i++;
 		}
 		
 		return checkout;
-	}
-	
-	/**
-	 * Updates the errorMessage with appropriate error
-	 * @param message: Message to be displayed, null = clear
-	 * @param icon: get icon from R.drawable
-	 */
-	private void updateErrorMessage(String message, int icon)
-	{
-		TextView errorMessage = (TextView)findViewById(R.id.errorMessage);
-		ImageView errorIcon = (ImageView)findViewById(R.id.errorIcon);
-		
-		errorMessage.setText(message);
-		errorIcon.setImageResource(icon);
 	}
 	
 	public void clearSearchField(View view) {
@@ -341,13 +358,10 @@ public class PictoAdminMain extends Activity {
 	}
 	
 	/**
-	 * MenuItem: Sends items from selected gridview to appropriate receiver
-	 * @param item: This must be included for the function to work 
+	 * MenuItem: Sends pictogram ids from checkoutlist to appropriate calling application 
 	 */	
 	public void sendContent(View view) {
-		Log.v("klim", "send");
 		long[] output = getCheckoutList();
-		Log.v("klim", "size of output: " + (output.length * Long.SIZE));
 		Intent data = this.getIntent();
 		data.putExtra("checkoutIds", output);
 		
