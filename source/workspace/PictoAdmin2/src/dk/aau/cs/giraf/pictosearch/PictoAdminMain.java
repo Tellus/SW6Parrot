@@ -22,15 +22,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import dk.aau.cs.giraf.categorylib.CategoryHelper;
 import dk.aau.cs.giraf.categorylib.PARROTCategory;
-import dk.aau.cs.giraf.oasis.lib.controllers.ProfilesHelper;
-import dk.aau.cs.giraf.oasis.lib.models.Profile;
 import dk.aau.cs.giraf.pictogram.PictoFactory;
 import dk.aau.cs.giraf.pictogram.Pictogram;
 
 
 public class PictoAdminMain extends Activity {
 	private long    childId;
-	private long    guardianId;
 
 	private ArrayList<Pictogram> checkoutList = new ArrayList<Pictogram>();
 	private ArrayList<Pictogram> pictoList    = new ArrayList<Pictogram>();
@@ -41,7 +38,6 @@ public class PictoAdminMain extends Activity {
 	
 	private CategoryHelper      catHelp;
 	private CheckoutGridHandler cgHandler;
-	private DatabaseHandler     dbhandler;
 	
 	/*
 	 *  Request from another group. It should be possible to only send one pictogram,
@@ -59,7 +55,6 @@ public class PictoAdminMain extends Activity {
 		Log.v("mmmmmmmm","begin");
 		Bundle extras = getIntent().getExtras();
 		childId = 12;
-		guardianId = 1;
 		if(extras != null){
 			Log.v("mmmmmmmm","before profile");
 			getProfile(extras);
@@ -129,9 +124,6 @@ public class PictoAdminMain extends Activity {
 	}
 	
 	public void getProfile(Bundle extras) {
-		if(getIntent().hasExtra("currentGuardianID")){
-			guardianId = extras.getLong("currentGuardianID", -1);
-			}
 		if(getIntent().hasExtra("currentChildID")){
 			childId = extras.getLong("currentChildID", -1);
 		}

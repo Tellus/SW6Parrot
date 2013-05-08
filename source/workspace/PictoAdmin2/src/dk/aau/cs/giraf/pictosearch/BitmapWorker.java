@@ -2,17 +2,13 @@ package dk.aau.cs.giraf.pictosearch;
 
 import java.lang.ref.WeakReference;
 
-
-import dk.aau.cs.giraf.pictogram.PictoFactory;
-import dk.aau.cs.giraf.pictogram.Pictogram;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.TextView;
+import dk.aau.cs.giraf.pictogram.Pictogram;
 
 public class BitmapWorker extends AsyncTask<Object, Void, Bitmap> {
 	// En weak reference gør den "flagged" som "garbage collectable" :)
