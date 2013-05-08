@@ -1,6 +1,7 @@
 package dk.aau.cs.giraf.categorylib;
 
 import java.util.ArrayList;
+
 /**
  * @author SW605f13-PARROT
  * used to store data from the XML file
